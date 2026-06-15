@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pharmacy", "Pharmacy\Pharmacy.csproj", "{B86D9D27-4D62-4641-9493-37B29998D631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyGateway", "PharmacyGateway\PharmacyGateway.csproj", "{227DB900-E1BA-4D45-9E5E-4441DCE73003}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B86D9D27-4D62-4641-9493-37B29998D631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B86D9D27-4D62-4641-9493-37B29998D631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B86D9D27-4D62-4641-9493-37B29998D631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B86D9D27-4D62-4641-9493-37B29998D631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{227DB900-E1BA-4D45-9E5E-4441DCE73003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{227DB900-E1BA-4D45-9E5E-4441DCE73003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227DB900-E1BA-4D45-9E5E-4441DCE73003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{227DB900-E1BA-4D45-9E5E-4441DCE73003}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
