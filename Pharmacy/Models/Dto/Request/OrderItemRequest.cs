@@ -1,3 +1,5 @@
+using Pharmasy.Models.Domain;
+
 namespace Pharmasy.Models.Dto.Request;
 
 public class OrderItemRequest

@@ -7,7 +7,8 @@ namespace Pharmasy.Infrastructure.Configurations;
 public class SupplierConfiguration:IEntityTypeConfiguration<Supplier>
 {
     public void Configure(EntityTypeBuilder<Supplier> builder)
-    {
-        throw new NotImplementedException();
+    { builder.ToTable("Suppliers");
+        
+        builder.HasKey(x => x.Id);
     }
 }

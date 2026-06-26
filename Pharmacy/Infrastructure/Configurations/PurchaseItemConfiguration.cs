@@ -7,7 +7,8 @@ namespace Pharmasy.Infrastructure.Configurations;
 public class PurchaseItemConfiguration:IEntityTypeConfiguration<PurchaseItem>
 {
     public void Configure(EntityTypeBuilder<PurchaseItem> builder)
-    {
-        throw new NotImplementedException();
+    { builder.ToTable("PurchaseItems");
+        
+        builder.HasKey(x => x.Id);
     }
 }

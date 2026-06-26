@@ -11,10 +11,25 @@ public class Mapper:Profile
     public Mapper()
     {
         CreateMap<CartRequest, Cart>();
-        CreateMap<Cart, CartResponse>();
-        
         CreateMap<CartItemRequest, CartItem>();
         CreateMap<CartItem, CartItemResponse>();
+        CreateMap<Cart, CartResponse>()
+            .ForMember(x => x.CartItemResponses,
+                x => x.MapFrom(x => x.CartItems));
+        
+        CreateMap<OrderRequest, Order>();
+        CreateMap<OrderItemRequest, OrderItem>();
+        CreateMap<OrderItem, OrderItemResponse>();
+        CreateMap<Order, OrderResponse>()
+            .ForMember(x=>x.OrderItemResponses,
+                x=>x.MapFrom(x=>x.OrderItems));
+        
+        CreateMap<PurchaseRequest, Purchase>();
+        CreateMap<PurchaseItemRequest, PurchaseItem>();
+        CreateMap<PurchaseItem, PurchaseItemResponse>();
+        CreateMap<Purchase, PurchaseResponse>()
+            .ForMember(x=>x.PurchaseItemResponses,
+                x=>x.MapFrom(y=>y.PurchaseItems));
         
         CreateMap<CategoryRequest, Category>();
         CreateMap<Category, CategoryResponse>();
@@ -23,22 +38,14 @@ public class Mapper:Profile
         CreateMap<Customer, CustomerResponse>();
         
         CreateMap<EmployeRequest, Employee>();
+        CreateMap<EmployeRequest, Employee>()
+            .ForMember(dest => dest.PasswordHash,
+                opt => opt.Ignore());
         CreateMap<Employee, EmployeResponse>();
-        
-        CreateMap<OrderRequest, Order>();
-        CreateMap<Order, OrderResponse>();
-        
-        CreateMap<OrderItemRequest, OrderItem>();
-        CreateMap<OrderItem, OrderItemResponse>();
+       
         
         CreateMap<ProductRequest, Product>();
         CreateMap<Product, ProductResponse>();
-        
-        CreateMap<PurchaseRequest, Purchase>();
-        CreateMap<Purchase, PurchaseResponse>();
-        
-        CreateMap<PurchaseItemRequest, PurchaseItem>();
-        CreateMap<PurchaseItem, PurchaseItemResponse>();
         
         CreateMap<SupplierRequest, Supplier>();
         CreateMap<Supplier, SupplierResponse>();

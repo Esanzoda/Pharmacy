@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Response;
 
 namespace Pharmasy.Repositories;
 
@@ -16,28 +15,30 @@ public interface ICategoryRepository:IBaseRepository<Category>
 }
 public class CategoryRepository :BaseRepository<Category>,ICategoryRepository
 {
-   private readonly IProductRepository _productRepository;
     public CategoryRepository(AppDbContext dbContext) : base(dbContext)
     {
     }
 
     public async Task<List<Product>> GetCategoryWithProducts(int categoryId, int page, int pageSize)
     {
-        return await _productRepository
-            .GetProductsByCategoryIdAsync(categoryId, page, pageSize);
+        return await DbContext.Products
+            .Where(x => x.CategoryId == categoryId)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
        
     }
 
     public Task<List<Category>> SearchByNameAsync(string name)
     {
-        return _dbContext.Categories
-            .Where(x => x.Name.ToLower().Contains( name.ToLower()))
+        return DbContext.Categories
+            .Where(x => x.Name.ToLower()== name.ToLower())
             .ToListAsync();
     }
 
     public Task<List<Category>> GetActiveCategoriesAsync()
     {
-        return _dbContext.Categories
+        return DbContext.Categories
             .Where(x=>x.CategoryStatus== CategoryStatus.Active)
             .ToListAsync();
         
@@ -45,7 +46,7 @@ public class CategoryRepository :BaseRepository<Category>,ICategoryRepository
 
     public Task<bool> CategoryExistsAsync(string name)
     {
-        return _dbContext.Categories
+        return DbContext.Categories
             .AnyAsync(x => x.Name.ToLower()==name.ToLower());
         
     }

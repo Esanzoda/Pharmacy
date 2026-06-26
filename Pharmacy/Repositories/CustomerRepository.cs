@@ -19,20 +19,20 @@ public class CustomerRepository:BaseRepository<Customer>,ICustomerRepository
 
     public async Task<Customer?> GetCustomerByEmailAsync(string email)
     {
-        return _dbContext.Customers
+        return DbContext.Customers
             .FirstOrDefault(x => x.Email.ToLower() == email.ToLower());
     }
 
     public async Task<Customer?> GetCustomerByPhoneAsync(string phone)
     {
-        return  _dbContext.Customers
-            .FirstOrDefault(x => x.Phonnumber == phone);
+        return  DbContext.Customers
+            .FirstOrDefault(x => x.PhoneNumber == phone);
     }
 
     public async Task<List<Customer>> GetCustomerByNameAsync(string name)
     {
-        return await _dbContext.Customers
-            .Where(x => x.Name.ToLower().Contains(name.ToLower()))
+        return await DbContext.Customers
+            .Where(x => x.Name.ToLower()==name.ToLower())
             .ToListAsync();
     }
     

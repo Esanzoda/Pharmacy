@@ -8,6 +8,7 @@ public class PurchaseItem:BaseEntity
     public decimal OrderPrice { get; set; }
     public int Quantity { get; set; }
     public decimal TotalPrice { get; set; }
+    public DateTime ExpiryDate { get; set; }
     
     
 }

@@ -2,10 +2,15 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using Hangfire.PostgreSql;
+using MassTransit;
 using Pharmasy.Data;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
 using Microsoft.EntityFrameworkCore;
+
+using Pharmasy.Consumers;
+using Pharmasy.Jobs;
+using Pharmasy.Middlewares;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +29,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddSwaggerGen();//
+builder.Services.AddSwaggerGen(); //
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
@@ -54,6 +60,7 @@ builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
+
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
@@ -71,37 +78,52 @@ builder.Services.AddHangfire(static (provider, cfg) =>
         .UseRecommendedSerializerSettings()
         .UsePostgreSqlStorage(options =>
         {
-            options.UseNpgsqlConnection("Host=localhost;Port=5432;Database=Pharmasy;Username=postgres;Password=1234");
+            options.UseNpgsqlConnection(
+                "Host=localhost;Port=5432;Database=Pharmacy;Username=postgres;Password=1234");
         });
-
 }).AddHangfireServer();
 
-//builder.Services.AddHostedService<AppStartupService>();
-
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer(typeof(OrderCreatedConsumer));
+    x.AddConsumer(typeof(OrderCanselledConsumer));  
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost","/", hostConfigure =>
+        {
+            hostConfigure.Username("guest");
+            hostConfigure.Password("guest");
+        });
+    });
+});
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var recurringJob = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+    recurringJob.AddOrUpdate<ChekExpiraDateProduct>(
+        "dksjkfj",
+        job => job.ChekExpiraDateAsync(24),
+        Cron.Daily());
+}
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy API");
-    });
+    app.UseSwagger();
+    app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy API"); });
 }
 
 app.UseHttpsRedirection();
-/*
-RecurringJob.AddOrUpdate<CleanupJob>(
-    "cleanup-inactive-carts",
-    job => job.CleanupInactiveCartsAsync(24),
-    Cron.Minutely);
-    */
+
 
 app.UseSerilogRequestLogging();
+app.UseMiddleware<ExseptionMiddleware>();
 app.MapControllers();
-
-
-
-
 app.Run();
 
+
+// documentatsiya + prezentatsiya
+// maqsadi project chi  , ki istifoda mebarad 
+// chi problemaya reshat mkunad
+// kodi navictageta fam
+//Task<Category> SearchByNameAsync(string name)

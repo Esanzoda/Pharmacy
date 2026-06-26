@@ -9,7 +9,7 @@ public class CartItemValidator:AbstractValidator<CartItemRequest>
     public CartItemValidator()
     {
         RuleFor(x => x.CartId)
-            .Null()
+            .NotNull()
             .NotEmpty()
             .NotEqual(0)
             .WithMessage("Cart id is required")
@@ -19,14 +19,12 @@ public class CartItemValidator:AbstractValidator<CartItemRequest>
         RuleFor(x=>x.ProductId) 
             .NotNull()
             .NotEmpty()
-            .NotEqual(0)
             .WithMessage("Product id is required")
             .GreaterThan(0)
             .WithMessage("Product id must be greater than 0");
         RuleFor(x=>x.Quantity) 
             .NotNull()
             .NotEmpty()
-            .NotEqual(0)
             .WithMessage("Quantity is required")
             .GreaterThan(0)
             .WithMessage("Quantity must be greater than 0");

@@ -8,6 +8,8 @@ public class CategoryConfiguration:IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        throw new NotImplementedException();
+        builder.ToTable("Categories");
+        
+        builder.HasKey(x => x.Id);
     }
 }

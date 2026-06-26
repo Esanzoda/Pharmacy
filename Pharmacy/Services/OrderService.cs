@@ -1,5 +1,7 @@
 using AutoMapper;
+using MassTransit;
 using Pharmasy.Exeption;
+using Pharmasy.Messages.Evants;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
@@ -9,149 +11,176 @@ using Pharmasy.Repositories;
 namespace Pharmasy.Services;
 
 public interface IOrderService
-    : IBaseService< OrderRequest, OrderResponse>
+    : IBaseService<OrderRequest, OrderResponse>
 {
-    public Task<OrderResponse> CreateOnlineOrderAsync(OrderOnlineRequest request);
     public Task<OrderResponse> UpdateOrderAsync(long orderId, UpdateOrder itemrequest);
     public Task<OrderResponse> AddItemToOrderAsync(long orderId, OrderItemRequest itemrequest);
-    public  Task<OrderResponse> RemoveItemFromOrderAsync(long orderId, long orderItemId);
+    public Task<OrderResponse> RemoveItemFromOrderAsync(long orderId, long orderItemId);
+    public Task<OrderResponse>CreateReservationOrderAsync(OrderReservationRequest reservationRequest);
 }
-public class OrderService:BaseService<Order,OrderRequest,OrderResponse>
-    ,IOrderService
+
+public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
+    , IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IOrderItemRepository _orderItemRepository;
     private readonly IProductRepository _productRepository;
-    private readonly IEmployeeRepository _employeeRepository;
     private readonly ICustomerRepository _customerRepository;
+    private readonly IPublishEndpoint _publishEndpoint;
+
     public OrderService(IOrderRepository orderrepository, IMapper mapper
-        ,IProductRepository productRepository,ICustomerRepository customerRepository,IEmployeeRepository employeeRepository
-        ,IOrderItemRepository orderItemRepository)
+        , IProductRepository productRepository, ICustomerRepository customerRepository,
+        IPublishEndpoint publishEndpoint
+        , IOrderItemRepository orderItemRepository)
         : base(orderrepository, mapper)
     {
         _orderRepository = orderrepository;
         _orderItemRepository = orderItemRepository;
         _productRepository = productRepository;
-        _customerRepository=customerRepository;
-        _employeeRepository = employeeRepository;
+        _customerRepository = customerRepository;
+        _publishEndpoint = publishEndpoint;
     }
 
-    public  async Task<OrderResponse> CreateOnlineOrderAsync(OrderOnlineRequest request)
+    public override async Task<OrderResponse> CreateAsync(OrderRequest request)
     {
-        var customer=await _customerRepository.GetByIdAsync(request.CustomerId);
+        var customer = await _customerRepository.GetByIdAsync(request.CustomerId);
         if (customer == null)
-            throw new ResourseNotFoundExeption($"Customer not found");  
-        
-        var order = _mapper.Map<Order>(request);
-        order.CreateAt = DateTime.Now;
-        order.Totalprise = 0;
+            throw new ResourseNotFoundExeption($"Customer not found");
+
+        var order = Mapper.Map<Order>(request);
+        order.CreateAt = DateTime.UtcNow;
+        order.TotalAmout = 0;
+        order.OrderStatus = OrderStatus.Pending;
         await _orderRepository.CreateAsync(order);
+        // doesnt use method into foreach
         foreach (var item in request.OrderItems)
         {
             await AddItemToOrderAsync(order.Id, item);
         }
-        return _mapper.Map<OrderResponse>(order);
+        await _publishEndpoint.Publish(new OrderCreatedEvant()
+        {
+            OrderId = order.Id,
+            CustomerId = order.CustomerId,
+            TotalAmout = order.TotalAmout,
+        });
+
+        return Mapper.Map<OrderResponse>(order);
     }
-    public override async Task<OrderResponse> CreateAsync(OrderRequest request)
-    {
-        var employee = await _employeeRepository.GetByIdAsync(request.EmployeeId);
-        if (employee == null)
-            throw new ResourseNotFoundExeption($"Employee not found");
-        var order = _mapper.Map<Order>(request);
-        order.CreateAt = DateTime.Now;
-        order.Totalprise = 0;
-        await _orderRepository.CreateAsync(order);
-        return _mapper.Map<OrderResponse>(order);
-    }
+    
 
 
     public async Task<OrderResponse> AddItemToOrderAsync(long orderId, OrderItemRequest itemrequest)
     {
         var order = await _orderRepository.GetByIdAsync(orderId);
-        if (order == null) 
-            throw new Exception("Заказ не найден");
+        if (order == null)
+            throw new ResourseNotFoundExeption($"Ordernot notfound");
         var product = await _productRepository.GetByIdAsync(itemrequest.ProductId);
-            if(product == null)
-                throw new ResourseNotFoundExeption($"Product with id {itemrequest.ProductId} not found");
-            
-            if(product.Stock< itemrequest.Quantity)
-                throw new BusinessExseption($"Product stock({product.Stock}) Request: {itemrequest.ProductId}");
-            
-            var existingOrderItem = await _orderItemRepository.GetByIdAsync(itemrequest.ProductId);
-            if (existingOrderItem != null)
-            {
-                existingOrderItem.Quantity += itemrequest.Quantity;
-                existingOrderItem.TotalPrice=existingOrderItem.Quantity*product.OrderPrice;
-            }
-            
-            var orderItem = _mapper.Map<OrderItem>(itemrequest);
-            orderItem.CreateAt = DateTime.Now;
-            orderItem.TotalPrice = existingOrderItem.Quantity*product.OrderPrice;
-            order.OrderItems.Add(orderItem);
-            
-            product.Stock -= itemrequest.Quantity;
-            await _productRepository.UpdateAsync(product);
-            order.Totalprise += order.OrderItems.Sum(x => x.TotalPrice);
-            await _orderRepository.UpdateAsync(order);
+        if (product == null)
+            throw new ResourseNotFoundExeption($"Product not found");
 
-            return _mapper.Map<OrderResponse>(order);
+        if (product.Stock < itemrequest.Quantity)
+            throw new BusinessExseption($"Insufficient product stock{product.Stock} for the requested quantity {itemrequest.Quantity}");
+
+        var existingOrderItem = order.OrderItems.FirstOrDefault(x => x.ProductId == itemrequest.ProductId);
+        if (existingOrderItem != null)
+        {
+            existingOrderItem.Quantity += itemrequest.Quantity;
+            existingOrderItem.TotalPrice = existingOrderItem.Quantity * product.Price;
+            await _orderItemRepository.UpdateAsync(existingOrderItem);
+            
+        }
+        else
+        {
+            var orderItem = Mapper.Map<OrderItem>(itemrequest);
+            orderItem.CreateAt = DateTime.UtcNow;
+            orderItem.Price=product.Price;
+            orderItem.TotalPrice = itemrequest.Quantity * product.Price;
+            order.OrderItems.Add(orderItem);
+            product.Stock -= itemrequest.Quantity;
+            order.TotalAmout += order.OrderItems.Sum(x => x.TotalPrice); 
+            await _orderItemRepository.UpdateAsync(orderItem);
+        }
+        
+       await _orderRepository.UpdateAsync(order);
+    
+        return Mapper.Map<OrderResponse>(order);
     }
+
     public async Task<OrderResponse> RemoveItemFromOrderAsync(long orderId, long orderItemId)
     {
         var order = await _orderRepository.GetByIdAsync(orderId);
-        if (order == null) 
-            throw new ResourseNotFoundExeption("Order not found");
-        
-        if(order.OrderStatus == OrderStatus.Completed||order.OrderStatus == OrderStatus.Cancelled)
-        throw new BusinessExseption("Order is canceled or order is canceled");
+        if (order == null)
+            throw new ResourseNotFoundExeption("OrderItem not found");
+
+        if (order.OrderStatus == OrderStatus.Completed || order.OrderStatus == OrderStatus.Cancelled)
+            throw new BusinessExseption("Can't remove item completed or cancelled order ");
 
         var itemToRemove = order.OrderItems.FirstOrDefault(x => x.Id == orderItemId);
         if (itemToRemove == null)
-        {
-            throw new ResourseNotFoundExeption($"OrderItem with id {orderItemId} does not exist");
-          
-        }
-            var product = await _productRepository.GetByIdAsync(itemToRemove.ProductId);
-            if (product != null)
-            {
-                product.Stock += itemToRemove.Quantity;
-                await _orderRepository.UpdateAsync(order);
-            }
+            throw new ResourseNotFoundExeption($"OrderItem not found");
 
-            order.OrderItems.Remove(itemToRemove);
-            order.Totalprise -= order.OrderItems.Sum(x => x.TotalPrice);
-            await _orderRepository.UpdateAsync(order);
-            return _mapper.Map<OrderResponse>(order);
+        var product = await _productRepository.GetByIdAsync(itemToRemove.ProductId);
+        if (product == null)
+            throw new ResourseNotFoundExeption($"Product not found");
+
+        product.Stock += itemToRemove.Quantity;
+
+        order.OrderItems.Remove(itemToRemove);
+        order.TotalAmout -= order.OrderItems.Sum(x => x.TotalPrice);
+        await _productRepository.UpdateAsync(product);
+        await _orderRepository.UpdateAsync(order);
+        return Mapper.Map<OrderResponse>(order);
     }
-    
+
+    public async Task<OrderResponse> CreateReservationOrderAsync(OrderReservationRequest reservationRequest)
+    {
+        var customer =await  _customerRepository.GetByIdAsync(reservationRequest.CustomerId);
+        if (customer == null)
+            throw new ResourseNotFoundExeption($"Customer not found");
+        var order = Mapper.Map<Order>(reservationRequest);
+        order.CreateAt = DateTime.UtcNow;
+        order.TotalAmout = 0;
+        await _orderRepository.CreateAsync(order);
+        foreach (var item in reservationRequest.OrderItemRequests)
+        {
+            await AddItemToOrderAsync(order.Id, item);
+            
+        }
+       
+        
+        return Mapper.Map<OrderResponse>(order);
+    }
+
     public async Task<OrderResponse> UpdateOrderAsync(long orderId, UpdateOrder itemrequest)
     {
-        var order =await _orderRepository.GetByIdAsync(orderId);
+        var order = await _orderRepository.GetByIdAsync(orderId);
         if (order == null)
             throw new ResourseNotFoundExeption($"Order not found");
-        
+
         if (order.OrderStatus == OrderStatus.Completed)
-            throw new BusinessExseption("You cannot update complete order");
+            throw new BusinessExseption("Can't update complete order");
+
         if (order.OrderStatus == OrderStatus.Cancelled)
             throw new BusinessExseption("Order alredy canseled");
+
         if (order.OrderStatus == OrderStatus.Shipped)
-            throw new BusinessExseption("You cannot update shipped order");
+            throw new BusinessExseption("Can't update shipped order");
+        var orderItems=await _orderItemRepository.GetAllOrderItems(orderId);
+        
         if (itemrequest.OrderStatus == OrderStatus.Cancelled)
         {
-            foreach (var item in order.OrderItems)
+            foreach (var item in orderItems)
             {
-                var product = await _productRepository.GetByIdAsync(item.ProductId);
-                if (product != null)
-                {
-                    product.Stock += item.Quantity;
-                    await _productRepository.UpdateAsync(product);
-                }
+                order.OrderItems.Remove(item);
+                item.Product.Stock += item.Quantity;
             }
-            order.Totalprise = 0;
+           
+            order.TotalAmout = 0;
         }
-        order.OrderStatus=itemrequest.OrderStatus;
-        order.UpdateAt = DateTime.Now;
-        await _orderRepository.UpdateAsync(order);
-        return _mapper.Map<OrderResponse>(order);
+
+        order.OrderStatus = itemrequest.OrderStatus;
+        order.UpdateAt = DateTime.UtcNow;
+        
+        return Mapper.Map<OrderResponse>(order);
     }
 }

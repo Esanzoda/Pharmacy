@@ -15,7 +15,7 @@ public class PurchaseRepository:BaseRepository<Purchase>,IPurchaseRepository
     }
     public override async Task<Purchase?> GetByIdAsync(long id)
     {
-        return await _dbContext.Purchases
+        return await DbContext.Purchases
             .Include(o => o.PurchaseItems)
             .FirstOrDefaultAsync(o => o.Id == id);
 

@@ -1,52 +1,82 @@
 using Microsoft.AspNetCore.Mvc;
+using Pharmasy.Exeption;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
 
 namespace Pharmasy.Controllers;
+
 [ApiController]
-[Route("api/supplier/[controller]")]
-public class SupplierController:ControllerBase
+[Route("api/[controller]/[action]")]
+public class SupplierController : ControllerBase
 {
-   private readonly ISupplierService _supplierService;
+    private readonly ISupplierService _supplierService;
 
-   public SupplierController(ISupplierService supplierService)
-   {
-      _supplierService = supplierService;
-   }
-   
-   [HttpPost]
-   public async Task<ActionResult<SupplierResponse>> CreateCategory([FromBody] SupplierRequest request)
-   {
-      var response =await  _supplierService.CreateAsync(request);
-      return Ok(response);
-   }
+    public SupplierController(ISupplierService supplierService)
+    {
+        _supplierService = supplierService;
+    }
 
-   [HttpPut]
-   public async Task<ActionResult<SupplierResponse>> UpdateCategory([FromBody] long id, SupplierRequest request)
-   {
-      var response =await _supplierService.UpdateAsync(id,request);
-      return Ok(response);
-   }
+    [HttpPost]
+    public async Task<ActionResult<SupplierResponse>> CreateSupplier([FromBody] SupplierRequest request)
+    {
+        var response = await _supplierService.CreateAsync(request);
+        return Ok(response);
+    }
 
-   [HttpGet]
-   public async Task<ActionResult<SupplierResponse>> GetCategoryById(long id)
-   {
-      var response =await _supplierService.GetByIdAsync(id);
-      return Ok(response);
-   }
+    [HttpPut]
+    public async Task<ActionResult<SupplierResponse>> UpdateCSupplier(long id, [FromBody] SupplierRequest request)
+    {
+        try
+        {
+            var response = await _supplierService.UpdateAsync(id, request);
+            return Ok(response);
+        }
+        catch (ResourseNotFoundExeption ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
 
-   [HttpGet]
-   public async Task<ActionResult<List<SupplierResponse>>> GetAllCategoriesByPagenation(int pageNumber, int pageSize)
-   {
-      var response=_supplierService.GetAllByPaginationAsync(pageNumber, pageSize);
-      return Ok(response);
-   }
+    [HttpGet("id")]
+    public async Task<ActionResult<SupplierResponse>> GetSupplierById(long id)
+    {
+        try
+        {
+            var response = await _supplierService.GetByIdAsync(id);
+            return Ok(response);
+        }
+        catch (ResourseNotFoundExeption ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
 
-   [HttpDelete]
-   public async Task<IActionResult> DeleteCategoryById(long id)
-   {
-      var response =await _supplierService.DeleteAsync(id);
-      return Ok(response);
-   }
+    [HttpGet]
+    public async Task<ActionResult<List<SupplierResponse>>> GetAllSuppliersByPagenation(int pageNumber, int pageSize)
+    {
+        try
+        {
+            var response = await _supplierService.GetAllByPaginationAsync(pageNumber, pageSize);
+            return Ok(response);
+        }
+        catch (ResourseNotFoundExeption ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteSupplierById(long id)
+    {
+        try
+        {
+            var response = await _supplierService.DeleteAsync(id);
+            return Ok(response);
+        }
+        catch (ResourseNotFoundExeption ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
 }

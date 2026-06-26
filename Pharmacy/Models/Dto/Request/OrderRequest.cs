@@ -4,9 +4,11 @@ namespace Pharmasy.Models.Dto.Request;
 
 public class OrderRequest
 {
+    
     public long CustomerId { get; set; }
-    public CustomerRequest? Customer { get; set; }
-    public long EmployeeId { get; set; }
-    public EmployeRequest Employe { get; set; }
+    public DateTime? GetTime { get; set; }
+    public string?  Adress { get; set; }
+    
     public List<OrderItemRequest> OrderItems { get; set; }
+        = new List<OrderItemRequest>();
 }

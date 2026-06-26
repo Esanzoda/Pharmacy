@@ -16,7 +16,7 @@ public class OrderRepository:BaseRepository<Order>,IOrderRepository
 
     public override async Task<Order?> GetByIdAsync(long id)
     {
-        return await _dbContext.Orders
+        return await DbContext.Orders
             .Include(o => o.OrderItems)
             .FirstOrDefaultAsync(o => o.Id == id);
     }
