@@ -11,7 +11,9 @@ public class Mapper:Profile
     public Mapper()
     {
         CreateMap<CartRequest, Cart>();
-        CreateMap<Cart, CartResponse>();
+        CreateMap<Cart, CartResponse>()
+            .ForMember(dest => dest.CartItemResponses, opt => 
+                opt.MapFrom(src => src.CartItems));
         
         CreateMap<CartItemRequest, CartItem>();
         CreateMap<CartItem, CartItemResponse>();
@@ -25,8 +27,18 @@ public class Mapper:Profile
         CreateMap<EmployeRequest, Employee>();
         CreateMap<Employee, EmployeResponse>();
         
-        CreateMap<OrderRequest, Order>();
-        CreateMap<Order, OrderResponse>();
+        CreateMap<OrderDeliverRequest, Order>();
+        CreateMap<Order, OrderResponse>()
+            .ForMember(dest => dest.OrderItemResponses, opt =>
+                opt.MapFrom(src => src.OrderItems));
+        
+        CreateMap<OrderReservationRequest, Order>();
+        CreateMap<Order, OrderResponse>()
+            .ForMember(dest => dest.OrderItemResponses, opt =>
+                opt.MapFrom(src => src.OrderItems));
+
+        
+        
         
         CreateMap<OrderItemRequest, OrderItem>();
         CreateMap<OrderItem, OrderItemResponse>();

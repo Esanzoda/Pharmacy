@@ -1,7 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
-using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Repositories;
 public interface IBaseRepository<TEntity> where TEntity : class
@@ -14,36 +13,36 @@ public interface IBaseRepository<TEntity> where TEntity : class
 }
 public class BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : class
 {
-    protected readonly AppDbContext _dbContext;
-    protected readonly DbSet<TEntity> _dbSet;
+    protected readonly AppDbContext DbContext;
+    protected readonly DbSet<TEntity> DbSet;
     public BaseRepository(AppDbContext dbContext)
     {
-        _dbContext = dbContext;
-        _dbSet = _dbContext.Set<TEntity>();
+        DbContext = dbContext;
+        DbSet = DbContext.Set<TEntity>();
     }
     public async Task<TEntity> CreateAsync(TEntity entity)
     {
-         _dbSet.Add(entity);
-        await  _dbContext.SaveChangesAsync();
+         DbSet.Add(entity);
+        await  DbContext.SaveChangesAsync();
         return entity;
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-       _dbSet.Update(entity);
-       await _dbContext.SaveChangesAsync();
+       DbSet.Update(entity);
+       await DbContext.SaveChangesAsync();
        return entity;
     }
 
     public virtual async Task<TEntity?> GetByIdAsync(long id)
     {
-        return await   _dbSet
+        return await   DbSet
             .FindAsync(id);
     }
 
     public async Task<List<TEntity>> GetAllByPagenationAsync(int pageNumber, int pageSize)
     {
-        return await _dbSet
+        return await DbSet
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -51,12 +50,12 @@ public class BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : c
 
     public async Task<bool> DeleteAsync(long id)
     {
-        var entity = await _dbSet.FindAsync(id);
+        var entity = await DbSet.FindAsync(id);
         if (entity == null)
             return false;
         
-        _dbSet.Remove(entity);
-        await _dbContext.SaveChangesAsync();
+        DbSet.Remove(entity);
+        await DbContext.SaveChangesAsync();
         return true;
     }
 }

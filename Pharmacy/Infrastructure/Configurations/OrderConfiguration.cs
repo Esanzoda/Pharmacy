@@ -7,7 +7,8 @@ namespace Pharmasy.Infrastructure.Configurations;
 public class OrderConfiguration:IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
-    {
-        throw new NotImplementedException();
+    { builder.ToTable("Orders");
+        
+        builder.HasKey(x => x.Id);
     }
 }

@@ -8,6 +8,8 @@ public class CartItemConfiguration:IEntityTypeConfiguration<CartItem>
 {
     public void Configure(EntityTypeBuilder<CartItem> builder)
     {
-        throw new NotImplementedException();
+        builder.ToTable("CartItems");
+        
+        builder.HasKey(x => x.Id);
     }
 }

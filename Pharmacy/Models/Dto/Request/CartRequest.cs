@@ -2,7 +2,6 @@ namespace Pharmasy.Models.Dto.Request;
 
 public class CartRequest
 {
-    public decimal  TotalAmout { get; set; }
     public List<CartItemRequest> CartItems { get; set; }
 }
 public class CartItemRequest

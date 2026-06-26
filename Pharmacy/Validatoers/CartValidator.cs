@@ -1,5 +1,4 @@
 using FluentValidation;
-using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;

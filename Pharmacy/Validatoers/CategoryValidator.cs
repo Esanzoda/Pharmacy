@@ -1,5 +1,4 @@
 using FluentValidation;
-using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;
@@ -13,6 +12,10 @@ public class CategoryValidator:AbstractValidator<CategoryRequest>
             .NotNull()
             .NotEmpty()
             .WithMessage("Name is required");
+        RuleFor(request => request.Description)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage("Description is required");
     }
     
 }

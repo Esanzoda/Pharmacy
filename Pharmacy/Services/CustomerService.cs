@@ -8,18 +8,18 @@ using Pharmasy.Repositories;
 namespace Pharmasy.Services;
 
 public interface ICustomerService
-    : IBaseService< CustomerRequest, CustomerResponse> 
+    : IBaseService<CustomerRequest, CustomerResponse>
 {
-    
     Task<CustomerResponse?> GetCustomerByEmailAsync(string email);
     Task<CustomerResponse?> GetCustomerByPhoneAsync(string phone);
     Task<List<CustomerResponse>> GetCustomerByNameAsync(string name);
 }
 
-public class CustomerService :BaseService<Customer,CustomerRequest,CustomerResponse>,ICustomerService
+public class CustomerService : BaseService<Customer, CustomerRequest, CustomerResponse>, ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
-    public CustomerService(ICustomerRepository customerrepository, IMapper mapper) 
+
+    public CustomerService(ICustomerRepository customerrepository, IMapper mapper)
         : base(customerrepository, mapper)
     {
         _customerRepository = customerrepository;
@@ -27,28 +27,26 @@ public class CustomerService :BaseService<Customer,CustomerRequest,CustomerRespo
 
     public async Task<CustomerResponse?> GetCustomerByEmailAsync(string email)
     {
-        var customer =await _customerRepository.GetCustomerByEmailAsync(email);
+        var customer = await _customerRepository.GetCustomerByEmailAsync(email);
         if (customer == null)
-            throw new ResourseNotFoundExeption("Customer with this email not found");
-        
-        return _mapper.Map<CustomerResponse>(customer);
-            
+            throw new ResourseNotFoundExeption("Customer not found");
+
+        return Mapper.Map<CustomerResponse>(customer);
     }
 
     public async Task<CustomerResponse?> GetCustomerByPhoneAsync(string phone)
     {
-        var customer =await _customerRepository.GetCustomerByPhoneAsync(phone);
+        var customer = await _customerRepository.GetCustomerByPhoneAsync(phone);
         if (customer == null)
-            throw new ResourseNotFoundExeption("Customer with this phone not found");
-        return _mapper.Map<CustomerResponse>(customer);
+            throw new ResourseNotFoundExeption("Customer not found");
+        return Mapper.Map<CustomerResponse>(customer);
     }
 
     public async Task<List<CustomerResponse>> GetCustomerByNameAsync(string name)
     {
         var customer = await _customerRepository.GetCustomerByNameAsync(name);
-        if (customer == null)
-            throw new ResourseNotFoundExeption("Customer with this name not found");
-        return _mapper.Map<List<CustomerResponse>>(customer);
-       
+        if (!customer.Any())
+            throw new ResourseNotFoundExeption("Customer not found");
+        return Mapper.Map<List<CustomerResponse>>(customer);
     }
 }

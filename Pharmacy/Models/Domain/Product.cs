@@ -14,6 +14,7 @@ public class Product : BaseEntity
     public long CategoryId { get; set; }
     public Category? Category { get; set; }
    public DateTime ExpiryDate { get; set; }
+   public CountryEnum Country { get; set; }
    
    
 }
