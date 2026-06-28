@@ -8,7 +8,7 @@ public interface IOrderRepository: IBaseRepository<Order>
 {
     
 }
-public class OrderRepository:BaseRepository<Order>,IOrderRepository
+public class  OrderRepository:BaseRepository<Order>,IOrderRepository
 {
     public OrderRepository(AppDbContext dbContext) : base(dbContext)
     {

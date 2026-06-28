@@ -3,7 +3,7 @@ using Pharmasy.Messages.Evants;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCanselledConsumer:IConsumer<OrderCancelledEvant>
+public class OrderCanselledConsumer:IConsumer<OrderCancelledEvant> 
 {
     private readonly ILogger<OrderCanselledConsumer> _logger;
 

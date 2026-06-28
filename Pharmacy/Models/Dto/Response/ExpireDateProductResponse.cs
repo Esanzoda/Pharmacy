@@ -2,8 +2,9 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Models.Dto.Response;
 
-public class ExpireDateProductResponse
+public class  ExpireDateProductResponse
 {
+    public long Id { get; set; }
     public DateTime DateTime { get; set; }
     public int  Count { get; set; }
     public decimal ToTalPrice { get; set; }

@@ -3,7 +3,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Dto.Response;
 
-public class EmployeResponse
+public class  EmployeResponse
 {
     public long Id { get; set; }
     public string Name { get; set; }

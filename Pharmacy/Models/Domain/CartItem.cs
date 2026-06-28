@@ -11,4 +11,4 @@ public class CartItem:BaseEntity
 
     public decimal TotalPrice { get; set; }
     
-}
+} 

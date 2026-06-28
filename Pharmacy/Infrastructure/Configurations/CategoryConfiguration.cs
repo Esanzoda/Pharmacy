@@ -12,4 +12,4 @@ public class CategoryConfiguration:IEntityTypeConfiguration<Category>
         
         builder.HasKey(x => x.Id);
     }
-}
+}  

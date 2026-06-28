@@ -8,7 +8,7 @@ public interface IPurchaseRepository: IBaseRepository<Purchase>
 {
     
 }
-public class PurchaseRepository:BaseRepository<Purchase>,IPurchaseRepository
+public class  PurchaseRepository:BaseRepository<Purchase>,IPurchaseRepository
 {
     public PurchaseRepository(AppDbContext dbContext) : base(dbContext)
     {

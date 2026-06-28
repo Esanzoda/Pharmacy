@@ -15,7 +15,4 @@ public class ProductResponse
     public DateTime ExpiryDate { get; set; }
     public string? Barcode { get; set; }
     public ProductType ProductType { get; set; }
-    public decimal TotalAmout { get; set; }
-    
-    
-}
+} 

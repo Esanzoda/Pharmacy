@@ -17,4 +17,4 @@ public class Product : BaseEntity
    public CountryEnum Country { get; set; }
    
    
-}
+} 

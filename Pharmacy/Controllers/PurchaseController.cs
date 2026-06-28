@@ -11,7 +11,7 @@ namespace Pharmasy.Controllers;
 public class PurchaseController : ControllerBase
 {
     private readonly IPurchaseService _purchaseService;
-
+ 
     public PurchaseController(IPurchaseService productService)
     {
         _purchaseService = productService;

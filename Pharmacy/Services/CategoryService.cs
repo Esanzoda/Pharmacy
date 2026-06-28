@@ -17,7 +17,7 @@ public interface ICategoryServise :
     Task<bool> CategoryExistsAsync(string name);
 }
 
-public class CategoryService : BaseService<Category, CategoryRequest, CategoryResponse>,
+public class  CategoryService : BaseService<Category, CategoryRequest, CategoryResponse>,
     ICategoryServise
 {
     private readonly ICategoryRepository _categoryRepository;

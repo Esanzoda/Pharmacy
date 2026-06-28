@@ -20,7 +20,7 @@ public interface IProductRepository : IBaseRepository<Product>
 
    
 }
-public class ProductRepository:BaseRepository<Product>,IProductRepository
+public class  ProductRepository:BaseRepository<Product>,IProductRepository
 {
     public ProductRepository(AppDbContext dbContext) : base(dbContext)
     {

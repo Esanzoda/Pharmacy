@@ -6,11 +6,11 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services;
 
-public interface ISupplierService : IBaseService<SupplierRequest, SupplierResponse>
+public interface ISupplierService : IBaseService<DeliverRequest, DeliverResponse>
 {
 }
 
-public class SupplierService : BaseService<Supplier, SupplierRequest, SupplierResponse>, ISupplierService
+public class  SupplierService : BaseService<Deliver, DeliverRequest, DeliverResponse>, ISupplierService
 {
     public SupplierService(ISupplierRepository repository, IMapper mapper)
         : base(repository, mapper)

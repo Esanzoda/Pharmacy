@@ -9,7 +9,7 @@ public interface IOrderItemRepository : IBaseRepository<OrderItem>
     Task<List<OrderItem>> GetAllOrderItems(long orderId); 
     
 }
-public class OrderItemRepository:BaseRepository<OrderItem>,IOrderItemRepository
+public class  OrderItemRepository:BaseRepository<OrderItem>,IOrderItemRepository
 {
     public OrderItemRepository(AppDbContext dbContext)
         : base(dbContext)

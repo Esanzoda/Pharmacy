@@ -53,7 +53,7 @@ public class CategoryController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet] 
     public async Task<ActionResult<List<CategoryResponse>>> GetAllCategoriesByPagenation(int pageNumber, int pageSize)
     {
         try

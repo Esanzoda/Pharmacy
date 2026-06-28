@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;
 
-public class ProductVAlidator:AbstractValidator<ProductRequest>
+public class  ProductVAlidator:AbstractValidator<ProductRequest>
 {
     public ProductVAlidator()
     {

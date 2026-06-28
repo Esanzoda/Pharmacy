@@ -13,7 +13,7 @@ public interface IPurchaseService : IBaseService<PurchaseRequest, PurchaseRespon
         Task<PurchaseItemResponse> RemoveItemFromPurchase(long purchaseId, long purchaseItemId);
 }
 
-public class PurchaseService : BaseService<Purchase, PurchaseRequest, PurchaseResponse>, IPurchaseService
+public class  PurchaseService : BaseService<Purchase, PurchaseRequest, PurchaseResponse>, IPurchaseService
 {
     private readonly IPurchaseRepository _purchaseRepository;
     private readonly IPurchaseItemRepository _purchaseItemRepository;

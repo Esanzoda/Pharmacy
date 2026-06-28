@@ -11,4 +11,4 @@ public class CustomerConfiguration:IEntityTypeConfiguration<Customer>
         
         builder.HasKey(x => x.Id);
     }
-}
+} 

@@ -15,7 +15,7 @@ public interface ICustomerService
     Task<List<CustomerResponse>> GetCustomerByNameAsync(string name);
 }
 
-public class CustomerService : BaseService<Customer, CustomerRequest, CustomerResponse>, ICustomerService
+public class  CustomerService : BaseService<Customer, CustomerRequest, CustomerResponse>, ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
 

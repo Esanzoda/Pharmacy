@@ -12,4 +12,4 @@ public class Employee:BaseEntity
     public Role? Role { get; set; }
     public string? PasswordHash { get; set; }
     
-}
+} 

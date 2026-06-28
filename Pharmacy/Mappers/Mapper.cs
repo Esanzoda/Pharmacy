@@ -31,7 +31,7 @@ public class Mapper:Profile
             .ForMember(x=>x.PurchaseItemResponses,
                 x=>x.MapFrom(y=>y.PurchaseItems));
         
-        CreateMap<CategoryRequest, Category>();
+        CreateMap<CategoryRequest, Category>(); 
         CreateMap<Category, CategoryResponse>();
         
         CreateMap<CustomerRequest, Customer>();
@@ -47,8 +47,8 @@ public class Mapper:Profile
         CreateMap<ProductRequest, Product>();
         CreateMap<Product, ProductResponse>();
         
-        CreateMap<SupplierRequest, Supplier>();
-        CreateMap<Supplier, SupplierResponse>();
+        CreateMap<DeliverRequest, Deliver>();
+        CreateMap<Deliver, DeliverResponse>();
     }
     
 }

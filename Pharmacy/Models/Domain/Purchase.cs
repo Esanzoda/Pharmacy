@@ -6,4 +6,4 @@ public class Purchase:BaseEntity
 
     public List<PurchaseItem> PurchaseItems { get; set; }
         = new List<PurchaseItem>();
-}
+} 

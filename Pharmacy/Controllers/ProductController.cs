@@ -39,7 +39,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<ProductResponse>> UpdateOrder(long id, [FromBody] ProductRequest request)
+    public async Task<ActionResult<ProductResponse>> UpdateProduct(long id, [FromBody] ProductRequest request)
     {
         try
         {
@@ -53,7 +53,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("id")]
-    public async Task<ActionResult<ProductResponse>> GetOrderById(long id)
+    public async Task<ActionResult<ProductResponse>> GetProductById(long id)
     {
         try
         {
@@ -67,7 +67,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ProductResponse>>> GetAllOrdersByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<ProductResponse>>> GetAllProductsByPagenation(int pageNumber, int pageSize)
     {
         try
         {
@@ -81,7 +81,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteOrderById(long id)
+    public async Task<IActionResult> DeleteProductById(long id)
     {
         try
         {

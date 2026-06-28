@@ -12,4 +12,4 @@ public class CartItemConfiguration:IEntityTypeConfiguration<CartItem>
         
         builder.HasKey(x => x.Id);
     }
-}
+} 

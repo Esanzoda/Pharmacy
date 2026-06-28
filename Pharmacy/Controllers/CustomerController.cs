@@ -17,7 +17,7 @@ public class CustomerController : ControllerBase
         _customerService = customerService;
     }
 
-    [HttpPost]
+    [HttpPost] 
     public async Task<ActionResult<CustomerResponse>> CreateCustomer([FromBody] CustomerRequest request)
     {
         try

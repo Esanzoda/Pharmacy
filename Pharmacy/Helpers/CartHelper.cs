@@ -11,5 +11,5 @@ public static class CartHelpers
     {
         return cartItemDtos.Sum(item => item.TotalAmout);
     }
-}
+} 
 }

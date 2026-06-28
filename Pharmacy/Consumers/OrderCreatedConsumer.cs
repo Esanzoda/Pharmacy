@@ -5,7 +5,7 @@ using Pharmasy.Messages.Evants;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
+public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant> 
 {
     private readonly ILogger<OrderCreatedConsumer> _logger;
 

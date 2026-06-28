@@ -15,7 +15,7 @@ public interface ICartService :
     Task<CartResponse> UpdateCartItem(long cartId, long cartItemid, int quantity);
 }
 
-public class CartService : BaseService<Cart, CartRequest, CartResponse>, ICartService
+public class  CartService : BaseService<Cart, CartRequest, CartResponse>, ICartService
 {
     private readonly ICartRepository _cartRepository;
     private readonly ICartItemRepository _cartItemRepository;

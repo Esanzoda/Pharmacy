@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Dto.Request;
 
-public class EmployeRequest
+public class  EmployeRequest
 {
     public string  Name { get; set; }
     public string  Email { get; set; }

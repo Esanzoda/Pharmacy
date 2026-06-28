@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;
 
-public class CartItemValidator:AbstractValidator<CartItemRequest>
+public class  CartItemValidator:AbstractValidator<CartItemRequest>
 {
 
     public CartItemValidator()

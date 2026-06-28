@@ -22,7 +22,7 @@ public class ProductConfiguration:IEntityTypeConfiguration<Product>
             .HasMaxLength(500);
         
         builder.Property(x=>x.Barcode)
-            .IsRequired()
+            .IsRequired() 
             .HasMaxLength(100);
         
         builder.HasIndex(x=>x.Barcode)

@@ -4,7 +4,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;
 
-public class CustomerValidator:AbstractValidator<CustomerRequest>
+public class  CustomerValidator:AbstractValidator<CustomerRequest>
 {
     public CustomerValidator()
     {

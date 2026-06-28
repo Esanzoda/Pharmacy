@@ -5,7 +5,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Repositories;
 
-public interface IEmployeeRepository : IBaseRepository<Employee>
+public interface  IEmployeeRepository : IBaseRepository<Employee>
 {
     Task<List<Employee>> GetEmployeesByNameAsync(string name, int page, int pageSize);    
     Task<List<Employee>> GetEmployeesByAdressAsync(string adress, int page, int pageSize);    

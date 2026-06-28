@@ -11,4 +11,4 @@ public class EmployeeConfiguration:IEntityTypeConfiguration<Employee>
         
         builder.HasKey(x => x.Id);
     }
-}
+} 

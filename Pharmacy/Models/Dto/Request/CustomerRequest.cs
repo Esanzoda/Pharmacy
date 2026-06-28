@@ -7,4 +7,4 @@ public class CustomerRequest
     public string  Phonenumber { get; set; }
     public string  Password { get; set; }
     public string  Address { get; set; }
-}
+} 

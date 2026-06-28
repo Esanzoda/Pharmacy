@@ -10,7 +10,7 @@ public interface ICartItemService
 {
     Task<bool> ClearCartAsync(long cartId);
 }
-public class CartItemService:BaseService<CartItem,CartItemRequest,CartItemResponse>, ICartItemService
+public class  CartItemService:BaseService<CartItem,CartItemRequest,CartItemResponse>, ICartItemService
 {
     private readonly ICartItemRepository _cartItemRepository;
 

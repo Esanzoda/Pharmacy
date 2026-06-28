@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validatoers;
 
-public class OrderResevationValidator:AbstractValidator<OrderReservationRequest>
+public class  OrderResevationValidator:AbstractValidator<OrderReservationRequest>
 {
     public OrderResevationValidator()
     {

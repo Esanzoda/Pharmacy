@@ -11,7 +11,7 @@ public interface IBaseRepository<TEntity> where TEntity : class
     Task<List<TEntity>>GetAllByPagenationAsync(int pageNumber, int pageSize);
     Task<bool> DeleteAsync(long id);
 }
-public class BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : class
+public class  BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : class
 {
     protected readonly AppDbContext DbContext;
     protected readonly DbSet<TEntity> DbSet;

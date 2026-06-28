@@ -13,7 +13,7 @@ public interface IBaseService< TRequest,TResponse>
     Task<bool> DeleteAsync(long id);
     
 }
-public class BaseService<TEntity,TRequest,TResponse>:IBaseService<TRequest,TResponse> where TEntity : class
+public class  BaseService<TEntity,TRequest,TResponse>:IBaseService<TRequest,TResponse> where TEntity : class
 {
     protected readonly IBaseRepository<TEntity> BaseRepository;
     protected readonly IMapper Mapper;

@@ -22,7 +22,7 @@ public interface IProductService : IBaseService<ProductRequest, ProductResponse>
     Task<bool> ProductExistsAsync(string name);
 }
 
-public class ProductService : BaseService<Product, ProductRequest, ProductResponse>, IProductService
+public class  ProductService : BaseService<Product, ProductRequest, ProductResponse>, IProductService
 {
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;

@@ -7,7 +7,7 @@ public interface IPurchaseItemRepository : IBaseRepository<PurchaseItem>
 {
     
 }
-public class PurchaseItemRepository:BaseRepository<PurchaseItem>, IPurchaseItemRepository
+public class  PurchaseItemRepository:BaseRepository<PurchaseItem>, IPurchaseItemRepository
 {
     public PurchaseItemRepository(AppDbContext dbContext)
         : base(dbContext)

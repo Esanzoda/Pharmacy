@@ -34,7 +34,7 @@ public class ChekExpiraDateProduct
         }
 
         var expire = new ExpireDateProduct
-        {
+        { 
             CreateAt = DateTime.Now,
             TotalOrderPrice = 0,
             TotalPurchasePrice = 0,

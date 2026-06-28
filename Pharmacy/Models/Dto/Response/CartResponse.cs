@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Response;
 
-public class CartResponse
+public class  CartResponse
 {
    public long Id { get; set; }
    public decimal TotalAmout { get; set; }

@@ -25,7 +25,7 @@ public class EmployeConteroller : ControllerBase
         try
         {
             var response = await _employeeService.CreateAsync(request);
-            return Ok(response);
+            return Ok(response); 
         }
         catch (ResourseIsAlredyExsistExeption ex)
         {

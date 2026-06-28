@@ -19,7 +19,7 @@ public interface IOrderService
     public Task<OrderResponse>CreateReservationOrderAsync(OrderReservationRequest reservationRequest);
 }
 
-public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
+public class  OrderService : BaseService<Order, OrderRequest, OrderResponse>
     , IOrderService
 {
     private readonly IOrderRepository _orderRepository;

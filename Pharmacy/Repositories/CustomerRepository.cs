@@ -10,7 +10,7 @@ public interface ICustomerRepository: IBaseRepository<Customer>
     Task<Customer?> GetCustomerByPhoneAsync(string phone);
     Task<List<Customer>> GetCustomerByNameAsync(string name);
 }
-public class CustomerRepository:BaseRepository<Customer>,ICustomerRepository
+public class  CustomerRepository:BaseRepository<Customer>,ICustomerRepository
     
 {
     public CustomerRepository(AppDbContext dbContext) : base(dbContext)

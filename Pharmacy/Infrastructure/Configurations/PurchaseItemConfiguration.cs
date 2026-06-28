@@ -11,4 +11,4 @@ public class PurchaseItemConfiguration:IEntityTypeConfiguration<PurchaseItem>
         
         builder.HasKey(x => x.Id);
     }
-}
+} 

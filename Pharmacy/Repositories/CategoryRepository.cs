@@ -13,7 +13,7 @@ public interface ICategoryRepository:IBaseRepository<Category>
     Task<bool> CategoryExistsAsync(string name);
 
 }
-public class CategoryRepository :BaseRepository<Category>,ICategoryRepository
+public class  CategoryRepository :BaseRepository<Category>,ICategoryRepository
 {
     public CategoryRepository(AppDbContext dbContext) : base(dbContext)
     {

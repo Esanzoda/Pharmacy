@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Request;
 
-public class PurchaseItemRequest
+public class  PurchaseItemRequest
 {
     public long PurchaseId { get; set; }
     public long ProductId { get; set; }

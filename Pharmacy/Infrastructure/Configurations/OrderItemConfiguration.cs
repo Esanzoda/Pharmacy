@@ -11,4 +11,4 @@ public class OrderItemConfiguration:IEntityTypeConfiguration<OrderItem>
         
         builder.HasKey(x => x.Id);
     }
-}
+} 

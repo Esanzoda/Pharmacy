@@ -19,4 +19,4 @@ public class ExpireDateItems:BaseEntity
     public decimal TotalOrderPrice { get; set; }
     
     
-}
+} 

@@ -19,7 +19,7 @@ public interface IEmployeeService
     Task<List<EmployeResponse>> GetAllEmployeeByRoleAsync(Role role, int page, int pageSize);
 }
 
-public class EmployeeService : BaseService<Employee, EmployeRequest, EmployeResponse>,
+public class  EmployeeService : BaseService<Employee, EmployeRequest, EmployeResponse>,
     IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;

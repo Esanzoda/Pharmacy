@@ -9,4 +9,4 @@ public class Category:BaseEntity
     public CategoryStatus CategoryStatus { get; set; }
     public List<Product>Products { get; set; }
     
-}
+} 

@@ -8,7 +8,7 @@ namespace Pharmasy.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class SupplierController : ControllerBase
+public class SupplierController : ControllerBase 
 {
     private readonly ISupplierService _supplierService;
 
@@ -18,14 +18,14 @@ public class SupplierController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<SupplierResponse>> CreateSupplier([FromBody] SupplierRequest request)
+    public async Task<ActionResult<DeliverResponse>> CreateSupplier([FromBody] DeliverRequest request)
     {
         var response = await _supplierService.CreateAsync(request);
         return Ok(response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<SupplierResponse>> UpdateCSupplier(long id, [FromBody] SupplierRequest request)
+    public async Task<ActionResult<DeliverResponse>> UpdateCSupplier(long id, [FromBody] DeliverRequest request)
     {
         try
         {
@@ -39,7 +39,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpGet("id")]
-    public async Task<ActionResult<SupplierResponse>> GetSupplierById(long id)
+    public async Task<ActionResult<DeliverResponse>> GetSupplierById(long id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class SupplierController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<SupplierResponse>>> GetAllSuppliersByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<DeliverResponse>>> GetAllSuppliersByPagenation(int pageNumber, int pageSize)
     {
         try
         {

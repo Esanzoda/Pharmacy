@@ -12,7 +12,7 @@ public interface ICartItemRepository : IBaseRepository<CartItem>
     Task<CartItem?> GetProductWhithProductIdInCartItemAsync( long productId);
   
 }
-public class CartItemRepository:BaseRepository<CartItem>, ICartItemRepository
+public class  CartItemRepository:BaseRepository<CartItem>, ICartItemRepository
 
 
 {
