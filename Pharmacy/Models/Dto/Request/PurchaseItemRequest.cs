@@ -8,6 +8,7 @@ public class  PurchaseItemRequest
     public decimal PurchasePrice { get; set; }
     public decimal Price { get; set; }
     public DateTime ExpiryDate { get; set; }
+    public decimal TotalPrice { get; set; }
     
     
 }

@@ -1,7 +1,7 @@
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
-namespace Pharmasy.Validatoers;
+namespace Pharmasy.Validators;
 
 public class  PurchaseItemValidator:AbstractValidator<PurchaseItemRequest>
 {
@@ -20,8 +20,8 @@ public class  PurchaseItemValidator:AbstractValidator<PurchaseItemRequest>
             .NotNull()
             .WithMessage("Purchase Price must not be null")
             .GreaterThan(0)
-            .WithMessage("PurchasePrice must be greater than 0");
-        RuleFor(x=>x.PurchasePrice)
+            .WithMessage("Purchase Price must be greater than 0");
+        RuleFor(x=>x.Price)
             .NotNull()
             .WithMessage("Purchase Price must not be null")
             .GreaterThan(0)

@@ -12,7 +12,6 @@ public class CartConfiguration:IEntityTypeConfiguration<Cart>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.TotalAmout)
             .HasColumnType("decimal(18,2)");
-        builder.Property(x=>x.TotalAmout)
-            .HasColumnType("decimal(18,2)");
+    
     } 
 }

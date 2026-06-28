@@ -37,7 +37,6 @@ public class Mapper:Profile
         CreateMap<CustomerRequest, Customer>();
         CreateMap<Customer, CustomerResponse>();
         
-        CreateMap<EmployeRequest, Employee>();
         CreateMap<EmployeRequest, Employee>()
             .ForMember(dest => dest.PasswordHash,
                 opt => opt.Ignore());
@@ -49,6 +48,9 @@ public class Mapper:Profile
         
         CreateMap<DeliverRequest, Deliver>();
         CreateMap<Deliver, DeliverResponse>();
+        
+        CreateMap<UserRequest, User>();
+        CreateMap<User, UserResponse>();
     }
     
 }

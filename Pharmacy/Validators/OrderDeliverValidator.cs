@@ -1,13 +1,13 @@
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
-namespace Pharmasy.Validatoers;
+namespace Pharmasy.Validators;
 
 public class  OrderDeliverValidator:AbstractValidator<OrderRequest>
 {
     public OrderDeliverValidator()
     {
-        RuleFor(x => x.CustomerId)
+        RuleFor(x => x.UserId)
             .GreaterThan(0)
             .WithMessage("Customer id must be greater than 0");
     }

@@ -1,29 +1,42 @@
 using MassTransit;
 using Pharmasy.Messages.Evants;
+using Pharmasy.Repositories;
+using Pharmasy.Services;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCanselledConsumer:IConsumer<OrderCancelledEvant> 
+public class OrderCanselledConsumer : IConsumer<OrderCancelledEvant>
 {
     private readonly ILogger<OrderCanselledConsumer> _logger;
+    private readonly IEmailService _emailService;
+    private readonly IUserRepository _userRepository;
 
-    public OrderCanselledConsumer(ILogger<OrderCanselledConsumer> logger)
+    public OrderCanselledConsumer(
+        ILogger<OrderCanselledConsumer> logger,
+        IEmailService emailService,
+        IUserRepository userRepository)
     {
-     _logger = logger;    
+        _logger = logger;
+        _emailService = emailService;
+        _userRepository = userRepository;
     }
+
     public async Task Consume(ConsumeContext<OrderCancelledEvant> context)
     {
-        
         var message = context.Message;
+
         _logger.LogInformation(
-            "OrderCanselled {OrderId} customer{CustomerId} has been cancelled} at {UpdateTime}. ", 
-            message.OrderId, 
-            message.CustomerId, 
-            message.UpdateTime
-            );
-        Console.WriteLine($"Order {message.OrderId} has been cancelled.");
+            "Order cancelled: OrderId={OrderId}, CustomerId={CustomerId}",
+            message.OrderId,
+            message.UserId);
+
         
-        
-        //who need thos sms
+        var user = await _userRepository.GetByIdAsync(message.UserId);
+        if (user != null)
+        {
+            await _emailService.SendOrderCancelledAsync(
+                user.Email,
+                message.OrderId);
+        }
     }
 }

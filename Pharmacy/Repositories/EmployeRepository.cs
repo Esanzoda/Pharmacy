@@ -42,6 +42,8 @@ public class EmployeeRepository:BaseRepository<Employee>,IEmployeeRepository
     {
         return DbSet
             .Where(x=>x.PhoneNumber==number)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
     }
 

@@ -22,6 +22,7 @@ public class ExseptionMiddleware
         catch (ResourseIsAlredyExsistExeption ex)
         {
             _logger.LogError(ex, ex.Message);
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
             await context.Response.WriteAsync(ex.Message);
             
         }

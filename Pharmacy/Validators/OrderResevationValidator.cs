@@ -1,7 +1,7 @@
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
-namespace Pharmasy.Validatoers;
+namespace Pharmasy.Validators;
 
 public class  OrderResevationValidator:AbstractValidator<OrderReservationRequest>
 {

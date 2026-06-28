@@ -2,7 +2,7 @@
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
-namespace Pharmasy.Validatoers;
+namespace Pharmasy.Validators;
 
 public class  CustomerValidator:AbstractValidator<CustomerRequest>
 {

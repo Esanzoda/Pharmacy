@@ -56,7 +56,9 @@ public class  BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : 
 
     public async Task<List<TEntity>> GetAllByPagenationAsync(int pageNumber, int pageSize)
     {
+        
         return await DbSet
+            .OrderBy(e => EF.Property<object>(e, "Id")) 
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -70,6 +72,7 @@ public class  BaseRepository<TEntity> :IBaseRepository<TEntity> where TEntity : 
         
         DbSet.Remove(entity);
         await DbContext.SaveChangesAsync();
+        
         return true;
     }
 }

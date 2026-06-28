@@ -47,6 +47,7 @@ public class  CartService : BaseService<Cart, CartRequest, CartResponse>, ICartS
         {
             existingCartItem.Quantity += itemrequest.Quantity;
             existingCartItem.TotalPrice = existingCartItem.Quantity * product.Price;
+            await _cartItemRepository.UpdateAsync(existingCartItem);
             
         }
         else
@@ -54,16 +55,12 @@ public class  CartService : BaseService<Cart, CartRequest, CartResponse>, ICartS
             var cartItem = Mapper.Map<CartItem>(itemrequest);
             cartItem.CreateAt = DateTime.UtcNow;
             cartItem.Price = product.Price;
+            cartItem.TotalPrice = product.Price * itemrequest.Quantity;
             cart.CartItems.Add(cartItem);
             
         }
-
-        if (cart != null)
-        {
             cart.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice); 
-        }
-       
-        
+            
         await _cartRepository.UpdateAsync(cart);
         return Mapper.Map<CartResponse>(cart);
     }
@@ -79,15 +76,21 @@ public class  CartService : BaseService<Cart, CartRequest, CartResponse>, ICartS
 
         cart.CartItems.Remove(cartItem);
         cart.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice);
+        await _cartRepository.UpdateAsync(cart);
         return Mapper.Map<CartResponse>(cart);
     }
 
     public async Task<CartResponse> UpdateCartItem(long cartId, long cartItemid, int quantity)
     {
         var cartItemupdate=await _cartItemRepository.UpdateQuantityCartItemAsync(cartId, cartItemid, quantity);
+        if(!cartItemupdate)
+            throw new ResourseNotFoundExeption("Cart Item not found");
         var cart = await _cartRepository.GetByIdAsync(cartId);
+        if (cart == null)
+            throw new ResourseNotFoundExeption("Cart not found");
       
-        cart?.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice);
+        cart.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice);
+        await _cartRepository.UpdateAsync(cart);
         return Mapper.Map<CartResponse>(cartItemupdate);
     }
 }

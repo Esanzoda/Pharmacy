@@ -3,16 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
 using Pharmasy.Exeption;
 using Pharmasy.Models.Domain;
+using Pharmasy.Services;
+
 namespace Pharmasy.Jobs;
 
 public class ChekExpiraDateProduct
 {
     private readonly AppDbContext _dbContext;
     private readonly ILogger<ChekExpiraDateProduct> _logger;
-    public ChekExpiraDateProduct(AppDbContext dbContext, ILogger<ChekExpiraDateProduct> logger)
+    private readonly IEmailService _emailService;
+    private readonly IConfiguration _configuration;
+    public ChekExpiraDateProduct(AppDbContext dbContext, ILogger<ChekExpiraDateProduct> logger, IEmailService emailService,
+        IConfiguration configuration)
     {
         _dbContext = dbContext;
         _logger = logger;
+        _emailService = emailService;
+        _configuration = configuration;
        
     }
 
@@ -22,43 +29,61 @@ public class ChekExpiraDateProduct
             $"Starting chek expira date product");
         var nextTime = DateTime.UtcNow.AddHours(hoursOld);
         var expiridateProduct =await _dbContext.Products
-            .Where(x => x.ExpiryDate == DateTime.UtcNow &&
+            .Where(x => x.ExpiryDate <= DateTime.UtcNow &&
                         x.Stock > 0
-                        && x.CreateAt > nextTime)
+                     //   && x.CreateAt > nextTime
+                     )
             .ToListAsync();
         if (!expiridateProduct.Any())
         {
             _logger.LogInformation(
                 $"No expire date products found");
-            throw new ResourseNotFoundExeption("No products found");
+            return;
         }
+      
 
-        var expire = new ExpireDateProduct
+        var expireRecord = new ExpireDateProduct
         { 
             CreateAt = DateTime.Now,
             TotalOrderPrice = 0,
             TotalPurchasePrice = 0,
             
         };
-        _dbContext.ExpireDateProducts.Add(expire);
+        _dbContext.ExpireDateProducts.Add(expireRecord);
 
         foreach (var product in expiridateProduct)
         {
-            var expireDate = new ExpireDateItems
+            var expireItem = new ExpireDateItems
             {
                 CreateAt =  DateTime.UtcNow,
+                ProductId =  product.Id,
                 Quantity = product.Stock,
+                ProductName =  product.Name,
                 TotalOrderPrice = product.Stock * product.Price,
                 TotalPurchasePrice = product.Stock * product.PurchasePrice
             };
-            _dbContext.ExpireDateItems.Add(expireDate);
-            expire.TotalOrderPrice+=expire.TotalOrderPrice;
-            expire.TotalPurchasePrice+=expireDate.TotalPurchasePrice;
-             _dbContext.ExpireDateProducts.Update(expire);
+            _dbContext.ExpireDateItems.Add(expireItem);
+            expireRecord.TotalOrderPrice+=expireItem.TotalOrderPrice;
+            expireRecord.TotalPurchasePrice+=expireItem.TotalPurchasePrice;
+                            // _dbContext.ExpireDateProducts.Update(expire);
+            var oldStock = product.Stock;
             product.Stock = 0;
             product.UpdateAt=DateTime.UtcNow;
             _dbContext.Products.Update(product);
-           
+
+            if (oldStock <= 10)
+            {
+                var adminEmail = _configuration["EmailSettings:From"];
+                await _emailService.SendLowStockAlertAsync(
+                    adminEmail,
+                    product.Name,
+                    product.Stock);
+            }
+            _dbContext.ExpireDateProducts.Update(expireRecord);
+            await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                $"Finished chek expira date product");
+
         }
     }
 }

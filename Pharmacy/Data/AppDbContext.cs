@@ -24,6 +24,7 @@ public class AppDbContext: DbContext
     public DbSet<Deliver>Suppliers { get; set; }
     public DbSet<ExpireDateProduct>ExpireDateProducts { get; set; }
     public DbSet<ExpireDateItems> ExpireDateItems { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

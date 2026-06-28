@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PharmacyGateway")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fb2806f56f22432e5c2a46c8284a369aaa3fd40")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dff584b750b68b6b152fd3f6dce79b3d3a9f5eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("PharmacyGateway")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PharmacyGateway")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

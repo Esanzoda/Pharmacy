@@ -44,6 +44,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Hangfire": {
               "target": "Package",
               "version": "[1.8.23, )"
@@ -99,6 +103,10 @@
             "Serilog.Enrichers.Environment": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.19.1, )"
             }
           },
           "imports": [
