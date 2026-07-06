@@ -4,16 +4,16 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services;
 
-public interface IBaseService< TRequest,TResponse> 
+public interface IBaseService<TRequest, TResponse>
 {
     Task<TResponse> CreateAsync(TRequest request);
-    Task<TResponse> UpdateAsync(long id,TRequest request);
+    Task<TResponse> UpdateAsync(long id, TRequest request);
     Task<TResponse> GetByIdAsync(long id);
-    Task<List<TResponse>>GetAllByPaginationAsync(int  pageNumber, int pageSize);
+    Task<List<TResponse>> GetAllByPaginationAsync(int pageNumber, int pageSize);
     Task<bool> DeleteAsync(long id);
-    
 }
-public class  BaseService<TEntity,TRequest,TResponse>:IBaseService<TRequest,TResponse> where TEntity : class
+
+public class BaseService<TEntity, TRequest, TResponse> : IBaseService<TRequest, TResponse> where TEntity : class
 {
     protected readonly IBaseRepository<TEntity> BaseRepository;
     protected readonly IMapper Mapper;
@@ -24,35 +24,41 @@ public class  BaseService<TEntity,TRequest,TResponse>:IBaseService<TRequest,TRes
         BaseRepository = repository;
         Mapper = mapper;
     }
-    public virtual async  Task<TResponse> CreateAsync(TRequest request)
+
+    public virtual async Task<TResponse> CreateAsync(TRequest request)
     {
         var entity = Mapper.Map<TEntity>(request);
-         await BaseRepository.CreateAsync(entity);
+        await BaseRepository.CreateAsync(entity);
+        await BaseRepository.SavechangesAsync();
         return Mapper.Map<TResponse>(entity);
     }
 
-    public virtual async Task<TResponse> UpdateAsync(long id,TRequest request)
+    public virtual async Task<TResponse> UpdateAsync(long id, TRequest request)
     {
         var entity = await BaseRepository.GetByIdAsync(id);
         if (entity == null)
+        {
             throw new ResourseNotFoundExeption($"{typeof(TEntity).Name} with id {id} not found");
-    
+        }
+
         Mapper.Map(request, entity);
         var updateEntity = await BaseRepository.UpdateAsync(entity);
+        await BaseRepository.SavechangesAsync();
         return Mapper.Map<TResponse>(updateEntity);
-        
     }
 
     public async Task<TResponse> GetByIdAsync(long id)
     {
         var entity = await BaseRepository.GetByIdAsync(id);
         if (entity == null)
+        {
             throw new ResourseNotFoundExeption($"{typeof(TEntity).Name}  with id {id} not found");
-        
+        }
+
         return Mapper.Map<TResponse>(entity);
     }
 
-    public  async Task<List<TResponse>> GetAllByPaginationAsync(int pageNumber, int pageSize)
+    public async Task<List<TResponse>> GetAllByPaginationAsync(int pageNumber, int pageSize)
     {
         var entities = await BaseRepository.GetAllByPagenationAsync(pageNumber, pageSize);
         return Mapper.Map<List<TResponse>>(entities);
@@ -60,7 +66,15 @@ public class  BaseService<TEntity,TRequest,TResponse>:IBaseService<TRequest,TRes
 
     public async Task<bool> DeleteAsync(long id)
     {
-        return await BaseRepository.DeleteAsync(id);
+        var delete = await BaseRepository.DeleteAsync(id);
+        if (delete == false)
+        {
+            throw new ResourseNotFoundExeption($"{typeof(TEntity).Name} with id {id} not found");
+        }
+        else
+        {
+            await BaseRepository.SavechangesAsync();
+            return delete;
+        }
     }
-    
 }

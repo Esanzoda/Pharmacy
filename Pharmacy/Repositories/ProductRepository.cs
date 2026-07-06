@@ -5,22 +5,22 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Repositories;
 
-public interface IProductRepository : IBaseRepository<Product> 
+public interface IProductRepository : IBaseRepository<Product>
 {
-   Task<Product?>GetProductByBarcodeAsync(string barcode);
-   Task<List<Product>> GetProductsByNameAsync(string name);
-   Task<List<Product>> GetProductsByCategoryIdAsync(long categoryId,int page , int pageSize );
-   Task<List<Product>> GetOutOfStockAsync(int page, int pageSize);
-   Task<List<Product>> GetLowOfStockAsync(int minquantity, int page, int pageSize);
-   Task<List<Product>> GetExpireDateAsync(int page, int pageSize);
-   Task<List<Product>> GetProductsByPurchasePriceAsync(decimal price, int page, int pageSize);
-   Task<List<Product>> GetProductsByOrderPriseAsync(decimal price, int page, int pageSize);
-   Task<List<Product>>GetProductsByCountryAsync(CountryEnum country, int page, int pageSize);
-   Task<bool> ProductExistsAsync(string name);
-
-   
+    Task<Product?> GetProductByBarcodeAsync(string barcode);
+    Task<List<Product>> GetProductsByNameAsync(string name);
+    Task<List<Product>> GetProductsByCategoryIdAsync(long categoryId, int page, int pageSize);
+    Task<List<Product>> GetOutOfStockAsync(int page, int pageSize);
+    Task<List<Product>> GetLowOfStockAsync(int minquantity, int page, int pageSize);
+    Task<List<Product>> GetExpiryDateAsync();
+    Task<List<Product>> GetProductsByPurchasePriceAsync(decimal price, int page, int pageSize);
+    Task<List<Product>> GetProductsByOrderPriseAsync(decimal price, int page, int pageSize);
+    Task<List<Product>> GetProductsByCountryAsync(CountryEnum country, int page, int pageSize);
+    Task<Product?> GetProductByNameAsync(string name);
+    Task<bool> ProductExistsAsync(string name);
 }
-public class  ProductRepository:BaseRepository<Product>,IProductRepository
+
+public class ProductRepository : BaseRepository<Product>, IProductRepository
 {
     public ProductRepository(AppDbContext dbContext) : base(dbContext)
     {
@@ -32,17 +32,22 @@ public class  ProductRepository:BaseRepository<Product>,IProductRepository
             .FirstOrDefaultAsync(x => x.Barcode == barcode);
     }
 
+//list for see product whith this name 
     public async Task<List<Product>> GetProductsByNameAsync(string name)
     {
         return await DbContext.Products
-            .Where(x => x.Name.ToLower()==name.ToLower())
+            .Where(x => x.Name.ToLower() == name.ToLower())
             .ToListAsync();
-            
-            
-
     }
 
-    public async Task<List<Product>> GetProductsByCategoryIdAsync(long categoryId,int page, int pageSize)
+//chek for create product
+    public async Task<Product?> GetProductByNameAsync(string name)
+    {
+        return await DbContext.Products
+            .FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+    }
+
+    public async Task<List<Product>> GetProductsByCategoryIdAsync(long categoryId, int page, int pageSize)
     {
         return await DbContext.Products
             .Where(x => x.CategoryId == categoryId)
@@ -57,32 +62,31 @@ public class  ProductRepository:BaseRepository<Product>,IProductRepository
             .Where(x => x.Stock == 0)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
-            .ToListAsync  ();
+            .ToListAsync();
     }
 
-    public async Task<List<Product>> GetLowOfStockAsync(int minquantity,int page, int pageSize)
+    public async Task<List<Product>> GetLowOfStockAsync(int minquantity, int page, int pageSize)
     {
-        return await  DbContext.Products
-            .Where(x=>x.Stock<=minquantity)
+        return await DbContext.Products
+            .Where(x => x.Stock <= minquantity)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
 
-    public async Task<List<Product>> GetExpireDateAsync(int page, int pageSize)
+//its for back job 
+    public async Task<List<Product>> GetExpiryDateAsync()
     {
-      return await  DbContext.Products
-          .Where(x=>x.ExpiryDate==DateTime.Today)
-          .Skip((page - 1) * pageSize)
-          .Take(pageSize)
-          .ToListAsync();
+        return await DbContext.Products
+            .Where(x => x.ExpiryDate == DateTime.Today && x.Stock > 0)
+            .ToListAsync();
     }
 
     public Task<List<Product>> GetProductsByPurchasePriceAsync(decimal price, int page, int pageSize)
     {
         return DbContext.Products
-            .Where(x=>x.PurchasePrice==price)
-            .Skip((page-1)*pageSize)
+            .Where(x => x.PurchasePrice == price)
+            .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
@@ -90,25 +94,24 @@ public class  ProductRepository:BaseRepository<Product>,IProductRepository
     public Task<List<Product>> GetProductsByOrderPriseAsync(decimal price, int page, int pageSize)
     {
         return DbContext.Products
-            .Where(x=>x.Price==price)
-            .Skip((page-1)*pageSize)
+            .Where(x => x.Price == price)
+            .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
 
     public Task<List<Product>> GetProductsByCountryAsync(CountryEnum country, int page, int pageSize)
     {
-      return  DbContext.Products
-          .Where(x => x.Country == country)
-          .Skip((page - 1) * pageSize)
-          .Take(pageSize)
-          .ToListAsync();
+        return DbContext.Products
+            .Where(x => x.Country == country)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 
     public Task<bool> ProductExistsAsync(string name)
     {
         return DbContext.Products
-                .AnyAsync(x => x.Name.ToLower()==name.ToLower());
-        
+            .AnyAsync(x => x.Name.ToLower() == name.ToLower());
     }
 }

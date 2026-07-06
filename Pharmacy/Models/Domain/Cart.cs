@@ -1,12 +1,11 @@
 namespace Pharmasy.Models.Domain;
 
-public class Cart:BaseEntity
+public class Cart : BaseEntity
 {
-   public long UserId { get; set; }
-   public User? User { get; set; }
-   public decimal TotalAmout { get; set; }
+    public long CustomerId { get; set; }
+    public Customer? Customer { get; set; }
+    public decimal TotalAmout { get; set; }
 
-   public List<CartItem> CartItems { get; set; }
-      = new List<CartItem>();
-
-}  
+    public List<CartItem> CartItems { get; set; }
+        = new List<CartItem>();
+}

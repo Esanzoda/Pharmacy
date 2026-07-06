@@ -5,16 +5,17 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Repositories;
 
-public interface  IEmployeeRepository : IBaseRepository<Employee>
+public interface IEmployeeRepository : IBaseRepository<Employee>
 {
-    Task<List<Employee>> GetEmployeesByNameAsync(string name, int page, int pageSize);    
-    Task<List<Employee>> GetEmployeesByAdressAsync(string adress, int page, int pageSize);    
-    Task<List<Employee>> GetEmployeesByNumberAsync(string number,int page, int pageSize);    
-    Task<Employee?> GetEmployeeByEmailAsync(string email);    
-    Task<List<Employee>> GetEmployeesBySalaryAsync(decimal salary,int page, int pageSize); 
-    Task<List<Employee>> GetAllEmployeeByRoleAsync(Role role,int page, int pageSize); 
+    Task<List<Employee>> GetEmployeesByNameAsync(string name, int page, int pageSize);
+    Task<List<Employee>> GetEmployeesByAdressAsync(string adress, int page, int pageSize);
+    Task<Employee> GetEmployeesByNumberAsync(string number);
+    Task<Employee?> GetEmployeeByEmailAsync(string email);
+    Task<List<Employee>> GetEmployeesBySalaryAsync(decimal salary, int page, int pageSize);
+    Task<List<Employee>> GetAllEmployeeByRoleAsync(Role role, int page, int pageSize);
 }
-public class EmployeeRepository:BaseRepository<Employee>,IEmployeeRepository
+
+public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
 {
     public EmployeeRepository(AppDbContext dbContext) : base(dbContext)
     {
@@ -32,19 +33,16 @@ public class EmployeeRepository:BaseRepository<Employee>,IEmployeeRepository
     public Task<List<Employee>> GetEmployeesByAdressAsync(string adress, int page, int pageSize)
     {
         return DbSet
-            .Where(x => x.Address.ToLower()==adress.ToLower())
+            .Where(x => x.Address.ToLower() == adress.ToLower())
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
 
-    public Task<List<Employee>> GetEmployeesByNumberAsync(string number, int page, int pageSize)
+    public async Task<Employee?> GetEmployeesByNumberAsync(string number)
     {
-        return DbSet
-            .Where(x=>x.PhoneNumber==number)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        return await DbSet
+            .FirstOrDefaultAsync(x => x.PhoneNumber == number);
     }
 
     public async Task<Employee?> GetEmployeeByEmailAsync(string email)
@@ -56,18 +54,17 @@ public class EmployeeRepository:BaseRepository<Employee>,IEmployeeRepository
     public Task<List<Employee>> GetEmployeesBySalaryAsync(decimal salary, int page, int pageSize)
     {
         return DbSet
-            .Where(x => x.Salary ==salary)
+            .Where(x => x.Salary == salary)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
-    
-   
- 
+
+
     public Task<List<Employee>> GetAllEmployeeByRoleAsync(Role role, int page, int pageSize)
     {
         return DbSet
-            .Where(x => x.Role==role)
+            .Where(x => x.Role == role)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

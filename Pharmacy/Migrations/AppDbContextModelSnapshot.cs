@@ -30,8 +30,11 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -42,13 +45,9 @@ namespace Pharmasy.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Carts", (string)null);
                 });
@@ -61,11 +60,14 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("CartId")
+                    b.Property<long?>("CartId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -103,7 +105,7 @@ namespace Pharmasy.Migrations
                     b.Property<int>("CategoryStatus")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -137,7 +139,7 @@ namespace Pharmasy.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -179,7 +181,7 @@ namespace Pharmasy.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -220,7 +222,7 @@ namespace Pharmasy.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -260,10 +262,10 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long?>("ExpireDateProductId")
+                    b.Property<long?>("ExpiryDateProductId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
@@ -290,12 +292,12 @@ namespace Pharmasy.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpireDateProductId");
+                    b.HasIndex("ExpiryDateProductId");
 
                     b.ToTable("ExpireDateItems");
                 });
 
-            modelBuilder.Entity("Pharmasy.Models.Domain.ExpireDateProduct", b =>
+            modelBuilder.Entity("Pharmasy.Models.Domain.ExpiryDateProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +305,7 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsDeleted")
@@ -334,8 +336,11 @@ namespace Pharmasy.Migrations
                     b.Property<string>("Adress")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("CustomererId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("GetTime")
                         .HasColumnType("timestamp with time zone");
@@ -355,12 +360,7 @@ namespace Pharmasy.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -373,7 +373,7 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsDeleted")
@@ -425,7 +425,7 @@ namespace Pharmasy.Migrations
                     b.Property<int>("Country")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -477,7 +477,7 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("EmployeId")
@@ -505,7 +505,11 @@ namespace Pharmasy.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("ExpiryDate")
@@ -542,131 +546,29 @@ namespace Pharmasy.Migrations
                     b.ToTable("PurchaseItems", (string)null);
                 });
 
-            modelBuilder.Entity("Pharmasy.Models.Domain.RefreshToken", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsRevoked")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RefreshTokens");
-                });
-
-            modelBuilder.Entity("Pharmasy.Models.Domain.User", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal?>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users", (string)null);
-                });
-
             modelBuilder.Entity("Pharmasy.Models.Domain.Cart", b =>
                 {
-                    b.HasOne("Pharmasy.Models.Domain.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("Pharmasy.Models.Domain.Cart", "UserId")
+                    b.HasOne("Pharmasy.Models.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Pharmasy.Models.Domain.CartItem", b =>
                 {
                     b.HasOne("Pharmasy.Models.Domain.Cart", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CartId");
                 });
 
             modelBuilder.Entity("Pharmasy.Models.Domain.ExpireDateItems", b =>
                 {
-                    b.HasOne("Pharmasy.Models.Domain.ExpireDateProduct", null)
+                    b.HasOne("Pharmasy.Models.Domain.ExpiryDateProduct", null)
                         .WithMany("ExpiredateItemsList")
-                        .HasForeignKey("ExpireDateProductId");
-                });
-
-            modelBuilder.Entity("Pharmasy.Models.Domain.Order", b =>
-                {
-                    b.HasOne("Pharmasy.Models.Domain.User", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ExpiryDateProductId");
                 });
 
             modelBuilder.Entity("Pharmasy.Models.Domain.OrderItem", b =>
@@ -706,17 +608,6 @@ namespace Pharmasy.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Pharmasy.Models.Domain.RefreshToken", b =>
-                {
-                    b.HasOne("Pharmasy.Models.Domain.Employee", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Pharmasy.Models.Domain.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -727,7 +618,7 @@ namespace Pharmasy.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Pharmasy.Models.Domain.ExpireDateProduct", b =>
+            modelBuilder.Entity("Pharmasy.Models.Domain.ExpiryDateProduct", b =>
                 {
                     b.Navigation("ExpiredateItemsList");
                 });
@@ -740,13 +631,6 @@ namespace Pharmasy.Migrations
             modelBuilder.Entity("Pharmasy.Models.Domain.Purchase", b =>
                 {
                     b.Navigation("PurchaseItems");
-                });
-
-            modelBuilder.Entity("Pharmasy.Models.Domain.User", b =>
-                {
-                    b.Navigation("Cart");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

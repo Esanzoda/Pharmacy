@@ -5,9 +5,10 @@ using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
 
 namespace Pharmasy.Controllers;
+
 [ApiController]
-[Route("api/[controller]/[action]")] 
-public class CartController:ControllerBase
+[Route("api/[controller]/[action]")]
+public class CartController : ControllerBase
 {
     private readonly ICartService _cartService;
     private readonly ICartItemService _cartItemService;
@@ -17,10 +18,10 @@ public class CartController:ControllerBase
         _cartService = cartService;
         _cartItemService = cartItemService;
     }
+
     [HttpPost]
     public async Task<IActionResult> CreateCart([FromBody] CartRequest request)
     {
-        
         var response = await _cartService.CreateAsync(request);
         return Ok(response);
     }
@@ -28,59 +29,35 @@ public class CartController:ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateCart(long id, [FromBody] CartRequest request)
     {
-        try
-        {
-            var response= await _cartService.UpdateAsync(id,request); 
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
-     
+        var response = await _cartService.UpdateAsync(id, request);
+        return Ok(response);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> AddToCartAsync(CartItemRequest request)
     {
-        try
-        {
-            var response = await _cartService.AddItemToCartAsync(request);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-           return NotFound(ex.Message); 
-        }
-        
-    }
-    [HttpDelete]
-    public async Task<IActionResult> RemoveItemFromCartAsync(long cartId, long productId)
-    {
-        try
-        {
-            var response = await _cartService.RemoveItemFromCartAsync(cartId, productId);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-           return NotFound(ex.Message);
-        }
-        
+        var response = await _cartItemService.AddItemToCartAsync(request);
+        return Ok(response);
     }
 
     [HttpDelete]
-  public async Task<IActionResult> ClearCartAsync(long cartId)
+    public async Task<IActionResult> RemoveItemFromCartAsync(long customerId, long itemId)
     {
-        var response =await _cartItemService.ClearCartAsync(cartId);
+        var response = await _cartItemService.DeleteItemFromCartAsync(customerId, itemId);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> ClearCartAsync(long cartId)
+    {
+        var response = await _cartService.ClearCartAsync(cartId);
         return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> UpdateQuantityAsync(long cartId, long cartItemId, int quantity)
+    public async Task<IActionResult> UpdateQuantityAsync(long customerId, long cartItemId, int quantity)
     {
-        var response= await _cartService.UpdateCartItem(cartId, cartItemId, quantity);
+        var response = await _cartItemService.UpdateQuantityCartItem(customerId, cartItemId, quantity);
         return Ok(response);
     }
-   
 }

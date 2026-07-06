@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Domain;
 
-public class Employee:BaseEntity
+public class Employee : BaseEntity
 {
     public string? Name { get; set; }
     public string? Address { get; set; }
@@ -11,5 +11,4 @@ public class Employee:BaseEntity
     public decimal Salary { get; set; }
     public Role? Role { get; set; }
     public string? PasswordHash { get; set; }
-    
-} 
+}

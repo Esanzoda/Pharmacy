@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class  CategoryValidator:AbstractValidator<CategoryRequest>
+public class CategoryValidator : AbstractValidator<CategoryRequest>
 
 {
     public CategoryValidator()
@@ -17,5 +17,4 @@ public class  CategoryValidator:AbstractValidator<CategoryRequest>
             .NotEmpty()
             .WithMessage("Description is required");
     }
-    
 }

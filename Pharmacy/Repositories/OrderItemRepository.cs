@@ -6,10 +6,10 @@ namespace Pharmasy.Repositories;
 
 public interface IOrderItemRepository : IBaseRepository<OrderItem>
 {
-    Task<List<OrderItem>> GetAllOrderItems(long orderId); 
-    
+    Task<List<OrderItem>> GetAllOrderItems(long orderId);
 }
-public class  OrderItemRepository:BaseRepository<OrderItem>,IOrderItemRepository
+
+public class OrderItemRepository : BaseRepository<OrderItem>, IOrderItemRepository
 {
     public OrderItemRepository(AppDbContext dbContext)
         : base(dbContext)
@@ -20,7 +20,7 @@ public class  OrderItemRepository:BaseRepository<OrderItem>,IOrderItemRepository
     public Task<List<OrderItem>> GetAllOrderItems(long orderId)
     {
         return DbContext.OrderItems
-            .Where(x=>x.OrderId == orderId)
+            .Where(x => x.OrderId == orderId)
             .ToListAsync();
     }
 }

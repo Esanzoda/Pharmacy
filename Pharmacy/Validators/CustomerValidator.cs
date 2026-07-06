@@ -1,10 +1,9 @@
-
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class  CustomerValidator:AbstractValidator<CustomerRequest>
+public class CustomerValidator : AbstractValidator<CustomerRequest>
 {
     public CustomerValidator()
     {
@@ -17,7 +16,7 @@ public class  CustomerValidator:AbstractValidator<CustomerRequest>
             .NotEmpty()
             .NotNull()
             .WithMessage("Email is required")
-           // .EmailAddress()
+            // .EmailAddress()
             .WithMessage("Invalid email format");
 
         RuleFor(x => x.Phonenumber)
@@ -35,7 +34,5 @@ public class  CustomerValidator:AbstractValidator<CustomerRequest>
             .NotEmpty()
             .WithMessage("Password is required")
             .MinimumLength(8).WithMessage("Password must be at least 8 characters");*/
-
     }
-    
 }

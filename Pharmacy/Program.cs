@@ -1,15 +1,12 @@
- using System.Text;
- using FluentValidation;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using Hangfire.PostgreSql;
 using MassTransit;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Pharmasy.Data;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Pharmasy.Consumers;
 using Pharmasy.Jobs;
 using Pharmasy.Middlewares;
@@ -29,10 +26,16 @@ builder.Host.UseSerilog();
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddSwaggerGen(); //
+builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    //options.UseNpgsql("Host=localhost;Port=5432;Database=Pharmacy;Username=postgres;Password=1234;");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ChekExpiraDateProduct>();
 
@@ -50,8 +53,6 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
@@ -64,23 +65,18 @@ builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
 
-builder.Services.AddScoped<ISupplierService, SupplierService>();
-builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<ISupplierService, DeliverService>();
+builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<AuditableInterceptor>();
 
-
-
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>((sp, options) =>
 {
-    //options.UseNpgsql("Host=localhost;Port=5432;Database=Pharmacy;Username=postgres;Password=1234;");
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .AddInterceptors(sp.GetRequiredService<AuditableInterceptor>());
 });
-
-
 builder.Services.AddHangfire(static (provider, cfg) =>
 {
     cfg
@@ -98,15 +94,16 @@ builder.Services.AddHangfire(static (provider, cfg) =>
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer(typeof(OrderCreatedConsumer));
-    x.AddConsumer(typeof(OrderCanselledConsumer));  
+    x.AddConsumer(typeof(OrderCanselledConsumer));
     x.AddConsumer(typeof(OrderCompletedConsumer));
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost","/", hostConfigure =>
+        cfg.Host("localhost", "/", hostConfigure =>
         {
             hostConfigure.Username("guest");
             hostConfigure.Password("guest");
         });
+        cfg.ConfigureEndpoints(context);
     });
 });
 var app = builder.Build();

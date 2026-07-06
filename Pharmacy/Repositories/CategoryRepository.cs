@@ -5,15 +5,15 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Repositories;
 
-public interface ICategoryRepository:IBaseRepository<Category>
+public interface ICategoryRepository : IBaseRepository<Category>
 {
-    Task<List<Product>> GetCategoryWithProducts(int categoryId,int page, int pageSize);
+    Task<List<Product>> GetCategoryWithProducts(int categoryId, int page, int pageSize);
     Task<List<Category>> SearchByNameAsync(string name);
     Task<List<Category>> GetActiveCategoriesAsync();
     Task<bool> CategoryExistsAsync(string name);
-
 }
-public class  CategoryRepository :BaseRepository<Category>,ICategoryRepository
+
+public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
 {
     public CategoryRepository(AppDbContext dbContext) : base(dbContext)
     {
@@ -26,28 +26,25 @@ public class  CategoryRepository :BaseRepository<Category>,ICategoryRepository
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
-       
     }
 
-    public Task<List<Category>> SearchByNameAsync(string name)
+    public async Task<List<Category>> SearchByNameAsync(string name)
     {
-        return DbContext.Categories
-            .Where(x => x.Name.ToLower()== name.ToLower())
+        return await DbContext.Categories
+            .Where(x => x.Name.ToLower() == name.ToLower())
             .ToListAsync();
     }
 
-    public Task<List<Category>> GetActiveCategoriesAsync()
+    public async Task<List<Category>> GetActiveCategoriesAsync()
     {
-        return DbContext.Categories
-            .Where(x=>x.CategoryStatus== CategoryStatus.Active)
+        return await DbContext.Categories
+            .Where(x => x.CategoryStatus == CategoryStatus.Active)
             .ToListAsync();
-        
     }
 
-    public Task<bool> CategoryExistsAsync(string name)
+    public async Task<bool> CategoryExistsAsync(string name)
     {
-        return DbContext.Categories
-            .AnyAsync(x => x.Name.ToLower()==name.ToLower());
-        
+        return await DbContext.Categories
+            .AnyAsync(x => x.Name.ToLower() == name.ToLower());
     }
 }

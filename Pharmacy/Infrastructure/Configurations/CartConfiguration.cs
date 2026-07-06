@@ -4,7 +4,7 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Infrastructure.Configurations;
 
-public class CartConfiguration:IEntityTypeConfiguration<Cart>
+public class CartConfiguration : IEntityTypeConfiguration<Cart>
 {
     public void Configure(EntityTypeBuilder<Cart> builder)
     {
@@ -12,6 +12,5 @@ public class CartConfiguration:IEntityTypeConfiguration<Cart>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.TotalAmout)
             .HasColumnType("decimal(18,2)");
-    
-    } 
+    }
 }

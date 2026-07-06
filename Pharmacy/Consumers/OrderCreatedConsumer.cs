@@ -9,14 +9,15 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
 {
     private readonly ILogger<OrderCreatedConsumer> _logger;
     private readonly IEmailService _emailService;
-    private readonly IUserRepository _userRepository;
+
+    private readonly ICustomerRepository _customerRepository;
 
     public OrderCreatedConsumer(ILogger<OrderCreatedConsumer> logger, IEmailService emailService,
-        IUserRepository userRepository)
+        ICustomerRepository customerRepository)
     {
         _logger = logger;
         _emailService = emailService;
-        _userRepository = userRepository;
+        _customerRepository = customerRepository;
     }
 
     public async Task Consume(ConsumeContext<OrderCreatedEvant> context)
@@ -24,18 +25,20 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
         var message = context.Message;
 
         _logger.LogInformation(
-            "Order created: OrderId={OrderId}, CustomerId={CustomerId}, Total={Total}",
+            "Order created: OrderId={OrderId}, CustomerId={CustomerId}, Total={Total} , CreatedAt={CreatededAt}",
             message.OrderId,
             message.UserId,
-            message.TotalAmout);
-        
-        var user = await _userRepository.GetByIdAsync(message.UserId);
+            message.TotalAmout,
+            message.CreatedAt);
+
+        var user = await _customerRepository.GetByIdAsync(message.UserId);
         if (user != null)
         {
             await _emailService.SendOrderCreatedAsync(
                 user.Email,
                 message.OrderId,
-                message.TotalAmout);
+                message.TotalAmout,
+                message.CreatedAt);
         }
     }
 }

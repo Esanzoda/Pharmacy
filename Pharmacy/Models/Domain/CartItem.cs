@@ -1,8 +1,8 @@
 namespace Pharmasy.Models.Domain;
 
-public class CartItem:BaseEntity
+public class CartItem : BaseEntity
 {
-    public long CartId { get; set; }
+    public long CustomerId { get; set; }
     public long ProductId { get; set; }
 
     public decimal Price { get; set; }
@@ -10,5 +10,4 @@ public class CartItem:BaseEntity
     public int Quantity { get; set; }
 
     public decimal TotalPrice { get; set; }
-    
-} 
+}

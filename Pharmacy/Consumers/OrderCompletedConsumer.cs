@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Mediator;
 using Pharmasy.Messages.Evants;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
@@ -9,16 +10,18 @@ public class OrderCompletedConsumer : IConsumer<OrderCompletedEvant>
 {
     private readonly ILogger<OrderCompletedConsumer> _logger;
     private readonly IEmailService _emailService;
-    private readonly IUserRepository _userRepository;
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IMessageService _messageService;
 
     public OrderCompletedConsumer(
         ILogger<OrderCompletedConsumer> logger,
-        IEmailService emailService,
-        IUserRepository userRepository)
+        IEmailService emailService, IMessageService messageService,
+        ICustomerRepository customerRepository)
     {
         _logger = logger;
         _emailService = emailService;
-        _userRepository = userRepository;
+        _messageService = messageService;
+        _customerRepository = customerRepository;
     }
 
     public async Task Consume(ConsumeContext<OrderCompletedEvant> context)
@@ -30,13 +33,19 @@ public class OrderCompletedConsumer : IConsumer<OrderCompletedEvant>
             message.OrderId,
             message.UserId);
 
-        var user = await _userRepository.GetByIdAsync(message.UserId);
+        var user = await _customerRepository.GetByIdAsync(message.UserId);
         if (user != null)
         {
             await _emailService.SendOrderCompletedAsync(
                 user.Email,
                 message.OrderId,
-                message.TotalAmout);
+                message.TotalAmout,
+                message.CompletedAt);
+            await _messageService.SendOrderCompletedAsync(
+                user.PhoneNumber,
+                message.OrderId,
+                message.TotalAmout,
+                message.CompletedAt);
         }
     }
 }

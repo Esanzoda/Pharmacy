@@ -3,6 +3,7 @@ using Pharmasy.Exeption;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
+
 //scqlqr
 namespace Pharmasy.Controllers;
 
@@ -27,114 +28,51 @@ public class CategoryController : ControllerBase
     [HttpPut]
     public async Task<ActionResult<CategoryResponse>> UpdateCategory(long id, [FromBody] CategoryRequest request)
     {
-        try
-        {
-            var response = await _categoryServise.UpdateAsync(id, request);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.UpdateAsync(id, request);
+        return Ok(response);
     }
 
 
     [HttpGet]
     public async Task<ActionResult<CategoryResponse>> GetCategoryById(long id)
     {
-        try
-        {
-            var response = await _categoryServise.GetByIdAsync(id);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.GetByIdAsync(id);
+        return Ok(response);
     }
 
-    [HttpGet] 
+    [HttpGet]
     public async Task<ActionResult<List<CategoryResponse>>> GetAllCategoriesByPagenation(int pageNumber, int pageSize)
     {
-        try
-        {
-            var response = await _categoryServise.GetAllByPaginationAsync(pageNumber, pageSize);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.GetAllByPaginationAsync(pageNumber, pageSize);
+        return Ok(response);
     }
 
     [HttpDelete]
     public async Task<IActionResult> DeleteCategoryById(long id)
     {
-        try
-        {
-            var response = await _categoryServise.DeleteAsync(id);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.DeleteAsync(id);
+        return Ok(response);
     }
 
     [HttpGet]
     public async Task<ActionResult<List<ProductResponse>>> GetCategoryWithProducts(int categoryId, int page,
         int pageSize)
     {
-        try
-        {
-            var response = await _categoryServise.GetCategoryWithProducts(categoryId, page, pageSize);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.GetCategoryWithProducts(categoryId, page, pageSize);
+        return Ok(response);
     }
 
     [HttpGet]
     public async Task<ActionResult<List<CategoryResponse>>> SearchByNameAsync(string name)
     {
-        try
-        {
-            var response = await _categoryServise.SearchByNameAsync(name);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.SearchByNameAsync(name);
+        return Ok(response);
     }
 
     [HttpGet]
     public async Task<ActionResult<List<CategoryResponse>>> GetActiveCategoriesAsync()
     {
-        try
-        {
-            var response = await _categoryServise.GetActiveCategoriesAsync();
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<bool>> GetCategoryExistsAsync(string name)
-    {
-        try
-        {
-            var response = await _categoryServise.CategoryExistsAsync(name);
-            return Ok(response);
-        }
-        catch (ResourseNotFoundExeption ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var response = await _categoryServise.GetActiveCategoriesAsync();
+        return Ok(response);
     }
 }

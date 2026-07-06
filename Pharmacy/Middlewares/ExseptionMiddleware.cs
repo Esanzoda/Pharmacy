@@ -17,14 +17,13 @@ public class ExseptionMiddleware
     {
         try
         {
-            await _next(context); 
+            await _next(context);
         }
         catch (ResourseIsAlredyExsistExeption ex)
         {
             _logger.LogError(ex, ex.Message);
             context.Response.StatusCode = StatusCodes.Status409Conflict;
             await context.Response.WriteAsync(ex.Message);
-            
         }
         catch (ResourseNotFoundExeption ex)
         {
@@ -35,15 +34,14 @@ public class ExseptionMiddleware
         catch (BusinessExseption ex)
         {
             _logger.LogError(ex, ex.Message);
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             await context.Response.WriteAsync(ex.Message);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            _logger.LogError(ex.Message);
+            _logger.LogError(ex, ex.Message);
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await context.Response.WriteAsync(ex.Message);
-            
         }
     }
-   
-    
 }

@@ -10,11 +10,10 @@ public interface ISupplierService : IBaseService<DeliverRequest, DeliverResponse
 {
 }
 
-public class  SupplierService : BaseService<Deliver, DeliverRequest, DeliverResponse>, ISupplierService
+public class DeliverService : BaseService<Deliver, DeliverRequest, DeliverResponse>, ISupplierService
 {
-    public SupplierService(ISupplierRepository repository, IMapper mapper)
+    public DeliverService(IDeliverRepository repository, IMapper mapper)
         : base(repository, mapper)
     {
     }
 }
-    

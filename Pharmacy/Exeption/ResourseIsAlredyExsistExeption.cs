@@ -1,10 +1,8 @@
 namespace Pharmasy.Exeption;
 
-public class ResourseIsAlredyExsistExeption:Exception
+public class ResourseIsAlredyExsistExeption : Exception
 {
-    public ResourseIsAlredyExsistExeption(string massage):base(massage)
+    public ResourseIsAlredyExsistExeption(string massage) : base(massage)
     {
-        
     }
-    
-} 
+}

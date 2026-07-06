@@ -4,11 +4,12 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Infrastructure.Configurations;
 
-public class EmployeeConfiguration:IEntityTypeConfiguration<Employee>
+public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
-    { builder.ToTable("Employees");
-        
+    {
+        builder.ToTable("Employees");
+
         builder.HasKey(x => x.Id);
     }
-} 
+}

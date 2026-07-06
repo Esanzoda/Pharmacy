@@ -4,14 +4,15 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Repositories;
 
-public interface ICustomerRepository: IBaseRepository<Customer>
+public interface ICustomerRepository : IBaseRepository<Customer>
 {
     Task<Customer?> GetCustomerByEmailAsync(string email);
     Task<Customer?> GetCustomerByPhoneAsync(string phone);
     Task<List<Customer>> GetCustomerByNameAsync(string name);
 }
-public class  CustomerRepository:BaseRepository<Customer>,ICustomerRepository
-    
+
+public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
+
 {
     public CustomerRepository(AppDbContext dbContext) : base(dbContext)
     {
@@ -19,22 +20,20 @@ public class  CustomerRepository:BaseRepository<Customer>,ICustomerRepository
 
     public async Task<Customer?> GetCustomerByEmailAsync(string email)
     {
-        return DbContext.Customers
-            .FirstOrDefault(x => x.Email.ToLower() == email.ToLower());
+        return await DbContext.Customers
+            .FirstOrDefaultAsync(x => x.Email == email);
     }
 
     public async Task<Customer?> GetCustomerByPhoneAsync(string phone)
     {
-        return  DbContext.Customers
-            .FirstOrDefault(x => x.PhoneNumber == phone);
+        return await DbContext.Customers
+            .FirstOrDefaultAsync(x => x.PhoneNumber == phone);
     }
 
     public async Task<List<Customer>> GetCustomerByNameAsync(string name)
     {
         return await DbContext.Customers
-            .Where(x => x.Name.ToLower()==name.ToLower())
+            .Where(x => x.Name.ToLower() == name.ToLower())
             .ToListAsync();
     }
-    
-   
 }

@@ -8,9 +8,9 @@ namespace Pharmasy.Services;
 public interface IEmailService
 {
     Task SendAsync(EmailMessage message);
-    Task SendOrderCreatedAsync(string toEmail, long orderId, decimal totalAmount);
-    Task SendOrderCancelledAsync(string toEmail, long orderId);
-    Task SendOrderCompletedAsync(string toEmail, long orderId, decimal totalAmount);
+    Task SendOrderCreatedAsync(string toEmail, long orderId, decimal totalAmount, DateTime createdAt);
+    Task SendOrderCancelledAsync(string toEmail, long orderId, DateTime updatedAt);
+    Task SendOrderCompletedAsync(string toEmail, long orderId, decimal totalAmount, DateTime completedAt);
     Task SendLowStockAlertAsync(string toEmail, string productName, int currentStock);
 }
 
@@ -62,48 +62,51 @@ public class EmailService : IEmailService
         }
     }
 
-    public async Task SendOrderCreatedAsync(string toEmail, long orderId, decimal totalAmount)
+    public async Task SendOrderCreatedAsync(string toEmail, long orderId, decimal totalAmount, DateTime createdAt)
     {
         var message = new EmailMessage
         {
             To = toEmail,
-            Subject = $"Заказ #{orderId} создан — Pharmasy",
+            Subject = $"Order #{orderId} created — Pharmasy",
             Body = $@"
-                <h2>Ваш заказ создан!</h2>
-                <p>Номер заказа: <strong>#{orderId}</strong></p>
-                <p>Сумма: <strong>{totalAmount:C}</strong></p>
-                <p>Спасибо за покупку в Pharmasy!</p>
+                <h2>Yor order created!</h2>
+                <p>order Id: <strong>#{orderId}</strong></p>
+                <p>Total amout <strong>{totalAmount:C}</strong></p>
+        <p>Order created at <strong>{createdAt}</strong></p>
+                <p>Thents for  order in our Pharmacy</p>
+
             "
         };
         await SendAsync(message);
     }
 
-    public async Task SendOrderCancelledAsync(string toEmail, long orderId)
+    public async Task SendOrderCancelledAsync(string toEmail, long orderId, DateTime updatedAt)
     {
         var message = new EmailMessage
         {
             To = toEmail,
-            Subject = $"Заказ #{orderId} отменён — Pharmasy",
+            Subject = $"order #{orderId} cncselled — Pharmacy",
             Body = $@"
-                <h2>Ваш заказ отменён</h2>
-                <p>Номер заказа: <strong>#{orderId}</strong></p>
-                <p>Если это ошибка — свяжитесь с нами.</p>
+                <h2>Your order is canselled</h2>
+                <p>Order Id: <strong>#{orderId}</strong></p>
+                <p>Order cancelled at <strong>{updatedAt}</strong></p>
+                
             "
         };
         await SendAsync(message);
     }
 
-    public async Task SendOrderCompletedAsync(string toEmail, long orderId, decimal totalAmount)
+    public async Task SendOrderCompletedAsync(string toEmail, long orderId, decimal totalAmount, DateTime completedAt)
     {
         var message = new EmailMessage
         {
             To = toEmail,
-            Subject = $"Заказ #{orderId} завершён — Pharmasy",
+            Subject = $"Order #{orderId} is completed — Pharmacy",
             Body = $@"
-                <h2>Ваш заказ завершён!</h2>
-                <p>Номер заказа: <strong>#{orderId}</strong></p>
-                <p>Итоговая сумма: <strong>{totalAmount:C}</strong></p>
-                <p>Спасибо что выбрали Pharmasy!</p>
+                <h2>Your order is completed at<strong>{completedAt}</strong></h2>
+                <p>Order id: <strong>#{orderId}</strong></p>
+                <p>Total amout: <strong>{totalAmount:C}</strong></p>
+                <p>Thenkc for choose our  Pharmacy!</p>
             "
         };
         await SendAsync(message);
@@ -114,12 +117,12 @@ public class EmailService : IEmailService
         var message = new EmailMessage
         {
             To = toEmail,
-            Subject = $"Низкий склад: {productName} — Pharmasy",
+            Subject = $"Low Stock: {productName} — Pharmacy",
             Body = $@"
-                <h2>⚠️ Внимание: низкий склад</h2>
-                <p>Продукт: <strong>{productName}</strong></p>
-                <p>Остаток: <strong>{currentStock} шт.</strong></p>
-                <p>Пожалуйста пополните склад.</p>
+                <h2>️ Attention: Low stock</h2>
+                <p>Product: <strong>{productName}</strong></p>
+                <p>Remaining: <strong>{currentStock} units.</strong></p>
+                <p>Please replenish the stock..</p>
             "
         };
         await SendAsync(message);

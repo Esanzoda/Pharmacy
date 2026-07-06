@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Response;
 
-public class  OrderItemResponse
+public class OrderItemResponse
 {
     public long Id { get; set; }
     public long OrderId { get; set; }
@@ -8,5 +8,4 @@ public class  OrderItemResponse
     public int Quantity { get; set; }
     public decimal Price { get; set; }
     public decimal TotalPrice { get; set; }
-    
 }

@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class  EmployeValidator : AbstractValidator<EmployeRequest>
+public class EmployeValidator : AbstractValidator<EmployeRequest>
 {
     public EmployeValidator()
     {
@@ -13,7 +13,7 @@ public class  EmployeValidator : AbstractValidator<EmployeRequest>
         RuleFor(x => x.Email)
             .NotEmpty()
             .WithMessage("Email is required")
-           // .EmailAddress()
+            // .EmailAddress()
             .WithMessage("Invalid email format");
         RuleFor(x => x.PhoneNumber)
             .NotEmpty()
@@ -21,8 +21,8 @@ public class  EmployeValidator : AbstractValidator<EmployeRequest>
         RuleFor(x => x.Salary)
             .GreaterThan(0)
             .WithMessage("Salary must be greater than 0");
-      /*  RuleFor(x => x.Password)
-            .MinimumLength(8)
-            .WithMessage("Password must be at least 8 characters");*/
+        /*  RuleFor(x => x.Password)
+              .MinimumLength(8)
+              .WithMessage("Password must be at least 8 characters");*/
     }
 }

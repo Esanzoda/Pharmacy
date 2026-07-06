@@ -3,14 +3,12 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Dto.Request;
 
-public class  OrderRequest
+public class OrderRequest
 {
-    
-    public long UserId { get; set; }
+    public long CustomererId { get; set; }
     public OrderType OrderType { get; set; }
     public DateTime? GetTime { get; set; }
-    public string?  Adress { get; set; }
-    
-  /*  public List<OrderItemRequest> OrderItems { get; set; }
-        = new List<OrderItemRequest>();*/
+    public string? Adress { get; set; }
+
+    public List<OrderItemRequest> OrderItems { get; set; }
 }
