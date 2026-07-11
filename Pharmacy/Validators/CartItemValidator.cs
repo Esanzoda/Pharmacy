@@ -1,7 +1,7 @@
 using FluentValidation;
 using Pharmasy.Models.Dto.Request;
 
-////madiator 
+
 namespace Pharmasy.Validators;
 
 public class CartItemValidator : AbstractValidator<CartItemRequest>

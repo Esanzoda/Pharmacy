@@ -5,7 +5,7 @@ using Pharmasy.Services;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
+public class OrderCreatedConsumer : IConsumer<OrderCreatedEvent>
 {
     private readonly ILogger<OrderCreatedConsumer> _logger;
     private readonly IEmailService _emailService;
@@ -20,7 +20,7 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
         _customerRepository = customerRepository;
     }
 
-    public async Task Consume(ConsumeContext<OrderCreatedEvant> context)
+    public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
     {
         var message = context.Message;
 
@@ -28,7 +28,7 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
             "Order created: OrderId={OrderId}, CustomerId={CustomerId}, Total={Total} , CreatedAt={CreatededAt}",
             message.OrderId,
             message.UserId,
-            message.TotalAmout,
+            message.TotalAmount,
             message.CreatedAt);
 
         var user = await _customerRepository.GetByIdAsync(message.UserId);
@@ -37,7 +37,7 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvant>
             await _emailService.SendOrderCreatedAsync(
                 user.Email,
                 message.OrderId,
-                message.TotalAmout,
+                message.TotalAmount,
                 message.CreatedAt);
         }
     }

@@ -19,6 +19,6 @@ public class PurchaseItemRepository : BaseRepository<PurchaseItem>, IPurchaseIte
     public async Task<PurchaseItem?> GetByBarcodeAsync(long purchaseId, string barcode)
     {
         return await DbContext.PurchaseItems
-            .FirstOrDefaultAsync(x => x.Barcode == barcode && x.PurchaseId == purchaseId);
+            .FirstOrDefaultAsync(x => x.Barcode == barcode & x.PurchaseId == purchaseId);
     }
 }

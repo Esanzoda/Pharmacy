@@ -8,5 +8,4 @@ public class PurchaseItemRequest
     public decimal Price { get; set; }
     public string Barcode { get; set; }
     public DateTime ExpiryDate { get; set; }
-    public decimal TotalPrice { get; set; }
 }

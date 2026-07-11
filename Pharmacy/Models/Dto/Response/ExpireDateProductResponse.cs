@@ -8,7 +8,7 @@ public class ExpireDateProductResponse
     public DateTime DateTime { get; set; }
     public int Count { get; set; }
     public decimal ToTalPrice { get; set; }
-    public decimal TotalPurchase { get; set; }
+    public decimal TotalPurchasePrice { get; set; }
     public List<ExpireDateItems> ExpiredateItemsListResponse { get; set; }
 }
 

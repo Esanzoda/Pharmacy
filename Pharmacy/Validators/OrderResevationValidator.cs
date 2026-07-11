@@ -7,8 +7,8 @@ public class OrderResevationValidator : AbstractValidator<OrderReservationReques
 {
     public OrderResevationValidator()
     {
-        RuleFor(x => x.UserId)
+        RuleFor(x => x.CustomerId)
             .GreaterThan(0)
-            .WithMessage("Customer id must be greater than 0");
+            .WithMessage("Customer id must be greater than 0hjhjhj");
     }
 }

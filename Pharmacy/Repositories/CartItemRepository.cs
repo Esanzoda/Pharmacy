@@ -7,8 +7,8 @@ namespace Pharmasy.Repositories;
 public interface ICartItemRepository : IBaseRepository<CartItem>
 {
     Task<bool> DeleteItemInCart(long customerId, long cartitemId);
-    Task<CartItem> UpdateQuantityCartItemAsync(long customerId, long cartItemid);
-    Task<CartItem?> GetItemWhithProductIdInCartItemAsync(long productId);
+    Task<CartItem?> GetCartItemByCustomerIdtemAsync(long customerId, long cartItemid);
+    Task<CartItem?> GetItemWhithProductIdInCartItemAsync(long customerId,long productId);
 }
 
 public class CartItemRepository : BaseRepository<CartItem>, ICartItemRepository
@@ -33,15 +33,15 @@ public class CartItemRepository : BaseRepository<CartItem>, ICartItemRepository
     }
 
 
-    public async Task<CartItem> UpdateQuantityCartItemAsync(long customerId, long cartItemid)
+    public async Task<CartItem?> GetCartItemByCustomerIdtemAsync(long customerId, long cartItemid)
     {
         return await DbContext.CartItems
             .FirstOrDefaultAsync(x => x.CustomerId == customerId && x.Id == cartItemid);
     }
 
-    public async Task<CartItem?> GetItemWhithProductIdInCartItemAsync(long productId)
+    public async Task<CartItem?> GetItemWhithProductIdInCartItemAsync(long customerId,long productId)
     {
         return await DbContext.CartItems
-            .FirstOrDefaultAsync(x => x.ProductId == productId);
+            .FirstOrDefaultAsync(  x => x.ProductId == productId && x.CustomerId == customerId);
     }
 }

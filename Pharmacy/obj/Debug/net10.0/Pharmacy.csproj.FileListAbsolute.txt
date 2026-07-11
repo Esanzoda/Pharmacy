@@ -192,3 +192,6 @@
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/MimeKit.dll
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/BCrypt-Net-Next.dll
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Microsoft.Bcl.Cryptography.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Pipelines.Sockets.Unofficial.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/StackExchange.Redis.dll

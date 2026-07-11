@@ -8,9 +8,9 @@ public interface IBaseRepository<TEntity> where TEntity : class
     Task<TEntity> CreateAsync(TEntity request);
     Task<TEntity> UpdateAsync(TEntity request);
     Task<TEntity?> GetByIdAsync(long id);
-    Task<List<TEntity>> GetAllByPagenationAsync(int pageNumber, int pageSize);
+    Task<List<TEntity>> GetAllByPaginationAsync(int pageNumber, int pageSize);
     Task<bool> DeleteAsync(long id);
-    Task<int> SavechangesAsync();
+    Task<int> SaveChangesAsync();
 }
 
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
@@ -39,11 +39,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public virtual async Task<TEntity?> GetByIdAsync(long id)
     {
-        return await DbSet
-            .FindAsync(id);
+        return (await DbSet
+            .FindAsync(id));
     }
 
-    public virtual async Task<List<TEntity>> GetAllByPagenationAsync(int pageNumber, int pageSize)
+    public virtual async Task<List<TEntity>> GetAllByPaginationAsync(int pageNumber, int pageSize)
     {
         return await DbSet
             .Skip((pageNumber - 1) * pageSize)
@@ -61,8 +61,17 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return true;
     }
 
-    public async Task<int> SavechangesAsync()
+    public async Task<int> SaveChangesAsync()
     {
-        return await DbContext.SaveChangesAsync();
+        try
+        {
+            return await DbContext.SaveChangesAsync();
+        }
+        catch (System.Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }

@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Exeption;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Repositories;
+using MediatR;
 using Pharmasy.Services;
+using Pharmasy.Services.Employee.Command;
+using Pharmasy.Services.Employee.Query;
 
 namespace Pharmasy.Controllers;
 
@@ -13,89 +14,90 @@ namespace Pharmasy.Controllers;
 public class EmployeConteroller : ControllerBase
 {
     private readonly IEmployeeService _employeeService;
+    private readonly IMediator _mediator;
 
-    public EmployeConteroller(IEmployeeService employeeService)
+    public EmployeConteroller(IEmployeeService employeeService, IMediator mediator)
     {
         _employeeService = employeeService;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public async Task<ActionResult<EmployeResponse>> CreateEmployee([FromBody] EmployeRequest request)
+    public async Task<ActionResult<EmployeeResponse>> Create([FromBody] EmployeeRequest request)
     {
-        var response = await _employeeService.CreateAsync(request);
+        var response = await _mediator.Send(new CreateEmployeCommand(request));
         return Ok(response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<EmployeResponse>> UpdateEmployee(long id, [FromBody] EmployeRequest request)
+    public async Task<ActionResult<EmployeeResponse>> Update(long id, [FromBody] EmployeeRequest request)
     {
-        var response = await _employeeService.UpdateAsync(id, request);
+        var response = await _mediator.Send(new UpdateEmployeCommand(id, request));
         return Ok(response);
     }
 
     [HttpGet("id")]
-    public async Task<ActionResult<ActionResult<EmployeResponse>>> GetEmployeeById(long id)
+    public async Task<ActionResult<ActionResult<EmployeeResponse>>> GetById(long id)
     {
-        var response = await _employeeService.GetByIdAsync(id);
+        var response = await _employeeService.GetByIdAsync(id, CancellationToken.None);
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetAllEmployeesByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<EmployeeResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
         var response = await _employeeService.GetAllByPaginationAsync(pageNumber, pageSize);
         return Ok(response);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteEmployeeById(long id)
+    public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await _employeeService.DeleteAsync(id);
+        var response = await _mediator.Send(new DeleteEmployeCommand(id));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetEmployeesByNameAsync(string name, int page, int pageSize)
+    public async Task<ActionResult<List<EmployeeResponse>>> GetByNameAsync(string name, int page, int pageSize)
     {
-        var response = await _employeeService.GetEmployeesByNameAsync(name, page, pageSize);
+        var response = await _mediator.Send(new GetEmpoyeesByNameQuery(name, page, pageSize));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetEmployeesByAdressAsync(string adress, int page,
+    public async Task<ActionResult<List<EmployeeResponse>>> GetByAdressAsync(string adress, int page,
         int pageSize)
     {
-        var response = await _employeeService.GetEmployeesByAdressAsync(adress, page, pageSize);
+        var response = await _mediator.Send(new GetEmpoyeesByAddressQuery(adress, page, pageSize));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetEmployeesByNumberAsync(string number)
+    public async Task<ActionResult<List<EmployeeResponse>>> GetByNumberAsync(string number)
     {
-        var response = await _employeeService.GetEmployeesByNumberAsync(number);
+        var response = await _mediator.Send(new GetEmpoyeesByNumberQuery(number));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<EmployeResponse>> GetEmployeeByEmailAsync(string email)
+    public async Task<ActionResult<EmployeeResponse>> GetByEmailAsync(string email)
     {
-        var response = await _employeeService.GetEmployeeByEmailAsync(email);
+        var response = await _mediator.Send(new GetEmployeeByEmailQuery(email));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetEmployeesBySalaryAsync(decimal salary, int page,
+    public async Task<ActionResult<List<EmployeeResponse>>> GetBySalaryAsync(decimal salary, int page,
         int pageSize)
     {
-        var response = await _employeeService.GetEmployeesBySalaryAsync(salary, page, pageSize);
+        var response = await _mediator.Send(new GetEmployeeBySalaryQuery(salary, page, pageSize));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<EmployeResponse>>> GetAllEmployeeByRoleAsync(Role role, int page, int pageSize)
+    public async Task<ActionResult<List<EmployeeResponse>>> GetByRoleAsync(Role role, int page, int pageSize)
     {
-        var response = await _employeeService.GetAllEmployeeByRoleAsync(role, page, pageSize);
-
+        var response = await _mediator.Send(new GetEmployeeByRoleQuery(role, page, pageSize));
         return Ok(response);
     }
 }

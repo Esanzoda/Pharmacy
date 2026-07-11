@@ -23,6 +23,7 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         return await DbContext.Products
             .Where(x => x.CategoryId == categoryId)
+            .OrderBy(x=>x.Id)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -32,6 +33,7 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         return await DbContext.Categories
             .Where(x => x.Name.ToLower() == name.ToLower())
+            .OrderBy(x => x.Id)
             .ToListAsync();
     }
 
@@ -39,6 +41,7 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         return await DbContext.Categories
             .Where(x => x.CategoryStatus == CategoryStatus.Active)
+            .OrderBy(x => x.Id)
             .ToListAsync();
     }
 

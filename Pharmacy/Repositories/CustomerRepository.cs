@@ -1,3 +1,4 @@
+using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
 using Pharmasy.Models.Domain;
@@ -34,6 +35,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         return await DbContext.Customers
             .Where(x => x.Name.ToLower() == name.ToLower())
+            .OrderBy(x => x.Id)
             .ToListAsync();
     }
 }

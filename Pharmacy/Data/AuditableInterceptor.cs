@@ -13,17 +13,18 @@ public class AuditableInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
-        if (eventData.Context != null)
+        if (eventData.Context is not null)
         {
             var entityEntries = eventData.Context.ChangeTracker.Entries<BaseEntity>();
+            
             foreach (var entityEntry in entityEntries)
             {
-                if (entityEntry.State == EntityState.Added)
+                if (entityEntry.State is EntityState.Added)
                 {
                     entityEntry.Entity.CreatedAt = DateTime.UtcNow;
                 }
 
-                if (entityEntry.State == EntityState.Modified)
+                if (entityEntry.State is EntityState.Modified)
                 {
                     entityEntry.Entity.UpdateAt = DateTime.UtcNow;
                 }
@@ -33,7 +34,7 @@ public class AuditableInterceptor : SaveChangesInterceptor
                     updateEntity.UpdatedAt = DateTime.UtcNow;
                 }
 
-                if (entityEntry.State == EntityState.Deleted)
+                if (entityEntry.State is EntityState.Deleted)
                 {
                     entityEntry.Entity.IsDeleted = true;
                 }

@@ -5,7 +5,7 @@ using Pharmasy.Services;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCanselledConsumer : IConsumer<OrderCancelledEvant>
+public class OrderCanselledConsumer : IConsumer<OrderCancelledEvent>
 {
     private readonly ILogger<OrderCanselledConsumer> _logger;
     private readonly IEmailService _emailService;
@@ -23,17 +23,17 @@ public class OrderCanselledConsumer : IConsumer<OrderCancelledEvant>
         _messageService = messageService;
     }
 
-    public async Task Consume(ConsumeContext<OrderCancelledEvant> context)
+    public async Task Consume(ConsumeContext<OrderCancelledEvent> context)
     {
         var message = context.Message;
 
         _logger.LogInformation(
             "Order cancelled: OrderId={OrderId}, CustomerId={CustomerId}",
             message.OrderId,
-            message.CustomererId);
+            message.CustomerId);
 
 
-        var user = await _customerRepository.GetByIdAsync(message.CustomererId);
+        var user = await _customerRepository.GetByIdAsync(message.CustomerId);
         if (user != null)
         {
             await _emailService.SendOrderCancelledAsync(

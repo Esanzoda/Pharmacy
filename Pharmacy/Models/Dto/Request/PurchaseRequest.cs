@@ -4,6 +4,6 @@ namespace Pharmasy.Models.Dto.Request;
 
 public class PurchaseRequest
 {
-    public long EmployeId { get; set; }
+    public long EmployeeId { get; set; }
     public List<PurchaseItemRequest> PurchaseItems { get; set; }
 }

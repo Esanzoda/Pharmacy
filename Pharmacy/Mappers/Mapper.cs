@@ -17,7 +17,9 @@ public class Mapper : Profile
             .ForMember(x => x.CartItemResponses,
                 x => x.MapFrom(x => x.CartItems));
 
-        CreateMap<OrderRequest, Order>();
+        CreateMap<OrderRequest, Order>()
+            .ForMember(dest => dest.OrderItems, opt => opt.Ignore());
+        
         CreateMap<OrderItemRequest, OrderItem>()
             .ForMember(dest => dest.Price, opt => opt.Ignore())
             .ForMember(dest => dest.TotalPrice, opt => opt.Ignore());
@@ -26,7 +28,9 @@ public class Mapper : Profile
             .ForMember(x => x.OrderItemResponses,
                 x => x.MapFrom(x => x.OrderItems));
 
-        CreateMap<PurchaseRequest, Purchase>();
+        CreateMap<PurchaseRequest, Purchase>()
+            .ForMember(dest => dest.PurchaseItems, 
+                opt => opt.Ignore());
         CreateMap<PurchaseItemRequest, PurchaseItem>();
         CreateMap<PurchaseItem, PurchaseItemResponse>();
         CreateMap<Purchase, PurchaseResponse>()
@@ -39,10 +43,10 @@ public class Mapper : Profile
         CreateMap<CustomerRequest, Customer>();
         CreateMap<Customer, CustomerResponse>();
 
-        CreateMap<EmployeRequest, Employee>()
+        CreateMap<EmployeeRequest, Employee>()
             .ForMember(dest => dest.PasswordHash,
                 opt => opt.Ignore());
-        CreateMap<Employee, EmployeResponse>();
+        CreateMap<Employee, EmployeeResponse>();
 
 
         CreateMap<ProductRequest, Product>();

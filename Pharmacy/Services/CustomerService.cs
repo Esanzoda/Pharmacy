@@ -1,5 +1,6 @@
 using AutoMapper;
-using Pharmasy.Exeption;
+using Microsoft.Extensions.Caching.Distributed;
+using Pharmasy.Exception;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
@@ -16,14 +17,16 @@ public interface ICustomerService
     Task<List<CustomerResponse>> GetCustomerByNameAsync(string name);
 }
 
-public class CustomerService : BaseService<Customer, CustomerRequest, CustomerResponse>, ICustomerService
+public class CustomerService : BaseService<Models.Domain.Customer, CustomerRequest, CustomerResponse>, ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
+    private readonly IDistributedCache _cache;
 
-    public CustomerService(ICustomerRepository customerrepository, IMapper mapper)
-        : base(customerrepository, mapper)
+    public CustomerService(ICustomerRepository customerrepository, IMapper mapper, IDistributedCache distributedCache)
+        : base(customerrepository, mapper, distributedCache)
     {
         _customerRepository = customerrepository;
+        _cache = distributedCache;
     }
 
     public async override Task<CustomerResponse> CreateAsync(CustomerRequest request)
@@ -31,18 +34,24 @@ public class CustomerService : BaseService<Customer, CustomerRequest, CustomerRe
         var customerByEmail = await _customerRepository.GetCustomerByEmailAsync(request.Email);
         if (customerByEmail != null)
         {
+            throw new ResourseIsAlredyExistException($"Customer already exists with this email {request.Email}");
         }
 
-        var customerByPhone = await _customerRepository.GetCustomerByPhoneAsync(request.Phonenumber);
+        var customerByPhone = await _customerRepository.GetCustomerByPhoneAsync(request.PhoneNumber);
         if (customerByPhone != null)
         {
-            throw new ResourseIsAlredyExsistExeption(
-                $"Customer already exists with this phone number{request.Phonenumber}");
+            throw new ResourseIsAlredyExistException(
+                $"Customer already exists with this phone number{request.PhoneNumber}");
         }
 
-        var newCustomer = Mapper.Map<Customer>(request);
+        var newCustomer = Mapper.Map<Models.Domain.Customer>(request);
         await _customerRepository.CreateAsync(newCustomer);
-        await _customerRepository.SavechangesAsync();
+        await _customerRepository.SaveChangesAsync();
+        var cart = new Models.Domain.Cart
+        {
+            CustomerId = newCustomer.Id,
+            TotalAmount = 0
+        };
         return Mapper.Map<CustomerResponse>(newCustomer);
     }
 
@@ -51,26 +60,26 @@ public class CustomerService : BaseService<Customer, CustomerRequest, CustomerRe
         var customer = await _customerRepository.GetByIdAsync(id);
         if (customer == null)
         {
-            throw new ResourseNotFoundExeption($"Customer not found with id {id}");
+            throw new ResourseNotFoundException($"Customer not found with id {id}");
         }
 
         var customerByEmail = await _customerRepository.GetCustomerByEmailAsync(request.Email);
         if (customerByEmail != null)
         {
-            throw new ResourseIsAlredyExsistExeption($"Customer already exists with this email {request.Email}");
+            throw new ResourseIsAlredyExistException($"Customer already exists with this email {request.Email}");
         }
 
-        var customerByPhone = await _customerRepository.GetCustomerByPhoneAsync(request.Phonenumber);
+        var customerByPhone = await _customerRepository.GetCustomerByPhoneAsync(request.PhoneNumber);
         if (customerByPhone != null)
         {
-            throw new ResourseIsAlredyExsistExeption(
-                $"Customer already exists with this phone number{request.Phonenumber}");
+            throw new ResourseIsAlredyExistException(
+                $"Customer already exists with this phone number{request.PhoneNumber}");
         }
 
         Mapper.Map(request, customer);
         await _customerRepository.UpdateAsync(customer);
-        await _customerRepository.SavechangesAsync();
-        return Mapper.Map<CustomerResponse>(customerByEmail);
+        await _customerRepository.SaveChangesAsync();
+        return Mapper.Map<CustomerResponse>(customer);
     }
 
     public async Task<CustomerResponse> GetCustomerByEmailAsync(string email)
@@ -78,7 +87,7 @@ public class CustomerService : BaseService<Customer, CustomerRequest, CustomerRe
         var customer = await _customerRepository.GetCustomerByEmailAsync(email);
         if (customer == null)
         {
-            throw new ResourseNotFoundExeption($"Customer with this email{email} not found");
+            throw new ResourseNotFoundException($"Customer with this email{email} not found");
         }
 
         return Mapper.Map<CustomerResponse>(customer);
@@ -89,7 +98,7 @@ public class CustomerService : BaseService<Customer, CustomerRequest, CustomerRe
         var customer = await _customerRepository.GetCustomerByPhoneAsync(phone);
         if (customer == null)
         {
-            throw new ResourseNotFoundExeption($"Customer with this number{phone} not found");
+            throw new ResourseNotFoundException($"Customer with this number{phone} not found");
         }
 
         return Mapper.Map<CustomerResponse>(customer);
@@ -100,7 +109,7 @@ public class CustomerService : BaseService<Customer, CustomerRequest, CustomerRe
         var customer = await _customerRepository.GetCustomerByNameAsync(name);
         if (!customer.Any())
         {
-            throw new ResourseNotFoundExeption($"Customer with this name{name} not found");
+            throw new ResourseNotFoundException($"Customer with this name{name} not found");
         }
 
         return Mapper.Map<List<CustomerResponse>>(customer);

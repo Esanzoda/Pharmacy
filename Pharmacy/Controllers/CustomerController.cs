@@ -1,8 +1,11 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Exeption;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
+using Pharmasy.Services.Customer.Command;
+using Pharmasy.Services.Customer.Query;
 
 namespace Pharmasy.Controllers;
 
@@ -10,66 +13,66 @@ namespace Pharmasy.Controllers;
 [Route("api/[controller]/[action]")]
 public class CustomerController : ControllerBase
 {
-    private readonly ICustomerService _customerService;
+    private readonly IMediator _mediator;
 
-    public CustomerController(ICustomerService customerService)
+    public CustomerController(IMediator mediator)
     {
-        _customerService = customerService;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public async Task<ActionResult<CustomerResponse>> CreateCustomer([FromBody] CustomerRequest request)
+    public async Task<ActionResult<CustomerResponse>> Create([FromBody] CustomerRequest request)
     {
-        var response = await _customerService.CreateAsync(request);
+        var response = await _mediator.Send(new CreateCustomerCommand(request));
         return Ok(response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<CustomerResponse>> UpdateCustomer(long id, [FromBody] CustomerRequest request)
+    public async Task<ActionResult<CustomerResponse>> Update(long id, [FromBody] CustomerRequest request)
     {
-        var response = await _customerService.UpdateAsync(id, request);
+        var response = await _mediator.Send(new UpdateCustomerCommand(id, request));
         return Ok(response);
     }
 
     [HttpGet("id")]
-    public async Task<ActionResult<CustomerResponse>> GetCustomerById(long id)
+    public async Task<ActionResult<CustomerResponse>> GetById(long id)
     {
-        var response = await _customerService.GetByIdAsync(id);
+        var response = await _mediator.Send(new GetCustomerByIdQuery(id));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<CustomerResponse>>> GetAllCustomersByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
-        var response = await _customerService.GetAllByPaginationAsync(pageNumber, pageSize);
+        var response = await _mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize));
         return Ok(response);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteCustomerById(long id)
+    public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await _customerService.DeleteAsync(id);
+        var response = _mediator.Send(new DeleteCustomerCommand(id));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<CustomerResponse?>> GetCustomerByEmailAsync(string email)
+    public async Task<ActionResult<CustomerResponse?>> GetByEmailAsync(string email)
     {
-        var response = await _customerService.GetCustomerByEmailAsync(email);
+        var response = await _mediator.Send(new GetCustomerByEmailQuery(email));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<CustomerResponse?>> GetCustomerByPhoneAsync(string phone)
+    public async Task<ActionResult<CustomerResponse?>> GetByPhoneAsync(string phone)
     {
-        var response = await _customerService.GetCustomerByPhoneAsync(phone);
+        var response = await _mediator.Send(new GetCustomerByPhoneNumberQuery(phone));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<CustomerResponse>>> GetCustomerByNameAsync(string name)
+    public async Task<ActionResult<List<CustomerResponse>>> GetByNameAsync(string name)
     {
-        var response = await _customerService.GetCustomerByNameAsync(name);
+        var response = await _mediator.Send(new GetCustomerByNameQuery(name));
         return Ok(response);
     }
 }

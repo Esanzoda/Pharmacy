@@ -21,6 +21,8 @@ public class OrderItemRepository : BaseRepository<OrderItem>, IOrderItemReposito
     {
         return DbContext.OrderItems
             .Where(x => x.OrderId == orderId)
+            .OrderBy(x => x.Id)
+            .Include(x => x.Product)
             .ToListAsync();
     }
 }

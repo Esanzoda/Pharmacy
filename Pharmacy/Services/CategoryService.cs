@@ -1,5 +1,6 @@
 using AutoMapper;
-using Pharmasy.Exeption;
+using Microsoft.Extensions.Caching.Distributed;
+using Pharmasy.Exception;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
@@ -17,28 +18,31 @@ public interface ICategoryServise :
     Task<bool> CategoryExistsAsync(string name);
 }
 
-public class CategoryService : BaseService<Category, CategoryRequest, CategoryResponse>,
+public class CategoryService : BaseService<Models.Domain.Category, CategoryRequest, CategoryResponse>,
     ICategoryServise
 {
     private readonly ICategoryRepository _categoryRepository;
+   
+    
 
-    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
-        : base(categoryRepository, mapper)
+    public CategoryService(ICategoryRepository categoryRepository,  IDistributedCache distributedCache,IMapper mapper)
+        : base(categoryRepository,mapper, distributedCache)
     {
-        _categoryRepository = categoryRepository;
+        
+       
     }
 
     public async override Task<CategoryResponse> CreateAsync(CategoryRequest request)
     {
         if (await _categoryRepository.CategoryExistsAsync(request.Name))
         {
-            throw new ResourseIsAlredyExsistExeption("Category already exists");
+            throw new ResourseIsAlredyExistException("Category already exists");
         }
 
-        var category = Mapper.Map<Category>(request);
+        var category = Mapper.Map<Models.Domain.Category>(request);
         category.CategoryStatus = CategoryStatus.Active;
         category = await _categoryRepository.CreateAsync(category);
-        await _categoryRepository.SavechangesAsync();
+        await _categoryRepository.SaveChangesAsync();
         return Mapper.Map<CategoryResponse>(category);
     }
 
@@ -47,18 +51,18 @@ public class CategoryService : BaseService<Category, CategoryRequest, CategoryRe
         var category = await _categoryRepository.GetByIdAsync(id);
         if (category == null)
         {
-            throw new ResourseNotFoundExeption("Category not found");
+            throw new ResourseNotFoundException("Category not found");
         }
 
         var exixtCategory = await _categoryRepository.CategoryExistsAsync(request.Name);
         if (exixtCategory)
         {
-            throw new ResourseIsAlredyExsistExeption("Category  with thia name alredy exsist");
+             throw new ResourseIsAlredyExistException("Category  with thia name alredy exsist");
         }
 
         Mapper.Map(request, category);
         await _categoryRepository.UpdateAsync(category);
-        await _categoryRepository.SavechangesAsync();
+        await _categoryRepository.SaveChangesAsync();
         return Mapper.Map<CategoryResponse>(category);
     }
 
@@ -67,7 +71,7 @@ public class CategoryService : BaseService<Category, CategoryRequest, CategoryRe
         var products = await _categoryRepository.GetCategoryWithProducts(categoryId, page, pageSize);
         if (!products.Any())
         {
-            throw new ResourseNotFoundExeption("In this category doesnt exsist products ");
+            throw new ResourseNotFoundException("In this category doesnt exsist products ");
         }
 
         return Mapper.Map<List<ProductResponse>>(products);
@@ -78,7 +82,7 @@ public class CategoryService : BaseService<Category, CategoryRequest, CategoryRe
         var categories = await _categoryRepository.SearchByNameAsync(name);
         if (!categories.Any())
         {
-            throw new ResourseNotFoundExeption("Category not found ");
+            throw new ResourseNotFoundException("Category not found ");
         }
 
         return Mapper.Map<List<CategoryResponse>>(categories);
@@ -89,7 +93,7 @@ public class CategoryService : BaseService<Category, CategoryRequest, CategoryRe
         var categories = await _categoryRepository.GetActiveCategoriesAsync();
         if (!categories.Any())
         {
-            throw new ResourseNotFoundExeption("Acktive Category not found");
+            throw new ResourseNotFoundException("Acktive Category not found");
         }
 
         return Mapper.Map<List<CategoryResponse>>(categories);

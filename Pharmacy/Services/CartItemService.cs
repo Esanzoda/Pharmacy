@@ -1,5 +1,6 @@
 using AutoMapper;
-using Pharmasy.Exeption;
+using Microsoft.Extensions.Caching.Distributed;
+using Pharmasy.Exception;
 using Pharmasy.Helpers;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Request;
@@ -22,15 +23,16 @@ public class CartItemService : BaseService<CartItem, CartItemRequest, CartItemRe
     private readonly ICartItemRepository _cartItemRepository;
     private readonly ICartRepository _cartRepository;
     private readonly IProductRepository _productRepository;
-
+    private readonly IDistributedCache _cache;
 
     public CartItemService(ICartItemRepository cartItemRepository, IMapper mapper,
-        ICartRepository cartRepository, IProductRepository productRepository)
-        : base(cartItemRepository, mapper)
+        ICartRepository cartRepository, IProductRepository productRepository, IDistributedCache distributedCache)
+        : base(cartItemRepository, mapper, distributedCache)
     {
         _cartItemRepository = cartItemRepository;
         _cartRepository = cartRepository;
         _productRepository = productRepository;
+        _cache = distributedCache;
     }
 
 
@@ -39,28 +41,29 @@ public class CartItemService : BaseService<CartItem, CartItemRequest, CartItemRe
         var cart = await _cartRepository.GetCartByCustomerId(itemrequest.CustomerId);
         if (cart == null)
         {
-            throw new ResourseNotFoundExeption("Cart not found");
+            throw new ResourseNotFoundException("Cart not found");
         }
 
         var product = await _productRepository.GetByIdAsync(itemrequest.ProductId);
         if (product == null)
         {
-            throw new ResourseNotFoundExeption("Product not found");
+            throw new ResourseNotFoundException("Product not found");
         }
 
         if (product.Stock < itemrequest.Quantity)
         {
-            throw new BusinessExseption(
+            throw new BusinessException(
                 $"Insufficient product stock{product.Stock} for the requested quantity {itemrequest.Quantity}");
         }
 
-        var existingCartItem = await _cartItemRepository.GetItemWhithProductIdInCartItemAsync(itemrequest.ProductId);
+        var existingCartItem =
+            await _cartItemRepository.GetItemWhithProductIdInCartItemAsync(cart.CustomerId, itemrequest.ProductId);
         if (existingCartItem != null)
         {
             existingCartItem.Quantity += itemrequest.Quantity;
             existingCartItem.TotalPrice = existingCartItem.Quantity * product.Price;
             await _cartItemRepository.UpdateAsync(existingCartItem);
-            await _cartItemRepository.SavechangesAsync();
+            await _cartItemRepository.SaveChangesAsync();
         }
         else
         {
@@ -69,29 +72,29 @@ public class CartItemService : BaseService<CartItem, CartItemRequest, CartItemRe
             cartItem.Price = product.Price;
             cartItem.TotalPrice = product.Price * itemrequest.Quantity;
             await _cartItemRepository.CreateAsync(cartItem);
-            await _cartItemRepository.SavechangesAsync();
+            await _cartItemRepository.SaveChangesAsync();
             cart.CartItems.Add(cartItem);
         }
 
-        cart.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice);
+        cart.TotalAmount = cart.CartItems.Sum(x => x.TotalPrice);
 
         await _cartRepository.UpdateAsync(cart);
-        await _cartRepository.SavechangesAsync();
+        await _cartRepository.SaveChangesAsync();
         return Mapper.Map<CartResponse>(cart);
     }
 
     public async Task<CartItemResponse> UpdateQuantityCartItem(long customerId, long cartItemid, int quantity)
     {
-        var cartItem = await _cartItemRepository.UpdateQuantityCartItemAsync(customerId, cartItemid);
+        var cartItem = await _cartItemRepository.GetCartItemByCustomerIdtemAsync(customerId, cartItemid);
         if (cartItem == null)
         {
-            throw new ResourseNotFoundExeption("CartItem not found");
+            throw new ResourseNotFoundException("CartItem not found");
         }
 
         cartItem.Quantity = quantity;
         cartItem.TotalPrice = cartItem.Price * quantity;
         await _cartItemRepository.UpdateAsync(cartItem);
-        await _cartItemRepository.SavechangesAsync();
+        await _cartItemRepository.SaveChangesAsync();
         return Mapper.Map<CartItemResponse>(cartItem);
     }
 
@@ -100,19 +103,19 @@ public class CartItemService : BaseService<CartItem, CartItemRequest, CartItemRe
         var cart = await _cartRepository.GetCartByCustomerId(customerId);
         if (cart == null)
         {
-            throw new ResourseNotFoundExeption("Cart not found");
+            throw new ResourseNotFoundException("Cart not found");
         }
 
         var item = await _cartItemRepository.DeleteAsync(cartItemId);
         if (item != true)
         {
-            throw new Exception("Cant't delete item in cart");
+            throw new System.Exception("Cant't delete item in cart");
         }
 
         cart.CartItems.Remove(cart.CartItems.First(x => x.Id == cartItemId));
-        cart.TotalAmout = cart.CartItems.Sum(x => x.TotalPrice);
+        cart.TotalAmount = cart.CartItems.Sum(x => x.TotalPrice);
         await _cartRepository.UpdateAsync(cart);
-        await _cartRepository.SavechangesAsync();
+        await _cartRepository.SaveChangesAsync();
         return true;
     }
 
@@ -121,13 +124,13 @@ public class CartItemService : BaseService<CartItem, CartItemRequest, CartItemRe
         var cart = await _cartRepository.GetCartByCustomerId(customerId);
         if (cart == null)
         {
-            throw new ResourseNotFoundExeption("Cart not found");
+            throw new ResourseNotFoundException("Cart not found");
         }
 
-        var item = await _cartItemRepository.GetItemWhithProductIdInCartItemAsync(productId);
+        var item = await _cartItemRepository.GetItemWhithProductIdInCartItemAsync(customerId, productId);
         if (item == null)
         {
-            throw new ResourseNotFoundExeption($"Product with id {productId} was not found in the cart");
+            throw new ResourseNotFoundException($"Product with id {productId} was not found in the cart");
         }
 
         return Mapper.Map<CartItemResponse>(item);

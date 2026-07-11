@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Exeption;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
@@ -10,9 +9,9 @@ namespace Pharmasy.Controllers;
 [Route("api/[controller]/[action]")]
 public class DeliverController : ControllerBase
 {
-    private readonly ISupplierService _deliverService;
+    private readonly IDelivererService _deliverService;
 
-    public DeliverController(ISupplierService deliverService)
+    public DeliverController(IDelivererService deliverService)
     {
         _deliverService = deliverService;
     }
@@ -34,7 +33,7 @@ public class DeliverController : ControllerBase
     [HttpGet("id")]
     public async Task<ActionResult<DeliverResponse>> GetDeliverById(long id)
     {
-        var response = await _deliverService.GetByIdAsync(id);
+        var response = await _deliverService.GetByIdAsync(id, CancellationToken.None);
         return Ok(response);
     }
 

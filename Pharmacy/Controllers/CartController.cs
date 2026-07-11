@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Exeption;
 using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
+using MediatR;
 using Pharmasy.Services;
+using Pharmasy.Services.Cart.Command;
 
 namespace Pharmasy.Controllers;
 
@@ -12,19 +12,15 @@ public class CartController : ControllerBase
 {
     private readonly ICartService _cartService;
     private readonly ICartItemService _cartItemService;
+    private readonly IMediator _mediator;
 
-    public CartController(ICartService cartService, ICartItemService cartItemService)
+    public CartController(ICartService cartService, ICartItemService cartItemService, IMediator mediator)
     {
         _cartService = cartService;
         _cartItemService = cartItemService;
+        _mediator = mediator;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateCart([FromBody] CartRequest request)
-    {
-        var response = await _cartService.CreateAsync(request);
-        return Ok(response);
-    }
 
     [HttpPut]
     public async Task<IActionResult> UpdateCart(long id, [FromBody] CartRequest request)
@@ -50,7 +46,7 @@ public class CartController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> ClearCartAsync(long cartId)
     {
-        var response = await _cartService.ClearCartAsync(cartId);
+        var response = await _mediator.Send(new ClearCartCommand(cartId));
         return Ok(response);
     }
 

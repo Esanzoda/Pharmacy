@@ -6,7 +6,7 @@ using Pharmasy.Services;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCompletedConsumer : IConsumer<OrderCompletedEvant>
+public class OrderCompletedConsumer : IConsumer<OrderCompletedEvent>
 {
     private readonly ILogger<OrderCompletedConsumer> _logger;
     private readonly IEmailService _emailService;
@@ -24,27 +24,27 @@ public class OrderCompletedConsumer : IConsumer<OrderCompletedEvant>
         _customerRepository = customerRepository;
     }
 
-    public async Task Consume(ConsumeContext<OrderCompletedEvant> context)
+    public async Task Consume(ConsumeContext<OrderCompletedEvent> context)
     {
         var message = context.Message;
 
         _logger.LogInformation(
             "Order completed: OrderId={OrderId},  CustomerId={CustomerId}",
             message.OrderId,
-            message.UserId);
+            message.CustomerId);
 
-        var user = await _customerRepository.GetByIdAsync(message.UserId);
+        var user = await _customerRepository.GetByIdAsync(message.CustomerId);
         if (user != null)
         {
             await _emailService.SendOrderCompletedAsync(
                 user.Email,
                 message.OrderId,
-                message.TotalAmout,
+                message.TotalAmount,
                 message.CompletedAt);
             await _messageService.SendOrderCompletedAsync(
                 user.PhoneNumber,
                 message.OrderId,
-                message.TotalAmout,
+                message.TotalAmount,
                 message.CompletedAt);
         }
     }

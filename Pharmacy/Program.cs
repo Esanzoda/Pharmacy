@@ -11,6 +11,7 @@ using Pharmasy.Consumers;
 using Pharmasy.Jobs;
 using Pharmasy.Middlewares;
 using Serilog;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,7 +66,7 @@ builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
 
-builder.Services.AddScoped<ISupplierService, DeliverService>();
+builder.Services.AddScoped<IDelivererService, DeliverService>();
 builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -77,6 +78,14 @@ builder.Services.AddDbContext<AppDbContext>((sp, options) =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
         .AddInterceptors(sp.GetRequiredService<AuditableInterceptor>());
 });
+//redis
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "Pharmacy";
+});
+//mediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddHangfire(static (provider, cfg) =>
 {
     cfg
@@ -124,7 +133,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseMiddleware<ExseptionMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 app.Run();
 

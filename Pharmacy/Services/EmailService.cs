@@ -56,7 +56,7 @@ public class EmailService : IEmailService
 
             _logger.LogInformation("Email sent to {Email}", message.To);
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             _logger.LogError(ex, "Failed to send email to {Email}", message.To);
         }

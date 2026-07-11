@@ -1,9 +1,11 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Exeption;
-using Pharmasy.Models.Domain;
+using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
+using Pharmasy.Services.Order.Command;
+using Pharmasy.Services.Order.Query;
 
 namespace Pharmasy.Controllers;
 
@@ -12,52 +14,67 @@ namespace Pharmasy.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
+   private readonly IMediator _mediator;
 
-    public OrderController(IOrderService orderService)
+    public OrderController(IOrderService orderService, IMediator mediator)
     {
         _orderService = orderService;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] OrderRequest request)
+    public async Task<ActionResult<OrderResponse>> Create([FromBody] OrderRequest request)
     {
-        var response = await _orderService.CreateAsync(request);
+        var response = await _mediator.Send(new CreateOrderCommand(request));
+        return Ok(response);
+    }
+    [HttpPost]
+    public async Task<ActionResult<OrderResponse>> CreateFromCart(long customerId)
+    {
+        var response = await _mediator.Send(new CreateOrderFromCartCommand(customerId));
         return Ok(response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<OrderResponse>> UpdateOrder(long id, [FromBody] UpdateOrderRequest request)
+    public async Task<ActionResult<OrderResponse>> UpdateStatusAsync(long id, [FromBody] UpdateOrderRequest request)
     {
-        var response = await _orderService.UpdateOrderStatusAsync(id, request);
+        var response = await _mediator.Send(new UpdateOrderStatusCommand(id, request));
         return Ok(response);
     }
 
     [HttpGet("id")]
-    public async Task<ActionResult<OrderResponse>> GetOrderById(long id)
+    public async Task<ActionResult<OrderResponse>> GetByIdAsync(long id)
     {
-        var response = await _orderService.GetByIdAsync(id);
+        var response = await _mediator.Send(new GetOrderByIdQuery(id));
         return Ok(response);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<OrderResponse>>> GetAllOrderByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<OrderResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
-        var response = await _orderService.GetAllByPaginationAsync(pageNumber, pageSize);
+        var response = await _mediator.Send(new GetAllOrdersQuery(pageNumber, pageSize));
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<OrderResponse>>> GetByStatusAsync(OrderStatus status, int pageNumber, int pageSize)
+    {
+        var response=_mediator.Send(new GetOrderByOrderStatusQuery(status, pageNumber, pageSize));
         return Ok(response);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteOrderById(long id)
+    public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await _orderService.DeleteAsync(id);
+        var response = _mediator.Send(new DeleteOrderCommand(id));
         return Ok(response);
     }
 
 
     [HttpDelete]
-    public async Task<ActionResult<OrderResponse>> RemoveItemFromOrderAsync(long orderId, long orderItemId)
+    public async Task<ActionResult<OrderResponse>> RemoveItemFromAsync(long orderId, long orderItemId)
     {
-        var response = await _orderService.RemoveItemFromOrderAsync(orderId, orderItemId);
+        var response = await _mediator.Send(new RemoveItemFromOrderCommand(orderId, orderItemId));
         return Ok(response);
     }
 }

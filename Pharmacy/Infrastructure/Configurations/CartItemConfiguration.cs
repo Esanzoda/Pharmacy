@@ -9,7 +9,12 @@ public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>
     public void Configure(EntityTypeBuilder<CartItem> builder)
     {
         builder.ToTable("CartItems");
-
+        
         builder.HasKey(x => x.Id);
+        
+       builder.HasOne<Cart>()
+           .WithMany()
+           .HasForeignKey(x=>x.CustomerId)
+           .OnDelete(DeleteBehavior.Cascade);
     }
 }

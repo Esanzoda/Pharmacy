@@ -1,6 +1,7 @@
 using AutoMapper;
 using MassTransit;
-using Pharmasy.Exeption;
+using Microsoft.Extensions.Caching.Distributed;
+using Pharmasy.Exception;
 using Pharmasy.Messages.Evants;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
@@ -15,9 +16,10 @@ public interface IOrderService
 {
     public Task<OrderResponse> UpdateOrderStatusAsync(long orderId, UpdateOrderRequest itemrequest);
     public Task<OrderResponse> RemoveItemFromOrderAsync(long orderId, long orderItemId);
+    public Task<OrderResponse> CreatOrderFromCartAsync(long customerId);
 }
 
-public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
+public class OrderService : BaseService<Models.Domain.Order, OrderRequest, OrderResponse>
     , IOrderService
 {
     private readonly IOrderRepository _orderRepository;
@@ -25,33 +27,36 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
     private readonly IProductRepository _productRepository;
     private readonly ICustomerRepository _customerRepository;
     private readonly IPublishEndpoint _publishEndpoint;
+    private readonly ICartRepository _cartRepository;
+    private readonly IDistributedCache _cache;
 
 
     public OrderService(IOrderRepository orderrepository, IMapper mapper
         , IProductRepository productRepository, ICustomerRepository customerRepository,
-        IPublishEndpoint publishEndpoint
+        IPublishEndpoint publishEndpoint, ICartRepository cartRepository, IDistributedCache distributedCache
         , IOrderItemRepository orderItemRepository)
-        : base(orderrepository, mapper)
+        : base(orderrepository, mapper, distributedCache)
     {
         _orderRepository = orderrepository;
         _orderItemRepository = orderItemRepository;
         _productRepository = productRepository;
         _customerRepository = customerRepository;
         _publishEndpoint = publishEndpoint;
+        _cartRepository = cartRepository;
+        _cache = distributedCache;
     }
 
     public override async Task<OrderResponse> CreateAsync(OrderRequest request)
     {
-        var user = await _customerRepository.GetByIdAsync(request.CustomererId);
-        if (user == null)
+        var customer = await _customerRepository.GetByIdAsync(request.CustomerId);
+        if (customer == null)
         {
-            throw new ResourseNotFoundExeption($"Customer not found");
+            throw new ResourseNotFoundException($"Customer not found");
         }
 
-        var order = Mapper.Map<Order>(request);
+        var order = Mapper.Map<Models.Domain.Order>(request);
 
         order.OrderStatus = OrderStatus.Pending;
-        //order.CreatedAt = DateTime.UtcNow;
         await _orderRepository.CreateAsync(order);
 
         // doesnt use method into foreach
@@ -60,12 +65,12 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
             var product = await _productRepository.GetByIdAsync(item.ProductId);
             if (product == null)
             {
-                throw new ResourseNotFoundExeption($"Product not found");
+                throw new ResourseNotFoundException($"Product not found");
             }
 
             if (product.Stock < item.Quantity)
             {
-                throw new BusinessExseption($"Insufficient product stock{product.Stock}");
+                throw new BusinessException($"Insufficient product stock{product.Stock}");
             }
 
             var exsistingOrderItem = order.OrderItems.FirstOrDefault(x => x.ProductId == item.ProductId);
@@ -73,35 +78,31 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
             {
                 exsistingOrderItem.Quantity += item.Quantity;
                 exsistingOrderItem.TotalPrice = exsistingOrderItem.Quantity * product.Price;
-                await _orderItemRepository.UpdateAsync(exsistingOrderItem);
-                await _orderItemRepository.SavechangesAsync();
-                product.Stock -= item.Quantity;
-                await _productRepository.UpdateAsync(product);
-                await _productRepository.SavechangesAsync();
-                order.TotalAmout = order.OrderItems.Sum(x => x.TotalPrice);
             }
             else
             {
                 var orderItem = Mapper.Map<OrderItem>(item);
+                orderItem.OrderId = order.Id;
                 orderItem.Price = product.Price;
                 orderItem.TotalPrice = item.Quantity * product.Price;
                 await _orderItemRepository.CreateAsync(orderItem);
-                await _orderItemRepository.SavechangesAsync();
                 order.OrderItems.Add(orderItem);
-                product.Stock -= item.Quantity;
-                await _productRepository.UpdateAsync(product);
-                await _productRepository.SavechangesAsync();
-                order.TotalAmout = order.OrderItems.Sum(x => x.TotalPrice);
             }
+
+            product.Stock -= item.Quantity;
+            await _productRepository.UpdateAsync(product);
+            order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
         }
 
+        await _productRepository.SaveChangesAsync();
+        await _orderItemRepository.SaveChangesAsync();
         await _orderRepository.UpdateAsync(order);
-        await _orderRepository.SavechangesAsync();
-        await _publishEndpoint.Publish(new OrderCreatedEvant()
+        await _orderRepository.SaveChangesAsync();
+        await _publishEndpoint.Publish(new OrderCreatedEvent()
         {
             OrderId = order.Id,
-            UserId = order.CustomererId,
-            TotalAmout = order.TotalAmout,
+            UserId = order.CustomerId,
+            TotalAmount = order.TotalAmount,
         });
 
         return Mapper.Map<OrderResponse>(order);
@@ -114,35 +115,83 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
         var order = await _orderRepository.GetByIdAsync(orderId);
         if (order == null)
         {
-            throw new ResourseNotFoundExeption("OrderItem not found");
+            throw new ResourseNotFoundException("OrderItem not found");
         }
 
         if (order.OrderStatus == OrderStatus.Completed || order.OrderStatus == OrderStatus.Cancelled)
         {
-            throw new BusinessExseption("Can't remove item completed or cancelled order ");
+            throw new BusinessException("Can't remove item completed or cancelled order ");
         }
 
         var itemToRemove = order.OrderItems.FirstOrDefault(x => x.Id == orderItemId);
         if (itemToRemove == null)
         {
-            throw new ResourseNotFoundExeption($"OrderItem not found");
+            throw new ResourseNotFoundException($"OrderItem not found");
         }
 
         var product = await _productRepository.GetByIdAsync(itemToRemove.ProductId);
         if (product == null)
         {
-            throw new ResourseNotFoundExeption($"Product not found");
+            throw new ResourseNotFoundException($"Product not found");
         }
 
         product.Stock += itemToRemove.Quantity;
-        // order.OrderItems.Remove(itemToRemove);
-        // fixed to -= to =
-        order.TotalAmout = order.OrderItems.Sum(x => x.TotalPrice);
         await _productRepository.UpdateAsync(product);
-        await _productRepository.SavechangesAsync();
-        await _orderItemRepository.DeleteAsync(itemToRemove.Id);
+        await _productRepository.SaveChangesAsync();
+
+        order.OrderItems.Remove(itemToRemove);
+        order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
         await _orderRepository.UpdateAsync(order);
-        await _orderItemRepository.SavechangesAsync();
+        await _orderRepository.SaveChangesAsync();
+
+        await _orderItemRepository.DeleteAsync(itemToRemove.Id);
+        await _orderItemRepository.SaveChangesAsync();
+
+        return Mapper.Map<OrderResponse>(order);
+    }
+
+    public async Task<OrderResponse> CreatOrderFromCartAsync(long customerId)
+    {
+        var cart = await _cartRepository.GetCartByCustomerId(customerId);
+        if (cart == null)
+        {
+            throw new ResourseNotFoundException($"Cart is empty");
+        }
+
+        var order = new Models.Domain.Order()
+        {
+            CustomerId = cart.CustomerId,
+            OrderType = OrderType.Deliver,
+            OrderStatus = OrderStatus.Pending,
+            Adress = cart.Customer.Address,
+            //GetTime = 
+            Customer =  cart.Customer,
+            TotalAmount = cart.TotalAmount,
+        };
+        await _orderRepository.CreateAsync(order);
+        await _orderRepository.SaveChangesAsync();
+        foreach (var item in cart.CartItems)
+        {
+            var orderItem = new OrderItem
+            {
+                OrderId = order.Id,
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                TotalPrice = item.TotalPrice
+            };
+            await _orderItemRepository.CreateAsync(orderItem);
+            var product = await _productRepository.GetByIdAsync(item.ProductId);
+            if (product == null)
+            {
+                throw new ResourseNotFoundException($"Product not found");
+            }
+
+            product.Stock -= item.Quantity;
+        }
+
+        await _orderRepository.SaveChangesAsync();
+        await _cartRepository.ClearCartAsync(customerId);
         return Mapper.Map<OrderResponse>(order);
     }
 
@@ -152,34 +201,27 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
         var order = await _orderRepository.GetByIdAsync(orderId);
         if (order == null)
         {
-            throw new ResourseNotFoundExeption($"Order not found");
+            throw new ResourseNotFoundException($"Order not found");
         }
 
         if (order.OrderStatus == OrderStatus.Completed)
         {
-            throw new BusinessExseption("Cannot update a completed order");
+            throw new BusinessException("Cannot update a completed order");
         }
 
         if (order.OrderStatus == OrderStatus.Cancelled)
         {
-            throw new BusinessExseption("Order alredy canseled");
+            throw new BusinessException("Order alredy canseled");
         }
 
         if (order.OrderStatus == OrderStatus.Shipped)
         {
-            throw new BusinessExseption("Can't update shipped order");
+            throw new BusinessException("Can't update shipped order");
         }
 
 
         if (itemrequest.OrderStatus == OrderStatus.Cancelled)
         {
-            await _publishEndpoint.Publish(new OrderCancelledEvant()
-                {
-                    OrderId = order.Id,
-                    CustomererId = order.CustomererId,
-                    UpdateTime = DateTime.UtcNow
-                }
-            );
             var orderItems = await _orderItemRepository.GetAllOrderItems(orderId);
             foreach (var item in orderItems)
             {
@@ -187,27 +229,41 @@ public class OrderService : BaseService<Order, OrderRequest, OrderResponse>
                 item.Product.Stock += item.Quantity;
                 order.OrderItems.Remove(item);
                 await _productRepository.UpdateAsync(item.Product);
-                await _productRepository.SavechangesAsync();
+                await _productRepository.SaveChangesAsync();
                 await _orderItemRepository.DeleteAsync(item.Id);
-                await _orderItemRepository.SavechangesAsync();
+                await _orderItemRepository.SaveChangesAsync();
             }
 
-            order.TotalAmout = 0;
+            order.TotalAmount = 0;
+        }
+
+        order.OrderStatus = itemrequest.OrderStatus;
+        await _orderRepository.UpdateAsync(order);
+        await _orderRepository.SaveChangesAsync();
+        if (itemrequest.OrderStatus == OrderStatus.Cancelled)
+        {
+            await _publishEndpoint.Publish(new OrderCancelledEvent()
+                {
+                    OrderId = order.Id,
+                    CustomerId = order.CustomerId,
+                    UpdateTime = DateTime.UtcNow
+                }
+            );
         }
 
         if (itemrequest.OrderStatus == OrderStatus.Completed)
         {
-            await _publishEndpoint.Publish(new OrderCompletedEvant
+            await _publishEndpoint.Publish(new OrderCompletedEvent
             {
                 OrderId = order.Id,
-                UserId = order.CustomererId,
-                TotalAmout = order.TotalAmout
+                CustomerId = order.CustomerId,
+                TotalAmount = order.TotalAmount
             });
         }
 
         order.OrderStatus = itemrequest.OrderStatus;
         await _orderRepository.UpdateAsync(order);
-        await _orderItemRepository.SavechangesAsync();
+        await _orderItemRepository.SaveChangesAsync();
         return Mapper.Map<OrderResponse>(order);
     }
 }

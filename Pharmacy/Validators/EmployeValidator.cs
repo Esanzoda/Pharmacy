@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class EmployeValidator : AbstractValidator<EmployeRequest>
+public class EmployeValidator : AbstractValidator<EmployeeRequest>
 {
     public EmployeValidator()
     {

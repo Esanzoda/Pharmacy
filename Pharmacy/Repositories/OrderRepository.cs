@@ -7,7 +7,8 @@ namespace Pharmasy.Repositories;
 
 public interface IOrderRepository : IBaseRepository<Order>
 {
-    Task<List<Order>> GetAllByOrderStatusAsync(OrderStatus status, DateTime day);
+    Task<List<Order>> GetOrdersByOrderStatusAndDayAsync(OrderStatus status, DateTime day);
+    Task<List<Order>> GetOrdersByOrderStatusAsync(OrderStatus status,int pageNumber, int pageSize);
 }
 
 public class OrderRepository : BaseRepository<Order>, IOrderRepository
@@ -23,19 +24,33 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .FirstOrDefaultAsync(o => o.Id == id);
     }
 
-    public override async Task<List<Order>> GetAllByPagenationAsync(int pageNumber, int pageSize)
+    public override async Task<List<Order>> GetAllByPaginationAsync(int pageNumber, int pageSize)
     {
         return await DbContext.Orders
             .Include(o => o.OrderItems)
+            .OrderBy(x => x.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }
 
-    public async Task<List<Order>> GetAllByOrderStatusAsync(OrderStatus status, DateTime day)
+//for check job , for raport to ceo
+    public async Task<List<Order>> GetOrdersByOrderStatusAndDayAsync(OrderStatus status, DateTime day)
     {
         return await DbContext.Orders
-            .Where(o => o.OrderStatus == status && o.CreatedAt >= day)
+            .Where(o => o.OrderStatus == status && o.CreatedAt == day)
+            .OrderBy(x => x.Id)
             .ToListAsync();
     }
+
+    public async Task<List<Order>> GetOrdersByOrderStatusAsync(OrderStatus status, int pageNumber, int pageSize)
+    {
+        return await DbContext.Orders
+            .Where(o => o.OrderStatus == status)
+            .OrderBy(x => x.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+    
 }

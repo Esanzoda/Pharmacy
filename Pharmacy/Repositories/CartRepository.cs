@@ -6,7 +6,7 @@ namespace Pharmasy.Repositories;
 
 public interface ICartRepository : IBaseRepository<Cart>
 {
-    Task<bool> ClearCartAsync(long cartId);
+    Task<bool> ClearCartAsync(long customerId);
     Task<Cart?> GetCartByCustomerId(long customerId);
 }
 

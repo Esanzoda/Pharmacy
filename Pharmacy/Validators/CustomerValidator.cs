@@ -19,7 +19,7 @@ public class CustomerValidator : AbstractValidator<CustomerRequest>
             // .EmailAddress()
             .WithMessage("Invalid email format");
 
-        RuleFor(x => x.Phonenumber)
+        RuleFor(x => x.PhoneNumber)
             .NotEmpty()
             .NotNull()
             .WithMessage("Invalid phone number format");
