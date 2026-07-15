@@ -195,3 +195,8 @@
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Pipelines.Sockets.Unofficial.dll
 /Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/StackExchange.Redis.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/MediatR.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/MediatR.Contracts.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Elastic.Clients.Elasticsearch.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Elastic.Esql.dll
+/Users/orash/RiderProjects/Pharmacy/Pharmacy/bin/Debug/net10.0/Elastic.Transport.dll

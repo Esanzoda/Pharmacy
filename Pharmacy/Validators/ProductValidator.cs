@@ -3,9 +3,9 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class ProductVAlidator : AbstractValidator<ProductRequest>
+public class ProductValidator : AbstractValidator<ProductRequest>
 {
-    public ProductVAlidator()
+    public ProductValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty()

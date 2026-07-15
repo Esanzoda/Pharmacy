@@ -36,7 +36,7 @@ public class CreatEmployeHendler : EmployeDiBase, IRequestHandler<CreateEmployeC
             throw new BusinessException("Cant create employee with status customer");
         }
 
-        var employee = Mapper.Map<Models.Domain.Employee>(request);
+        var employee = Mapper.Map<Models.Domain.Employee>(request.Request);
         await EmployeeRepository.CreateAsync(employee);
         await EmployeeRepository.SaveChangesAsync();
         return Mapper.Map<EmployeeResponse>(employee);

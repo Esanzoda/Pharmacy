@@ -9,7 +9,8 @@ using Pharmasy.Repositories;
 namespace Pharmasy.Services.Purchase.Command;
 
 public record CreatePurchaseCommand(PurchaseRequest Request) : IRequest<PurchaseResponse>;
-public class CreatePurchaseHendler:PurchaseDiBase,IRequestHandler<CreatePurchaseCommand,PurchaseResponse>
+
+public class CreatePurchaseHendler : PurchaseDiBase, IRequestHandler<CreatePurchaseCommand, PurchaseResponse>
 {
     public CreatePurchaseHendler(IPurchaseRepository purchaseRepository) : base(purchaseRepository)
     {
@@ -17,7 +18,7 @@ public class CreatePurchaseHendler:PurchaseDiBase,IRequestHandler<CreatePurchase
 
     public async Task<PurchaseResponse> Handle(CreatePurchaseCommand request, CancellationToken cancellationToken)
     {
-        var employee = await EmployeeService.GetByIdAsync(request.Request.EmployeeId, CancellationToken.None);
+        var employee = await EmployeeRepository.GetByIdAsync(request.Request.EmployeeId);
         if (employee == null)
         {
             throw new ResourseNotFoundException($"Employee with this id  not found");
@@ -25,7 +26,6 @@ public class CreatePurchaseHendler:PurchaseDiBase,IRequestHandler<CreatePurchase
 
         var purchase = Mapper.Map<Models.Domain.Purchase>(request);
         await PurchaseRepository.CreateAsync(purchase);
-        await PurchaseRepository.SaveChangesAsync();
 
         foreach (var item in request.Request.PurchaseItems)
         {
@@ -36,21 +36,22 @@ public class CreatePurchaseHendler:PurchaseDiBase,IRequestHandler<CreatePurchase
             }
 
             var purchaseItem = Mapper.Map<PurchaseItem>(item);
-            purchaseItem.PurchaseId = purchase.Id;
+            purchaseItem.Purchase = purchase;
             purchaseItem.TotalPrice = item.Quantity * item.PurchasePrice;
 
-            await PurchaseItemRepository.CreateAsync(purchaseItem);
-            await PurchaseItemRepository.SaveChangesAsync();
-
+            purchase.PurchaseItems.Add(purchaseItem);
             product.Stock += item.Quantity;
             await ProductRepository.UpdateAsync(product);
-            await ProductRepository.SaveChangesAsync();
 
-
-            purchase.TotalAmount = purchase.PurchaseItems.Sum(x => x.TotalPrice);
-            await PurchaseRepository.UpdateAsync(purchase);
-            await PurchaseRepository.SaveChangesAsync();
+            //  await PurchaseItemRepository.CreateAsync(purchaseItem);
+            // await PurchaseItemRepository.SaveChangesAsync();
         }
+
+        purchase.TotalAmount = purchase.PurchaseItems.Sum(x => x.TotalPrice);
+        await PurchaseRepository.UpdateAsync(purchase);
+        await PurchaseRepository.SaveChangesAsync(); //1
+        await ProductRepository.SaveChangesAsync();
+
 
         return Mapper.Map<PurchaseResponse>(purchase);
     }

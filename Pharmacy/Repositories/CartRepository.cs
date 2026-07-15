@@ -16,12 +16,7 @@ public class CartRepository : BaseRepository<Cart>, ICartRepository
     {
     }
 
-    public async Task<Cart?> GetCartByCustomerId(long customerId)
-    {
-        return await DbContext.Carts
-            .Include(x => x.CartItems)
-            .FirstOrDefaultAsync(x => x.CustomerId == customerId);
-    }
+ 
 
     public async Task<bool> ClearCartAsync(long customerId)
     {
@@ -34,5 +29,12 @@ public class CartRepository : BaseRepository<Cart>, ICartRepository
 
         DbContext.CartItems.RemoveRange(items);
         return true;
+    }
+    
+    public async Task<Cart?> GetCartByCustomerId(long customerId)
+    {
+        return await DbContext.Carts
+            .Include(x => x.CartItems)
+            .FirstOrDefaultAsync(x => x.CustomerId == customerId);
     }
 }

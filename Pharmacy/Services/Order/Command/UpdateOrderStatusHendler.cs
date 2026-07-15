@@ -11,9 +11,12 @@ namespace Pharmasy.Services.Order.Command;
 
 public record UpdateOrderStatusCommand(long OrderId, UpdateOrderRequest Request) : IRequest<OrderResponse>;
 
-public class UpdateOrderStatusHendler : OrderDiBase,IRequestHandler<UpdateOrderStatusCommand, OrderResponse>
+public class UpdateOrderStatusHendler : OrderDiBase, IRequestHandler<UpdateOrderStatusCommand, OrderResponse>
 {
-    public UpdateOrderStatusHendler(ICustomerRepository customerRepository, IOrderRepository orderRepository, ProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper, IPublishEndpoint publishEndpoint) : base(customerRepository, orderRepository, productRepository, orderItemRepository, mapper, publishEndpoint)
+    public UpdateOrderStatusHendler(ICustomerRepository customerRepository, IOrderRepository orderRepository,
+        IProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper,
+        IPublishEndpoint publishEndpoint) : base(customerRepository, orderRepository, productRepository,
+        orderItemRepository, mapper, publishEndpoint)
     {
     }
 
@@ -25,66 +28,64 @@ public class UpdateOrderStatusHendler : OrderDiBase,IRequestHandler<UpdateOrderS
             throw new ResourseNotFoundException($"Order not found");
         }
 
-        if (order.OrderStatus == OrderStatus.Completed)
+//its order.status alredy changed
+        if (order.OrderStatus == OrderStatus.Completed || order.OrderStatus == OrderStatus.Shipped ||
+            order.OrderStatus == OrderStatus.Cancelled)
         {
-            throw new BusinessException("Cannot update a completed order");
+            throw new BusinessException($"Cannot update a {order.OrderStatus} order");
         }
-
-        if (order.OrderStatus == OrderStatus.Cancelled)
-        {
-            throw new BusinessException("Order alredy canseled");
-        }
-
-        if (order.OrderStatus == OrderStatus.Shipped)
-        {
-            throw new BusinessException("Can't update shipped order");
-        }
-
-
+//its new request will chanch ordersTATUS when order canseled
         if (request.Request.OrderStatus == OrderStatus.Cancelled)
         {
             var orderItems = await OrderItemRepository.GetAllOrderItems(request.OrderId);
-            foreach (var item in orderItems)
+            foreach (var item in orderItems.ToList())
             {
+                var product = await ProductRepository.GetByIdAsync(item.ProductId);
+                if (product == null)
+                {
+                    throw new ResourseNotFoundException($"Product {item.ProductId} not found");
+                }
                 //to do: must chek it
-                item.Product.Stock += item.Quantity;
-                order.OrderItems.Remove(item);
-                await ProductRepository.UpdateAsync(item.Product);
-                await ProductRepository.SaveChangesAsync();
+                product.Stock += item.Quantity;
+                await ProductRepository.UpdateAsync(product);
                 await OrderItemRepository.DeleteAsync(item.Id);
-                await OrderItemRepository.SaveChangesAsync();
-            }
 
+            }
+            await ProductRepository.SaveChangesAsync();
+            await OrderItemRepository.SaveChangesAsync();
             order.TotalAmount = 0;
         }
 
         order.OrderStatus = request.Request.OrderStatus;
         await OrderRepository.UpdateAsync(order);
         await OrderRepository.SaveChangesAsync();
-        if (request.Request.OrderStatus == OrderStatus.Cancelled)
+        switch (request.Request.OrderStatus)
         {
-            await PublishEndpoint.Publish(new OrderCancelledEvent()
+            case OrderStatus.Cancelled:
+                await PublishEndpoint.Publish(new OrderCancelledEvent
                 {
                     OrderId = order.Id,
                     CustomerId = order.CustomerId,
                     UpdateTime = DateTime.UtcNow
-                }
-            );
+                });
+                break;
+            case OrderStatus.Completed:
+                await PublishEndpoint.Publish(new OrderCompletedEvent
+                {
+                    OrderId = order.Id,
+                    CustomerId = order.CustomerId,
+                    TotalAmount = order.TotalAmount,
+                    CompletedAt = DateTime.UtcNow
+                });
+                break;
+            case OrderStatus.Shipped:
+                await PublishEndpoint.Publish(new OrderShippedEventToCeo
+                {
+                    Count = 1,
+                    DateTime = DateTime.UtcNow
+                });
+                break;
         }
-
-        if (request.Request.OrderStatus == OrderStatus.Completed)
-        {
-            await PublishEndpoint.Publish(new OrderCompletedEvent
-            {
-                OrderId = order.Id,
-                CustomerId = order.CustomerId,
-                TotalAmount = order.TotalAmount
-            });
-        }
-
-        order.OrderStatus = request.Request.OrderStatus;
-        await OrderRepository.UpdateAsync(order);
-        await OrderItemRepository.SaveChangesAsync();
         return Mapper.Map<OrderResponse>(order);
     }
 }

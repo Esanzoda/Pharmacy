@@ -11,82 +11,32 @@ using Pharmasy.Consumers;
 using Pharmasy.Jobs;
 using Pharmasy.Middlewares;
 using Serilog;
-using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
-
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .Enrich.WithEnvironmentName()
-    .WriteTo.Console()
-    .WriteTo.File("logs/pharmacy-log-.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-
-builder.Host.UseSerilog();
-
-builder.Services.AddOpenApi();
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    //options.UseNpgsql("Host=localhost;Port=5432;Database=Pharmacy;Username=postgres;Password=1234;");
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<ChekExpiraDateProduct>();
-
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
-builder.Services.AddScoped<ICartItemService, CartItemService>();
-
-builder.Services.AddScoped<ICategoryServise, CategoryService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
-
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
-builder.Services.AddScoped<IPurchaseService, PurchaseService>();
-builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
-builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
-
-builder.Services.AddScoped<IDelivererService, DeliverService>();
-builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
-
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IMessageService, MessageService>();
-builder.Services.AddScoped<AuditableInterceptor>();
 
 builder.Services.AddDbContext<AppDbContext>((sp, options) =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
         .AddInterceptors(sp.GetRequiredService<AuditableInterceptor>());
 });
+builder.Services.AddScoped<AuditableInterceptor>();
+
 //redis
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
     options.InstanceName = "Pharmacy";
 });
+
 //mediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddHangfire(static (provider, cfg) =>
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+    
+
+//Hangfire
+builder.Services.AddHangfire(static (_, cfg) =>
 {
     cfg
         .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
@@ -100,6 +50,7 @@ builder.Services.AddHangfire(static (provider, cfg) =>
         });
 }).AddHangfireServer();
 
+//MassTransit
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer(typeof(OrderCreatedConsumer));
@@ -115,16 +66,67 @@ builder.Services.AddMassTransit(x =>
         cfg.ConfigureEndpoints(context);
     });
 });
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .Enrich.WithEnvironmentName()
+    .WriteTo.Console()
+    .WriteTo.File("logs/pharmacy-log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
+
+builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ChekExpiraDateProduct>();
+
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
+
+builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
+
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 var app = builder.Build();
+
+//Job
 using (var scope = app.Services.CreateScope())
 {
     var recurringJob = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
     recurringJob.AddOrUpdate<ChekExpiraDateProduct>(
-        "dksjkfj",
+        "check-expiry-data-products",
         job => job.ChekExpiraDateAsync(24),
         Cron.Daily());
+    recurringJob.AddOrUpdate<Report>(
+        "report-to-ceo",
+        job => job.ReportToCeo(24),
+        Cron.Daily());
 }
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -132,9 +134,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy API"); });
 }
 
-
 app.UseMiddleware<ExceptionMiddleware>();
+
 app.MapControllers();
+
 app.Run();
 
 

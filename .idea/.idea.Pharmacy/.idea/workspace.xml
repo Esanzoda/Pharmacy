@@ -6,173 +6,106 @@
     <projectFile profileName="http">PharmacyGateway/PharmacyGateway.csproj</projectFile>
     <projectFile profileName="https">PharmacyGateway/PharmacyGateway.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="324d9440-fc9a-40e0-a1ae-5593114e3daf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderCancelledEvantToCeo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderShippedEventToCeo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/AddItemToCartHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/ClearCartHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/CreateCartHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/DeleteItemFromCartHEndler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/UpdateQuantityCartItemHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Query/GetCartItemByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/CategoryDiBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/CreateCategoryHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/DeleteCategiryByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/UpdateCategoryHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetActiveCategoriesHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetAllCategoryHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetCategoryByIdQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetCategoryByIdWithProductsHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/SerchByNameHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/CreateHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/DeleteHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/UpdateHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/CustomerDIBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetAllCustomerByPagenationHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByEmailHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByNameHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByPhoneNumberHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Command/CreatEmployeHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Command/DeleteEmployeHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Command/UpdateEmployeHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/EmployeDiBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GEtEmployeeByAddressHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetAllEmployeeByPagenationHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeeByEmailHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeeByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeeByNumberHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeeByRoleHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeeBySalaryHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Query/GetEmployeesByNameHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CereateOrderHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CreatOrderFromCartHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/DeleteOrderHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/RemoveItemFromOrderHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/UpdateOrderStatusHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/OrderDiBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Query/GetAllOrdersHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Query/GetOrderByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Query/GetOrderByOrderStatusHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Command/CreateProductHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Command/DeleteProductHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Command/UpdateProductHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/ProductDiBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetAllProductsHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetLowOfStockHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetOutOfStockHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductByBarcodeHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductByIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductsByCategoryIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductsByCountryHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductsByNameHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductsByOrderPriseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductsByPurchasePriceHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/AddItemToPurchaseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/CreatePurchaseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/DeletePurchaseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/RemovItemFromPurchaseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/PurchaseDiBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Query/GetAllPurchaseHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Query/GetPurchaseBuIdHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Query/GetPurchaseByDateHendler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Query/GetPurchaseByEmployeId.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Controllers/AuthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Jobs/Report.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/RefreshToken.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/UpdateCustomerRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/LoginResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Repositories/RefreshTokenRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/AuthService/Command/GenerateTokenHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/AuthService/Command/GenereteRefreshTokenHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/AuthService/Command/LoginHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/AuthService/Command/ReGenerateRefreshTokenHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/AuthService/Command/RegisterHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/CartDiBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/UpdateCustomerPasswordHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Deliver/Command/CreateDeliverHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Deliver/Command/DeleteDeliverHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Deliver/Query/GetDeliverByIdHendler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/PasswordService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/UpdatePurchaseHendler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Pharmacy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Pharmacy/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCanselledConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCanselledConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCompletedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCompletedConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCreatedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Consumers/OrderCreatedConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/CartController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/CartController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/CategoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/CustomerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/CustomerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/DeliverController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/DeliverController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/EmployeConteroller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/EmployeConteroller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/OrderController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/ProductController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Controllers/PurchaseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Controllers/PurchaseController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Data/AppDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Data/AuditableInterceptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Data/AuditableInterceptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Exeption/BusinessExseption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Exception/BusinessException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Exeption/ResourseIsAlredyExsistExeption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Exception/ResourseIsAlredyExistException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Exeption/ResourseNotFoundExeption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Exception/ResourseNotFoundException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Helpers/CartHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Helpers/CartHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CartConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CartConfiguration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CartItemConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CartItemConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/OrderConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/OrderConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/OrderItemConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/OrderItemConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/PrchaseConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/PurchaseConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/PurchaseItemConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/PurchaseItemConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Jobs/ChekExpiraDateProduct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Jobs/CheckExpiryDateProduct.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Mappers/Mapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Mappers/Mapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Messages/Evants/OrderCancelledEvant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderCancelledEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Messages/Evants/OrderCompletedEvant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderCompletedEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Messages/Evants/OrderCompletedEventReportToCeo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderCompletedEventReportToCeo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Messages/Evants/OrderCreatedEvant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Messages/Events/OrderCreatedEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Middlewares/ExseptionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Middlewares/ExceptionMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260616230545_IntialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260616230545_IntialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260622234142_IntialCreate1.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260622234142_IntialCreate1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260627003724_IntialCreate2.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260627003724_IntialCreate2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260628003441_IntialCreate3.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260628003441_IntialCreate3.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260628010836_IntialCreate4.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/20260628010836_IntialCreate4.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Cart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Cart.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CustomerConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Infrastructure/Configurations/CustomerConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Jobs/CheckExpiryDateProduct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Jobs/CheckExpiryDateProduct.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Mappers/Mapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Mappers/Mappers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Customer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Deliver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Deliver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/Purchase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/Purchase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Domain/PurchaseItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Domain/PurchaseItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/CartRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/CartRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/CustomerRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/CustomerRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/EmployeRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/EmployeeRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/ExpiryDateRequrst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/ExpiryDateRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/OrderRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/OrderRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/OrderReservationRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/OrderReservationRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/PurchaseItemRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/PurchaseItemRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/PurchaseRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Request/PurchaseRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/CartResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/CartResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/CustomerResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/CustomerResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/EmployeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/EmployeeResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/ExpireDateProductResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/ExpireDateProductResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/OrderResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/OrderResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/ProductResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/ProductResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/PurchaseResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/PurchaseResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/DeliverResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Models/Dto/Response/DeliverResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Pharmacy.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Pharmacy.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/CartItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/CartItemRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/CartRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/CartRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/CategoryRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/CustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/CustomerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/EmployeRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/EmployeeRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/OrderItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/OrderItemRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/OrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/DeliverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/DeliverRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/ProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/PurchaseItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/PurchaseItemRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Repositories/PurchaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Repositories/PurchaseRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/CartItemService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CartService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/CartService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/CategoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CustomerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/CustomerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/DeliverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/DeliverService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/AddItemToCartHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/AddItemToCartHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/ClearCartHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/ClearCartHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/CreateCartHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/CreateCartHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/UpdateQuantityCartItemHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Command/UpdateQuantityCartItemHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Cart/Query/GetCartItemByIdHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Cart/Query/GetCartItemByIdHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CartItemService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CartService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/DeleteCategiryByIdHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/DeleteCategiryByIdHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/UpdateCategoryHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Command/UpdateCategoryHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetCategoryByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetCategoryByIdQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CategoryService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/CreateHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/CreateCustomerHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/DeleteHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/DeleteCustomerHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/UpdateHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Command/UpdateCustomerHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/CustomerDIBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/CustomerDIBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByEmailHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByEmailHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByIdHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Customer/Query/GetCustomerByIdHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/CustomerService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/DeliverService.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Services/EmailService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/EmailService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/EmployeeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/EmployeeService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/ProductService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/CartItemValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/CartItemValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/CustomerValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/CustomerValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/EmployeValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/EmployeValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/OrderDeliverValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/OrderValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Employee/Command/CreatEmployeHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Employee/Command/CreatEmployeHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/EmployeeService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CereateOrderHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CereateOrderHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CreatOrderFromCartHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/CreatOrderFromCartHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/DeleteOrderHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/DeleteOrderHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/UpdateOrderStatusHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/Command/UpdateOrderStatusHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Order/OrderDiBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Order/OrderDiBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Product/Command/DeleteProductHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Command/DeleteProductHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetAllProductsHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetAllProductsHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductByIdHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Product/Query/GetProductByIdHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/ProductService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/CreatePurchaseHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/CreatePurchaseHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/DeletePurchaseHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/DeletePurchaseHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/RemovItemFromPurchaseHendler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/Command/RemovItemFromPurchaseHendler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/Purchase/PurchaseDiBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Services/Purchase/PurchaseDiBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/OrderResevationValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/OrderResevationValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/PurchaseVAlidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/PurchaseVAlidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/ProductVAlidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/ProductValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pharmacy/Validators/PurchaseVAlidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/Validators/PurchaseValidator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/bin/Debug/net10.0/Pharmacy.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/bin/Debug/net10.0/Pharmacy.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pharmacy/bin/Debug/net10.0/Pharmacy.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Pharmacy/bin/Debug/net10.0/Pharmacy.dll" afterDir="false" />
@@ -234,11 +167,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9e897a6987694c919ec5510ff60b9ba9214750/5e/57a6a951/InferParameterBindingInfoConvention.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f005c71aaa141eb86bc6ad2da9e20103a950/fb/b11928ae/ServiceProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a10ae864a6a1447982c91a23cd3d3658168d20/09/e06ac99b/JobStorage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a1fc9d0cf5554abbb06e6175274a973e5a00/49/31a088f8/BCrypt.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a94c60d1562f4344b735c67d0a7bcc26c6200/63/c6654b7a/ConsumeContext`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b15c9c65f8084f1d8acb1b1eb0d875f669000/3b/89175ce4/RabbitMqHostAddress.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bf3d7e6b5bb24fcda9727b183e4bffab104cf50/1f/1cf6adf3/Exception.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bf3d7e6b5bb24fcda9727b183e4bffab104cf50/49/5dea94d4/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d85416ec27554b78b57dea04ed6ced0811550/9b/c38ef87f/HostingAbstractionsHostExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ef5aef5920934afeb4937c5e6c98ab1117000/58/93a46ff1/IRequestHandler`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10c416186d2ec0e7256c7531a43eefcdac27ee6c28fa45ac9ae07af67f1ca886/GC.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1346574be64b578f97aaa196ad474a63ff52f6d977d7ae18c366a60766f036/List.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/21c12b75b72ded3579a2533dad7d6ecc6997b19ffd5a7daf7a3bba1c381f53a/TaskContinuation.cs" root0="FORCE_HIGHLIGHTING" />
@@ -293,6 +228,7 @@
     <setting file="file://$PROJECT_DIR$/Pharmacy/Models/Dto/Response/CartResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pharmacy/Models/Dto/Response/ExpireDateProductResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PharmacyGateway/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Wether/WetherApi/DTOs/LoginRequest.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="HttpClientEndpointsTabState">
     <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests /&gt;" />
@@ -317,27 +253,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Pharmacy: http.executor": "Run",
-    ".NET Launch Settings Profile.Pharmacy: https.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/orash/RiderProjects/Pharmacy",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Pharmacy: http.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.Pharmacy: https.executor&quot;: &quot;Debug&quot;,
+    &quot;HTTP Request.Pharmasy | #1.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/orash/RiderProjects/Pharmacy&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion.inline&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="Pharmasy | #1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Pharmacy: http">
+    <configuration name="Pharmasy | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/Pharmacy/Pharmasy.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="PharmacyGateway: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/PharmacyGateway/PharmacyGateway.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net10.0" />
@@ -402,6 +359,11 @@
         <option name="Build" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.Pharmasy | #1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -427,7 +389,12 @@
       <workItem from="1783349578313" duration="28371000" />
       <workItem from="1783478829075" duration="5138000" />
       <workItem from="1783491270358" duration="15044000" />
-      <workItem from="1783579367546" duration="45077000" />
+      <workItem from="1783579367546" duration="45209000" />
+      <workItem from="1783827160485" duration="6000" />
+      <workItem from="1783827432347" duration="37782000" />
+      <workItem from="1784038583717" duration="7877000" />
+      <workItem from="1784092813740" duration="467000" />
+      <workItem from="1784094463627" duration="3257000" />
     </task>
     <task id="LOCAL-00001" summary="First comit">
       <option name="closed" value="true" />
@@ -501,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783322220111</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="chabge 7">
+      <option name="closed" value="true" />
+      <created>1783783707566</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1783783707566</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,7 +506,8 @@
     <MESSAGE value="change4" />
     <MESSAGE value="change5" />
     <MESSAGE value="change6" />
-    <option name="LAST_COMMIT_MESSAGE" value="change6" />
+    <MESSAGE value="chabge 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="chabge 7" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -563,71 +539,6 @@
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/OrderService.cs</url>
-          <line>49</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1991" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1992" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>104</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Local function 'GetAllByPaginationAsync'">
-            <startOffsets>
-              <option value="3552" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3553" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>33</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1117" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1118" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>35</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1178" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1219" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>36</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1228" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1268" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs</url>
           <line>28</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs" containingFunctionPresentation="Method 'CreateAsync'">
@@ -654,19 +565,6 @@
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>110</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Local function 'DeleteAsync'">
-            <startOffsets>
-              <option value="3759" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3760" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs</url>
           <line>54</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/BaseRepository.cs" containingFunctionPresentation="Method 'DeleteAsync'">
@@ -684,10 +582,10 @@
           <line>22</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/CustomerRepository.cs" containingFunctionPresentation="Method 'GetCustomerByEmailAsync'">
             <startOffsets>
-              <option value="638" />
+              <option value="651" />
             </startOffsets>
             <endOffsets>
-              <option value="639" />
+              <option value="652" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="92" />
@@ -697,71 +595,19 @@
           <line>28</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/CustomerRepository.cs" containingFunctionPresentation="Method 'GetCustomerByPhoneAsync'">
             <startOffsets>
-              <option value="820" />
+              <option value="833" />
             </startOffsets>
             <endOffsets>
-              <option value="821" />
+              <option value="834" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/BaseService.cs</url>
-          <line>41</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/BaseService.cs" containingFunctionPresentation="Method 'UpdateAsync'">
-            <startOffsets>
-              <option value="1406" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1407" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/EmployeeRepository.cs</url>
           <line>42</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/EmployeRepository.cs" containingFunctionPresentation="Method 'GetEmployeesByNumberAsync'" />
           <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/EmployeeService.cs</url>
-          <line>116</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/EmployeeService.cs" containingFunctionPresentation="Method 'GetEmployeesByNumberAsync'">
-            <startOffsets>
-              <option value="4538" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4539" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/ProductService.cs</url>
-          <line>59</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/ProductService.cs" containingFunctionPresentation="Method 'UpdateAsync'">
-            <startOffsets>
-              <option value="2933" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2934" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>37</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1619" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1620" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/ProductRepository.cs</url>
@@ -775,32 +621,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>45</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="1954" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2002" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>49</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="2126" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2127" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/PurchaseItemRepository.cs</url>
@@ -817,13 +637,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Controllers/OrderController.cs</url>
-          <line>53</line>
+          <line>52</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Controllers/OrderController.cs" containingFunctionPresentation="Method 'GetAllOrderByPagenation'">
             <startOffsets>
-              <option value="1683" />
+              <option value="1609" />
             </startOffsets>
             <endOffsets>
-              <option value="1684" />
+              <option value="1610" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="109" />
@@ -843,81 +663,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Controllers/PurchaseController.cs</url>
-          <line>46</line>
+          <line>47</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Controllers/PurchaseController.cs" containingFunctionPresentation="Method 'GetAllPurchasesByPagenation'">
             <startOffsets>
-              <option value="1428" />
+              <option value="1346" />
             </startOffsets>
             <endOffsets>
-              <option value="1429" />
+              <option value="1347" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>73</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="3078" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3124" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Repositories/CategoryRepository.cs</url>
           <line>48</line>
           <properties documentPath="$PROJECT_DIR$/Pharmacy/Repositories/CategoryRepository.cs" containingFunctionPresentation="Method 'CategoryExistsAsync'">
             <startOffsets>
-              <option value="1532" />
+              <option value="1539" />
             </startOffsets>
             <endOffsets>
-              <option value="1533" />
+              <option value="1540" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>65</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="2811" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2855" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="115" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>69</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="2952" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3000" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="116" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs</url>
-          <line>77</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/PurchaseService.cs" containingFunctionPresentation="Method 'AddItemToPurchase'">
-            <startOffsets>
-              <option value="3252" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3253" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pharmacy/Validators/OrderResevationValidator.cs</url>
@@ -927,7 +695,7 @@
               <option value="229" />
             </startOffsets>
             <endOffsets>
-              <option value="353" />
+              <option value="347" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="118" />
@@ -959,30 +727,17 @@
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/OrderService.cs</url>
-          <line>63</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" containingFunctionPresentation="Method 'CreateAsync'">
+          <url>file://$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetActiveCategoriesHendler.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/Category/Query/GetActiveCategoriesHendler.cs" containingFunctionPresentation="Method 'Handle'">
             <startOffsets>
-              <option value="2462" />
+              <option value="636" />
             </startOffsets>
             <endOffsets>
-              <option value="2463" />
+              <option value="637" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="121" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pharmacy/Services/OrderService.cs</url>
-          <line>107</line>
-          <properties documentPath="$PROJECT_DIR$/Pharmacy/Services/OrderService.cs" containingFunctionPresentation="Method 'CreateAsync'">
-            <startOffsets>
-              <option value="4177" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4217" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="122" />
+          <option name="timeStamp" value="126" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -992,5 +747,9 @@
         <watch expression="parameters" custom="2" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

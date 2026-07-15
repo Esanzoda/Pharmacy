@@ -77,37 +77,5 @@ public class ChekExpiraDateProduct
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task ReportToCeo(int hoursOld = 24)
-    {
-        _logger.LogInformation(
-            $"Starting report to ceo");
-        var yesterday = DateTime.UtcNow.AddDays(-1);
-        var nextTime = DateTime.UtcNow.AddHours(hoursOld);
-        decimal TotalAmount = 0;
-        var completedOrder = await _orderRepository.GetOrdersByOrderStatusAndDayAsync(OrderStatus.Completed, yesterday);
-        foreach (var order in completedOrder)
-        {
-            TotalAmount += order.TotalAmount;
-        }
-
-
-        await _publishEndpoint.Publish(new OrderCompletedEventReportToCeo()
-        {
-            day = yesterday,
-            count = completedOrder.Count,
-            totalamout = TotalAmount
-        });
-        var cancelledOrder = await _orderRepository.GetOrdersByOrderStatusAndDayAsync(OrderStatus.Cancelled, yesterday);
-        await _publishEndpoint.Publish(new OrderCancelledEvantToCeo()
-        {
-            DateTime = yesterday,
-            Count = cancelledOrder.Count,
-        });
-        var shipedorder = await _orderRepository.GetOrdersByOrderStatusAndDayAsync(OrderStatus.Shipped, yesterday);
-
-        _logger.LogInformation(
-            $"Finished report cheking");
-        _logger.LogInformation(
-            $"Starting report to ceo");
-    }
+   
 }

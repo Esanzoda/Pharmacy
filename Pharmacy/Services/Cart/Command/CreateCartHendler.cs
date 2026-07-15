@@ -7,27 +7,25 @@ using Pharmasy.Repositories;
 namespace Pharmasy.Services.Cart.Command;
 
 public record CreateCartCommand(CartRequest Request) : IRequest<CartResponse>;
-public class CreateCartHendler:IRequestHandler<CreateCartCommand,CartResponse>
-{
-    private readonly ICartRepository _cartRepository;
-    private readonly IMapper _mapper;
 
-    public CreateCartHendler(ICartRepository cartRepository, IMapper mapper)
+public class CreateCartHendler : CartDiBase, IRequestHandler<CreateCartCommand, CartResponse>
+{
+    public CreateCartHendler(ICartRepository cartRepository, ICartItemRepository cartItemRepository,
+        IProductRepository productRepository, IMapper mapper) : base(cartRepository, cartItemRepository,
+        productRepository, mapper)
     {
-        _cartRepository = cartRepository;
-        _mapper = mapper;
     }
 
     public async Task<CartResponse> Handle(CreateCartCommand request, CancellationToken cancellationToken)
     {
-        var existingCart = await _cartRepository.GetCartByCustomerId(request.Request.CustomerId);
+        var existingCart = await CartRepository.GetCartByCustomerId(request.Request.CustomerId);
         if (existingCart != null)
-            return _mapper.Map<CartResponse>(existingCart);
+            return Mapper.Map<CartResponse>(existingCart);
 
-        var cart = _mapper.Map<Models.Domain.Cart>(request);
+        var cart = Mapper.Map<Models.Domain.Cart>(request.Request);
         cart.TotalAmount = 0;
-        await _cartRepository.CreateAsync(cart);
-        await _cartRepository.SaveChangesAsync();
-        return _mapper.Map<CartResponse>(cart);
+        await CartRepository.CreateAsync(cart);
+        await CartRepository.SaveChangesAsync();
+        return Mapper.Map<CartResponse>(cart);
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services;
 using Pharmasy.Services.Order.Command;
 using Pharmasy.Services.Order.Query;
 
@@ -13,12 +12,12 @@ namespace Pharmasy.Controllers;
 [Route("api/[controller]/[action]")]
 public class OrderController : ControllerBase
 {
-    private readonly IOrderService _orderService;
+   
    private readonly IMediator _mediator;
 
-    public OrderController(IOrderService orderService, IMediator mediator)
+    public OrderController( IMediator mediator)
     {
-        _orderService = orderService;
+      
         _mediator = mediator;
     }
 
@@ -29,9 +28,9 @@ public class OrderController : ControllerBase
         return Ok(response);
     }
     [HttpPost]
-    public async Task<ActionResult<OrderResponse>> CreateFromCart(long customerId)
+    public async Task<ActionResult<OrderResponse>> CreateFromCart(long customerId,OrderType orderType,string address)
     {
-        var response = await _mediator.Send(new CreateOrderFromCartCommand(customerId));
+        var response = await _mediator.Send(new CreateOrderFromCartCommand(customerId, orderType, address));
         return Ok(response);
     }
 
@@ -59,14 +58,14 @@ public class OrderController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<OrderResponse>>> GetByStatusAsync(OrderStatus status, int pageNumber, int pageSize)
     {
-        var response=_mediator.Send(new GetOrderByOrderStatusQuery(status, pageNumber, pageSize));
+        var response=await _mediator.Send(new GetOrderByOrderStatusQuery(status, pageNumber, pageSize));
         return Ok(response);
     }
 
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response = _mediator.Send(new DeleteOrderCommand(id));
+        var response =await _mediator.Send(new DeleteOrderCommand(id));
         return Ok(response);
     }
 

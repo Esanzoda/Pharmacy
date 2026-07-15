@@ -20,9 +20,10 @@ public class AppDbContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Purchase> Purchases { get; set; }
     public DbSet<PurchaseItem> PurchaseItems { get; set; }
-    public DbSet<Deliver> Suppliers { get; set; }
+    public DbSet<Deliver> Delivers { get; set; }
     public DbSet<ExpiryDateProduct> ExpireDateProducts { get; set; }
     public DbSet<ExpireDateItems> ExpireDateItems { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Customer;
@@ -12,5 +13,6 @@ public class CustomerDiBase
     {
         CustomerRepository = customerRepository;
         Mapper = mapper;
+        
     }
 }

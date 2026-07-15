@@ -3,9 +3,9 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class PurchaseVAlidator : AbstractValidator<PurchaseRequest>
+public class PurchaseValidator : AbstractValidator<PurchaseRequest>
 {
-    public PurchaseVAlidator()
+    public PurchaseValidator()
     {
         RuleFor(x => x.EmployeeId)
             .GreaterThan(0)

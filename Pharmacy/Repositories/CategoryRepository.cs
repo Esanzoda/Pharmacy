@@ -32,7 +32,7 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     public async Task<List<Category>> SearchByNameAsync(string name)
     {
         return await DbContext.Categories
-            .Where(x => x.Name.ToLower() == name.ToLower())
+            .Where(x => x.Name.ToLower().Contains(name.ToLower()))
             .OrderBy(x => x.Id)
             .ToListAsync();
     }

@@ -11,5 +11,20 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.ToTable("Customers");
 
         builder.HasKey(x => x.Id);
+        
+        builder.Property(x => x.Name)
+            .HasMaxLength(100);
+
+        builder.Property(x => x.PhoneNumber)
+            .HasMaxLength(20);
+
+        builder.Property(x => x.Address)
+            .HasMaxLength(200);
+
+        builder.Property(x => x.Email)
+            .HasMaxLength(150);
+
+        builder.Property(x => x.PasswordHash)
+            .HasMaxLength(500);
     }
 }

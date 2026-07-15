@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
@@ -11,28 +12,33 @@ public record UpdateCategoryCommand(long Id, CategoryRequest Request) : IRequest
 
 public class UpdateCategoryHendler : CategoryDiBase, IRequestHandler<UpdateCategoryCommand, CategoryResponse>
 {
-    public UpdateCategoryHendler(CategoryRepository categoryRepository, IMapper mapper)
+    private readonly IDistributedCache _cache;
+
+    public UpdateCategoryHendler(ICategoryRepository categoryRepository, IMapper mapper, IDistributedCache cache)
         : base(categoryRepository, mapper)
     {
+        _cache = cache;
     }
 
     public async Task<CategoryResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await CategoryRepository.GetByIdAsync(request.Id);
-        if (category == null)
+        if (category is null)
         {
             throw new ResourseNotFoundException("Category not found");
         }
 
         var exixtCategory = await CategoryRepository.CategoryExistsAsync(request.Request.Name);
-        if (exixtCategory)
+        if (exixtCategory )
         {
             throw new ResourseIsAlredyExistException("Category  with thia name alredy exsist");
         }
-
         Mapper.Map(request, category);
         await CategoryRepository.UpdateAsync(category);
         await CategoryRepository.SaveChangesAsync();
+        //delete category in redis
+        var key = $"CategoryById-{request.Id}";
+        await _cache.RemoveAsync(key, cancellationToken);
         return Mapper.Map<CategoryResponse>(request);
     }
 }

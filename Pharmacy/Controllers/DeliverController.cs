@@ -4,12 +4,12 @@ using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
 
 namespace Pharmasy.Controllers;
-
+/*
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class DeliverController : ControllerBase
 {
-    private readonly IDelivererService _deliverService;
+    
 
     public DeliverController(IDelivererService deliverService)
     {
@@ -50,4 +50,4 @@ public class DeliverController : ControllerBase
         var response = await _deliverService.DeleteAsync(id);
         return Ok(response);
     }
-}
+}*/

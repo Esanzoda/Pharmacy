@@ -15,7 +15,7 @@ public class DeleteOrderHendler:OrderDiBase,IRequestHandler<DeleteOrderCommand,b
         var category = await OrderRepository.DeleteAsync(request.OrderId);
         if (category is false)
         {
-            throw new ResourseNotFoundException("Category not found  ");
+            throw new ResourseNotFoundException($"Order with id {request.OrderId} not found");
         }
 
         await OrderRepository.SaveChangesAsync();

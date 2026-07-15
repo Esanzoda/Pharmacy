@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using Pharmasy.Exception;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
 
@@ -22,27 +23,29 @@ public class GetCategoryByIdHendler : CategoryDiBase, IRequestHandler<GetCategor
 
     public async Task<CategoryResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
     {
-        var key = $"{typeof(Models.Domain.Category).Name}-{request.CategoryId}";
-        var cached = await _cache.GetStringAsync(key, cancellationToken);
-        Models.Domain.Category? entity;
-        if (cached != null)
+        var key = $"CategoryById-{request.CategoryId}";
+        var cachedCategory = await _cache.GetStringAsync(key, cancellationToken);
+        if (cachedCategory is not  null)
         {
-            entity = JsonConvert.DeserializeObject<Models.Domain.Category?>(cached);
-            return Mapper.Map<CategoryResponse>(entity);
+            var entity = JsonConvert.DeserializeObject<Models.Domain.Category?>(cachedCategory);
+            if (entity is not null)
+            {
+                return Mapper.Map<CategoryResponse>(entity);
+            }
         }
 
-        entity = await CategoryRepository.GetByIdAsync(request.CategoryId);
-        if (entity is null)
+        var category = await CategoryRepository.GetByIdAsync(request.CategoryId);
+        if (category is null)
         {
-            return default;
+            throw new ResourseNotFoundException("Category not found");
         }
 
         await _cache.SetStringAsync(
             key,
-            JsonConvert.SerializeObject(entity), new DistributedCacheEntryOptions()
+            JsonConvert.SerializeObject(category), new DistributedCacheEntryOptions()
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
             });
-        return Mapper.Map<CategoryResponse>(entity);
+        return Mapper.Map<CategoryResponse>(category);
     }
 }

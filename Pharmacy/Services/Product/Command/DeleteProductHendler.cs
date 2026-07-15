@@ -16,7 +16,7 @@ public class DeleteProductHendler:ProductDiBase,IRequestHandler<DeleteProductCom
         var category = await ProductRepository.DeleteAsync(request.Id);
         if (category is false)
         {
-            throw new ResourseNotFoundException("Category not found  ");
+            throw new ResourseNotFoundException($"Product with id {request.Id} not found");
         }
 
         await ProductRepository.SaveChangesAsync();

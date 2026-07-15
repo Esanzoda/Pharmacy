@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services;
 using Pharmasy.Services.Product.Query;
 using Pharmasy.Services.Purchase.Command;
 using Pharmasy.Services.Purchase.Query;
@@ -13,12 +12,13 @@ namespace Pharmasy.Controllers;
 [Route("api/[controller]/[action]")]
 public class PurchaseController : ControllerBase
 {
-    private readonly IPurchaseService _purchaseService;
+ 
     private readonly IMediator _mediator;
 
-    public PurchaseController(IPurchaseService productService)
+    public PurchaseController( IMediator mediator)
     {
-        _purchaseService = productService;
+       
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -29,9 +29,10 @@ public class PurchaseController : ControllerBase
     }
 
     [HttpPut]
+
     public async Task<ActionResult<PurchaseResponse>> Update(long id, [FromBody] PurchaseRequest request)
     {
-        var response = await _purchaseService.UpdateAsync(id, request);
+        var response = await _mediator.Send(new UpdatePurchaseCommand(id, request));
         return Ok(response);
     }
 
@@ -67,7 +68,7 @@ public class PurchaseController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult<PurchaseItemResponse>> RemoveItem(long employeeId,long purchaseId, long purchaseItemId)
     {
-        var response = await _mediator.Send(new RemoveItemFromPurchaseCommandHandler(employeeId, purchaseId, purchaseItemId));
+        var response = await _mediator.Send(new RemoveItemFromPurchaseCommand(employeeId, purchaseId, purchaseItemId));
         return Ok(response);
     }
 }

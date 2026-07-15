@@ -9,11 +9,13 @@ namespace Pharmasy.Services.Customer.Command;
 
 public record CreateCustomerCommand(CustomerRequest Request) : IRequest<CustomerResponse>;
 
-public class CreateHendler : CustomerDiBase, IRequestHandler<CreateCustomerCommand, CustomerResponse>
+public class CreateCustomerHendler : CustomerDiBase, IRequestHandler<CreateCustomerCommand, CustomerResponse>
 {
-    public CreateHendler(ICustomerRepository customerRepository, IMapper mapper)
+    private readonly ICartRepository _cartRepository;
+    public CreateCustomerHendler(ICustomerRepository customerRepository, IMapper mapper, ICartRepository cartRepository)
         : base(customerRepository, mapper)
     {
+        _cartRepository = cartRepository;
     }
 
     public async Task<CustomerResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -32,7 +34,7 @@ public class CreateHendler : CustomerDiBase, IRequestHandler<CreateCustomerComma
                 $"Customer already exists with this phone number{request.Request.PhoneNumber}");
         }
 
-        var newCustomer = Mapper.Map<Models.Domain.Customer>(request);
+        var newCustomer = Mapper.Map<Models.Domain.Customer>(request.Request);
         await CustomerRepository.CreateAsync(newCustomer);
         await CustomerRepository.SaveChangesAsync();
         var cart = new Models.Domain.Cart
@@ -41,6 +43,9 @@ public class CreateHendler : CustomerDiBase, IRequestHandler<CreateCustomerComma
             Customer = newCustomer,
             TotalAmount = 0
         };
+        
+        await _cartRepository.CreateAsync(cart);
+        await _cartRepository.SaveChangesAsync();
         return Mapper.Map<CustomerResponse>(newCustomer);
     }
 }

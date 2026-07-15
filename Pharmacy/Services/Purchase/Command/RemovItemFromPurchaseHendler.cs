@@ -5,20 +5,23 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Purchase.Command;
 
-public record RemoveItemFromPurchaseCommandHandler(long EmployeeId,long PurchaseId, long ItemId): IRequest<PurchaseResponse>;
-public class RemovItemFromPurchaseHendler:PurchaseDiBase,IRequestHandler<RemoveItemFromPurchaseCommandHandler,PurchaseResponse>
+public record RemoveItemFromPurchaseCommand(long EmployeeId, long PurchaseId, long ItemId) : IRequest<PurchaseResponse>;
+
+public class RemovItemFromPurchaseHendler : PurchaseDiBase, IRequestHandler<RemoveItemFromPurchaseCommand, PurchaseResponse>
 {
     public RemovItemFromPurchaseHendler(IPurchaseRepository purchaseRepository) : base(purchaseRepository)
     {
     }
 
-    public async Task<PurchaseResponse> Handle(RemoveItemFromPurchaseCommandHandler request, CancellationToken cancellationToken)
+    public async Task<PurchaseResponse> Handle(RemoveItemFromPurchaseCommand request,
+        CancellationToken cancellationToken)
     {
-        var employee =await EmployeeService.GetByIdAsync(request.EmployeeId, cancellationToken);
+        var employee = await EmployeeRepository.GetByIdAsync(request.EmployeeId);
         if (employee == null)
         {
             throw new ResourseNotFoundException("Employee not found");
         }
+
         var purchase = await PurchaseRepository.GetByIdAsync(request.PurchaseId);
         if (purchase == null)
             throw new ResourseNotFoundException("Purchase not found");
@@ -32,17 +35,15 @@ public class RemovItemFromPurchaseHendler:PurchaseDiBase,IRequestHandler<RemoveI
 
         product.Stock -= purchaseItemToRemove.Quantity;
         await ProductRepository.UpdateAsync(product);
-        await ProductRepository.SaveChangesAsync();
-
+        
         purchase.PurchaseItems.Remove(purchaseItemToRemove);
         await PurchaseItemRepository.DeleteAsync(request.ItemId);
-        await PurchaseRepository.SaveChangesAsync();
-
         purchase.TotalAmount = purchase.PurchaseItems.Sum(item => item.TotalPrice);
         await PurchaseRepository.UpdateAsync(purchase);
+        await ProductRepository.SaveChangesAsync();
         await PurchaseItemRepository.SaveChangesAsync();
+        await PurchaseRepository.SaveChangesAsync();
 
         return Mapper.Map<PurchaseResponse>(purchaseItemToRemove);
     }
-    
 }

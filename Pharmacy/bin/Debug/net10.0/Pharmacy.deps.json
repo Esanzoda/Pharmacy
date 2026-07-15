@@ -10,6 +10,7 @@
         "dependencies": {
           "AutoMapper": "14.0.0",
           "BCrypt.Net-Next": "4.2.0",
+          "Elastic.Clients.Elasticsearch": "9.4.2",
           "FluentValidation": "12.1.1",
           "FluentValidation.AspNetCore": "11.3.1",
           "Hangfire": "1.8.23",
@@ -20,6 +21,7 @@
           "MassTransit": "9.2.0-develop.151",
           "MassTransit.AspNetCore": "9.2.0-develop.151",
           "MassTransit.RabbitMQ": "9.2.0-develop.151",
+          "MediatR": "14.2.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.8",
           "Microsoft.AspNetCore.OpenApi": "10.0.8",
           "Microsoft.EntityFrameworkCore": "10.0.8",
@@ -76,6 +78,34 @@
           "lib/net8.0/Dapper.AOT.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.48.20364"
+          }
+        }
+      },
+      "Elastic.Clients.Elasticsearch/9.4.2": {
+        "dependencies": {
+          "Elastic.Esql": "0.11.0",
+          "Elastic.Transport": "0.17.1"
+        },
+        "runtime": {
+          "lib/net10.0/Elastic.Clients.Elasticsearch.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.4.2.0"
+          }
+        }
+      },
+      "Elastic.Esql/0.11.0": {
+        "runtime": {
+          "lib/net10.0/Elastic.Esql.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.11.0.0"
+          }
+        }
+      },
+      "Elastic.Transport/0.17.1": {
+        "runtime": {
+          "lib/net10.0/Elastic.Transport.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.17.1.0"
           }
         }
       },
@@ -279,6 +309,26 @@
           "lib/net10.0/MassTransit.RabbitMqTransport.dll": {
             "assemblyVersion": "9.2.0.0",
             "fileVersion": "9.2.0.0"
+          }
+        }
+      },
+      "MediatR/14.2.0": {
+        "dependencies": {
+          "MediatR.Contracts": "2.0.1",
+          "Microsoft.IdentityModel.JsonWebTokens": "8.19.1"
+        },
+        "runtime": {
+          "lib/net10.0/MediatR.dll": {
+            "assemblyVersion": "14.0.0.0",
+            "fileVersion": "14.2.0.0"
+          }
+        }
+      },
+      "MediatR.Contracts/2.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Contracts.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
           }
         }
       },
@@ -1094,6 +1144,27 @@
       "path": "dapper.aot/1.0.48",
       "hashPath": "dapper.aot.1.0.48.nupkg.sha512"
     },
+    "Elastic.Clients.Elasticsearch/9.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sMzOK9HgGqlSBjmX2ad88vDLQ0ySWXi4bYGe9T6xHVmhz41ikRYZ8G0VgkOYmRGgVwpkvupGDFztF+6KyPiYEw==",
+      "path": "elastic.clients.elasticsearch/9.4.2",
+      "hashPath": "elastic.clients.elasticsearch.9.4.2.nupkg.sha512"
+    },
+    "Elastic.Esql/0.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-frYrulxZxDLsAk5vBw6oVG4dOYcGFSOPBsJ+1EfLn/sEB/fS56zVEbEitdVxreY3xREdhZwS9dtUkAqsAt037g==",
+      "path": "elastic.esql/0.11.0",
+      "hashPath": "elastic.esql.0.11.0.nupkg.sha512"
+    },
+    "Elastic.Transport/0.17.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PpDoD+6zxtYgK/DAqQEiVSlkC2Zt1x0JKGaygAx8Oqrkft9Nr1VTuysOWZ6NKsav9WtB4jyHuU/eIZXuc2oZuw==",
+      "path": "elastic.transport/0.17.1",
+      "hashPath": "elastic.transport.0.17.1.nupkg.sha512"
+    },
     "FluentValidation/12.1.1": {
       "type": "package",
       "serviceable": true,
@@ -1198,6 +1269,20 @@
       "sha512": "sha512-GodyCEnal3aosCVDzl74VuWFs/FCA9haBXHp0azsXEK9/QAIVvht9WqteU8ayqz1hsG8+9bNgZC0EulkdauR6Q==",
       "path": "masstransit.rabbitmq/9.2.0-develop.151",
       "hashPath": "masstransit.rabbitmq.9.2.0-develop.151.nupkg.sha512"
+    },
+    "MediatR/14.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1vqNVS6ijU0IF78vDfIE99pi0iTa+M/1ztRlM98P+KL+Loi/O4knaR2+ex0AqbT5xBl01VFryjuYUAFtvGwzOQ==",
+      "path": "mediatr/14.2.0",
+      "hashPath": "mediatr.14.2.0.nupkg.sha512"
+    },
+    "MediatR.Contracts/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ==",
+      "path": "mediatr.contracts/2.0.1",
+      "hashPath": "mediatr.contracts.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/10.0.8": {
       "type": "package",

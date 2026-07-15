@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services;
 using Pharmasy.Services.Category.Command;
 using Pharmasy.Services.Category.Query;
 
@@ -16,7 +15,7 @@ public class CategoryController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public CategoryController(ICategoryServise categoryServise, IMediator mediator)
+    public CategoryController( IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -44,10 +43,11 @@ public class CategoryController : ControllerBase
         return Ok(response);
     }
 
+    // no recomendate for from body in get 
     [HttpGet]
-    public async Task<ActionResult<List<CategoryResponse>>> GetAllByPagenationAsinc(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<CategoryResponse>>> GetAllByPagenationAsinc([FromBody] GetActiveCategoriesQuery request)
     {
-        var response = await _mediator.Send(new GetActiveCategoriesQuery(), CancellationToken.None);
+        var response = await _mediator.Send(request);
         return Ok(response);
     }
 

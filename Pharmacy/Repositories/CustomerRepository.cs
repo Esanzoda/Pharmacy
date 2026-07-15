@@ -1,7 +1,7 @@
-using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
 using Pharmasy.Models.Domain;
+using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Repositories;
 
@@ -34,8 +34,9 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     public async Task<List<Customer>> GetCustomerByNameAsync(string name)
     {
         return await DbContext.Customers
-            .Where(x => x.Name.ToLower() == name.ToLower())
+            .Where(x => x.Name.ToLower().Contains( name.ToLower()))
             .OrderBy(x => x.Id)
             .ToListAsync();
     }
+
 }

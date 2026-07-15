@@ -8,7 +8,7 @@ public class PurchaseDiBase
 {
    protected IPurchaseRepository PurchaseRepository;
    protected readonly IPurchaseItemRepository PurchaseItemRepository;
-   protected readonly IEmployeeService EmployeeService;
+   protected readonly IEmployeeRepository EmployeeRepository;
    protected readonly IProductRepository ProductRepository;
    protected readonly IDistributedCache Cache;
    protected readonly IMapper Mapper;
@@ -17,11 +17,11 @@ public class PurchaseDiBase
    {
       PurchaseRepository = purchaseRepository;
    }
-   public PurchaseDiBase(IPurchaseRepository purchaseRepository, IPurchaseItemRepository purchaseItemRepository, IEmployeeService employeeService, IProductRepository productRepository, IDistributedCache cache, IMapper mapper)
+   public PurchaseDiBase(IPurchaseRepository purchaseRepository, IPurchaseItemRepository purchaseItemRepository, IEmployeeRepository employeeRepository, IProductRepository productRepository, IDistributedCache cache, IMapper mapper)
    {
       PurchaseRepository = purchaseRepository;
       PurchaseItemRepository = purchaseItemRepository;
-      EmployeeService = employeeService;
+      EmployeeRepository = employeeRepository;
       ProductRepository = productRepository;
       Cache = cache;
       Mapper = mapper;

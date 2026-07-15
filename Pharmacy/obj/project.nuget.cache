@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zqW4ZgdHtmY=",
+  "dgSpecHash": "sE/uA6ShfFo=",
   "success": true,
   "projectFilePath": "/Users/orash/RiderProjects/Pharmacy/Pharmacy/Pharmacy.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "/Users/orash/.nuget/packages/bouncycastle.cryptography/2.6.2/bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "/Users/orash/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
     "/Users/orash/.nuget/packages/dapper.aot/1.0.48/dapper.aot.1.0.48.nupkg.sha512",
+    "/Users/orash/.nuget/packages/elastic.clients.elasticsearch/9.4.2/elastic.clients.elasticsearch.9.4.2.nupkg.sha512",
+    "/Users/orash/.nuget/packages/elastic.esql/0.11.0/elastic.esql.0.11.0.nupkg.sha512",
+    "/Users/orash/.nuget/packages/elastic.transport/0.17.1/elastic.transport.0.17.1.nupkg.sha512",
     "/Users/orash/.nuget/packages/fluentvalidation/12.1.1/fluentvalidation.12.1.1.nupkg.sha512",
     "/Users/orash/.nuget/packages/fluentvalidation.aspnetcore/11.3.1/fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "/Users/orash/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",

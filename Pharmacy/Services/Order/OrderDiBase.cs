@@ -44,7 +44,7 @@ public class OrderDiBase
     }
 
     public OrderDiBase(ICustomerRepository customerRepository, IOrderRepository orderRepository,
-        ProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper,
+        IProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper,
         IPublishEndpoint publishEndpoint)
     {
         CustomerRepository = customerRepository;

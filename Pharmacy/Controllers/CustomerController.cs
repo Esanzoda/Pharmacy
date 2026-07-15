@@ -28,13 +28,19 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<CustomerResponse>> Update(long id, [FromBody] CustomerRequest request)
+    public async Task<ActionResult<CustomerResponse>> Update(long id, [FromBody] UpdateCustomerRequest request)
     {
         var response = await _mediator.Send(new UpdateCustomerCommand(id, request));
         return Ok(response);
     }
+    [HttpPatch]
+    public async Task<ActionResult<CustomerResponse>> UpdatePassword(long id, [FromBody] string newPassword)
+    {
+        var response = await _mediator.Send(new UpdateCustomerPasswordCommand(id, newPassword));
+        return Ok(response);
+    }
 
-    [HttpGet("id")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<CustomerResponse>> GetById(long id)
     {
         var response = await _mediator.Send(new GetCustomerByIdQuery(id));
@@ -51,7 +57,7 @@ public class CustomerController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response = _mediator.Send(new DeleteCustomerCommand(id));
+        var response =await _mediator.Send(new DeleteCustomerCommand(id));
         return Ok(response);
     }
 

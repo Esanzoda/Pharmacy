@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
@@ -7,13 +8,16 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Customer.Command;
 
-public record UpdateCustomerCommand(long Id, CustomerRequest Request) : IRequest<CustomerResponse>;
+public record UpdateCustomerCommand(long Id, UpdateCustomerRequest Request) : IRequest<CustomerResponse>;
 
-public class UpdateHendler : CustomerDiBase, IRequestHandler<UpdateCustomerCommand, CustomerResponse>
+public class UpdateCustomerHendler : CustomerDiBase, IRequestHandler<UpdateCustomerCommand, CustomerResponse>
 {
-    public UpdateHendler(ICustomerRepository customerRepository, IMapper mapper)
+    private IDistributedCache _cache;
+
+    public UpdateCustomerHendler(ICustomerRepository customerRepository, IMapper mapper, IDistributedCache cache)
         : base(customerRepository, mapper)
     {
+        _cache = cache;
     }
 
     public async Task<CustomerResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
@@ -37,10 +41,13 @@ public class UpdateHendler : CustomerDiBase, IRequestHandler<UpdateCustomerComma
             throw new ResourseIsAlredyExistException(
                 $"Customer already exists with this phone number{request.Request.PhoneNumber}");
         }
-
-        Mapper.Map(request, customer);
+        
+        Mapper.Map(request.Request, customer);
         await CustomerRepository.UpdateAsync(customer);
         await CustomerRepository.SaveChangesAsync();
+
+        var key = $"CustomerById-{customer.Id}";
+        await _cache.RemoveAsync(key, cancellationToken);
         return Mapper.Map<CustomerResponse>(customer);
     }
 }

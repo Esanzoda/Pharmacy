@@ -16,7 +16,7 @@ public class DeletePurchaseHendler:PurchaseDiBase,IRequestHandler<DeletePurchase
         var purchase = await PurchaseRepository.DeleteAsync(request.Id);
         if (purchase is false)
         {
-            throw new ResourseNotFoundException("Category not found  ");
+            throw new ResourseNotFoundException($"Purchase with id {request.Id} not found");
         }
 
         await PurchaseRepository.SaveChangesAsync();

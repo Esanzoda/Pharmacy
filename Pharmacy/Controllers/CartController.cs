@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Dto.Request;
 using MediatR;
-using Pharmasy.Services;
 using Pharmasy.Services.Cart.Command;
 
 namespace Pharmasy.Controllers;
@@ -10,36 +9,33 @@ namespace Pharmasy.Controllers;
 [Route("api/[controller]/[action]")]
 public class CartController : ControllerBase
 {
-    private readonly ICartService _cartService;
-    private readonly ICartItemService _cartItemService;
     private readonly IMediator _mediator;
 
-    public CartController(ICartService cartService, ICartItemService cartItemService, IMediator mediator)
+    public CartController( IMediator mediator)
     {
-        _cartService = cartService;
-        _cartItemService = cartItemService;
+        
         _mediator = mediator;
     }
 
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateCart(long id, [FromBody] CartRequest request)
+    [HttpPut("idid")]
+    public async Task<IActionResult> UpdateItemQuantity(long customerId,long cartItemId,int quantity)
     {
-        var response = await _cartService.UpdateAsync(id, request);
+        var response = await _mediator.Send(new UpdateQuantityCartItemCommand(customerId, cartItemId, quantity));
         return Ok(response);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddToCartAsync(CartItemRequest request)
     {
-        var response = await _cartItemService.AddItemToCartAsync(request);
+        var response = await _mediator.Send(new AddItemToCartCommand(request));
         return Ok(response);
     }
 
     [HttpDelete]
     public async Task<IActionResult> RemoveItemFromCartAsync(long customerId, long itemId)
     {
-        var response = await _cartItemService.DeleteItemFromCartAsync(customerId, itemId);
+        var response = await _mediator.Send(new DeleteItemFromCartCommand(customerId, itemId));
         return Ok(response);
     }
 
@@ -53,7 +49,7 @@ public class CartController : ControllerBase
     [HttpPatch]
     public async Task<IActionResult> UpdateQuantityAsync(long customerId, long cartItemId, int quantity)
     {
-        var response = await _cartItemService.UpdateQuantityCartItem(customerId, cartItemId, quantity);
+        var response = await _mediator.Send(new UpdateQuantityCartItemCommand(customerId, cartItemId, quantity));
         return Ok(response);
     }
 }

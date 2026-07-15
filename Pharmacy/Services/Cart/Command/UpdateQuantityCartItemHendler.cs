@@ -9,22 +9,25 @@ namespace Pharmasy.Services.Cart.Command;
 public record UpdateQuantityCartItemCommand(long CustomerId, long CartItemId, int Quantity)
     : IRequest<CartItemResponse>;
 
-public class UpdateQuantityCartItemHendler : IRequestHandler<UpdateQuantityCartItemCommand, CartItemResponse>
+public class UpdateQuantityCartItemHendler : CartDiBase,
+    IRequestHandler<UpdateQuantityCartItemCommand, CartItemResponse>
 {
-    private readonly ICartItemRepository _cartItemRepository;
-    private readonly IMapper _mapper;
-
-    public UpdateQuantityCartItemHendler(ICartItemRepository cartItemRepository,
-        IMapper mapper)
+    public UpdateQuantityCartItemHendler(ICartRepository cartRepository, ICartItemRepository cartItemRepository,
+        IProductRepository productRepository, IMapper mapper) : base(cartRepository, cartItemRepository,
+        productRepository, mapper)
     {
-        _cartItemRepository = cartItemRepository;
-        _mapper = mapper;
     }
 
     public async Task<CartItemResponse> Handle(UpdateQuantityCartItemCommand request,
         CancellationToken cancellationToken)
     {
-        var cartItem = await _cartItemRepository.GetCartItemByCustomerIdtemAsync(request.CustomerId, request.CartItemId);
+        var cart =await CartRepository.GetByIdAsync(request.CustomerId);
+        if (cart == null)
+        {
+            throw new ResourseNotFoundException("Cart not found");
+        }
+        var cartItem =
+            await CartItemRepository.GetCartItemByCustomerIdAndItemIdtemAsync(request.CustomerId, request.CartItemId);
         if (cartItem == null)
         {
             throw new ResourseNotFoundException("CartItem not found");
@@ -32,8 +35,9 @@ public class UpdateQuantityCartItemHendler : IRequestHandler<UpdateQuantityCartI
 
         cartItem.Quantity = request.Quantity;
         cartItem.TotalPrice = cartItem.Price * request.Quantity;
-        await _cartItemRepository.UpdateAsync(cartItem);
-        await _cartItemRepository.SaveChangesAsync();
-        return _mapper.Map<CartItemResponse>(cartItem);
+        cart.TotalAmount = cart.CartItems.Sum(x=>x.TotalPrice);
+        await CartItemRepository.UpdateAsync(cartItem);
+        await CartItemRepository.SaveChangesAsync();
+        return Mapper.Map<CartItemResponse>(cartItem);
     }
 }

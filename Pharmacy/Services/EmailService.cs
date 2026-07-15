@@ -33,7 +33,7 @@ public class EmailService : IEmailService
 
             email.From.Add(new MailboxAddress(
                 _configuration["EmailSettings:FromName"],
-                _configuration["EmailSettings:From"]));
+                _configuration["EmailSettings:From"] ?? ""));
 
             email.To.Add(MailboxAddress.Parse(message.To));
             email.Subject = message.Subject;
@@ -43,13 +43,13 @@ public class EmailService : IEmailService
 
             using var smtp = new SmtpClient();
             await smtp.ConnectAsync(
-                _configuration["EmailSettings:Host"],
+                _configuration["EmailSettings:Host"] ?? throw new InvalidOperationException() ,
                 _configuration.GetValue<int>("EmailSettings:Port"),
                 SecureSocketOptions.StartTls);
 
             await smtp.AuthenticateAsync(
-                _configuration["EmailSettings:Username"],
-                _configuration["EmailSettings:Password"]);
+                _configuration["EmailSettings:Username"] ?? throw new InvalidOperationException(),
+                _configuration["EmailSettings:Password"] ?? throw new InvalidOperationException());
 
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);

@@ -9,11 +9,12 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Order.Command;
 
-public record CreateOrderFromCartCommand(long CustomerId): IRequest<OrderResponse>;
-public class CreatOrderFromCartHendler:OrderDiBase,IRequestHandler<CreateOrderFromCartCommand,OrderResponse>
+public record CreateOrderFromCartCommand(long CustomerId, OrderType OrderType,string Address) : IRequest<OrderResponse>;
+
+public class CreatOrderFromCartHendler : OrderDiBase, IRequestHandler<CreateOrderFromCartCommand, OrderResponse>
 {
-    public CreatOrderFromCartHendler(ICartRepository cartRepository, IMapper mapper, IOrderRepository orderRepository, 
-        IOrderItemRepository orderItemRepository, IProductRepository productRepository) 
+    public CreatOrderFromCartHendler(ICartRepository cartRepository, IMapper mapper, IOrderRepository orderRepository,
+        IOrderItemRepository orderItemRepository, IProductRepository productRepository)
         : base(cartRepository, mapper, orderRepository, orderItemRepository, productRepository)
     {
     }
@@ -26,14 +27,36 @@ public class CreatOrderFromCartHendler:OrderDiBase,IRequestHandler<CreateOrderFr
             throw new ResourseNotFoundException($"Cart is empty");
         }
 
+        foreach (var item in cart.CartItems)
+        {
+            var productCheck = await ProductRepository.GetByIdAsync(item.ProductId);
+            if (productCheck == null)
+            {
+                throw new ResourseNotFoundException($"Product {item.ProductId} not found");
+            }
+
+            if (productCheck.Stock < item.Quantity)
+            {
+                throw new BusinessException($"Insufficient stock for product {productCheck.Name}: available {productCheck.Stock}, requested {item.Quantity}");
+            }
+        }
+
+        string? newAddress;
+        if (string.IsNullOrEmpty(request.Address))
+        {
+            newAddress = cart.Customer?.Address; 
+        }
+        newAddress=request.Address;
+        
         var order = new Models.Domain.Order()
         {
             CustomerId = cart.CustomerId,
             OrderType = OrderType.Deliver,
             OrderStatus = OrderStatus.Pending,
-            Adress = cart.Customer.Address,
+           
+            Adress = newAddress,
             //GetTime = 
-            Customer =  cart.Customer,
+            Customer = cart.Customer,
             TotalAmount = cart.TotalAmount,
         };
         await OrderRepository.CreateAsync(order);

@@ -6,9 +6,9 @@ using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Cart.Query;
 
-public record GetCartItemByIQuery(long Id, long CartItemId) : IRequest<CartResponse>;
+public record GetCartItemByIQuery(long Id, long CartItemId) : IRequest<CartItemResponse>;
 
-public class GetCartItemByIdHendler : IRequestHandler<GetCartItemByIQuery, CartResponse>
+public class GetCartItemByIdHendler : IRequestHandler<GetCartItemByIQuery, CartItemResponse>
 {
     private readonly ICartItemRepository _cartItemRepository;
 
@@ -20,14 +20,14 @@ public class GetCartItemByIdHendler : IRequestHandler<GetCartItemByIQuery, CartR
         _mapper = mapper;
     }
 
-    public async Task<CartResponse> Handle(GetCartItemByIQuery request, CancellationToken cancellationToken)
+    public async Task<CartItemResponse> Handle(GetCartItemByIQuery request, CancellationToken cancellationToken)
     {
-        var cartItem = await _cartItemRepository.GetCartItemByCustomerIdtemAsync(request.Id, request.CartItemId);
+        var cartItem = await _cartItemRepository.GetCartItemByCustomerIdAndItemIdtemAsync(request.Id, request.CartItemId);
         if (cartItem == null)
         {
             throw new ResourseNotFoundException("Item not found");
         }
 
-        return _mapper.Map<CartResponse>(cartItem);
+        return _mapper.Map<CartItemResponse>(cartItem);
     }
 }

@@ -36,7 +36,7 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     public async Task<List<Product>> GetProductsByNameAsync(string name, int page, int pageSize)
     {
         return await DbContext.Products
-            .Where(x => x.Name.ToLower() == name.ToLower())
+            .Where(x => x.Name.ToLower().Contains(name.ToLower()))
             .OrderBy(x => x.Id)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)

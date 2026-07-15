@@ -12,9 +12,12 @@ using Pharmasy.Repositories;
 namespace Pharmasy.Services.Order.Command;
 
 public record CreateOrderCommand(OrderRequest Request) : IRequest<OrderResponse>;
-public class CereateOrderHendler:OrderDiBase,IRequestHandler<CreateOrderCommand, OrderResponse>
+
+public class CereateOrderHendler : OrderDiBase, IRequestHandler<CreateOrderCommand, OrderResponse>
 {
-    public CereateOrderHendler(ICustomerRepository customerRepository, IOrderRepository orderRepository, ProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper, IPublishEndpoint publishEndpoint) 
+    public CereateOrderHendler(ICustomerRepository customerRepository, IOrderRepository orderRepository,
+        IProductRepository productRepository, IOrderItemRepository orderItemRepository, IMapper mapper,
+        IPublishEndpoint publishEndpoint)
         : base(customerRepository, orderRepository, productRepository, orderItemRepository, mapper, publishEndpoint)
     {
     }
@@ -27,12 +30,11 @@ public class CereateOrderHendler:OrderDiBase,IRequestHandler<CreateOrderCommand,
             throw new ResourseNotFoundException($"Customer not found");
         }
 
-        var order = Mapper.Map<Models.Domain.Order>(request);
+        var order = Mapper.Map<Models.Domain.Order>(request.Request);
 
         order.OrderStatus = OrderStatus.Pending;
         await OrderRepository.CreateAsync(order);
-
-        // doesnt use method into foreach
+        
         foreach (var item in request.Request.OrderItems)
         {
             var product = await ProductRepository.GetByIdAsync(item.ProductId);
@@ -51,7 +53,6 @@ public class CereateOrderHendler:OrderDiBase,IRequestHandler<CreateOrderCommand,
             {
                 exsistingOrderItem.Quantity += item.Quantity;
                 exsistingOrderItem.TotalPrice = exsistingOrderItem.Quantity * product.Price;
-                
             }
             else
             {
@@ -65,7 +66,18 @@ public class CereateOrderHendler:OrderDiBase,IRequestHandler<CreateOrderCommand,
 
             product.Stock -= item.Quantity;
             await ProductRepository.UpdateAsync(product);
-            order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
+            var totalAmount = order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
+            if (request.Request.OrderType is OrderType.Deliver)
+            {
+                var address = request.Request.Adress;
+
+                if (address is "1" || address is "2" || address is "3")
+                {
+                    totalAmount += 10;
+                }
+            }
+
+            order.TotalAmount = totalAmount;
         }
 
         await ProductRepository.SaveChangesAsync();
