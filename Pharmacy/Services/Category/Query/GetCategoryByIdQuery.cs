@@ -36,8 +36,7 @@ public class GetCategoryByIdHendler(
             throw new ResourseNotFoundException("Category not found");
         }
 
-        await cache.SetStringAsync(
-            key,
+        await cache.SetStringAsync(key,
             JsonConvert.SerializeObject(category), new DistributedCacheEntryOptions()
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
