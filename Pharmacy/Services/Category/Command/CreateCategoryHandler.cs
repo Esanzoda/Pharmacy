@@ -14,13 +14,13 @@ public record CreateCategoryCommand(CreateCategoryRequest Request) : IRequest<Ca
 public class CreateCategoryHandler(
     IMapper mapper,
     IApplicationDbContext dbContext)
-     :IRequestHandler<CreateCategoryCommand, CategoryResponse>
+    : IRequestHandler<CreateCategoryCommand, CategoryResponse>
 {
     public async Task<CategoryResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var exsist = await dbContext.Categories
-            .AnyAsync(x => x.Name == request.Request.Name,cancellationToken);
-            
+            .AnyAsync(x => x.Name == request.Request.Name, cancellationToken);
+
         if (exsist)
         {
             throw new ResourseIsAlredyExistException("Category alredy exist");
@@ -31,7 +31,7 @@ public class CreateCategoryHandler(
         await dbContext.Categories
             .AddAsync(category, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
-       
+
         return mapper.Map<CategoryResponse>(category);
     }
 }
