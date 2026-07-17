@@ -9,7 +9,8 @@ using Pharmasy.Models.Dto.Response;
 
 namespace Pharmasy.Services.Category.Command;
 
-public record CreateCategoryCommand(CreateCategoryRequest Request) : IRequest<CategoryResponse>;
+public record CreateCategoryCommand(CreateCategoryRequest Request) 
+    : IRequest<CategoryResponse>;
 
 public class CreateCategoryHandler(
     IMapper mapper,
