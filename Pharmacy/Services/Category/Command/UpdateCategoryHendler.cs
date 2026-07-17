@@ -1,44 +1,45 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
+using Pharmasy.Interfaces;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Category.Command;
 
-public record UpdateCategoryCommand(long Id, CategoryRequest Request) : IRequest<CategoryResponse>;
+public record UpdateCategoryCommand(long Id, UpdateCategoryRequest Request) : IRequest<UpdateCategoryResponse>;
 
-public class UpdateCategoryHendler : CategoryDiBase, IRequestHandler<UpdateCategoryCommand, CategoryResponse>
+public class UpdateCategoryHendler(
+    IMapper mapper,
+    IApplicationDbContext dbContext,
+    IDistributedCache cache)
+    : IRequestHandler<UpdateCategoryCommand, UpdateCategoryResponse>
 {
-    private readonly IDistributedCache _cache;
-
-    public UpdateCategoryHendler(ICategoryRepository categoryRepository, IMapper mapper, IDistributedCache cache)
-        : base(categoryRepository, mapper)
+    public async Task<UpdateCategoryResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        _cache = cache;
-    }
-
-    public async Task<CategoryResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
-    {
-        var category = await CategoryRepository.GetByIdAsync(request.Id);
+        var category = await dbContext.Categories
+            .FindAsync(request.Id, cancellationToken);
         if (category is null)
         {
             throw new ResourseNotFoundException("Category not found");
         }
 
-        var exixtCategory = await CategoryRepository.CategoryExistsAsync(request.Request.Name);
-        if (exixtCategory )
+        var exixtCategory = await dbContext.Categories
+            .AnyAsync(x => x.Name == request.Request.Name, cancellationToken);
+        if (exixtCategory)
         {
-            throw new ResourseIsAlredyExistException("Category  with thia name alredy exsist");
+            throw new ResourseIsAlredyExistException("Category  with this name alredy exsist");
         }
-        Mapper.Map(request, category);
-        await CategoryRepository.UpdateAsync(category);
-        await CategoryRepository.SaveChangesAsync();
-        //delete category in redis
+
+        mapper.Map(request.Request, category);
+        dbContext.Categories.Update(category);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
         var key = $"CategoryById-{request.Id}";
-        await _cache.RemoveAsync(key, cancellationToken);
-        return Mapper.Map<CategoryResponse>(request);
+        await cache.RemoveAsync(key, cancellationToken);
+
+        return mapper.Map<UpdateCategoryResponse>(category);
     }
 }

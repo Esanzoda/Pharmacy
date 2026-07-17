@@ -1,5 +1,5 @@
 using MassTransit;
-using Pharmasy.Messages.Evants;
+using Pharmasy.Messages.Events;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
 
@@ -9,7 +9,6 @@ public class OrderCreatedConsumer : IConsumer<OrderCreatedEvent>
 {
     private readonly ILogger<OrderCreatedConsumer> _logger;
     private readonly IEmailService _emailService;
-
     private readonly ICustomerRepository _customerRepository;
 
     public OrderCreatedConsumer(ILogger<OrderCreatedConsumer> logger, IEmailService emailService,

@@ -1,4 +1,4 @@
-namespace Pharmasy.Messages.Evants;
+namespace Pharmasy.Messages.Events;
 
 public class OrderCompletedEventReportToCeo
 {

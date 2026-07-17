@@ -5,7 +5,7 @@ using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
 
-namespace Pharmasy.Services.Cart.AuthService.Command;
+namespace Pharmasy.Services.AuthService.Command;
 
 public record RegisterCommand(CustomerRequest Request) : IRequest<CustomerResponse>;
 public class RegisterHendler:IRequestHandler<RegisterCommand,CustomerResponse>

@@ -11,6 +11,8 @@ public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>
         builder.ToTable("CartItems");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
 
         builder.HasOne<Cart>()
             .WithMany(x => x.CartItems)

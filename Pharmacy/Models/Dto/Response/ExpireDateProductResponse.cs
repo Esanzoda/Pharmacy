@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Models.Dto.Response;
 
-public class ExpireDateProductResponse
+public record ExpireDateProductResponse
 {
     public long Id { get; set; }
     public DateTime DateTime { get; set; }
@@ -12,7 +12,7 @@ public class ExpireDateProductResponse
     public List<ExpireDateItems> ExpiredateItemsListResponse { get; set; }
 }
 
-public class ExpireDateItemsResponse
+public record ExpireDateItemsResponse
 {
     public long Id { get; set; }
     public long ProductId { get; set; }

@@ -3,7 +3,7 @@ using Pharmasy.Models.Dto.Request;
 
 namespace Pharmasy.Validators;
 
-public class CategoryValidator : AbstractValidator<CategoryRequest>
+public class CategoryValidator : AbstractValidator<CreateCategoryRequest>
 
 {
     public CategoryValidator()

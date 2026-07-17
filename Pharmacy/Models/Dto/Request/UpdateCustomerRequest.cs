@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Request;
 
-public class UpdateCustomerRequest
+public record UpdateCustomerRequest
 {
     public string Name { get; set; }
     public string Email { get; set; }

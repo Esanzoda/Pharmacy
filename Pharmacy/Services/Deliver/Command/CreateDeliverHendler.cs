@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
@@ -9,29 +10,25 @@ namespace Pharmasy.Services.Deliver.Command;
 
 public record CreateDeliverCommand(DeliverRequest DeliverRequest) : IRequest<DeliverResponse>;
 
-public class CreateDeliverHendler : IRequestHandler<CreateDeliverCommand, DeliverResponse>
+public class CreateDeliverHendler : DeliverDiBase,IRequestHandler<CreateDeliverCommand, DeliverResponse>
 {
-    private readonly IDeliverRepository _deliverRepository;
-    private readonly IMapper _mapper;
-
-    public CreateDeliverHendler(IDeliverRepository deliverRepository, IMapper mapper)
+    public CreateDeliverHendler(IDeliverRepository deliverRepository, IMapper mapper, IDistributedCache cache) 
+        : base(deliverRepository, mapper, cache)
     {
-        _deliverRepository = deliverRepository;
-        _mapper = mapper;
     }
 
     public async Task<DeliverResponse> Handle(CreateDeliverCommand request, CancellationToken cancellationToken)
     {
-        var deliver = await _deliverRepository.GetDeliverByEmail(request.DeliverRequest.Email);
+        var deliver = await DeliverRepository.GetDeliverByEmail(request.DeliverRequest.Email);
         if (deliver is not null)
         {
             throw new ResourseIsAlredyExistException("Deliver already exist");
         }
 
-        var newDeliver = _mapper.Map<Models.Domain.Deliver>(request.DeliverRequest);
-        await _deliverRepository.CreateAsync(newDeliver);
-        await _deliverRepository.SaveChangesAsync();
+        var newDeliver = Mapper.Map<Models.Domain.Deliver>(request.DeliverRequest);
+        await DeliverRepository.CreateAsync(newDeliver);
+        await DeliverRepository.SaveChangesAsync();
 
-        return _mapper.Map<DeliverResponse>(newDeliver);
+        return Mapper.Map<DeliverResponse>(newDeliver);
     }
 }

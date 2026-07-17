@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Request;
 
-public class CartItemRequest
+public record CartItemRequest
 {
     public long CustomerId { get; set; }
     public long ProductId { get; set; }

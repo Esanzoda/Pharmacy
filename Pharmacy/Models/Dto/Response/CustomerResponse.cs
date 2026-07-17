@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Models.Dto.Response;
 
-public class CustomerResponse
+public record CustomerResponse
 {
     public long Id { get; set; }
     public string? Name { get; set; }

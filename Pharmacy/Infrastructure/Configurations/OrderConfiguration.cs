@@ -11,9 +11,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.ToTable("Orders");
         
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
         
         builder.HasOne(x => x.Customer)
-            .WithMany()
+            .WithMany(c => c.Orders)
             .HasForeignKey(x=>x.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
     }

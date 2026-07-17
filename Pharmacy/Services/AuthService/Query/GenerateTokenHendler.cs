@@ -4,12 +4,11 @@ using System.Text;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 
+namespace Pharmasy.Services.AuthService.Query;
 
-namespace Pharmasy.Services.Cart.AuthService.Command;
+public record GenerateTokenQueri(Models.Domain.Customer Request) : IRequest<string>;
 
-public record GenerateTokenCommand(Models.Domain.Customer Request) : IRequest<string>;
-
-public class GenerateTokenHendler : IRequestHandler<GenerateTokenCommand, string>
+public class GenerateTokenHendler : IRequestHandler<GenerateTokenQueri, string>
 {
     private readonly IConfiguration _configuration;
 
@@ -18,18 +17,16 @@ public class GenerateTokenHendler : IRequestHandler<GenerateTokenCommand, string
         _configuration = configuration;
     }
 
-    public async Task<string> Handle(GenerateTokenCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(GenerateTokenQueri request, CancellationToken cancellationToken)
     {
         var claims = new List<Claim>()
         {
-            new Claim(
-                ClaimTypes.NameIdentifier,
-                request.Request.Id.ToString()),
-            new Claim(ClaimTypes.Email,
-                request.Request.Email)
+            new Claim(ClaimTypes.NameIdentifier, request.Request.Id.ToString()),
+            new Claim(ClaimTypes.Email, request.Request.Email),
+            new Claim(ClaimTypes.Role, request.Request.Role.ToString())
         };
         var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]!));
 
         var credentials =
             new SigningCredentials(
@@ -37,14 +34,14 @@ public class GenerateTokenHendler : IRequestHandler<GenerateTokenCommand, string
                 SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(
             issuer:
-            _configuration["Jwt:Issuer"],
+            _configuration["JwtSettings:Issuer"],
             audience:
-            _configuration["Jwt:Audience"],
+            _configuration["JwtSettings:Audience"],
             claims: claims,
             expires:
             DateTime.UtcNow.AddMinutes(
                 Convert.ToDouble(
-                    _configuration["Jwt:ExpireMinutes"])),
+                    _configuration["JwtSettings:AccessTokenExpirationMinutes"])),
             signingCredentials:
             credentials
         );

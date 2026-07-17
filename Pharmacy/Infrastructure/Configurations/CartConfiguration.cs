@@ -9,14 +9,16 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
     public void Configure(EntityTypeBuilder<Cart> builder)
     {
         builder.ToTable("Carts");
-        
+
         builder.HasKey(x => x.Id);
-        
-        builder.HasOne<Customer>()
+
+        builder.HasOne(x => x.Customer)
             .WithOne(c => c.Cart)
             .HasForeignKey<Cart>(x => x.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
+        builder.HasIndex(x => x.CustomerId)
+            .IsUnique();
         builder.Property(x => x.TotalAmount)
             .HasColumnType("decimal(18,2)");
     }

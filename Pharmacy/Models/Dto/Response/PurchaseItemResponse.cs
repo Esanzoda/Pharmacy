@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Response;
 
-public class PurchaseItemResponse
+public record PurchaseItemResponse
 {
     public long id { get; set; }
     public long ProductId { get; set; }

@@ -23,7 +23,7 @@ public class PurchaseRepository : BaseRepository<Purchase>, IPurchaseRepository
             .FirstOrDefaultAsync(o => o.Id == id);
     }
 
-    public override async Task<List<Purchase>> GetAllByPaginationAsync(int pageNumber, int pageSize)
+    public override async Task<List<Purchase>> GetAllByPaginationAsync(int pageNumber, int pageSize,CancellationToken cancellationToken=default)
     {
         return await DbContext.Purchases
             .Include(o => o.PurchaseItems)

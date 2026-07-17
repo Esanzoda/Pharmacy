@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Request;
 
-public class DeliverRequest
+public record DeliverRequest
 {
     public string Name { get; set; }
     public string PhoneNumber { get; set; }

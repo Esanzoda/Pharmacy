@@ -7,10 +7,15 @@ using Pharmasy.Data;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 using Pharmasy.Consumers;
 using Pharmasy.Jobs;
 using Pharmasy.Middlewares;
-using Serilog;
+using Serilog;using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Pharmasy.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +24,7 @@ builder.Services.AddDbContext<AppDbContext>((sp, options) =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
         .AddInterceptors(sp.GetRequiredService<AuditableInterceptor>());
 });
+
 builder.Services.AddScoped<AuditableInterceptor>();
 
 //redis
@@ -77,7 +83,51 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        Description = "Enter JWT Token (dont need 'Bearer')"
+    });
+
+    
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecuritySchemeReference("Bearer", document), 
+            new List<string>()
+        }
+    });
+});
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+            ValidAudience = builder.Configuration["JwtSettings:Audience"],
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!))
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
@@ -108,9 +158,12 @@ builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
 
 builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
+builder.Services.AddScoped<IRefreshToken,RefreshTokenRepository>();
 
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 
 var app = builder.Build();
 
@@ -135,7 +188,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

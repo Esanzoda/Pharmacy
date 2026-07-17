@@ -1,31 +1,27 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
-using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
 
 namespace Pharmasy.Services.Deliver.Command;
 public record DeleteDeliverCommand(int Id) : IRequest<bool>;
-public class DeleteDeliverHendler:IRequestHandler<DeleteDeliverCommand,bool>
+public class DeleteDeliverHendler:DeliverDiBase,IRequestHandler<DeleteDeliverCommand,bool>
 {
-    private readonly IDeliverRepository _deliverRepository;
-  private  readonly IDistributedCache _cache;
-
-    public DeleteDeliverHendler(IDeliverRepository deliverRepository, IDistributedCache cache)
+    public DeleteDeliverHendler(IDeliverRepository deliverRepository, IMapper mapper, IDistributedCache cache) 
+        : base(deliverRepository, mapper, cache)
     {
-        _deliverRepository = deliverRepository;
-        _cache = cache;
     }
 
     public async Task<bool> Handle(DeleteDeliverCommand request, CancellationToken cancellationToken)
     {
-        var deliver = await _deliverRepository.DeleteAsync(request.Id);
+        var deliver = await DeliverRepository.DeleteAsync(request.Id);
         if (deliver is false)
         {
             throw new ResourseNotFoundException("Deliver not found");
         }
         var key = $"DeliverById-{request.Id}";
-        await _cache.RemoveAsync(key, cancellationToken);
+        await Cache.RemoveAsync(key, cancellationToken);
 
         return true;
     }

@@ -3,7 +3,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Dto.Request;
 
-public class OrderRequest
+public record OrderRequest
 {
     public long CustomerId { get; set; }
     public OrderType OrderType { get; set; }

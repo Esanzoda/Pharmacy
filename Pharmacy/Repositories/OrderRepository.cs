@@ -24,7 +24,7 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .FirstOrDefaultAsync(o => o.Id == id);
     }
 
-    public override async Task<List<Order>> GetAllByPaginationAsync(int pageNumber, int pageSize)
+    public override async Task<List<Order>> GetAllByPaginationAsync(int pageNumber, int pageSize,CancellationToken cancellationToken=default)
     {
         return await DbContext.Orders
             .Include(o => o.OrderItems)

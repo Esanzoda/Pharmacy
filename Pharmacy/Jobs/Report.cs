@@ -1,6 +1,6 @@
 using MassTransit;
 using Pharmasy.Data;
-using Pharmasy.Messages.Evants;
+using Pharmasy.Messages.Events;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Repositories;
 

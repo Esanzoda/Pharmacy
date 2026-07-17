@@ -2,7 +2,7 @@ using AutoMapper;
 using MassTransit;
 using MediatR;
 using Pharmasy.Exception;
-using Pharmasy.Messages.Evants;
+using Pharmasy.Messages.Events;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
@@ -34,7 +34,7 @@ public class CereateOrderHendler : OrderDiBase, IRequestHandler<CreateOrderComma
 
         order.OrderStatus = OrderStatus.Pending;
         await OrderRepository.CreateAsync(order);
-        
+
         foreach (var item in request.Request.OrderItems)
         {
             var product = await ProductRepository.GetByIdAsync(item.ProductId);
@@ -64,21 +64,26 @@ public class CereateOrderHendler : OrderDiBase, IRequestHandler<CreateOrderComma
                 order.OrderItems.Add(orderItem);
             }
 
+
             product.Stock -= item.Quantity;
             await ProductRepository.UpdateAsync(product);
-            var totalAmount = order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
+        }
+
+        var totalAmount = order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
+        var delivePrice=1;
             if (request.Request.OrderType is OrderType.Deliver)
             {
+               
                 var address = request.Request.Adress;
 
                 if (address is "1" || address is "2" || address is "3")
                 {
-                    totalAmount += 10;
+                    delivePrice = 10;
                 }
             }
 
-            order.TotalAmount = totalAmount;
-        }
+            order.TotalAmount = delivePrice+totalAmount;
+        
 
         await ProductRepository.SaveChangesAsync();
         await OrderItemRepository.SaveChangesAsync();

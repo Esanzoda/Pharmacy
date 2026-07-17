@@ -11,5 +11,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.ToTable("Employees");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
     }
 }

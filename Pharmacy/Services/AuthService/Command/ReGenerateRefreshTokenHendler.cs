@@ -3,8 +3,9 @@ using Pharmasy.Exception;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
+using Pharmasy.Services.AuthService.Query;
 
-namespace Pharmasy.Services.Cart.AuthService.Command;
+namespace Pharmasy.Services.AuthService.Command;
 
 public record ReGenerateRefreshTokenComman(string RefreshToken) : IRequest<LoginResponse>;
 
@@ -38,19 +39,21 @@ public class ReGenerateRefreshTokenHendler : IRequestHandler<ReGenerateRefreshTo
         }
 
         refreshToken.ExpiresAt = DateTime.UtcNow;
+        refreshToken.UpdateAt = DateTime.UtcNow;
         refreshToken.IsDeleted = true;
         await _refreshTokenRepo.UpdateAsync(refreshToken);
         await _refreshTokenRepo.SaveChangesAsync();
 
-        var newRefreshToken = new RefreshToken()
+        new RefreshToken()
         {
             CustomerId = refreshToken.CustomerId,
             CreatedAt = DateTime.UtcNow,
+            UpdateAt = DateTime.UtcNow,
             ExpiresAt = DateTime.UtcNow.AddMinutes(3),
             Token = await _mediator.Send(new GenereteRefreshTokenCommand()),
             Customer = refreshToken.Customer
         };
-        var newAccessToken = await _mediator.Send(new GenerateTokenCommand(refreshToken.Customer));
+        var newAccessToken = await _mediator.Send(new GenerateTokenQueri(refreshToken.Customer));
         return new LoginResponse()
         {
             AccessToken = newAccessToken,

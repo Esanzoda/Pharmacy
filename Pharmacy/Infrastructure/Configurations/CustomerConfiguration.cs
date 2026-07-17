@@ -11,6 +11,8 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.ToTable("Customers");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
         
         builder.Property(x => x.Name)
             .HasMaxLength(100);

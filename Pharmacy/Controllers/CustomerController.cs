@@ -1,11 +1,15 @@
 using AutoMapper;
+using MassTransit.Internals;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Services;
 using Pharmasy.Services.Customer.Command;
 using Pharmasy.Services.Customer.Query;
+using static Pharmasy.Models.Domain.Enum.Role;
 
 namespace Pharmasy.Controllers;
 
@@ -20,6 +24,7 @@ public class CustomerController : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<CustomerResponse>> Create([FromBody] CustomerRequest request)
     {
@@ -27,12 +32,15 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<ActionResult<CustomerResponse>> Update(long id, [FromBody] UpdateCustomerRequest request)
     {
         var response = await _mediator.Send(new UpdateCustomerCommand(id, request));
         return Ok(response);
     }
+
+    [Authorize]
     [HttpPatch]
     public async Task<ActionResult<CustomerResponse>> UpdatePassword(long id, [FromBody] string newPassword)
     {
@@ -40,13 +48,15 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("{id}")]
+    [Authorize]
+    [HttpGet]
     public async Task<ActionResult<CustomerResponse>> GetById(long id)
     {
         var response = await _mediator.Send(new GetCustomerByIdQuery(id));
         return Ok(response);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
@@ -54,13 +64,15 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response =await _mediator.Send(new DeleteCustomerCommand(id));
+        var response = await _mediator.Send(new DeleteCustomerCommand(id));
         return Ok(response);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<CustomerResponse?>> GetByEmailAsync(string email)
     {
@@ -68,6 +80,7 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<CustomerResponse?>> GetByPhoneAsync(string phone)
     {
@@ -75,6 +88,7 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<CustomerResponse>>> GetByNameAsync(string name)
     {

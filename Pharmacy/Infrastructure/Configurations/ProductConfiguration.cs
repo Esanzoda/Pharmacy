@@ -12,6 +12,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.ToTable("Products");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
 
         builder.Property(x => x.Name)
             .IsRequired()

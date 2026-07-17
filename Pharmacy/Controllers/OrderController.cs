@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
@@ -20,19 +21,21 @@ public class OrderController : ControllerBase
       
         _mediator = mediator;
     }
-
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<OrderResponse>> Create([FromBody] OrderRequest request)
     {
         var response = await _mediator.Send(new CreateOrderCommand(request));
         return Ok(response);
     }
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<OrderResponse>> CreateFromCart(long customerId,OrderType orderType,string address)
     {
         var response = await _mediator.Send(new CreateOrderFromCartCommand(customerId, orderType, address));
         return Ok(response);
     }
+    [Authorize]
 
     [HttpPut]
     public async Task<ActionResult<OrderResponse>> UpdateStatusAsync(long id, [FromBody] UpdateOrderRequest request)
@@ -40,28 +43,28 @@ public class OrderController : ControllerBase
         var response = await _mediator.Send(new UpdateOrderStatusCommand(id, request));
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet("id")]
     public async Task<ActionResult<OrderResponse>> GetByIdAsync(long id)
     {
         var response = await _mediator.Send(new GetOrderByIdQuery(id));
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<OrderResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
         var response = await _mediator.Send(new GetAllOrdersQuery(pageNumber, pageSize));
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<OrderResponse>>> GetByStatusAsync(OrderStatus status, int pageNumber, int pageSize)
     {
         var response=await _mediator.Send(new GetOrderByOrderStatusQuery(status, pageNumber, pageSize));
         return Ok(response);
     }
-
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
@@ -69,7 +72,7 @@ public class OrderController : ControllerBase
         return Ok(response);
     }
 
-
+    [Authorize]
     [HttpDelete]
     public async Task<ActionResult<OrderResponse>> RemoveItemFromAsync(long orderId, long orderItemId)
     {

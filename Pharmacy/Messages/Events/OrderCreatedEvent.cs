@@ -1,11 +1,11 @@
-using System.Runtime.InteropServices.JavaScript;
-
-namespace Pharmasy.Messages.Evants;
+namespace Pharmasy.Messages.Events;
 
 public class OrderCreatedEvent
 {
     public long OrderId { get; set; }
     public long UserId { get; set; }
     public DateTime CreatedAt { get; set; }
+    public decimal DelivePrice { get; set; }
     public decimal TotalAmount { get; set; }
+    
 }

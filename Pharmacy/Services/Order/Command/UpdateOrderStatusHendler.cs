@@ -2,7 +2,7 @@ using AutoMapper;
 using MassTransit;
 using MediatR;
 using Pharmasy.Exception;
-using Pharmasy.Messages.Evants;
+using Pharmasy.Messages.Events;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;

@@ -1,6 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
-
-namespace Pharmasy.Messages.Evants;
+namespace Pharmasy.Messages.Events;
 
 public class OrderCompletedEvent
 {

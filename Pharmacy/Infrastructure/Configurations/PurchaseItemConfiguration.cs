@@ -11,14 +11,12 @@ public class PurchaseItemConfiguration : IEntityTypeConfiguration<PurchaseItem>
         builder.ToTable("PurchaseItems");
         
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
         
         builder.HasOne(x => x.Purchase)
             .WithMany(x => x.PurchaseItems)
             .HasForeignKey(x => x.PurchaseId);
-        
-        builder.HasOne(x => x.Product)
-            .WithMany()
-            .HasForeignKey(x => x.ProductId);
         
     }
 }

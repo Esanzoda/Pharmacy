@@ -1,12 +1,13 @@
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity.Data;
 using Pharmasy.Exception;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
+using Pharmasy.Services.AuthService.Query;
+using LoginRequest = Pharmasy.Models.Dto.Request.LoginRequest;
 
-namespace Pharmasy.Services.Cart.AuthService.Command;
+namespace Pharmasy.Services.AuthService.Command;
 
 public record LoginCommand(LoginRequest Request) :  IRequest<LoginResponse>;
 public class LoginHendler: IRequestHandler<LoginCommand,LoginResponse>
@@ -41,7 +42,7 @@ public class LoginHendler: IRequestHandler<LoginCommand,LoginResponse>
             throw new BusinessException("Invalid email or password");
         }
 
-        var accesToken = await _mediator.Send(new GenerateTokenCommand(customer));
+        var accesToken = await _mediator.Send(new GenerateTokenQueri(customer));
         var refreshToken =
             new RefreshToken
             {

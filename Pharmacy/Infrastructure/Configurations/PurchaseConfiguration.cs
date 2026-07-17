@@ -11,6 +11,8 @@ public class PurchaseConfiguration : IEntityTypeConfiguration<Purchase>
         builder.ToTable("Purchases");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
         
         builder.HasMany(x => x.PurchaseItems)
             .WithOne(x => x.Purchase)

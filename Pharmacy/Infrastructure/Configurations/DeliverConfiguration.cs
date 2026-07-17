@@ -11,5 +11,7 @@ public class DeliverConfiguration : IEntityTypeConfiguration<Deliver>
         builder.ToTable("Suppliers");
 
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
     }
 }

@@ -6,6 +6,6 @@ public class Cart : BaseEntity
     public Customer? Customer { get; set; }
     public decimal TotalAmount { get; set; }
 
-    public List<CartItem> CartItems { get; set; }
-        = new List<CartItem>();
+    public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+
 }

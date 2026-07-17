@@ -1,7 +1,6 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Pharmasy.Data;
-using Pharmasy.Messages.Evants;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Repositories;

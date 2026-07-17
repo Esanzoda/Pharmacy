@@ -6,9 +6,9 @@ public interface IPasswordService
     public Task<bool> VerifyPassword(string password, string passwordHash);
 }
 
-public class PasswordService
+public class PasswordService:IPasswordService
 {
-    public async Task<String> HashPasword(string password)
+    public async Task<string> HashPasword(string password)
     {
         return BCrypt.Net.BCrypt.HashPassword(password);
     }

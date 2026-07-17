@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Request;
 
-public class OrderReservationRequest
+public record OrderReservationRequest
 {
     public long CustomerId { get; set; }
 

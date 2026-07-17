@@ -11,6 +11,8 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
         builder.ToTable("OrderItems");
         
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id)
+            .IsUnique();
         
         builder.HasOne<Order>()
             .WithMany(x=>x.OrderItems)

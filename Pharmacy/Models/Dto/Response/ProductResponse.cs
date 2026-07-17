@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Dto.Response;
 
-public class ProductResponse 
+public record ProductResponse 
 {
     public long Id { get; set; }
     public string? Name { get; set; }

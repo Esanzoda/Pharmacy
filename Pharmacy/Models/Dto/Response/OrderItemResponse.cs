@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Response;
 
-public class OrderItemResponse
+public record OrderItemResponse
 {
     public long Id { get; set; }
     public long OrderId { get; set; }

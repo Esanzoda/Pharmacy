@@ -10,7 +10,7 @@ public class ExpiryDateResponse
     public List<ExpiryDateItemResponse> ExpiryDateItems { get; set; }
 }
 
-public class ExpiryDateItemResponse
+public record ExpiryDateItemResponse
 {
     public long Id { get; set; }
     public long ProductId { get; set; }

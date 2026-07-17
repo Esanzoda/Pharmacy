@@ -1,6 +1,6 @@
 namespace Pharmasy.Models.Dto.Response;
 
-public class DeliverResponse
+public record DeliverResponse
 {
     public long Id { get; set; }
     public string Name { get; set; }

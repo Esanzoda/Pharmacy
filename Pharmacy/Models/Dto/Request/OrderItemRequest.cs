@@ -2,7 +2,7 @@ using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Models.Dto.Request;
 
-public class OrderItemRequest
+public record OrderItemRequest
 {
     public long ProductId { get; set; }
 

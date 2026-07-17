@@ -1,6 +1,6 @@
 using MassTransit;
 using MassTransit.Mediator;
-using Pharmasy.Messages.Evants;
+using Pharmasy.Messages.Events;
 using Pharmasy.Repositories;
 using Pharmasy.Services;
 

@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Pharmasy.Exception;
+using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 using Pharmasy.Repositories;
@@ -34,18 +35,25 @@ public class CreateCustomerHendler : CustomerDiBase, IRequestHandler<CreateCusto
                 $"Customer already exists with this phone number{request.Request.PhoneNumber}");
         }
 
-        var newCustomer = Mapper.Map<Models.Domain.Customer>(request.Request);
-        await CustomerRepository.CreateAsync(newCustomer);
-        await CustomerRepository.SaveChangesAsync();
-        var cart = new Models.Domain.Cart
+        if (request.Request.Role is Role.Customer)
         {
-            CustomerId = newCustomer.Id,
-            Customer = newCustomer,
-            TotalAmount = 0
-        };
+            
+            var newCustomer = Mapper.Map<Models.Domain.Customer>(request.Request);
+            await CustomerRepository.CreateAsync(newCustomer);
+            await CustomerRepository.SaveChangesAsync();
+            var cart = new Models.Domain.Cart
+            {
+                CustomerId = newCustomer.Id,
+                Customer = newCustomer,
+                TotalAmount = 0
+            };
         
-        await _cartRepository.CreateAsync(cart);
-        await _cartRepository.SaveChangesAsync();
-        return Mapper.Map<CustomerResponse>(newCustomer);
+            await _cartRepository.CreateAsync(cart);
+            await _cartRepository.SaveChangesAsync();
+            return Mapper.Map<CustomerResponse>(newCustomer);
+        }
+
+        throw new BusinessException("You cant creat customer with other role");
+
     }
 }

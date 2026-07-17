@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using MediatR;
 
-namespace Pharmasy.Services.Cart.AuthService.Command;
+namespace Pharmasy.Services.AuthService.Command;
 
 public record GenereteRefreshTokenCommand : IRequest<string>;
 public class GenereteRefreshTokenHendler:IRequestHandler<GenereteRefreshTokenCommand,string>

@@ -34,8 +34,12 @@ public class Mappers : Profile
         CreateMap<PurchaseItem, PurchaseItemResponse>();
         CreateMap<Purchase, PurchaseResponse>()
             .ForMember(x => x.PurchaseItems, x => x.MapFrom(y => y.PurchaseItems));
-        CreateMap<CategoryRequest, Category>();
+        
+        CreateMap<CreateCategoryRequest, Category>();
         CreateMap<Category, CategoryResponse>();
+        CreateMap<UpdateCategoryRequest, Category>();
+        CreateMap<Category, UpdateCategoryResponse>();
+        
 
         CreateMap<CustomerRequest, Customer>()
             .ForMember(x => x.PasswordHash, opt => opt.Ignore());
