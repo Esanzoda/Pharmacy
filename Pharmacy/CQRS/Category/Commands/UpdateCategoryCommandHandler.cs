@@ -7,11 +7,11 @@ using Pharmasy.Interfaces;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 
-namespace Pharmasy.Services.Category.Command;
+namespace Pharmasy.CQRS.Category.Commands;
 
 public record UpdateCategoryCommand(long Id, UpdateCategoryRequest Request) : IRequest<UpdateCategoryResponse>;
 
-public class UpdateCategoryHendler(
+public class UpdateCategoryHandler(
     IMapper mapper,
     IApplicationDbContext dbContext,
     IDistributedCache cache)

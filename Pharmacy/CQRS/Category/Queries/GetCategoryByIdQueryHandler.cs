@@ -7,11 +7,12 @@ using Pharmasy.Exception;
 using Pharmasy.Interfaces;
 using Pharmasy.Models.Dto.Response;
 
-namespace Pharmasy.Services.Category.Query;
+namespace Pharmasy.CQRS.Category.Queries;
 
-public record GetCategoryByIdQuery(long CategoryId) : IRequest<CategoryResponse>;
+public record GetCategoryByIdQuery(
+    long CategoryId) : IRequest<CategoryResponse>;
 
-public class GetCategoryByIdHendler(
+public class GetCategoryByIdHandler(
     IMapper mapper,
     IDistributedCache cache,
     IApplicationDbContext dbContext) : IRequestHandler<GetCategoryByIdQuery, CategoryResponse>
@@ -22,7 +23,7 @@ public class GetCategoryByIdHendler(
         var cachedCategory = await cache.GetStringAsync(key, cancellationToken);
         if (cachedCategory is not null)
         {
-            var entity = JsonConvert.DeserializeObject<Models.Domain.Category?>(cachedCategory);
+            var entity = JsonConvert.DeserializeObject<Pharmasy.Models.Domain.Category?>(cachedCategory);
             if (entity is not null)
             {
                 return mapper.Map<CategoryResponse>(entity);

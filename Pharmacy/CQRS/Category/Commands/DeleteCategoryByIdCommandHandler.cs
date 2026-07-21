@@ -1,16 +1,17 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Pharmasy.Exception;
 using Pharmasy.Interfaces;
 
-namespace Pharmasy.Services.Category.Command;
+namespace Pharmasy.CQRS.Category.Commands;
 
-public record DeleteCategoryCommand(long Id) : IRequest<bool>;
+public record DeleteCategoryCommand(
+    long Id) : IRequest<bool>;
 
-public class DeleteCategoryByIdHandler(IApplicationDbContext dbContext, IDistributedCache cache)
-    : IRequestHandler<DeleteCategoryCommand, bool>
+public class DeleteCategoryByIdHandler(
+    IApplicationDbContext dbContext,
+    IDistributedCache cache) : IRequestHandler<DeleteCategoryCommand, bool>
 {
     public async Task<bool> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
