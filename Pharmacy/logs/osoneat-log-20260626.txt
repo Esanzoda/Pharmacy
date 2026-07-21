@@ -303,7 +303,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 208
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
 2026-06-26 17:16:08.507 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-26 17:16:10.979 -07:00 [ERR] Failed executing DbCommand (21ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:16:10.979 -07:00 [ERR] Failed executing DbCommandHandler (21ms) [Parameters=[@p='?' (DbType = Int64)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."Password", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
 WHERE c."Id" = @p
@@ -316,11 +316,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -339,11 +339,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -467,7 +467,7 @@ RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified end
    --- End of inner exception stack trace ---
    at RabbitMQ.Client.ConnectionFactory.CreateConnectionAsync(IEndpointResolver endpointResolver, String clientProvidedName, CancellationToken cancellationToken)
    at MassTransit.RabbitMqTransport.ConnectionContextFactory.CreateConnection(ISupervisor supervisor) in D:\a\MassTransit\MassTransit\src\Transports\MassTransit.RabbitMqTransport\RabbitMqTransport\ConnectionContextFactory.cs:line 108
-2026-06-26 17:16:56.013 -07:00 [ERR] Failed executing DbCommand (22ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:16:56.013 -07:00 [ERR] Failed executing DbCommandHandler (22ms) [Parameters=[@p='?' (DbType = Int64)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."Password", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
 WHERE c."Id" = @p
@@ -480,11 +480,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -503,11 +503,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -629,7 +629,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
 2026-06-26 17:17:16.005 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-26 17:17:16.008 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
-2026-06-26 17:17:16.041 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:17:16.041 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."Password", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
 LIMIT @p1 OFFSET @p
@@ -641,11 +641,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -664,11 +664,11 @@ POSITION: 79
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -2827,7 +2827,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 208
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
 2026-06-26 17:53:37.546 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-26 17:53:39.863 -07:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:53:39.863 -07:00 [ERR] Failed executing DbCommandHandler (9ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "Price", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -2840,12 +2840,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -2855,10 +2855,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2872,12 +2872,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -2887,10 +2887,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2989,7 +2989,7 @@ RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified end
    --- End of inner exception stack trace ---
    at RabbitMQ.Client.ConnectionFactory.CreateConnectionAsync(IEndpointResolver endpointResolver, String clientProvidedName, CancellationToken cancellationToken)
    at MassTransit.RabbitMqTransport.ConnectionContextFactory.CreateConnection(ISupervisor supervisor) in D:\a\MassTransit\MassTransit\src\Transports\MassTransit.RabbitMqTransport\RabbitMqTransport\ConnectionContextFactory.cs:line 108
-2026-06-26 17:53:52.620 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:53:52.620 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "Price", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -3002,12 +3002,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3017,10 +3017,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3034,12 +3034,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3049,10 +3049,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3108,7 +3108,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
 2026-06-26 17:53:58.131 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-26 17:53:58.131 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 8154.9959 ms
 2026-06-26 17:54:03.751 -07:00 [INF] Starting chek expira date product
-2026-06-26 17:54:03.761 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:54:03.761 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 WHERE p."ExpiryDate" = now() AND p."Stock" > 0 AND p."CreateAt" > @nextTime
@@ -3120,11 +3120,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3143,11 +3143,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3167,11 +3167,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3257,7 +3257,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 200
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 208
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
-2026-06-26 17:54:20.470 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:54:20.470 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "Price", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -3270,12 +3270,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3285,10 +3285,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3302,12 +3302,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3317,10 +3317,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3466,7 +3466,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 200
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 208
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
-2026-06-26 17:55:17.874 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:55:17.874 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "Price", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -3479,12 +3479,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3494,10 +3494,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3511,12 +3511,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3526,10 +3526,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3537,7 +3537,7 @@ POSITION: 123
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
 2026-06-26 17:55:17.978 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-26 17:55:17.978 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 26231.8143 ms
-2026-06-26 17:55:30.909 -07:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:55:30.909 -07:00 [ERR] Failed executing DbCommandHandler (9ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "Price", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -3550,12 +3550,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3565,10 +3565,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3582,12 +3582,12 @@ POSITION: 123
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 42703
@@ -3597,10 +3597,10 @@ POSITION: 123
     Line: 1073
     Routine: checkInsertTargets
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -3610,7 +3610,7 @@ POSITION: 123
 2026-06-26 17:55:30.989 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 4555.0363 ms
 2026-06-26 17:55:53.343 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-26 17:55:53.345 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
-2026-06-26 17:55:53.358 -07:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:55:53.358 -07:00 [ERR] Failed executing DbCommandHandler (9ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 LIMIT @p1 OFFSET @p
@@ -3622,11 +3622,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3645,11 +3645,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3803,7 +3803,7 @@ MassTransit.RabbitMqConnectionException: Broker unreachable: guest@localhost:567
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 200
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.RunTransport() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 208
    at MassTransit.Transports.ReceiveTransport`1.ReceiveTransportAgent.Run() in D:\a\MassTransit\MassTransit\src\MassTransit\Transports\ReceiveTransport.cs:line 145
-2026-06-26 17:56:52.377 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:56:52.377 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p='?' (DbType = Int64)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 WHERE p."Id" = @p
@@ -3816,11 +3816,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3839,11 +3839,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3859,7 +3859,7 @@ POSITION: 130
 
 POSITION: 130
 2026-06-26 17:56:52.443 -07:00 [INF] HTTP GET /api/Product/GetOrderById/id responded 200 in 81.7423 ms
-2026-06-26 17:56:57.378 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 17:56:57.378 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p='?' (DbType = Int64)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 WHERE p."Id" = @p
@@ -3872,11 +3872,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -3895,11 +3895,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4025,11 +4025,11 @@ RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified end
 2026-06-26 18:12:59.278 -07:00 [INF] Removed 1 outdated record(s) from 'aggregatedcounter' table.
 2026-06-26 18:12:59.574 -07:00 [INF] Starting chek expira date product
 2026-06-26 18:12:59.574 -07:00 [INF] Starting chek expira date product
-2026-06-26 18:13:00.008 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 18:13:00.008 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 WHERE p."ExpiryDate" = now() AND p."Stock" > 0 AND p."CreateAt" > @nextTime
-2026-06-26 18:13:00.008 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-26 18:13:00.008 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@nextTime='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT p."Id", p."Barcode", p."CategoryId", p."Country", p."CreateAt", p."Description", p."ExpiryDate", p."IsDeleted", p."Name", p."Price", p."ProductType", p."PurchasePrice", p."Stock", p."UpdateAt"
 FROM "Products" AS p
 WHERE p."ExpiryDate" = now() AND p."Stock" > 0 AND p."CreateAt" > @nextTime
@@ -4041,11 +4041,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4064,11 +4064,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4088,11 +4088,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4111,11 +4111,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4135,11 +4135,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
@@ -4164,11 +4164,11 @@ POSITION: 130
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()

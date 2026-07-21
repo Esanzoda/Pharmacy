@@ -2,10 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services.Category.Command;
-using Pharmasy.Services.Category.Query;
+using Pharmasy.CQRS.Category.Commands;
+using Pharmasy.CQRS.Category.Queries;
 
 //scqlqr
 namespace Pharmasy.Controllers;
@@ -28,7 +29,7 @@ public class CategoryController : ControllerBase
         var response = await _mediator.Send(new CreateCategoryCommand(request));
         return Ok(response);
     }
-    [Authorize]
+    [Authorize(Roles = nameof(Role.Admin) )]
     [HttpPut]
     public async Task<ActionResult<CategoryResponse>> Update(long id, [FromBody] UpdateCategoryRequest request)
     {

@@ -18,9 +18,9 @@
           "Hangfire.Core": "1.8.23",
           "Hangfire.PostgreSql": "1.21.1",
           "MailKit": "4.17.0",
-          "MassTransit": "9.2.0-develop.151",
-          "MassTransit.AspNetCore": "9.2.0-develop.151",
-          "MassTransit.RabbitMQ": "9.2.0-develop.151",
+          "MassTransit": "9.1.2",
+          "MassTransit.AspNetCore": "7.3.1",
+          "MassTransit.RabbitMQ": "9.1.2",
           "MediatR": "14.2.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.8",
           "Microsoft.AspNetCore.OpenApi": "10.0.8",
@@ -268,47 +268,57 @@
           }
         }
       },
-      "MassTransit/9.2.0-develop.151": {
+      "MassTransit/9.1.2": {
         "dependencies": {
-          "MassTransit.Abstractions": "9.2.0-develop.151"
+          "MassTransit.Abstractions": "9.1.2"
         },
         "runtime": {
           "lib/net10.0/MassTransit.dll": {
-            "assemblyVersion": "9.2.0.0",
-            "fileVersion": "9.2.0.0"
+            "assemblyVersion": "9.1.2.0",
+            "fileVersion": "9.1.2.0"
           }
         }
       },
-      "MassTransit.Abstractions/9.2.0-develop.151": {
+      "MassTransit.Abstractions/9.1.2": {
         "runtime": {
           "lib/net10.0/MassTransit.Abstractions.dll": {
-            "assemblyVersion": "9.2.0.0",
-            "fileVersion": "9.2.0.0"
+            "assemblyVersion": "9.1.2.0",
+            "fileVersion": "9.1.2.0"
           }
         }
       },
-      "MassTransit.AspNetCore/9.2.0-develop.151": {
+      "MassTransit.AspNetCore/7.3.1": {
         "dependencies": {
-          "MassTransit": "9.2.0-develop.151",
-          "MassTransit.Abstractions": "9.2.0-develop.151",
-          "Microsoft.AspNetCore.OpenApi": "10.0.8"
+          "MassTransit": "9.1.2",
+          "MassTransit.Extensions.DependencyInjection": "7.3.1"
         },
         "runtime": {
-          "lib/net10.0/MassTransit.AspNetCore.dll": {
-            "assemblyVersion": "9.2.0.0",
-            "fileVersion": "9.2.0.0"
+          "lib/netstandard2.0/MassTransit.AspNetCoreIntegration.dll": {
+            "assemblyVersion": "7.3.1.0",
+            "fileVersion": "7.3.1.0"
           }
         }
       },
-      "MassTransit.RabbitMQ/9.2.0-develop.151": {
+      "MassTransit.Extensions.DependencyInjection/7.3.1": {
         "dependencies": {
-          "MassTransit": "9.2.0-develop.151",
+          "MassTransit": "9.1.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MassTransit.ExtensionsDependencyInjectionIntegration.dll": {
+            "assemblyVersion": "7.3.1.0",
+            "fileVersion": "7.3.1.0"
+          }
+        }
+      },
+      "MassTransit.RabbitMQ/9.1.2": {
+        "dependencies": {
+          "MassTransit": "9.1.2",
           "RabbitMQ.Client": "7.2.1"
         },
         "runtime": {
           "lib/net10.0/MassTransit.RabbitMqTransport.dll": {
-            "assemblyVersion": "9.2.0.0",
-            "fileVersion": "9.2.0.0"
+            "assemblyVersion": "9.1.2.0",
+            "fileVersion": "9.1.2.0"
           }
         }
       },
@@ -1242,33 +1252,40 @@
       "path": "mailkit/4.17.0",
       "hashPath": "mailkit.4.17.0.nupkg.sha512"
     },
-    "MassTransit/9.2.0-develop.151": {
+    "MassTransit/9.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SDTHwp4Fo34h5myjfYVgg5T0g4shjFBg32hlOdGdwmuXjbGxqDEQZWXCQhRyX5T1fuYTNQYNjf5UaGPixVsx3w==",
-      "path": "masstransit/9.2.0-develop.151",
-      "hashPath": "masstransit.9.2.0-develop.151.nupkg.sha512"
+      "sha512": "sha512-7rHsXnvoQ+YpKBlWhkBPwkkbq9kK+mK2hro3Z7m1CfCqVUZPsDh/lmkuVkEXKsr+mY6fgG3rxQLaLTYVYaqsEw==",
+      "path": "masstransit/9.1.2",
+      "hashPath": "masstransit.9.1.2.nupkg.sha512"
     },
-    "MassTransit.Abstractions/9.2.0-develop.151": {
+    "MassTransit.Abstractions/9.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WZia00p3f0Xx4y5V+iXxo5GT0aE1yOVmTB4uC58zqhmaKTISc//h/7btxLWLBejlog2z+oCgCzAV+mYc5txPMw==",
-      "path": "masstransit.abstractions/9.2.0-develop.151",
-      "hashPath": "masstransit.abstractions.9.2.0-develop.151.nupkg.sha512"
+      "sha512": "sha512-o2MymiTaxaJ0LUNm6W/8taD1u6Q/hyee1FwM/XvJ8l4IHgGBOVllPLuViYiI/XDu/t86ErjXOJqXrkOB/+ZrCg==",
+      "path": "masstransit.abstractions/9.1.2",
+      "hashPath": "masstransit.abstractions.9.1.2.nupkg.sha512"
     },
-    "MassTransit.AspNetCore/9.2.0-develop.151": {
+    "MassTransit.AspNetCore/7.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-uYNb21mZxz8l5WEK8yk3ywP8kj359N0ILsSxD6GEMqV7x6l2teQ2HkV9pKx/vmf3UzYHaC6bDWgGmti8WgNsDA==",
-      "path": "masstransit.aspnetcore/9.2.0-develop.151",
-      "hashPath": "masstransit.aspnetcore.9.2.0-develop.151.nupkg.sha512"
+      "sha512": "sha512-l5zu6mHevPQGP1tfDg4My8dtqH4n2jL22+Y1+GnAs12liQy5gYLcJAwSmCKb1iusjjD9S1tgfdILVkAfShfN8w==",
+      "path": "masstransit.aspnetcore/7.3.1",
+      "hashPath": "masstransit.aspnetcore.7.3.1.nupkg.sha512"
     },
-    "MassTransit.RabbitMQ/9.2.0-develop.151": {
+    "MassTransit.Extensions.DependencyInjection/7.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GodyCEnal3aosCVDzl74VuWFs/FCA9haBXHp0azsXEK9/QAIVvht9WqteU8ayqz1hsG8+9bNgZC0EulkdauR6Q==",
-      "path": "masstransit.rabbitmq/9.2.0-develop.151",
-      "hashPath": "masstransit.rabbitmq.9.2.0-develop.151.nupkg.sha512"
+      "sha512": "sha512-s1gnkYUngHNP9m2+Jx1vuUAvoVm4KB3oVbtFJUlXNtBBzhRFq1N3Y0w5iiew60ZBLm0j0RQcSRbI0ahMOkL+og==",
+      "path": "masstransit.extensions.dependencyinjection/7.3.1",
+      "hashPath": "masstransit.extensions.dependencyinjection.7.3.1.nupkg.sha512"
+    },
+    "MassTransit.RabbitMQ/9.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yc6qZJdHl5M+7ceTbgUOXXQnl6csuv3Sguv/DWY5xtrkPk8uRwI9isGowDeMGjJgNmbWWy1K7LXjNw+xY+Y5XA==",
+      "path": "masstransit.rabbitmq/9.1.2",
+      "hashPath": "masstransit.rabbitmq.9.1.2.nupkg.sha512"
     },
     "MediatR/14.2.0": {
       "type": "package",

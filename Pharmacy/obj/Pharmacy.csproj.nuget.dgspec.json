@@ -86,15 +86,15 @@
             },
             "MassTransit": {
               "target": "Package",
-              "version": "[9.2.0-develop.151, )"
+              "version": "[9.1.2, )"
             },
             "MassTransit.AspNetCore": {
               "target": "Package",
-              "version": "[9.2.0-develop.151, )"
+              "version": "[7.3.1, )"
             },
             "MassTransit.RabbitMQ": {
               "target": "Package",
-              "version": "[9.2.0-develop.151, )"
+              "version": "[9.1.2, )"
             },
             "MediatR": {
               "target": "Package",

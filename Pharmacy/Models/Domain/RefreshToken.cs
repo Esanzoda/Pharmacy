@@ -1,4 +1,5 @@
 using Elastic.Clients.Elasticsearch.Security;
+using Pharmasy.Models.Domain;
 
 namespace Pharmasy.Models.Domain;
 

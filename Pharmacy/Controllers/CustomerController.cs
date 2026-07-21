@@ -1,15 +1,11 @@
-using AutoMapper;
-using MassTransit.Internals;
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services;
-using Pharmasy.Services.Customer.Command;
-using Pharmasy.Services.Customer.Query;
-using static Pharmasy.Models.Domain.Enum.Role;
+using Pharmasy.CQRS.Customer.Commands;
+using Pharmasy.CQRS.Customer.Queries;
 
 namespace Pharmasy.Controllers;
 
@@ -34,17 +30,19 @@ public class CustomerController : ControllerBase
 
     [Authorize]
     [HttpPut]
-    public async Task<ActionResult<CustomerResponse>> Update(long id, [FromBody] UpdateCustomerRequest request)
+    public async Task<ActionResult<CustomerResponse>> Update([FromBody] UpdateCustomerRequest request)
     {
-        var response = await _mediator.Send(new UpdateCustomerCommand(id, request));
+        var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var response = await _mediator.Send(new UpdateCustomerCommand(customerId, request));
         return Ok(response);
     }
 
     [Authorize]
     [HttpPatch]
-    public async Task<ActionResult<CustomerResponse>> UpdatePassword(long id, [FromBody] string newPassword)
+    public async Task<ActionResult<CustomerResponse>> UpdatePassword([FromBody] string newPassword)
     {
-        var response = await _mediator.Send(new UpdateCustomerPasswordCommand(id, newPassword));
+        var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var response = await _mediator.Send(new UpdateCustomerPasswordCommand(customerId, newPassword));
         return Ok(response);
     }
 
@@ -52,6 +50,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<CustomerResponse>> GetById(long id)
     {
+        var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         var response = await _mediator.Send(new GetCustomerByIdQuery(id));
         return Ok(response);
     }
@@ -60,7 +59,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
-        var response = await _mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize));
+        var response = await _mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize), HttpContext.RequestAborted);
         return Ok(response);
     }
 

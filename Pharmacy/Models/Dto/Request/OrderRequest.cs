@@ -5,7 +5,6 @@ namespace Pharmasy.Models.Dto.Request;
 
 public record OrderRequest
 {
-    public long CustomerId { get; set; }
     public OrderType OrderType { get; set; }
     public DateTime? GetTime { get; set; }
     public string? Adress { get; set; }

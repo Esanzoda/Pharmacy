@@ -1,5 +1,3 @@
-using Pharmasy.Models.Domain;
-
 namespace Pharmasy.Models.Dto.Response;
 
 public record CustomerResponse

@@ -1,3 +1,4 @@
+using Pharmasy.Models.Domain;
 using Pharmasy.Models.Domain.Enum;
 
 namespace Pharmasy.Models.Domain;
@@ -14,4 +15,6 @@ public class Order : BaseEntity
 
     public List<OrderItem> OrderItems { get; set; }
         = new List<OrderItem>();
+
+    public CategoryStatus CategoryStatus { get; set; }
 }

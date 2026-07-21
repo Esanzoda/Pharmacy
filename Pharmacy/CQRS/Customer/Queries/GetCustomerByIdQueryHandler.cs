@@ -1,0 +1,53 @@
+using AutoMapper;
+using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
+using Pharmasy.Exception;
+using Pharmasy.Interfaces;
+using Pharmasy.Models.Dto.Response;
+
+namespace Pharmasy.CQRS.Customer.Queries;
+
+public record GetCustomerByIdQuery(
+    long Id
+) : IRequest<CustomerResponse>;
+
+public class GetCustomerByIdHandler(
+    IDistributedCache cache,
+    IMapper mapper,
+    IApplicationDbContext dbContext)
+    : IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
+{
+    public async Task<CustomerResponse> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+    {
+        var key = $"CustomerById-{request.Id}";
+        var cachedCustomer = await cache.GetStringAsync(key, cancellationToken);
+        if (cachedCustomer is not null)
+        {
+            var redis = JsonConvert.DeserializeObject<CustomerResponse>(cachedCustomer);
+
+            if (redis is not null)
+            {
+                return redis;
+            }
+        }
+
+        var customer = await dbContext.Customers
+            .FindAsync(request.Id, cancellationToken);
+        if (customer is null)
+        {
+            throw new ResourseNotFoundException("Customer not found");
+        }
+
+        var response = mapper.Map<CustomerResponse>(customer);
+        await cache.SetStringAsync(
+            key,
+            JsonConvert.SerializeObject(response),
+            new DistributedCacheEntryOptions()
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1)
+            },
+            cancellationToken);
+        return response;
+    }
+}

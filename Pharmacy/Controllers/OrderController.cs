@@ -1,11 +1,12 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Domain.Enum;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services.Order.Command;
-using Pharmasy.Services.Order.Query;
+using Pharmasy.CQRS.Order.Commands;
+using Pharmasy.CQRS.Order.Queries;
 
 namespace Pharmasy.Controllers;
 
@@ -25,18 +26,19 @@ public class OrderController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<OrderResponse>> Create([FromBody] OrderRequest request)
     {
-        var response = await _mediator.Send(new CreateOrderCommand(request));
+        var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var response = await _mediator.Send(new CreateOrderCommand(customerId,request));
         return Ok(response);
     }
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<OrderResponse>> CreateFromCart(long customerId,OrderType orderType,string address)
+    public async Task<ActionResult<OrderResponse>> CreateFromCart(OrderType orderType,string address)
     {
+        var customerId = long.Parse(User.FindFirstValue((ClaimTypes.NameIdentifier))!);
         var response = await _mediator.Send(new CreateOrderFromCartCommand(customerId, orderType, address));
         return Ok(response);
     }
     [Authorize]
-
     [HttpPut]
     public async Task<ActionResult<OrderResponse>> UpdateStatusAsync(long id, [FromBody] UpdateOrderRequest request)
     {
@@ -76,7 +78,8 @@ public class OrderController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult<OrderResponse>> RemoveItemFromAsync(long orderId, long orderItemId)
     {
-        var response = await _mediator.Send(new RemoveItemFromOrderCommand(orderId, orderItemId));
+        var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var response = await _mediator.Send(new RemoveItemFromOrderCommand(customerId,orderId, orderItemId));
         return Ok(response);
     }
 }

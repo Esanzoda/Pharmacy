@@ -1,0 +1,26 @@
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Pharmasy.Interfaces;
+using Pharmasy.Models.Dto.Response;
+
+namespace Pharmasy.CQRS.Pharmacy.Queries;
+
+public record GetAllPharmacyQuery(
+    int PageNumber,
+    int PageSize) : IRequest<List<PharmacyResponse>>;
+
+public class GetAllPharmacyQueryHandler(
+    IMapper mapper,
+    IApplicationDbContext dbContext) : IRequestHandler<GetAllPharmacyQuery, List<PharmacyResponse>>
+{
+    public async Task<List<PharmacyResponse>> Handle(GetAllPharmacyQuery request, CancellationToken cancellationToken)
+    {
+        var pharmacies = await dbContext.Pharmacies
+            .OrderBy(x => x.Id)
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync(cancellationToken);
+        return mapper.Map<List<PharmacyResponse>>(pharmacies);
+    }
+}

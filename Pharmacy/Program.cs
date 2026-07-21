@@ -4,8 +4,7 @@ using Hangfire;
 using Hangfire.PostgreSql;
 using MassTransit;
 using Pharmasy.Data;
-using Pharmasy.Repositories;
-using Pharmasy.Services;
+using Pharmasy.CQRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Pharmasy.Consumers;
@@ -62,6 +61,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer(typeof(OrderCreatedConsumer));
     x.AddConsumer(typeof(OrderCanselledConsumer));
     x.AddConsumer(typeof(OrderCompletedConsumer));
+    x.AddConsumer(typeof(ReportToCeoOrderCompleted));
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", hostConfigure =>
@@ -138,32 +138,11 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped<ChekExpiraDateProduct>();
-
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
-
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
-builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
-builder.Services.AddScoped<IPurchaseItemRepository, PurchaseItemRepository>();
-
-builder.Services.AddScoped<IDeliverRepository, DeliverRepository>();
-builder.Services.AddScoped<IRefreshToken,RefreshTokenRepository>();
-
 builder.Services.AddScoped<IMessageService, MessageService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
+builder.Services.AddScoped<CheckExpiredProductsJob>();
+builder.Services.AddScoped<Report>();
+
 
 var app = builder.Build();
 
@@ -171,14 +150,14 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var recurringJob = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
-    recurringJob.AddOrUpdate<ChekExpiraDateProduct>(
+  /*  recurringJob.AddOrUpdate<CheckExpiredProductsJob>(
         "check-expiry-data-products",
-        job => job.ChekExpiraDateAsync(24),
-        Cron.Daily());
+        job => job.CheckExpiredProductsAsync(),
+        Cron.Daily(0));*/
     recurringJob.AddOrUpdate<Report>(
         "report-to-ceo",
-        job => job.ReportToCeo(24),
-        Cron.Daily());
+        job => job.ReportToCeo(),
+        Cron.MinuteInterval(3));//in day one
 }
 if (app.Environment.IsDevelopment())
 {
@@ -186,6 +165,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy API"); });
 }
+app.UseHangfireDashboard();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();

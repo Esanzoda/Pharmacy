@@ -24,6 +24,7 @@ public class AppDbContext : DbContext,IApplicationDbContext
     public DbSet<ExpiryDateProduct> ExpireDateProducts { get; set; }
     public DbSet<ExpireDateItems> ExpireDateItems { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<Models.Domain.Pharmacy> Pharmacies { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

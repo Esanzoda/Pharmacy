@@ -1,0 +1,41 @@
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Pharmasy.Exception;
+using Pharmasy.Interfaces;
+using Pharmasy.Models.Dto.Response;
+
+namespace Pharmasy.CQRS.Product.Queries;
+
+public record GetProductsByCategoryIdQuery(
+    long CategoryId,
+    int Page,
+    int PageSize) : IRequest<List<ProductResponse>>;
+
+public class GetProductsByCategoryIdQueryHandler(
+    IApplicationDbContext dbContext,
+    IMapper mapper) : IRequestHandler<GetProductsByCategoryIdQuery, List<ProductResponse>>
+{
+    public async Task<List<ProductResponse>> Handle(GetProductsByCategoryIdQuery request,
+        CancellationToken cancellationToken)
+    {
+        var category = await dbContext.Categories
+            .Include(x => x.Products)
+            .FirstOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
+        if (category == null)
+        {
+            throw new ResourseNotFoundException("Category with this id  not found");
+        }
+
+
+        var product = await dbContext.Products
+            .Where(x => x.CategoryId == request.CategoryId)
+            .OrderBy(x => x.Id)
+            .Skip((request.Page - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync(cancellationToken);
+        if (!product.Any())
+            throw new ResourseNotFoundException("We dont have product  with categoryId ");
+        return mapper.Map<List<ProductResponse>>(product);
+    }
+}

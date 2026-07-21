@@ -1,43 +1,39 @@
 using MassTransit;
+using MediatR;
 using Pharmasy.Messages.Events;
-using Pharmasy.Repositories;
-using Pharmasy.Services;
+using Pharmasy.CQRS.Notification.Commands;
+using Pharmasy.Interfaces;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCreatedConsumer : IConsumer<OrderCreatedEvent>
+public class OrderCreatedConsumer(
+    ILogger<OrderCreatedConsumer> logger,
+    IMediator mediator,
+    IApplicationDbContext dbContext
+    ) : IConsumer<OrderCreatedEvent>
 {
-    private readonly ILogger<OrderCreatedConsumer> _logger;
-    private readonly IEmailService _emailService;
-    private readonly ICustomerRepository _customerRepository;
-
-    public OrderCreatedConsumer(ILogger<OrderCreatedConsumer> logger, IEmailService emailService,
-        ICustomerRepository customerRepository)
-    {
-        _logger = logger;
-        _emailService = emailService;
-        _customerRepository = customerRepository;
-    }
+   
 
     public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
     {
         var message = context.Message;
 
-        _logger.LogInformation(
+        logger.LogInformation(
             "Order created: OrderId={OrderId}, CustomerId={CustomerId}, Total={Total} , CreatedAt={CreatededAt}",
             message.OrderId,
-            message.UserId,
+            message.CustomerId,
             message.TotalAmount,
             message.CreatedAt);
 
-        var user = await _customerRepository.GetByIdAsync(message.UserId);
+        var user = await dbContext.Customers
+            .FindAsync(message.CustomerId);
         if (user != null)
         {
-            await _emailService.SendOrderCreatedAsync(
+            await  mediator.Send(new SendToEmailCustomerOrderCreateCommand(
                 user.Email,
                 message.OrderId,
                 message.TotalAmount,
-                message.CreatedAt);
+                message.CreatedAt));
         }
     }
 }

@@ -19,6 +19,7 @@ public interface IApplicationDbContext
     DbSet<ExpiryDateProduct> ExpireDateProducts { get; }
     DbSet<ExpireDateItems> ExpireDateItems { get; }
     DbSet<RefreshToken> RefreshTokens { get; }
+    DbSet<Models.Domain.Pharmacy> Pharmacies { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

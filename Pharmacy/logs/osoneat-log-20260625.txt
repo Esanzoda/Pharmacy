@@ -469,7 +469,7 @@ Pharmasy.Exeption.ResourseNotFoundExeption: No products found
    at InvokeStub_TaskAwaiter.GetResult(Object, Object, IntPtr*)
    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 2026-06-25 15:21:57.115 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-25 15:21:57.380 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Int64), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Decimal), @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:21:57.380 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Int64), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Decimal), @p7='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Orders" ("Adress", "CreateAt", "CustomerId", "IsDeleted", "OrderStatus", "OrderType", "TotalPrice", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
 RETURNING "Id";
@@ -484,18 +484,18 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving 
    at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
    at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
    at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
-   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandHandlerType CommandHandlerType)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -511,18 +511,18 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving 
    at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
    at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
    at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
-   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandHandlerType CommandHandlerType)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -583,7 +583,7 @@ Pharmasy.Exeption.ResourseNotFoundExeption: No products found
 2026-06-25 15:40:21.461 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-25 15:40:21.461 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-25 15:40:21.513 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 61.8875 ms
-2026-06-25 15:40:52.789 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:40:52.789 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -596,12 +596,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -614,10 +614,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -631,12 +631,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -649,10 +649,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -661,7 +661,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:40:52.949 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 15:40:52.949 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 330.7756 ms
 2026-06-25 15:40:59.431 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 6.9378 ms
-2026-06-25 15:42:02.807 -07:00 [ERR] Failed executing DbCommand (27ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:42:02.807 -07:00 [ERR] Failed executing DbCommandHandler (27ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -674,12 +674,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -692,10 +692,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -709,12 +709,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -727,10 +727,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -738,7 +738,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
 2026-06-25 15:42:02.905 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 15:42:02.905 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 17399.3897 ms
-2026-06-25 15:42:36.773 -07:00 [ERR] Failed executing DbCommand (10ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:42:36.773 -07:00 [ERR] Failed executing DbCommandHandler (10ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -751,12 +751,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -769,10 +769,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -786,12 +786,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -804,10 +804,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -829,7 +829,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:51:37.209 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 44955.5763 ms
 2026-06-25 15:51:56.938 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 3962.4549 ms
 2026-06-25 15:52:10.919 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 404 in 35.7085 ms
-2026-06-25 15:52:17.701 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:52:17.701 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -842,12 +842,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -860,10 +860,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -877,12 +877,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -895,10 +895,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -907,7 +907,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:52:17.793 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 15:52:17.793 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 98.6885 ms
 2026-06-25 15:52:30.447 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 4.3675 ms
-2026-06-25 15:52:47.173 -07:00 [ERR] Failed executing DbCommand (11ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:52:47.173 -07:00 [ERR] Failed executing DbCommandHandler (11ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -920,12 +920,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -938,10 +938,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -955,12 +955,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -973,10 +973,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -985,7 +985,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:52:47.279 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 15:52:47.280 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 8992.0999 ms
 2026-06-25 15:53:00.736 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 3454.4832 ms
-2026-06-25 15:53:18.339 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:53:18.339 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -998,12 +998,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1016,10 +1016,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1033,12 +1033,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1051,10 +1051,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1063,7 +1063,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:53:18.429 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 15:53:18.429 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 8159.9188 ms
 2026-06-25 15:54:00.667 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 404 in 4353.3523 ms
-2026-06-25 15:54:41.743 -07:00 [ERR] Failed executing DbCommand (6ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:54:41.743 -07:00 [ERR] Failed executing DbCommandHandler (6ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1076,12 +1076,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1094,10 +1094,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1111,12 +1111,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1129,10 +1129,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1158,7 +1158,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 15:56:16.579 -07:00 [INF] Server macbook-pro-:14563:141842c1 all the dispatchers started
 2026-06-25 15:56:16.626 -07:00 [INF] Bus started: "rabbitmq://localhost/"
 2026-06-25 15:56:42.789 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-25 15:56:48.075 -07:00 [ERR] Failed executing DbCommand (5ms) [Parameters=[@p8='?' (DbType = DateTime), @p9='?' (DbType = Boolean), @p10='?' (DbType = Int64), @p11='?' (DbType = Decimal), @p12='?' (DbType = Int64), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 15:56:48.075 -07:00 [ERR] Failed executing DbCommandHandler (5ms) [Parameters=[@p8='?' (DbType = DateTime), @p9='?' (DbType = Boolean), @p10='?' (DbType = Int64), @p11='?' (DbType = Decimal), @p12='?' (DbType = Int64), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "OrderItems" ("CreateAt", "IsDeleted", "OrderId", "Price", "ProductId", "Quantity", "TotalPrice", "UpdateAt")
 VALUES (@p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15)
 RETURNING "Id";
@@ -1171,12 +1171,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23503
@@ -1189,10 +1189,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 2783
     Routine: ri_ReportViolation
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1206,12 +1206,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23503
@@ -1224,10 +1224,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 2783
     Routine: ri_ReportViolation
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1269,7 +1269,7 @@ Pharmasy.Exeption.ResourseNotFoundExeption: No products found
 2026-06-25 16:01:01.768 -07:00 [INF] Server macbook-pro-:14804:0450ff94 all the dispatchers started
 2026-06-25 16:01:01.832 -07:00 [INF] Bus started: "rabbitmq://localhost/"
 2026-06-25 16:01:13.922 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-25 16:01:14.713 -07:00 [ERR] Failed executing DbCommand (6ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:01:14.713 -07:00 [ERR] Failed executing DbCommandHandler (6ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1282,12 +1282,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1300,10 +1300,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1317,12 +1317,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1335,10 +1335,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1374,7 +1374,7 @@ Pharmasy.Exeption.ResourseNotFoundExeption: No products found
 2026-06-25 16:05:22.283 -07:00 [INF] Server macbook-pro-:15067:97c6d4c2 all the dispatchers started
 2026-06-25 16:05:22.343 -07:00 [INF] Bus started: "rabbitmq://localhost/"
 2026-06-25 16:05:36.445 -07:00 [WRN] Failed to determine the https port for redirect.
-2026-06-25 16:05:37.213 -07:00 [ERR] Failed executing DbCommand (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:05:37.213 -07:00 [ERR] Failed executing DbCommandHandler (7ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1387,12 +1387,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23503
@@ -1405,10 +1405,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 2783
     Routine: ri_ReportViolation
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1422,12 +1422,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23503
@@ -1440,10 +1440,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 2783
     Routine: ri_ReportViolation
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1459,7 +1459,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 16:07:56.419 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-25 16:07:56.463 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 58.4050 ms
 2026-06-25 16:10:32.074 -07:00 [INF] 1 servers were removed due to timeout
-2026-06-25 16:11:40.243 -07:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:11:40.243 -07:00 [ERR] Failed executing DbCommandHandler (4ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1472,12 +1472,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1490,10 +1490,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1507,12 +1507,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1525,10 +1525,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1557,38 +1557,38 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 16:15:21.159 -07:00 [WRN] Failed to determine the https port for redirect.
 2026-06-25 16:15:59.971 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-25 16:15:59.973 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
-2026-06-25 16:15:59.988 -07:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:15:59.988 -07:00 [ERR] Failed executing DbCommandHandler (2ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
 LIMIT @p1 OFFSET @p
 2026-06-25 16:15:59.993 -07:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Pharmasy.Data.AppDbContext'.
-Npgsql.NpgsqlOperationInProgressException (0x80004005): A command is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
+Npgsql.NpgsqlOperationInProgressException (0x80004005): A CommandHandler is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
-   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommand command)
-   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|285_0(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
-   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommandHandler CommandHandler)
+   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|285_0(ConnectorState newState, NpgsqlCommandHandler CommandHandler, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommandHandler CommandHandler, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
-Npgsql.NpgsqlOperationInProgressException (0x80004005): A command is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
+Npgsql.NpgsqlOperationInProgressException (0x80004005): A CommandHandler is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
-   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommand command)
-   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|285_0(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
-   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommandHandler CommandHandler)
+   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|285_0(ConnectorState newState, NpgsqlCommandHandler CommandHandler, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommandHandler CommandHandler, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
    at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
-2026-06-25 16:16:00.051 -07:00 [ERR] A command is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
+2026-06-25 16:16:00.051 -07:00 [ERR] A CommandHandler is already in progress: SELECT c."Id", c."Address", c."CreateAt", c."Email", c."IsDeleted", c."Name", c."PhoneNumber", c."UpdateAt"
 FROM "Customers" AS c
 2026-06-25 16:16:00.052 -07:00 [INF] HTTP GET /api/Customer/GetAllCustomersByPagenation responded 200 in 38888.6315 ms
 2026-06-25 16:17:18.372 -07:00 [INF] Start installing Hangfire SQL objects...
@@ -1632,7 +1632,7 @@ FROM "Customers" AS c
 2026-06-25 16:19:57.819 -07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
 2026-06-25 16:20:39.011 -07:00 [INF] HTTP GET /api/Product/GetAllOrdersByPagenation responded 200 in 51951.6012 ms
 2026-06-25 16:22:12.602 -07:00 [INF] HTTP POST /api/Category/CreateCategory/dtefrted responded 200 in 49282.1813 ms
-2026-06-25 16:24:17.316 -07:00 [ERR] Failed executing DbCommand (15ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:24:17.316 -07:00 [ERR] Failed executing DbCommandHandler (15ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1645,12 +1645,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1663,10 +1663,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1680,12 +1680,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1698,10 +1698,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1728,7 +1728,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-06-25 16:26:58.705 -07:00 [INF] Bus started: "rabbitmq://localhost/"
 2026-06-25 16:27:08.358 -07:00 [WRN] Failed to determine the https port for redirect.
 2026-06-25 16:27:15.620 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 404 in 7255.8813 ms
-2026-06-25 16:27:38.997 -07:00 [ERR] Failed executing DbCommand (19ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:27:38.997 -07:00 [ERR] Failed executing DbCommandHandler (19ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1741,12 +1741,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1759,10 +1759,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1776,12 +1776,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1794,10 +1794,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1805,7 +1805,7 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
 2026-06-25 16:27:39.078 -07:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
 2026-06-25 16:27:39.079 -07:00 [INF] HTTP POST /api/Product/CreateProduct responded 200 in 10134.4092 ms
-2026-06-25 16:28:39.044 -07:00 [ERR] Failed executing DbCommand (14ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 16:28:39.044 -07:00 [ERR] Failed executing DbCommandHandler (14ms) [Parameters=[@p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 INSERT INTO "Products" ("Barcode", "CategoryId", "Country", "CreateAt", "Description", "ExpiryDate", "IsDeleted", "Name", "OrderPrice", "ProductType", "PurchasePrice", "Stock", "UpdateAt")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
 RETURNING "Id";
@@ -1818,12 +1818,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1836,10 +1836,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -1853,12 +1853,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -1871,10 +1871,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2225,7 +2225,7 @@ Pharmasy.Exeption.BusinessExseption: Insufficient product stock0 for the request
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
    at Pharmasy.Middlewares.ExseptionMiddleware.Invoke(HttpContext context) in /Users/orash/RiderProjects/Pharmacy/Pharmacy/Middlewares/ExseptionMiddleware.cs:line 20
 2026-06-25 17:03:14.706 -07:00 [INF] HTTP POST /Order/AddItemToOrder responded 200 in 7108.5949 ms
-2026-06-25 17:03:35.415 -07:00 [ERR] Failed executing DbCommand (12ms) [Parameters=[@p13='?' (DbType = Int64), @p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 17:03:35.415 -07:00 [ERR] Failed executing DbCommandHandler (12ms) [Parameters=[@p13='?' (DbType = Int64), @p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 UPDATE "Products" SET "Barcode" = @p0, "CategoryId" = @p1, "Country" = @p2, "CreateAt" = @p3, "Description" = @p4, "ExpiryDate" = @p5, "IsDeleted" = @p6, "Name" = @p7, "OrderPrice" = @p8, "ProductType" = @p9, "PurchasePrice" = @p10, "Stock" = @p11, "UpdateAt" = @p12
 WHERE "Id" = @p13;
 2026-06-25 17:03:35.427 -07:00 [ERR] An exception occurred in the database while saving changes for context type 'Pharmasy.Data.AppDbContext'.
@@ -2237,12 +2237,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -2255,10 +2255,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2272,12 +2272,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -2290,10 +2290,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2319,7 +2319,7 @@ Pharmasy.Exeption.BusinessExseption: Insufficient product stock0 for the request
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
    at Pharmasy.Middlewares.ExseptionMiddleware.Invoke(HttpContext context) in /Users/orash/RiderProjects/Pharmacy/Pharmacy/Middlewares/ExseptionMiddleware.cs:line 20
 2026-06-25 17:04:09.143 -07:00 [INF] HTTP POST /Order/AddItemToOrder responded 200 in 25325.1274 ms
-2026-06-25 17:04:09.147 -07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@p13='?' (DbType = Int64), @p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+2026-06-25 17:04:09.147 -07:00 [ERR] Failed executing DbCommandHandler (1ms) [Parameters=[@p13='?' (DbType = Int64), @p0='?', @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = DateTime), @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Decimal), @p9='?' (DbType = Int32), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandHandlerType='"Text"', CommandHandlerTimeout='30']
 UPDATE "Products" SET "Barcode" = @p0, "CategoryId" = @p1, "Country" = @p2, "CreateAt" = @p3, "Description" = @p4, "ExpiryDate" = @p5, "IsDeleted" = @p6, "Name" = @p7, "OrderPrice" = @p8, "ProductType" = @p9, "PurchasePrice" = @p10, "Stock" = @p11, "UpdateAt" = @p12
 WHERE "Id" = @p13;
 2026-06-25 17:04:09.149 -07:00 [ERR] An exception occurred in the database while saving changes for context type 'Pharmasy.Data.AppDbContext'.
@@ -2331,12 +2331,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -2349,10 +2349,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
@@ -2366,12 +2366,12 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
    at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
    at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
-   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteReader(Boolean async, CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommandHandler.ExecuteDbDataReaderAsync(CommandHandlerBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommandHandler.ExecuteReaderAsync(RelationalCommandHandlerParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
   Exception data:
     Severity: ERROR
     SqlState: 23505
@@ -2384,10 +2384,10 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
     Line: 673
     Routine: _bt_check_unique
    --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandHandlerBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 CommandHandlerBatches, IRelationalConnection connection, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)

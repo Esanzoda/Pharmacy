@@ -2,8 +2,6 @@ using AutoMapper;
 using Pharmasy.Models.Domain;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Purchase = Pharmasy.Models.Domain.Purchase;
-
 namespace Pharmasy.Mappers;
 
 public class Mappers : Profile
@@ -44,6 +42,9 @@ public class Mappers : Profile
         CreateMap<CustomerRequest, Customer>()
             .ForMember(x => x.PasswordHash, opt => opt.Ignore());
         CreateMap<Customer, CustomerResponse>();
+        CreateMap<UpdateCustomerRequest, Customer>();
+        CreateMap<Customer, CustomerResponse>();
+        
 
         CreateMap<EmployeeRequest, Employee>()
             .ForMember(x => x.PasswordHash, opt => opt.Ignore());
@@ -55,5 +56,8 @@ public class Mappers : Profile
 
         CreateMap<DeliverRequest, Deliver>();
         CreateMap<Deliver, DeliverResponse>();
+
+        CreateMap<PharmacyRequest,Pharmacy>();
+        CreateMap<Pharmacy, PharmacyResponse>();
     }
 }

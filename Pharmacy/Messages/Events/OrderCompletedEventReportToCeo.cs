@@ -2,7 +2,8 @@ namespace Pharmasy.Messages.Events;
 
 public class OrderCompletedEventReportToCeo
 {
-    public DateTime  day{ get; set; }
-    public int  count { get; set; }
-    public decimal  totalamout { get; set; }
+    public string?  To { get; set; }
+    public DateTime Day { get; set; }
+    public int Count { get; set; }
+    public decimal Totalamout { get; set; }
 }

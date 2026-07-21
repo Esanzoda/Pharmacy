@@ -1,0 +1,59 @@
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Pharmasy.Exception;
+using Pharmasy.Interfaces;
+using Pharmasy.Models.Dto.Response;
+
+namespace Pharmasy.CQRS.Purchase.Commands;
+
+public record RemoveItemFromPurchaseCommand(
+    long EmployeeId,
+    long PurchaseId,
+    long ItemId) : IRequest<PurchaseResponse>;
+
+public class RemovItemFromPurchaseCommandHandler(
+    IApplicationDbContext dbContext,
+    IMapper mapper)
+    : IRequestHandler<RemoveItemFromPurchaseCommand, PurchaseResponse>
+{
+    public async Task<PurchaseResponse> Handle(RemoveItemFromPurchaseCommand request,
+        CancellationToken cancellationToken)
+    {
+        var employee = await dbContext.Employees
+            .FindAsync(request.EmployeeId, cancellationToken);
+        if (employee == null)
+        {
+            throw new ResourseNotFoundException("Employee not found");
+        }
+
+        var purchase = await dbContext.Purchases
+            .Include(x => x.PurchaseItems)
+            .FirstOrDefaultAsync(x => x.Id == request.PurchaseId, cancellationToken);
+        if (purchase == null)
+        {
+            throw new ResourseNotFoundException("Purchase not found");
+        }
+
+        var purchaseItemToRemove = purchase.PurchaseItems.FirstOrDefault(x => x.Id == request.ItemId);
+        if (purchaseItemToRemove == null)
+        {
+            throw new ResourseNotFoundException("Purchase item not found");
+        }
+
+        var product = await dbContext.Products
+            .FindAsync(purchaseItemToRemove.ProductId, cancellationToken);
+        if (product == null)
+            throw new ResourseNotFoundException("Porduct not found");
+
+        product.Stock -= purchaseItemToRemove.Quantity;
+
+        purchase.PurchaseItems.Remove(purchaseItemToRemove);
+        dbContext.PurchaseItems.Remove(purchaseItemToRemove);
+        purchase.TotalAmount = purchase.PurchaseItems.Sum(item => item.TotalPrice);
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return mapper.Map<PurchaseResponse>(purchaseItemToRemove);
+    }
+}

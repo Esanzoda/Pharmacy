@@ -1,46 +1,39 @@
 using MassTransit;
+using MediatR;
 using Pharmasy.Messages.Events;
-using Pharmasy.Repositories;
-using Pharmasy.Services;
+using Pharmasy.CQRS;
+using Pharmasy.CQRS.Notification.Commands;
+using Pharmasy.Interfaces;
 
 namespace Pharmasy.Consumers;
 
-public class OrderCanselledConsumer : IConsumer<OrderCancelledEvent>
+public class OrderCanselledConsumer(
+    IApplicationDbContext dbContext,
+    ILogger<OrderCanselledConsumer> logger,
+    IMediator mediator,
+    IMessageService messageService
+) : IConsumer<OrderCancelledEvent>
 {
-    private readonly ILogger<OrderCanselledConsumer> _logger;
-    private readonly IEmailService _emailService;
-    private readonly ICustomerRepository _customerRepository;
-    private readonly IMessageService _messageService;
-
-    public OrderCanselledConsumer(
-        ILogger<OrderCanselledConsumer> logger,
-        IEmailService emailService,
-        ICustomerRepository customerRepository, IMessageService messageService)
-    {
-        _logger = logger;
-        _emailService = emailService;
-        _customerRepository = customerRepository;
-        _messageService = messageService;
-    }
-
     public async Task Consume(ConsumeContext<OrderCancelledEvent> context)
     {
         var message = context.Message;
 
-        _logger.LogInformation(
+        logger.LogInformation(
             "Order cancelled: OrderId={OrderId}, CustomerId={CustomerId}",
             message.OrderId,
             message.CustomerId);
 
 
-        var user = await _customerRepository.GetByIdAsync(message.CustomerId);
+        var user = await dbContext.Customers
+            .FindAsync(message.CustomerId);
         if (user != null)
         {
-            await _emailService.SendOrderCancelledAsync(
+            await mediator.Send(new SendToEmailCustomerOrderCancelledCommand(
                 user.Email,
                 message.OrderId,
-                message.UpdateTime);
-            await _messageService.SendOrderCancelledAsync(
+                message.UpdateTime));
+                
+            await messageService.SendOrderCancelledAsync(
                 user.PhoneNumber,
                 message.OrderId,
                 message.UpdateTime

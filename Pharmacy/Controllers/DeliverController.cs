@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services;
+using Pharmasy.CQRS;
 
 namespace Pharmasy.Controllers;
 /*

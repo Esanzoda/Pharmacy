@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Pharmasy.CQRS.AuthService.Commands;
 using Pharmasy.Models.Dto.Response;
-using Pharmasy.Services.AuthService.Command;
 
 namespace Pharmasy.Controllers;
 
@@ -18,9 +18,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<CustomerResponse>> Register([FromBody] RegisterCommand registerCommand)
+    public async Task<ActionResult<CustomerResponse>> Register([FromBody] RegisterCommand registerCommandHandler)
     {
-        var response = await _mediator.Send(registerCommand);
+        var response = await _mediator.Send(registerCommandHandler);
         return Ok(response);
     }
 
@@ -31,13 +31,13 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
-    [Authorize]
     [HttpPost]
-    public async Task<ActionResult<LoginResponse>> ReCreateToken(ReGenerateRefreshTokenComman request)
+    public async Task<ActionResult<LoginResponse>> ReCreateToken(ReGenerateRefreshTokenCommand request)
     {
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
     [Authorize]
     [HttpPatch]
     public async Task<ActionResult<string>> ChangePassword(string oldPassword, string newPassword)
