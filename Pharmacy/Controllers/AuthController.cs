@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.CQRS.AuthService.Commands;
+using Pharmasy.CQRS.Auth.Commands;
 using Pharmasy.Models.Dto.Response;
 
 namespace Pharmasy.Controllers;

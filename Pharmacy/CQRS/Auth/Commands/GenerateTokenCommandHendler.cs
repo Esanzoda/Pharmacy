@@ -4,7 +4,7 @@ using System.Text;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Pharmasy.CQRS.AuthService.Commands;
+namespace Pharmasy.CQRS.Auth.Commands;
 
 public record GenerateTokenCommand(Pharmasy.Models.Domain.Customer Request) : IRequest<string>;
 

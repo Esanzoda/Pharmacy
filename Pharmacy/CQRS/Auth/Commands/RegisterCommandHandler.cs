@@ -6,7 +6,7 @@ using Pharmasy.Interfaces;
 using Pharmasy.Models.Dto.Request;
 using Pharmasy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.AuthService.Commands;
+namespace Pharmasy.CQRS.Auth.Commands;
 
 public record RegisterCommand(
     CustomerRequest Request) : IRequest<CustomerResponse>;

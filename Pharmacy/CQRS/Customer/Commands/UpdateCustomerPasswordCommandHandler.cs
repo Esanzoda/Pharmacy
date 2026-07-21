@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Pharmasy.CQRS.AuthService.Commands;
+using Pharmasy.CQRS.Auth.Commands;
 using Pharmasy.Exception;
 using Pharmasy.Interfaces;
 using Pharmasy.Models.Dto.Response;
