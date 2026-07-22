@@ -6,17 +6,14 @@ namespace Pharmacy.Infrastructure.Extensions;
 
 public static class DbContextExtensions
 {
-
-    public static void AddAppDbContext(this IServiceCollection serviceCollection ,IConfiguration configuration)
+    public static void AddAppDbContext(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        var connectionString=configuration.GetSection(ConnectionStringsOption.SettingName)
+        var connectionString = configuration.GetSection(ConnectionStringsOption.SettingName)
             .Get<ConnectionStringsOption>()!;
-       serviceCollection.AddDbContext<AppDbContext>((sp, options) =>
+        serviceCollection.AddDbContext<AppDbContext>((sp, options) =>
         {
             options.UseNpgsql(connectionString.DefaultConnection)
                 .AddInterceptors(sp.GetRequiredService<AuditableInterceptor>());
         });
-     
     }
-    
 }

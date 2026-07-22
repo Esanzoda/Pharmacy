@@ -8,6 +8,7 @@ public static class RedisExtensions
         {
             options.Configuration = webApplicationBuilder.Configuration.GetConnectionString("Redis");
             options.InstanceName = "Pharmacy";
+            
         });
     }
 }

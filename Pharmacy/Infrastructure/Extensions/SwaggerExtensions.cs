@@ -6,7 +6,6 @@ public static class SwaggerExtensions
 {
   public static void AddSwagger(this IServiceCollection serviceCollection)
   {
-    
     serviceCollection.AddSwaggerGen(options =>
     {
       options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

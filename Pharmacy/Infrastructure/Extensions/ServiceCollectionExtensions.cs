@@ -6,7 +6,6 @@ using Pharmacy.Interfaces;
 using Pharmacy.Jobs;
 
 namespace Pharmacy.Infrastructure.Extensions;
-
 public static class ServiceCollectionExtensions
 {
     public static void AddInfrastructure(this IServiceCollection serviceCollection)

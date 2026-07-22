@@ -6,7 +6,7 @@ namespace Pharmacy.Infrastructure.Extensions;
 
 public static class ConsumerExtensions
 {
-    public static void AddConsumers(this IServiceCollection serviceCollection,IConfiguration configuration)
+    public static void AddConsumers(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         var rabbitmq = configuration.GetSection(RabbitMqOption.SettingName)
             .Get<RabbitMqOption>();
