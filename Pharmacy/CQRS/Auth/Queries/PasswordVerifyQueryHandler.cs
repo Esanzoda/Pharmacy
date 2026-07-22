@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Pharmasy.CQRS.Auth.Queries;
+namespace Pharmacy.CQRS.Auth.Queries;
 public record PasswordVerifyQuery(
     string Password, 
     string PasswordHash) : IRequest<bool>;

@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using MediatR;
 
-namespace Pharmasy.CQRS.Auth.Commands;
+namespace Pharmacy.CQRS.Auth.Commands;
 
 public record GenereteRefreshTokenCommand : IRequest<string>;
 public class GenereteRefreshTokenHandler:IRequestHandler<GenereteRefreshTokenCommand,string>

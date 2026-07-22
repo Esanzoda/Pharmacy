@@ -1,5 +1,5 @@
 
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class Deliver : BaseEntity
 {

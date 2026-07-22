@@ -1,6 +1,6 @@
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Models.Domain.Enum;
 
-namespace Pharmasy.Models.Dto.Request;
+namespace Pharmacy.Models.Dto.Request;
 
 public record EmployeeRequest
 {

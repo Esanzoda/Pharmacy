@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Infrastructure.Configurations;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain;
+using Pharmacy.Infrastructure.Configurations;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Data;
+namespace Pharmacy.Data;
 
 public class AppDbContext : DbContext,IApplicationDbContext
 {

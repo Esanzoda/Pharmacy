@@ -1,6 +1,6 @@
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Models.Dto.Response;
+namespace Pharmacy.Models.Dto.Response;
 
 public record OrderResponse
 {

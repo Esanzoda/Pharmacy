@@ -1,7 +1,7 @@
-using Pharmasy.Models.Domain;
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Models.Dto.Request;
+namespace Pharmacy.Models.Dto.Request;
 
 public record OrderRequest
 {

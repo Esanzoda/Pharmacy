@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Pharmacy.Queries;
+namespace Pharmacy.CQRS.Pharmacy.Queries;
 
 public record GetAllPharmacyQuery(
     int PageNumber,

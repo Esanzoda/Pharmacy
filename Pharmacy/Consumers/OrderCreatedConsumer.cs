@@ -1,10 +1,10 @@
 using MassTransit;
 using MediatR;
-using Pharmasy.Messages.Events;
-using Pharmasy.CQRS.Notification.Commands;
-using Pharmasy.Interfaces;
+using Pharmacy.CQRS.Notification.Commands;
+using Pharmacy.Interfaces;
+using Pharmacy.Messages.Events;
 
-namespace Pharmasy.Consumers;
+namespace Pharmacy.Consumers;
 
 public class OrderCreatedConsumer(
     ILogger<OrderCreatedConsumer> logger,

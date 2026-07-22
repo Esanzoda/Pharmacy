@@ -2,12 +2,12 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
-using Pharmasy.CQRS.Customer.Commands;
-using Pharmasy.CQRS.Customer.Queries;
+using Pharmacy.CQRS.Customer.Commands;
+using Pharmacy.CQRS.Customer.Queries;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.Controllers;
+namespace Pharmacy.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]

@@ -1,14 +1,14 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.CQRS.Auth.Queries;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.CQRS.Auth.Queries;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
 
 
-namespace Pharmasy.CQRS.Auth.Commands;
+namespace Pharmacy.CQRS.Auth.Commands;
 
 public record LoginCommand(
     LoginRequest Request) : IRequest<LoginResponse>;

@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Pharmacy.Commands;
+namespace Pharmacy.CQRS.Pharmacy.Commands;
 
 public record UpdatePharmacyEmailCommand(long Id, string NewEmail) : IRequest<PharmacyResponse>;
 

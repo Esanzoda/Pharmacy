@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Customer.Commands;
+namespace Pharmacy.CQRS.Customer.Commands;
 
 public record DeleteCustomerCommand(
     long Id

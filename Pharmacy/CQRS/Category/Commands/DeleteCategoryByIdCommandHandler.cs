@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Category.Commands;
+namespace Pharmacy.CQRS.Category.Commands;
 
 public record DeleteCategoryCommand(
     long Id) : IRequest<bool>;

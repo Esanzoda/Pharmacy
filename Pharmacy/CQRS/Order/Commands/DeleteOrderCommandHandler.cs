@@ -1,8 +1,8 @@
 using MediatR;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Order.Commands;
+namespace Pharmacy.CQRS.Order.Commands;
 
 public record DeleteOrderCommand(
     long OrderId) : IRequest<bool>;

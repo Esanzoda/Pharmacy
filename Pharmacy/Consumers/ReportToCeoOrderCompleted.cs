@@ -1,9 +1,9 @@
 using MassTransit;
 using MediatR;
-using Pharmasy.CQRS.Notification.Commands;
-using Pharmasy.Messages.Events;
+using Pharmacy.CQRS.Notification.Commands;
+using Pharmacy.Messages.Events;
 
-namespace Pharmasy.Consumers;
+namespace Pharmacy.Consumers;
 
 public class ReportToCeoOrderCompleted(
     IMediator mediator,

@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.CQRS.ExpiredProducts.Commands;
+namespace Pharmacy.CQRS.ExpiredProducts.Commands;
 
 public record CreateExpiredProductsCommand : IRequest;
 

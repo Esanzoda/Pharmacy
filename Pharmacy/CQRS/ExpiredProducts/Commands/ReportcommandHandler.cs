@@ -1,12 +1,12 @@
 using MassTransit;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Data;
-using Pharmasy.Jobs;
-using Pharmasy.Messages.Events;
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Data;
+using Pharmacy.Jobs;
+using Pharmacy.Messages.Events;
+using Pharmacy.Models.Domain.Enum;
 
-namespace Pharmasy.CQRS.ExpiredProducts.Commands;
+namespace Pharmacy.CQRS.ExpiredProducts.Commands;
 
 public record ReportCommand : IRequest;
 

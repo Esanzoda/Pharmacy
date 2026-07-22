@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Infrastructure.Configurations;
+namespace Pharmacy.Infrastructure.Configurations;
 
 public class PurchaseItemConfiguration : IEntityTypeConfiguration<PurchaseItem>
 {

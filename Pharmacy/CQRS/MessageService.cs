@@ -1,6 +1,6 @@
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.CQRS;
+namespace Pharmacy.CQRS;
 
 public interface IMessageService
 {

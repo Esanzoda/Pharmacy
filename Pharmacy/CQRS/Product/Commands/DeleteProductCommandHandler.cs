@@ -1,8 +1,8 @@
 using MediatR;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Product.Commands;
+namespace Pharmacy.CQRS.Product.Commands;
 
 public record DeleteProductCommand(
     long Id

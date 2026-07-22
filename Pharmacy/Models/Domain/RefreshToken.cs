@@ -1,7 +1,7 @@
 using Elastic.Clients.Elasticsearch.Security;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class RefreshToken:BaseEntity
 {

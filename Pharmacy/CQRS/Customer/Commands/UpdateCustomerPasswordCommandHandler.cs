@@ -1,12 +1,12 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Pharmasy.CQRS.Auth.Commands;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.CQRS.Auth.Commands;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Customer.Commands;
+namespace Pharmacy.CQRS.Customer.Commands;
 
 public record UpdateCustomerPasswordCommand(
     long Id,

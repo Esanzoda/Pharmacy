@@ -1,7 +1,7 @@
 using MediatR;
-using Pharmasy.CQRS.ExpiredProducts.Commands;
+using Pharmacy.CQRS.ExpiredProducts.Commands;
 
-namespace Pharmasy.Jobs;
+namespace Pharmacy.Jobs;
 
 public class Report(IMediator mediator)
 {

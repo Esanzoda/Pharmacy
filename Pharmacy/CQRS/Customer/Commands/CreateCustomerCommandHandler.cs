@@ -1,14 +1,14 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.CQRS.Auth.Commands;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.CQRS.Auth.Commands;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Customer.Commands;
+namespace Pharmacy.CQRS.Customer.Commands;
 
 public record CreateCustomerCommand(
     CustomerRequest Request
@@ -41,7 +41,7 @@ public class CreateCustomerHandler(
         newCustomer.PasswordHash = passwordHash;
 
 
-        var cart = new Pharmasy.Models.Domain.Cart
+        var cart = new Models.Domain.Cart
         {
             Customer = newCustomer,
             TotalAmount = 0

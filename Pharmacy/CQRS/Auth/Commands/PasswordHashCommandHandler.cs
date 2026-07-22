@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Pharmasy.CQRS.Auth.Commands;
+namespace Pharmacy.CQRS.Auth.Commands;
 
 public record PasswordHashCommand(
     string Password) : IRequest<string>;

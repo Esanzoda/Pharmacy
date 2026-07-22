@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Infrastructure.Configurations;
+namespace Pharmacy.Infrastructure.Configurations;
 
 public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {

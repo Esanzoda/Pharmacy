@@ -1,6 +1,6 @@
-using Pharmasy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Request;
 
-namespace Pharmasy.Models.Dto.Response;
+namespace Pharmacy.Models.Dto.Response;
 
 public class PurchaseResponse
 {

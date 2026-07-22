@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Interfaces;
+namespace Pharmacy.Interfaces;
 
 public interface IApplicationDbContext
 {

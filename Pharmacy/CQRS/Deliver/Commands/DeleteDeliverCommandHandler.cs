@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Deliver.Commands;
+namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record DeleteDeliverCommand(
     int Id

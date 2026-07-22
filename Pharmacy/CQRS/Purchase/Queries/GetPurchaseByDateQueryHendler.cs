@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Purchase.Queries;
+namespace Pharmacy.CQRS.Purchase.Queries;
 
 public record GetPurchaseByDateQuery(
     DateTime Date, 

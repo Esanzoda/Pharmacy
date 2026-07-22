@@ -3,17 +3,17 @@ using FluentValidation.AspNetCore;
 using Hangfire;
 using Hangfire.PostgreSql;
 using MassTransit;
-using Pharmasy.Data;
-using Pharmasy.CQRS;
+using Pharmacy.Data;
+using Pharmacy.CQRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
-using Pharmasy.Consumers;
-using Pharmasy.Jobs;
-using Pharmasy.Middlewares;
+using Pharmacy.Consumers;
+using Pharmacy.Jobs;
+using Pharmacy.Middlewares;
 using Serilog;using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Pharmasy.Interfaces;
+using Pharmacy.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);

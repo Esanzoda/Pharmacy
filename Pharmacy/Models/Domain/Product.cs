@@ -1,7 +1,7 @@
-using Pharmasy.Data;
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Data;
 
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class Product : BaseEntity
 {
