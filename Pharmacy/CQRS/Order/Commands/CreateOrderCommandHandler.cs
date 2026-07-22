@@ -58,17 +58,16 @@ public class CreateOrderCommandHandler(
                     $"Insufficient stock. Available: {product.Stock}");
             }
 
-            var exsistingOrderItem = order.OrderItems
+            var existingOrderItem = order.OrderItems
                 .FirstOrDefault(x => x.ProductId == item.ProductId);
-            if (exsistingOrderItem != null)
+            if (existingOrderItem != null)
             {
-                exsistingOrderItem.Quantity += item.Quantity;
-                exsistingOrderItem.TotalPrice = exsistingOrderItem.Quantity * product.Price;
+                existingOrderItem.Quantity += item.Quantity;
+                existingOrderItem.TotalPrice = existingOrderItem.Quantity * product.Price;
             }
             else
             {
                 var orderItem = mapper.Map<OrderItem>(item);
-                orderItem.OrderId = order.Id;
                 orderItem.Price = product.Price;
                 orderItem.TotalPrice = item.Quantity * product.Price;
                 await dbContext.OrderItems

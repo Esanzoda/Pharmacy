@@ -11,20 +11,15 @@ namespace Pharmacy.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class CustomerController : ControllerBase
+public class CustomerController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public CustomerController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+  
 
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<CustomerResponse>> Create([FromBody] CustomerRequest request)
     {
-        var response = await _mediator.Send(new CreateCustomerCommand(request));
+        var response = await mediator.Send(new CreateCustomerCommand(request));
         return Ok(response);
     }
 
@@ -33,7 +28,7 @@ public class CustomerController : ControllerBase
     public async Task<ActionResult<CustomerResponse>> Update([FromBody] UpdateCustomerRequest request)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new UpdateCustomerCommand(customerId, request));
+        var response = await mediator.Send(new UpdateCustomerCommand(customerId, request));
         return Ok(response);
     }
 
@@ -42,7 +37,7 @@ public class CustomerController : ControllerBase
     public async Task<ActionResult<CustomerResponse>> UpdatePassword([FromBody] string newPassword)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new UpdateCustomerPasswordCommand(customerId, newPassword));
+        var response = await mediator.Send(new UpdateCustomerPasswordCommand(customerId, newPassword));
         return Ok(response);
     }
 
@@ -51,7 +46,7 @@ public class CustomerController : ControllerBase
     public async Task<ActionResult<CustomerResponse>> GetById(long id)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new GetCustomerByIdQuery(id));
+        var response = await mediator.Send(new GetCustomerByIdQuery(id));
         return Ok(response);
     }
 
@@ -59,7 +54,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
-        var response = await _mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize), HttpContext.RequestAborted);
+        var response = await mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize), HttpContext.RequestAborted);
         return Ok(response);
     }
 
@@ -67,7 +62,7 @@ public class CustomerController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await _mediator.Send(new DeleteCustomerCommand(id));
+        var response = await mediator.Send(new DeleteCustomerCommand(id));
         return Ok(response);
     }
 
@@ -75,7 +70,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<CustomerResponse?>> GetByEmailAsync(string email)
     {
-        var response = await _mediator.Send(new GetCustomerByEmailQuery(email));
+        var response = await mediator.Send(new GetCustomerByEmailQuery(email));
         return Ok(response);
     }
 
@@ -83,7 +78,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<CustomerResponse?>> GetByPhoneAsync(string phone)
     {
-        var response = await _mediator.Send(new GetCustomerByPhoneNumberQuery(phone));
+        var response = await mediator.Send(new GetCustomerByPhoneNumberQuery(phone));
         return Ok(response);
     }
 
@@ -91,7 +86,7 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<CustomerResponse>>> GetByNameAsync(string name)
     {
-        var response = await _mediator.Send(new GetCustomerByNameQuery(name));
+        var response = await mediator.Send(new GetCustomerByNameQuery(name));
         return Ok(response);
     }
 }

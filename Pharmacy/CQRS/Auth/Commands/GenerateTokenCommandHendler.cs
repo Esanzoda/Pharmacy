@@ -2,13 +2,15 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using MediatR;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Pharmacy.Infrastructure.Setting;
 
 namespace Pharmacy.CQRS.Auth.Commands;
 
 public record GenerateTokenCommand(Models.Domain.Customer Request) : IRequest<string>;
 
-public class GenerateTokenCommandHandler(IConfiguration configuration) : IRequestHandler<GenerateTokenCommand, string>
+public class GenerateTokenCommandHandler(IOptionsMonitor<JwtOption>jwt) : IRequestHandler<GenerateTokenCommand, string>
 {
    
     public async Task<string> Handle(GenerateTokenCommand request, CancellationToken cancellationToken)
@@ -20,22 +22,19 @@ public class GenerateTokenCommandHandler(IConfiguration configuration) : IReques
             new Claim(ClaimTypes.Role, request.Request.Role.ToString())
         };
         var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]!));
+            Encoding.UTF8.GetBytes(jwt.CurrentValue.SecretKey));
 
         var credentials =
             new SigningCredentials(
                 key,
                 SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(
-            issuer:
-            configuration["JwtSettings:Issuer"],
-            audience:
-            configuration["JwtSettings:Audience"],
+            issuer: jwt.CurrentValue.Issuer,
+            audience: jwt.CurrentValue.Audience,
             claims: claims,
             expires:
             DateTime.UtcNow.AddMinutes(
-                Convert.ToDouble(
-                    configuration["JwtSettings:AccessTokenExpirationMinutes"])),
+                Convert.ToDouble(jwt.CurrentValue.AccessTokenExpirationMinutes)),
             signingCredentials:
             credentials
         );
