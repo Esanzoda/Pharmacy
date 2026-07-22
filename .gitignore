@@ -1,7 +1,12 @@
 bin/
 obj/
-*.xml
-*.txt
-.DS_Store 
+
+.idea/
+
+.DS_Store
+
 *.user
-appsettings.json
+*.sln.DotSettings.user
+
+appsettings.Local.json
+.env
