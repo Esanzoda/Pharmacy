@@ -1,12 +1,12 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Auth.Commands;
+namespace Pharmacy.CQRS.Auth.Commands;
 
 public record RegisterCommand(
     CustomerRequest Request) : IRequest<CustomerResponse>;
@@ -27,7 +27,7 @@ public class RegisterHandler(
         }
 
         var passwordHash = await mediator.Send(new PasswordHashCommand(request.Request.Password), cancellationToken);
-        var newCustomer = mapper.Map<Pharmasy.Models.Domain.Customer>(request.Request);
+        var newCustomer = mapper.Map<Models.Domain.Customer>(request.Request);
         newCustomer.PasswordHash = passwordHash;
         await dbContext.Customers
             .AddAsync(newCustomer, cancellationToken);

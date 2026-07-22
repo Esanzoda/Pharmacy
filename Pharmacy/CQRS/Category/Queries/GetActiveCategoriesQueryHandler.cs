@@ -1,11 +1,11 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Category.Queries;
+namespace Pharmacy.CQRS.Category.Queries;
 
 public record GetActiveCategoriesQuery(
     int PageNumber,

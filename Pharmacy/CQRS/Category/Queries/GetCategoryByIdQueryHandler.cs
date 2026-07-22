@@ -3,11 +3,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Category.Queries;
+namespace Pharmacy.CQRS.Category.Queries;
 
 public record GetCategoryByIdQuery(
     long CategoryId) : IRequest<CategoryResponse>;
@@ -23,7 +23,7 @@ public class GetCategoryByIdHandler(
         var cachedCategory = await cache.GetStringAsync(key, cancellationToken);
         if (cachedCategory is not null)
         {
-            var entity = JsonConvert.DeserializeObject<Pharmasy.Models.Domain.Category?>(cachedCategory);
+            var entity = JsonConvert.DeserializeObject<Models.Domain.Category?>(cachedCategory);
             if (entity is not null)
             {
                 return mapper.Map<CategoryResponse>(entity);

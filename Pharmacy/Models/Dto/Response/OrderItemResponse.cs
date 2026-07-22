@@ -1,4 +1,4 @@
-namespace Pharmasy.Models.Dto.Response;
+namespace Pharmacy.Models.Dto.Response;
 
 public record OrderItemResponse
 {

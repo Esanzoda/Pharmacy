@@ -1,7 +1,6 @@
-using Pharmasy.Models.Domain;
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Models.Domain.Enum;
 
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class Customer : BaseEntity
 {

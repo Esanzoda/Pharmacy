@@ -1,4 +1,4 @@
-namespace Pharmasy.Messages.Events;
+namespace Pharmacy.Messages.Events;
 
 public class OrderCreatedEvent
 {

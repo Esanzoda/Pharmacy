@@ -1,11 +1,11 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Cart.Queries;
+namespace Pharmacy.CQRS.Cart.Queries;
 
 public record GetCartItemByIQuery(long CustomerId) : IRequest<CartResponse>;
 

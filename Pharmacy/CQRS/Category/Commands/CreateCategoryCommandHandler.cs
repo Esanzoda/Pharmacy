@@ -1,13 +1,13 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Category.Commands;
+namespace Pharmacy.CQRS.Category.Commands;
 
 public record CreateCategoryCommand(
     CreateCategoryRequest Request) : IRequest<CategoryResponse>;
@@ -27,7 +27,7 @@ public class CreateCategoryCommandHandler(
             throw new ResourseIsAlredyExistException("Category alredy exist");
         }
 
-        var category = mapper.Map<Pharmasy.Models.Domain.Category>(request.Request);
+        var category = mapper.Map<Models.Domain.Category>(request.Request);
         category.CategoryStatus = CategoryStatus.Active;
         await dbContext.Categories
             .AddAsync(category, cancellationToken);

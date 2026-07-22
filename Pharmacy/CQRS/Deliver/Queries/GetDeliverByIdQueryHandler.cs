@@ -2,11 +2,11 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Deliver.Queries;
+namespace Pharmacy.CQRS.Deliver.Queries;
 
 public record GetDeliverByIdQuery(
     long Id

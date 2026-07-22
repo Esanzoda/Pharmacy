@@ -1,6 +1,6 @@
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Models.Dto.Request;
+namespace Pharmacy.Models.Dto.Request;
 
 public class ExpiryDateRequest : BaseEntity
 {

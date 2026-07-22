@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.Data;
+namespace Pharmacy.Data;
 
 public class AuditableInterceptor : SaveChangesInterceptor
 {

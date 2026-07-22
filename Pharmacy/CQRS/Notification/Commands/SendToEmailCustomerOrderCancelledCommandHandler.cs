@@ -1,7 +1,7 @@
 using MediatR;
-using Pharmasy.Models.Domain;
+using Pharmacy.Models.Domain;
 
-namespace Pharmasy.CQRS.Notification.Commands;
+namespace Pharmacy.CQRS.Notification.Commands;
 
 public record SendToEmailCustomerOrderCancelledCommand(
     string ToEmail,

@@ -1,6 +1,4 @@
-using Pharmasy.Models.Domain;
-
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class Cart : BaseEntity
 {

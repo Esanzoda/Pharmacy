@@ -1,4 +1,4 @@
-namespace Pharmasy.Exception;
+namespace Pharmacy.Exception;
 
 public class ResourseIsAlredyExistException : System.Exception
 {

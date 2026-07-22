@@ -1,4 +1,4 @@
-namespace Pharmasy.Models.Domain.Enum;
+namespace Pharmacy.Models.Domain.Enum;
 
 public enum OrderStatus
 {

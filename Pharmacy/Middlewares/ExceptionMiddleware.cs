@@ -1,6 +1,6 @@
-using Pharmasy.Exception;
+using Pharmacy.Exception;
 
-namespace Pharmasy.Middlewares;
+namespace Pharmacy.Middlewares;
 
 public class ExceptionMiddleware
 {

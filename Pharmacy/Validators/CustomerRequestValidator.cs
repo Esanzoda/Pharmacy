@@ -1,8 +1,8 @@
 using FluentValidation;
-using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Request;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Dto.Request;
 
-namespace Pharmasy.Validators;
+namespace Pharmacy.Validators;
 
 public class CustomerRequestValidator : AbstractValidator<CustomerRequest>
 {

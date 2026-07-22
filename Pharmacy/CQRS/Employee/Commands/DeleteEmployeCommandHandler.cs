@@ -1,8 +1,8 @@
 using MediatR;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Employee.Commands;
+namespace Pharmacy.CQRS.Employee.Commands;
 
 public record DeleteEmployeCommand(
     long EmployeeId

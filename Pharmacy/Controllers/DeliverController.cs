@@ -1,9 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
-using Pharmasy.CQRS;
-
-namespace Pharmasy.Controllers;
+namespace Pharmacy.Controllers;
 /*
 [ApiController]
 [Route("api/[controller]/[action]")]

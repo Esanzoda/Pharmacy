@@ -1,8 +1,9 @@
 using AutoMapper;
-using Pharmasy.Models.Domain;
-using Pharmasy.Models.Dto.Request;
-using Pharmasy.Models.Dto.Response;
-namespace Pharmasy.Mappers;
+using Pharmacy.Models.Domain;
+using Pharmacy.Models.Dto.Request;
+using Pharmacy.Models.Dto.Response;
+
+namespace Pharmacy.Mappers;
 
 public class Mappers : Profile
 {
@@ -57,7 +58,7 @@ public class Mappers : Profile
         CreateMap<DeliverRequest, Deliver>();
         CreateMap<Deliver, DeliverResponse>();
 
-        CreateMap<PharmacyRequest,Pharmacy>();
-        CreateMap<Pharmacy, PharmacyResponse>();
+        CreateMap<PharmacyRequest,Models.Domain.Pharmacy>();
+        CreateMap<Models.Domain.Pharmacy, PharmacyResponse>();
     }
 }

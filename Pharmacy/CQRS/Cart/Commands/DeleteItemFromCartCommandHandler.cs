@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Cart.Commands;
+namespace Pharmacy.CQRS.Cart.Commands;
 
 public record DeleteItemFromCartCommand(
     long CustomerId, 

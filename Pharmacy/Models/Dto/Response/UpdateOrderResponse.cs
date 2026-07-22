@@ -1,6 +1,6 @@
-using Pharmasy.Models.Domain.Enum;
+using Pharmacy.Models.Domain.Enum;
 
-namespace Pharmasy.Models.Dto.Response;
+namespace Pharmacy.Models.Dto.Response;
 
 public record UpdateOrderResponse
 {

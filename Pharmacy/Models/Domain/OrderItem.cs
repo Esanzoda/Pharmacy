@@ -1,6 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
-
-namespace Pharmasy.Models.Domain;
+namespace Pharmacy.Models.Domain;
 
 public class OrderItem : BaseEntity
 {

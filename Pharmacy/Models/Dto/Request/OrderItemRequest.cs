@@ -1,6 +1,4 @@
-using Pharmasy.Models.Domain;
-
-namespace Pharmasy.Models.Dto.Request;
+namespace Pharmacy.Models.Dto.Request;
 
 public record OrderItemRequest
 {

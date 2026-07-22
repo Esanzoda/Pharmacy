@@ -2,15 +2,15 @@ using AutoMapper;
 using MassTransit;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.CQRS.Cart.Commands;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
-using Pharmasy.Messages.Events;
-using Pharmasy.Models.Domain;
-using Pharmasy.Models.Domain.Enum;
-using Pharmasy.Models.Dto.Response;
+using Pharmacy.CQRS.Cart.Commands;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
+using Pharmacy.Messages.Events;
+using Pharmacy.Models.Domain;
+using Pharmacy.Models.Domain.Enum;
+using Pharmacy.Models.Dto.Response;
 
-namespace Pharmasy.CQRS.Order.Commands;
+namespace Pharmacy.CQRS.Order.Commands;
 
 public record CreateOrderFromCartCommand(
     long CustomerId,

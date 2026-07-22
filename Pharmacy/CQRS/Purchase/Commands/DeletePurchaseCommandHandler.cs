@@ -1,10 +1,9 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Pharmasy.Exception;
-using Pharmasy.Interfaces;
+using Pharmacy.Exception;
+using Pharmacy.Interfaces;
 
-namespace Pharmasy.CQRS.Purchase.Commands;
+namespace Pharmacy.CQRS.Purchase.Commands;
 
 public record DeletePurchaseCommand(
     long Id) : IRequest<bool>;
