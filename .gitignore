@@ -1,7 +1,0 @@
-bin/
-obj/
-*.xml
-*.txt
-.DS_Store 
-*.user
-appsettings.json
