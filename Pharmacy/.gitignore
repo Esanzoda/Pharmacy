@@ -1,0 +1,8 @@
+
+bin/
+obj/
+*.xml
+*.txt
+.DS_Store 
+appsettings.json
+
