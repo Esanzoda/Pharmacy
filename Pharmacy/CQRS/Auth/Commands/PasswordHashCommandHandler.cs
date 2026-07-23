@@ -4,11 +4,11 @@ namespace Pharmacy.CQRS.Auth.Commands;
 
 public record PasswordHashCommand(
     string Password) : IRequest<string>;
-public class PasswordHashCommandHandler:IRequestHandler<PasswordHashCommand,string>
-{
 
-    public async Task<string> Handle(PasswordHashCommand request, CancellationToken cancellationToken)
+public class PasswordHashCommandHandler : IRequestHandler<PasswordHashCommand, string>
+{
+    public Task<string> Handle(PasswordHashCommand request, CancellationToken cancellationToken)
     {
-        return BCrypt.Net.BCrypt.HashPassword(request.Password);
+        return Task.FromResult(BCrypt.Net.BCrypt.HashPassword(request.Password));
     }
 }

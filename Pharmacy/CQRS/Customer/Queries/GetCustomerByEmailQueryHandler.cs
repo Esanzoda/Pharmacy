@@ -10,8 +10,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Customer.Queries;
 
 public record GetCustomerByEmailQuery(
-    string Email
-) : IRequest<CustomerResponse>;
+    string Email) : IRequest<CustomerResponse>;
 
 public class GetCustomerByEmailHandler(
     IMapper mapper,
@@ -36,7 +35,7 @@ public class GetCustomerByEmailHandler(
             .FirstOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
         if (customer == null)
         {
-            throw new ResourseNotFoundException($"Customer with this email{request.Email} not found");
+            throw new RecourseNotFoundException($"Customer with this email{request.Email} not found");
         }
 
         var response = mapper.Map<CustomerResponse>(customer);

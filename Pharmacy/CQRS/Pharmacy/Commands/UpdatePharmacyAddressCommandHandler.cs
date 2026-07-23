@@ -22,12 +22,12 @@ public class UpdatePharmacyAddressCommandHandler(
             .FindAsync(request.Id, cancellationToken);
         if (pharmacy is null)
         {
-            throw new ResourseNotFoundException("Pharmacy not found");
+            throw new RecourseNotFoundException("Pharmacy not found");
         }
 
         if (pharmacy.Address == request.NewAddress)
         {
-            throw new BusinessException("Pharmacy with this email alredy exsist");
+            throw new BusinessException("Pharmacy with this email already exist");
         }
 
         pharmacy.Address = request.NewAddress;

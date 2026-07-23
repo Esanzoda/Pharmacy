@@ -11,8 +11,7 @@ public class OrderCompletedConsumer(
     ILogger<OrderCompletedConsumer> logger,
     IMediator mediator,
     IMessageService messageService,
-    IApplicationDbContext dbContext
-    ) : IConsumer<OrderCompletedEvent>
+    IApplicationDbContext dbContext) : IConsumer<OrderCompletedEvent>
 {
     public async Task Consume(ConsumeContext<OrderCompletedEvent> context)
     {

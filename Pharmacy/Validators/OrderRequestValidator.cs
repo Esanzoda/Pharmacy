@@ -7,6 +7,5 @@ public class OrderRequestValidator : AbstractValidator<OrderRequest>
 {
     public OrderRequestValidator()
     {
-        
     }
 }

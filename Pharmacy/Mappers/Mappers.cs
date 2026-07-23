@@ -33,19 +33,19 @@ public class Mappers : Profile
         CreateMap<PurchaseItem, PurchaseItemResponse>();
         CreateMap<Purchase, PurchaseResponse>()
             .ForMember(x => x.PurchaseItems, x => x.MapFrom(y => y.PurchaseItems));
-        
+
         CreateMap<CreateCategoryRequest, Category>();
         CreateMap<Category, CategoryResponse>();
         CreateMap<UpdateCategoryRequest, Category>();
         CreateMap<Category, UpdateCategoryResponse>();
-        
+
 
         CreateMap<CustomerRequest, Customer>()
             .ForMember(x => x.PasswordHash, opt => opt.Ignore());
         CreateMap<Customer, CustomerResponse>();
         CreateMap<UpdateCustomerRequest, Customer>();
         CreateMap<Customer, CustomerResponse>();
-        
+
 
         CreateMap<EmployeeRequest, Employee>()
             .ForMember(x => x.PasswordHash, opt => opt.Ignore());
@@ -58,7 +58,7 @@ public class Mappers : Profile
         CreateMap<DeliverRequest, Deliver>();
         CreateMap<Deliver, DeliverResponse>();
 
-        CreateMap<PharmacyRequest,Models.Domain.Pharmacy>();
+        CreateMap<PharmacyRequest, Models.Domain.Pharmacy>();
         CreateMap<Models.Domain.Pharmacy, PharmacyResponse>();
     }
 }

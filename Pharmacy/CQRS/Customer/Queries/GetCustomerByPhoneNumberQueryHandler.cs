@@ -8,8 +8,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Customer.Queries;
 
 public record GetCustomerByPhoneNumberQuery(
-    string PhoneNumber
-) : IRequest<CustomerResponse>;
+    string PhoneNumber) : IRequest<CustomerResponse>;
 
 public class GetCustomerByPhoneNumberQueryHandler(
     IMapper mapper,
@@ -23,7 +22,7 @@ public class GetCustomerByPhoneNumberQueryHandler(
             .FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber, cancellationToken);
         if (customer == null)
         {
-            throw new ResourseNotFoundException($"Customer with this phoneNumber{request.PhoneNumber} not found");
+            throw new RecourseNotFoundException($"Customer with this phoneNumber{request.PhoneNumber} not found");
         }
 
         return mapper.Map<CustomerResponse>(customer);

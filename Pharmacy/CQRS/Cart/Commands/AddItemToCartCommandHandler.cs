@@ -27,14 +27,14 @@ public class AddItemToCartCommandHandler(
 
         if (cart is null)
         {
-            throw new ResourseNotFoundException("Cart not found");
+            throw new RecourseNotFoundException("Cart not found");
         }
 
         var product = await dbContext.Products
             .FirstOrDefaultAsync(x => x.Id == request.ItemRequest.ProductId, cancellationToken);
         if (product == null)
         {
-            throw new ResourseNotFoundException("Product not found");
+            throw new RecourseNotFoundException("Product not found");
         }
 
         var existingCartItem = await dbContext.CartItems
@@ -66,7 +66,7 @@ public class AddItemToCartCommandHandler(
                 .AddAsync(cartItem, cancellationToken);
         }
 
-        cart.TotalAmount = cart.CartItems.Sum(x => x.TotalPrice);
+        cart.TotalAmount = cart.CartItems.Sum(x => x!.TotalPrice);
         await dbContext.SaveChangesAsync(cancellationToken);
         return mapper.Map<CartResponse>(cart);
     }

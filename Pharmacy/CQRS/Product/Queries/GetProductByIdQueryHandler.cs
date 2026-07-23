@@ -19,7 +19,7 @@ public class GetProductByIdQueryHandler(
             .FindAsync(request.Id, cancellationToken);
         if (product == null)
         {
-            throw new ResourseNotFoundException("Product not found");
+            throw new RecourseNotFoundException("Product not found");
         }
 
         return mapper.Map<ProductResponse>(product);

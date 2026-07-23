@@ -7,9 +7,9 @@ using Pharmacy.Messages.Events;
 
 namespace Pharmacy.Consumers;
 
-public class OrderCanselledConsumer(
+public class OrderCancelledConsumer(
     IApplicationDbContext dbContext,
-    ILogger<OrderCanselledConsumer> logger,
+    ILogger<OrderCancelledConsumer> logger,
     IMediator mediator,
     IMessageService messageService
 ) : IConsumer<OrderCancelledEvent>
@@ -32,7 +32,7 @@ public class OrderCanselledConsumer(
                 user.Email,
                 message.OrderId,
                 message.UpdateTime));
-                
+
             await messageService.SendOrderCancelledAsync(
                 user.PhoneNumber,
                 message.OrderId,

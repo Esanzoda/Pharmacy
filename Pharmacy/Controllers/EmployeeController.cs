@@ -12,7 +12,7 @@ namespace Pharmacy.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class EmployeConteroller(IMediator mediator) : ControllerBase
+public class EmployeeController(IMediator mediator) : ControllerBase
 {
     [Authorize]
     [HttpPost]
@@ -43,7 +43,7 @@ public class EmployeConteroller(IMediator mediator) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<EmployeeResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
     {
-        var response = await mediator.Send(new GetAllEmployeeByPagenationQuery(pageNumber, pageSize));
+        var response = await mediator.Send(new GetAllEmployeeByPaginationQuery(pageNumber, pageSize));
         return Ok(response);
     }
 
@@ -51,7 +51,7 @@ public class EmployeConteroller(IMediator mediator) : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await mediator.Send(new DeleteEmployeCommand(id));
+        var response = await mediator.Send(new DeleteEmployeeCommand(id));
         return Ok(response);
     }
 
@@ -59,7 +59,7 @@ public class EmployeConteroller(IMediator mediator) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<EmployeeResponse>>> GetByNameAsync(string name, int page, int pageSize)
     {
-        var response = await mediator.Send(new GetEmpoyeesByNameQuery(name, page, pageSize));
+        var response = await mediator.Send(new GetEmployeesByNameQuery(name, page, pageSize));
         return Ok(response);
     }
 
@@ -68,7 +68,7 @@ public class EmployeConteroller(IMediator mediator) : ControllerBase
     public async Task<ActionResult<List<EmployeeResponse>>> GetByAdressAsync(string adress, int page,
         int pageSize)
     {
-        var response = await mediator.Send(new GetEmpoyeesByAddressQuery(adress, page, pageSize));
+        var response = await mediator.Send(new GetEmployeesByAddressQuery(adress, page, pageSize));
         return Ok(response);
     }
 
@@ -76,7 +76,7 @@ public class EmployeConteroller(IMediator mediator) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<EmployeeResponse>>> GetByNumberAsync(string number)
     {
-        var response = await mediator.Send(new GetEmpoyeesByNumberQuery(number));
+        var response = await mediator.Send(new GetEmployeesByNumberQuery(number));
         return Ok(response);
     }
 

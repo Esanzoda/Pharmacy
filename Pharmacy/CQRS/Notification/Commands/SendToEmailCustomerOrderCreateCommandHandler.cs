@@ -23,10 +23,10 @@ public class SendToEmailCustomerOrderCreateCommandHandler(IMediator mediator)
                 <p>order Id: <strong>#{request.OrderId}</strong></p>
                 <p>Total amout <strong>{request.TotalAmount:C}</strong></p>
         <p>Order created at <strong>{request.CreatedAt}</strong></p>
-                <p>Thents for  order in our Pharmacy</p>
+                <p>Thanks for  order in our Pharmacy</p>
 
             "
         };
-        await mediator.Send(new SendToEmailCommand(message));
+        await mediator.Send(new SendToEmailCommand(message), cancellationToken);
     }
 }

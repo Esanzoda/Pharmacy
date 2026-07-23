@@ -27,27 +27,19 @@ public class CreatOrderFromCartHandler(
     public async Task<OrderResponse> Handle(CreateOrderFromCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await dbContext.Carts
-            .Include(x=>x.Customer)
-            .Include(x=>x.CartItems)
+            .Include(x => x.Customer)
+            .Include(x => x.CartItems)
             .FirstOrDefaultAsync(x => x.CustomerId == request.CustomerId, cancellationToken);
         if (cart == null && cart!.CartItems.Any())
         {
-            throw new ResourseNotFoundException($"Cart is empty");
+            throw new RecourseNotFoundException($"Cart is empty");
         }
 
 
-        string? newAddress;
-        if (string.IsNullOrEmpty(request.Address))
-        {
-            newAddress = cart.Customer?.Address;
-        }
-        else
-        {
-            newAddress = request.Address;
-        }
+        var newAddress = string.IsNullOrEmpty(request.Address) ? cart.Customer?.Address : request.Address;
 
 
-        var order = new Models.Domain.Order()
+        var order = new Models.Domain.Order
         {
             CustomerId = cart.CustomerId,
             OrderType = request.OrderType,
@@ -66,7 +58,7 @@ public class CreatOrderFromCartHandler(
                     .FindAsync(item.ProductId, cancellationToken);
                 if (product == null)
                 {
-                    throw new ResourseNotFoundException($"Product {item.ProductId} not found");
+                    throw new RecourseNotFoundException($"Product {item.ProductId} not found");
                 }
 
                 if (product.Stock < item.Quantity)
@@ -81,7 +73,7 @@ public class CreatOrderFromCartHandler(
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     Price = product.Price,
-                    TotalPrice = product.Price*item.Quantity
+                    TotalPrice = product.Price * item.Quantity
                 };
                 order.OrderItems.Add(orderItem);
                 await dbContext.OrderItems
@@ -91,17 +83,17 @@ public class CreatOrderFromCartHandler(
         }
 
         var totalAmount = order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
-        decimal delivePrice = 0;
+        decimal deliverPrice = 0;
         if (request.OrderType is OrderType.Deliver)
         {
             var address = newAddress;
 
             if (address is "1" || address is "2" || address is "3")
             {
-                delivePrice = 10;
+                deliverPrice = 10;
             }
 
-            order.TotalAmount = delivePrice + totalAmount;
+            order.TotalAmount = deliverPrice + totalAmount;
         }
 
         await dbContext.SaveChangesAsync(cancellationToken);

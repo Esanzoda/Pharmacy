@@ -22,12 +22,12 @@ public class CreateProductCommandHandler(
             .AnyAsync(x => x.Name == request.Request.Name &&
                            x.Barcode == request.Request.Barcode, cancellationToken);
         if (productByName)
-            throw new ResourseIsAlredyExistException(
+            throw new RecourseIsAlreadyExistException(
                 $"Product already exists whith this name {request.Request.Name} or barcode {request.Request.Barcode}");
         var category = await dbContext.Categories
             .FindAsync(request.Request.CategoryId, cancellationToken);
         if (category == null)
-            throw new ResourseNotFoundException($"Category with this[{request.Request.CategoryId}] not found");
+            throw new RecourseNotFoundException($"Category with this[{request.Request.CategoryId}] not found");
 
         var product = mapper.Map<Models.Domain.Product>(request.Request);
         await dbContext.Products

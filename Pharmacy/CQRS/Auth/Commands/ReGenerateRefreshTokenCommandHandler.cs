@@ -20,10 +20,10 @@ public class ReGenerateRefreshTokenHandler(
         var now = DateTime.UtcNow;
         var refreshToken = await dbContext.RefreshTokens
             .Include(x => x.Customer)
-            .FirstOrDefaultAsync(x => x.Token == request.RefreshToken,cancellationToken);
+            .FirstOrDefaultAsync(x => x.Token == request.RefreshToken, cancellationToken);
         if (refreshToken is null)
         {
-            throw new ResourseNotFoundException("Invalid refresh token");
+            throw new RecourseNotFoundException("Invalid refresh token");
         }
 
         if (refreshToken.ExpiresAt < DateTime.UtcNow)
@@ -33,7 +33,7 @@ public class ReGenerateRefreshTokenHandler(
 
         if (refreshToken.IsDeleted)
         {
-            throw new ResourseNotFoundException("Refresh tocen not found or alredy deleted ");
+            throw new RecourseNotFoundException("Refresh token not found or already deleted ");
         }
 
         refreshToken.ExpiresAt = now;
@@ -46,8 +46,7 @@ public class ReGenerateRefreshTokenHandler(
             CreatedAt = now,
             UpdateAt = now,
             ExpiresAt = now.AddMinutes(3),
-            Token = await mediator.Send(new GenereteRefreshTokenCommand(), cancellationToken),
-           
+            Token = await mediator.Send(new GenerateRefreshTokenCommand(), cancellationToken),
         };
         await dbContext.RefreshTokens
             .AddAsync(newRefreshToken, cancellationToken);

@@ -8,8 +8,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Queries;
 
 public record GetDeliverByEmailQuery(
-    string Email
-) : IRequest<DeliverResponse>;
+    string Email) : IRequest<DeliverResponse>;
 
 public class GetDeliverByEmailHandler(
     IApplicationDbContext dbContext,
@@ -22,7 +21,7 @@ public class GetDeliverByEmailHandler(
             .FirstOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
         if (deliver is null)
         {
-            throw new ResourseNotFoundException("deliver not found");
+            throw new RecourseNotFoundException("deliver not found");
         }
 
         return mapper.Map<DeliverResponse>(deliver);

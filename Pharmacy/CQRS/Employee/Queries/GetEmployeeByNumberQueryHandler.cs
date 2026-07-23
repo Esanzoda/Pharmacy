@@ -7,21 +7,21 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Employee.Queries;
 
-public record GetEmpoyeesByNumberQuery(
+public record GetEmployeesByNumberQuery(
     string Number
 ) : IRequest<EmployeeResponse>;
 
 public class GetEmployeeByNumberQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetEmpoyeesByNumberQuery, EmployeeResponse>
+    IMapper mapper) : IRequestHandler<GetEmployeesByNumberQuery, EmployeeResponse>
 {
-    public async Task<EmployeeResponse> Handle(GetEmpoyeesByNumberQuery request, CancellationToken cancellationToken)
+    public async Task<EmployeeResponse> Handle(GetEmployeesByNumberQuery request, CancellationToken cancellationToken)
     {
         var employees = await dbContext.Employees
             .FirstOrDefaultAsync(x => x.PhoneNumber == request.Number, cancellationToken);
         if (employees == null)
         {
-            throw new ResourseNotFoundException($"Employee whith this number {request.Number}  not found ");
+            throw new RecourseNotFoundException($"Employee whith this number {request.Number}  not found ");
         }
 
         return mapper.Map<EmployeeResponse>(employees);

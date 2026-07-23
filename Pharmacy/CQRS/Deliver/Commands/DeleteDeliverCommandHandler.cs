@@ -6,8 +6,7 @@ using Pharmacy.Interfaces;
 namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record DeleteDeliverCommand(
-    int Id
-) : IRequest<bool>;
+    int Id) : IRequest<bool>;
 
 public class DeleteDeliverHandler(
     IApplicationDbContext dbContext,
@@ -20,7 +19,7 @@ public class DeleteDeliverHandler(
             .FindAsync(request.Id, cancellationToken);
         if (deliver is null)
         {
-            throw new ResourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Customer not found");
         }
 
         dbContext.Delivers

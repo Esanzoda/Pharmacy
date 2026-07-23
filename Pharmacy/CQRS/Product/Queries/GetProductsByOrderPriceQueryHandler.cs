@@ -26,7 +26,7 @@ public class GetProductsByOrderPriseQueryHandler(
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!product.Any())
-            throw new ResourseNotFoundException("Product with this price  not found");
+            throw new RecourseNotFoundException("Product with this price  not found");
 
         return mapper.Map<List<ProductResponse>>(product);
     }

@@ -1,5 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-
 namespace Pharmacy.Infrastructure.Setting;
 
 public class RabbitMqOption

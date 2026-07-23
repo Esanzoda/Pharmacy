@@ -7,11 +7,11 @@ namespace Pharmacy.CQRS.Cart.Commands;
 
 public record ClearCartCommand(
     long CustomerId
-    ) : IRequest<bool>;
+) : IRequest<bool>;
 
 public class ClearCartCommandHandler(
     IApplicationDbContext dbContext
-    ) : IRequestHandler<ClearCartCommand, bool>
+) : IRequestHandler<ClearCartCommand, bool>
 {
     public async Task<bool> Handle(ClearCartCommand request, CancellationToken cancellationToken)
     {
@@ -21,12 +21,12 @@ public class ClearCartCommandHandler(
 
         if (cart == null)
         {
-            throw new ResourseNotFoundException("Cart not found");
+            throw new RecourseNotFoundException("Cart not found");
         }
 
         if (cart.CartItems.Count == 0)
         {
-            throw new ResourseNotFoundException("Cart  is alredy empty");
+            throw new RecourseNotFoundException("Cart  is already empty");
         }
 
         cart.TotalAmount = 0;

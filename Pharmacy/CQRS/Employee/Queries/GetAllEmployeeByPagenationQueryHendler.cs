@@ -6,16 +6,16 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Employee.Queries;
 
-public record GetAllEmployeeByPagenationQuery(
+public record GetAllEmployeeByPaginationQuery(
     int PageNumber,
     int PageSize) : IRequest<List<EmployeeResponse>>;
 
-public class GetAllEmployeeByPagenationQueryHandler(
+public class GetAllEmployeeByPaginationQueryHandler(
     IApplicationDbContext dbContext,
     IMapper mapper
-) : IRequestHandler<GetAllEmployeeByPagenationQuery, List<EmployeeResponse>>
+) : IRequestHandler<GetAllEmployeeByPaginationQuery, List<EmployeeResponse>>
 {
-    public async Task<List<EmployeeResponse>> Handle(GetAllEmployeeByPagenationQuery request,
+    public async Task<List<EmployeeResponse>> Handle(GetAllEmployeeByPaginationQuery request,
         CancellationToken cancellationToken)
     {
         var employees = await dbContext.Employees

@@ -10,54 +10,50 @@ namespace Pharmacy.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 [Authorize(Roles = "Customer")]
-public class CartController : ControllerBase
+public class CartController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public CartController( IMediator mediator)
-    {
-        
-        _mediator = mediator;
-    }
-
-   [Authorize]
+    [Authorize]
     [HttpPut]
-    public async Task<IActionResult> UpdateItemQuantity(long productId,int quantity)
+    public async Task<IActionResult> UpdateItemQuantity(long productId, int quantity)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new UpdateQuantityCartItemCommand(customerId, productId, quantity));
+        var response = await mediator.Send(new UpdateQuantityCartItemCommand(customerId, productId, quantity));
         return Ok(response);
     }
-   [Authorize]
+
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddToCartAsync(CartItemRequest request)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new AddItemToCartCommand(customerId,request));
+        var response = await mediator.Send(new AddItemToCartCommand(customerId, request));
         return Ok(response);
     }
+
     [Authorize]
     [HttpDelete]
     public async Task<IActionResult> RemoveItemFromCartAsync(long itemId)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new DeleteItemFromCartCommand(customerId, itemId));
+        var response = await mediator.Send(new DeleteItemFromCartCommand(customerId, itemId));
         return Ok(response);
     }
+
     [Authorize]
     [HttpDelete]
     public async Task<IActionResult> ClearCartAsync()
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new ClearCartCommand(customerId));
+        var response = await mediator.Send(new ClearCartCommand(customerId));
         return Ok(response);
     }
+
     [Authorize]
     [HttpPatch]
     public async Task<IActionResult> UpdateQuantityItemAsync(long cartItemId, int quantity)
     {
         var customerId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await _mediator.Send(new UpdateQuantityCartItemCommand(customerId, cartItemId, quantity));
+        var response = await mediator.Send(new UpdateQuantityCartItemCommand(customerId, cartItemId, quantity));
         return Ok(response);
     }
 }

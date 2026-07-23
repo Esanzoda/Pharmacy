@@ -10,8 +10,7 @@ namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record UpdateDeliverCommand(
     long Id,
-    DeliverRequest Request
-) : IRequest<DeliverResponse>;
+    DeliverRequest Request) : IRequest<DeliverResponse>;
 
 public class UpdateDeliverHandler(
     IApplicationDbContext dbContext,
@@ -24,7 +23,7 @@ public class UpdateDeliverHandler(
             .FindAsync(request.Id, cancellationToken);
         if (deliver is null)
         {
-            throw new ResourseNotFoundException("Deliver not found");
+            throw new RecourseNotFoundException("Deliver not found");
         }
 
         var deliverExist = await dbContext.Delivers

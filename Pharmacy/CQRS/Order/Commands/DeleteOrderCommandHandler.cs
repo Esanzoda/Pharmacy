@@ -16,7 +16,7 @@ public class DeleteOrderHandler(
             .FindAsync(request.OrderId, cancellationToken);
         if (order == null)
         {
-            throw new ResourseNotFoundException($"Order with id {request.OrderId} not found");
+            throw new RecourseNotFoundException($"Order with id {request.OrderId} not found");
         }
 
         dbContext.Orders

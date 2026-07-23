@@ -8,9 +8,10 @@ public record SendToEmailCustomerOrderCompletedCommand(
     long OrderId,
     decimal TotalAmount,
     DateTime CompletedAt) : IRequest;
+
 public class SendToEmailCustomerOrderCompletedCommandHandler(
     IMediator mediator
-    ):IRequestHandler<SendToEmailCustomerOrderCompletedCommand>
+) : IRequestHandler<SendToEmailCustomerOrderCompletedCommand>
 {
     public async Task Handle(SendToEmailCustomerOrderCompletedCommand request, CancellationToken cancellationToken)
     {
@@ -21,10 +22,10 @@ public class SendToEmailCustomerOrderCompletedCommandHandler(
             Body = $@"
                 <h2>Your order is completed at<strong>{request.CompletedAt}</strong></h2>
                 <p>Order id: <strong>#{request.OrderId}</strong></p>
-                <p>Total amout: <strong>{request.TotalAmount:C}</strong></p>
-                <p>Thenkc for choose our  Pharmacy!</p>
+                <p>Total amount: <strong>{request.TotalAmount:C}</strong></p>
+                <p>Thanks for choose our  Pharmacy!</p>
             "
         };
-       await  mediator.Send(new SendToEmailCommand(message));
+        await mediator.Send(new SendToEmailCommand(message), cancellationToken);
     }
 }

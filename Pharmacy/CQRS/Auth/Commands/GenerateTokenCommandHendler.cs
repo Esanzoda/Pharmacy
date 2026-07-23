@@ -10,10 +10,9 @@ namespace Pharmacy.CQRS.Auth.Commands;
 
 public record GenerateTokenCommand(Models.Domain.Customer Request) : IRequest<string>;
 
-public class GenerateTokenCommandHandler(IOptionsMonitor<JwtOption>jwt) : IRequestHandler<GenerateTokenCommand, string>
+public class GenerateTokenCommandHandler(IOptionsMonitor<JwtOption> jwt) : IRequestHandler<GenerateTokenCommand, string>
 {
-   
-    public async Task<string> Handle(GenerateTokenCommand request, CancellationToken cancellationToken)
+    public Task<string> Handle(GenerateTokenCommand request, CancellationToken cancellationToken)
     {
         var claims = new List<Claim>()
         {
@@ -38,7 +37,7 @@ public class GenerateTokenCommandHandler(IOptionsMonitor<JwtOption>jwt) : IReque
             signingCredentials:
             credentials
         );
-        return new JwtSecurityTokenHandler()
-            .WriteToken(token);
+        return Task.FromResult(new JwtSecurityTokenHandler()
+            .WriteToken(token));
     }
 }

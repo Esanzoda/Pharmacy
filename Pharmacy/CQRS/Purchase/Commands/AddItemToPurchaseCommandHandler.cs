@@ -22,13 +22,13 @@ public class AddItemToPurchaseCommandHandler(
         var purchase = await dbContext.Purchases
             .FindAsync(request.Id, cancellationToken);
         if (purchase == null)
-            throw new ResourseNotFoundException($"Purchase with this id not found");
+            throw new RecourseNotFoundException($"Purchase with this id not found");
         var product = await dbContext.Products
             .FirstOrDefaultAsync(x => x.Id == request.Request.ProductId || x.Barcode == request.Request.Barcode,
                 cancellationToken);
         if (product == null)
         {
-            throw new ResourseNotFoundException($"Product not found");
+            throw new RecourseNotFoundException($"Product not found");
         }
 
         product.Stock += request.Request.Quantity;

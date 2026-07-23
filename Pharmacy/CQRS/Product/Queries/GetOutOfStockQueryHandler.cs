@@ -24,7 +24,7 @@ public class GetOutOfStockQueryHandler(
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!product.Any())
-            throw new ResourseNotFoundException("Product  not found");
+            throw new RecourseNotFoundException("Product  not found");
 
         return mapper.Map<List<ProductResponse>>(product);
     }

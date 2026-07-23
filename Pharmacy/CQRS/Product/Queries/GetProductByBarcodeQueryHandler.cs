@@ -19,7 +19,7 @@ public class GetProductByBarcodeQueryHandler(
         var product = await dbContext.Products
             .FirstOrDefaultAsync(x => x.Barcode == request.Barcode, cancellationToken);
         if (product == null)
-            throw new ResourseNotFoundException("Product whith this barcode not found");
+            throw new RecourseNotFoundException("Product whith this barcode not found");
 
         return mapper.Map<ProductResponse>(product);
     }

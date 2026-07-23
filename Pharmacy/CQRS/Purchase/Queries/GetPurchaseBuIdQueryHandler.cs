@@ -21,7 +21,7 @@ public class GetPurchaseBuIdQueryHandler(
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (purchase == null)
         {
-            throw new ResourseNotFoundException("Purchase not found");
+            throw new RecourseNotFoundException("Purchase not found");
         }
 
         return mapper.Map<PurchaseResponse>(purchase);

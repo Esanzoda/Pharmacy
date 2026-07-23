@@ -9,8 +9,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Employee.Queries;
 
 public record GetEmployeeByIdQuery(
-    long Id
-) : IRequest<EmployeeResponse>;
+    long Id) : IRequest<EmployeeResponse>;
 
 public class GetEmployeeByIdQueryHandler(
     IApplicationDbContext dbContext,
@@ -37,7 +36,7 @@ public class GetEmployeeByIdQueryHandler(
 
         if (employee == null)
         {
-            throw new ResourseNotFoundException("customer not found");
+            throw new RecourseNotFoundException("customer not found");
         }
 
         var response = mapper.Map<EmployeeResponse>(employee);

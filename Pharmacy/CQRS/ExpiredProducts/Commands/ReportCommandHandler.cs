@@ -10,11 +10,10 @@ namespace Pharmacy.CQRS.ExpiredProducts.Commands;
 
 public record ReportCommand : IRequest;
 
-public class ReportcommandHandler(
+public class ReportCommandHandler(
     AppDbContext dbContext,
     ILogger<CheckExpiredProductsJob> logger,
-    IPublishEndpoint publishEndpoint)
-    : IRequestHandler<ReportCommand>
+    IPublishEndpoint publishEndpoint) : IRequestHandler<ReportCommand>
 {
     public async Task Handle(ReportCommand request, CancellationToken cancellationToken)
     {
@@ -35,25 +34,25 @@ public class ReportcommandHandler(
             To = "orashesanov05@gmail.com",
             Count = completedOrders.Count,
             Day = DateTime.UtcNow,
-            Totalamout = totalAmount
+            TotalAmount = totalAmount
         }, cancellationToken);
         logger.LogInformation("OrderCompletedEventReportToCeo published");
-        var cancelleddOrders = await dbContext.Orders
+        var cancelledOrders = await dbContext.Orders
             .Where(x => x.OrderStatus == OrderStatus.Cancelled && x.CreatedAt == yesterday)
             .OrderBy(x => x.Id)
             .ToListAsync(cancellationToken);
-        await publishEndpoint.Publish(new OrderCancelledEvantToCeo()
+        await publishEndpoint.Publish(new OrderCancelledEventToCeo()
         {
             DateTime = yesterday,
-            Count = cancelleddOrders.Count
+            Count = cancelledOrders.Count
         }, cancellationToken);
-        var sheepedOrders = await dbContext.Orders
+        var sheepadOrders = await dbContext.Orders
             .Where(x => x.OrderStatus == OrderStatus.Shipped && x.CreatedAt == yesterday)
             .OrderBy(x => x.Id)
             .ToListAsync(cancellationToken);
         await publishEndpoint.Publish(new OrderShippedEventToCeo
         {
-            Count = sheepedOrders.Count,
+            Count = sheepadOrders.Count,
             DateTime = yesterday
         }, cancellationToken);
     }

@@ -23,7 +23,7 @@ public class CreatePurchaseCommandHandler(
             .FindAsync(request.Request.EmployeeId, cancellationToken);
         if (employee == null)
         {
-            throw new ResourseNotFoundException($"Employee with this id  not found");
+            throw new RecourseNotFoundException($"Employee with this id  not found");
         }
 
         var purchase = mapper.Map<Models.Domain.Purchase>(request.Request);
@@ -36,7 +36,7 @@ public class CreatePurchaseCommandHandler(
                 .FirstOrDefaultAsync(x => x.Barcode == item.Barcode, cancellationToken);
             if (product == null)
             {
-                throw new ResourseNotFoundException($"Product whith this barcode not found");
+                throw new RecourseNotFoundException($"Product whith this barcode not found");
             }
 
             var purchaseItem = mapper.Map<PurchaseItem>(item);

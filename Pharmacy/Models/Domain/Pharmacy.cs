@@ -12,5 +12,4 @@ public class Pharmacy : BaseEntity
     public List<Category> Categories { get; set; } = new List<Category>();
     public List<Employee> Employees { get; set; } = new List<Employee>();
     public List<Customer> Customers { get; set; } = new List<Customer>();
-    
 }
