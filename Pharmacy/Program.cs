@@ -17,7 +17,7 @@ builder.Services.AddConsumers(builder.Configuration);
 builder.Services.AddAppDbContext(builder.Configuration);
 builder.Services.AddHangfire(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
-builder.Services.AddRedis(builder);
+builder.Services.AddRedis(builder.Configuration);
 builder.AddSeriaLogger();
 builder.Services.AddInfrastructure();
 builder.Services.AddSwagger();
