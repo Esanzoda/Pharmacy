@@ -22,7 +22,7 @@ public class UpdatePurchaseHandler(
             .FindAsync(request.Id, cancellationToken);
         if (purchase == null)
         {
-            throw new ResourseNotFoundException("Purchase not found");
+            throw new RecourseNotFoundException("Purchase not found");
         }
 
         purchase.EmployeeId = request.Request.EmployeeId;

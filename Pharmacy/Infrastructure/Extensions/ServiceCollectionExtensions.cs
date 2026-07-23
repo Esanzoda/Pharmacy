@@ -6,6 +6,7 @@ using Pharmacy.Interfaces;
 using Pharmacy.Jobs;
 
 namespace Pharmacy.Infrastructure.Extensions;
+
 public static class ServiceCollectionExtensions
 {
     public static void AddInfrastructure(this IServiceCollection serviceCollection)
@@ -24,9 +25,6 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddScoped<CheckExpiredProductsJob>();
         serviceCollection.AddScoped<Report>();
         serviceCollection.AddOpenApi();
-        serviceCollection.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-        });
+        serviceCollection.AddMediatR(cfg => { cfg.RegisterServicesFromAssembly(typeof(Program).Assembly); });
     }
 }

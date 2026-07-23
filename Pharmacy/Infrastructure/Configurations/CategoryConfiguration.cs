@@ -13,5 +13,11 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.Id)
             .IsUnique();
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+        builder.Property(x => x.Description)
+            .IsRequired()
+            .HasMaxLength(100);
     }
 }

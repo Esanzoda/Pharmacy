@@ -8,7 +8,7 @@ namespace Pharmacy.CQRS.ExpiredProducts.Commands;
 public record CreateExpiredProductsCommand : IRequest;
 
 public class CheckExpiredProductsHandler(
-    IApplicationDbContext dbcontext,
+    IApplicationDbContext dbContext,
     ILogger<CheckExpiredProductsHandler> logger
 ) : IRequestHandler<CreateExpiredProductsCommand>
 {
@@ -17,7 +17,7 @@ public class CheckExpiredProductsHandler(
     {
         var today = DateTime.UtcNow.Date;
 
-        var expiredProducts = await dbcontext.Products
+        var expiredProducts = await dbContext.Products
             .Where(x => x.ExpiryDate.Date <= today && x.Stock > 0)
             .ToListAsync(cancellationToken);
 
@@ -28,17 +28,17 @@ public class CheckExpiredProductsHandler(
 
         foreach (var product in expiredProducts)
         {
-            var oldstock = product.Stock;
-            var item = new ExpireDateItems
+            var oldStock = product.Stock;
+            var item = new ExpiryDateItems
             {
                 Product = product,
                 ProductName = product.Name,
-                Quantity = oldstock,
+                Quantity = oldStock,
                 TotalOrderPrice = product.Stock * product.Price,
                 TotalPurchasePrice = product.Stock * product.PurchasePrice
             };
 
-            report.ExpiredateItemsList.Add(item);
+            report.ExpiryDateItemsList.Add(item);
 
             report.TotalOrderPrice += item.TotalOrderPrice;
             report.TotalPurchasePrice += item.TotalPurchasePrice;
@@ -46,12 +46,12 @@ public class CheckExpiredProductsHandler(
             product.Stock = 0;
         }
 
-        dbcontext.ExpireDateProducts.Add(report);
+        dbContext.ExpireDateProducts.Add(report);
 
-        await dbcontext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
         logger.LogInformation(
             "Created expired products report with {Count} items.",
-            report.ExpiredateItemsList.Count);
+            report.ExpiryDateItemsList.Count);
     }
 }

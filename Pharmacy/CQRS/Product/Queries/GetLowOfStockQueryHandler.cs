@@ -8,8 +8,8 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Product.Queries;
 
 public record GetLowOfStockQuery(
-    int MinQuantity, 
-    int Page, 
+    int MinQuantity,
+    int Page,
     int PageSize) : IRequest<List<ProductResponse>>;
 
 public class GetLowOfStockQueryHandler(
@@ -25,7 +25,7 @@ public class GetLowOfStockQueryHandler(
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!product.Any())
-            throw new ResourseNotFoundException("Product not found");
+            throw new RecourseNotFoundException("Product not found");
 
         return mapper.Map<List<ProductResponse>>(product);
     }

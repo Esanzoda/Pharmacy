@@ -15,7 +15,7 @@ public static class ConsumerExtensions
             serviceCollection.AddMassTransit(x =>
             {
                 x.AddConsumer(typeof(OrderCreatedConsumer));
-                x.AddConsumer(typeof(OrderCanselledConsumer));
+                x.AddConsumer(typeof(OrderCancelledConsumer));
                 x.AddConsumer(typeof(OrderCompletedConsumer));
                 x.AddConsumer(typeof(ReportToCeoOrderCompleted));
                 x.UsingRabbitMq((context, cfg) =>

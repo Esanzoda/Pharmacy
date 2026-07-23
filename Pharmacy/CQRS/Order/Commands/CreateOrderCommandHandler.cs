@@ -28,7 +28,7 @@ public class CreateOrderCommandHandler(
             .FindAsync(request.Id, cancellationToken);
         if (customer == null)
         {
-            throw new ResourseNotFoundException($"Customer not found");
+            throw new RecourseNotFoundException($"Customer not found");
         }
 
         var order = mapper.Map<Models.Domain.Order>(request.Request);
@@ -49,7 +49,7 @@ public class CreateOrderCommandHandler(
         {
             if (!products.TryGetValue(item.ProductId, out var product))
             {
-                throw new ResourseNotFoundException("Product not found");
+                throw new RecourseNotFoundException("Product not found");
             }
 
             if (product.Stock < item.Quantity)
@@ -80,18 +80,18 @@ public class CreateOrderCommandHandler(
         }
 
         var totalAmount = order.TotalAmount = order.OrderItems.Sum(x => x.TotalPrice);
-        decimal delivePrice = 0;
+        decimal deliverPrice = 0;
         if (request.Request.OrderType is OrderType.Deliver)
         {
             var address = request.Request.Adress;
 
             if (address is "1" || address is "2" || address is "3")
             {
-                delivePrice = 10;
+                deliverPrice = 10;
             }
         }
 
-        order.TotalAmount = delivePrice + totalAmount;
+        order.TotalAmount = deliverPrice + totalAmount;
         await dbContext.SaveChangesAsync(cancellationToken);
 
         await publishEndpoint.Publish(new OrderCreatedEvent()

@@ -16,15 +16,15 @@ public class ReportToCeoOrderCompleted(
             "At {Day} our pharmacy had {Count} completed orders with total amount {TotalAmount}.",
             message.Day,
             message.Count,
-            message.Totalamout);
+            message.TotalAmount);
 
         if (message.To != null)
         {
-            await mediator.Send(new SendToCeoComplatedOrderReportCommand(
+            await mediator.Send(new SendToCeoCompletedOrderReportCommand(
                 message.To,
                 message.Day,
                 message.Count,
-                message.Totalamout));
+                message.TotalAmount));
         }
     }
 }

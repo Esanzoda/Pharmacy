@@ -6,14 +6,14 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Category.Queries;
 
-public record GetAllCategoriesByPeginationQuery(
+public record GetAllCategoriesByPaginationQuery(
     int PageNumber,
     int PageSize) : IRequest<List<CategoryResponse>>;
 
 public class GetAllCategoryQueryHandler(IMapper mapper, IApplicationDbContext dbContext)
-    : IRequestHandler<GetAllCategoriesByPeginationQuery, List<CategoryResponse>>
+    : IRequestHandler<GetAllCategoriesByPaginationQuery, List<CategoryResponse>>
 {
-    public async Task<List<CategoryResponse>> Handle(GetAllCategoriesByPeginationQuery request,
+    public async Task<List<CategoryResponse>> Handle(GetAllCategoriesByPaginationQuery request,
         CancellationToken cancellationToken)
     {
         // request.PageNumber = Math.Max(1, request.PageNumber);

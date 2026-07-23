@@ -8,23 +8,20 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Cart.Commands;
 
-public record CreateCartCommand(
-    CartRequest Request
-    ) : IRequest<CartResponse>;
+public record CreateCartCommand(CartRequest Request) : IRequest<CartResponse>;
 
-public class CreateCartCommandHandler(IMapper mapper,IApplicationDbContext dbContext) : IRequestHandler<CreateCartCommand, CartResponse>
+public class CreateCartCommandHandler(IMapper mapper, IApplicationDbContext dbContext)
+    : IRequestHandler<CreateCartCommand, CartResponse>
 {
-
     public async Task<CartResponse> Handle(CreateCartCommand request, CancellationToken cancellationToken)
     {
         var existingCart = await dbContext.Carts
-            .AnyAsync(x => x.CustomerId == request.Request.CustomerId,cancellationToken);
+            .AnyAsync(x => x.CustomerId == request.Request.CustomerId, cancellationToken);
 
         if (existingCart)
         {
-            throw new ResourseIsAlredyExistException("Cart olredy exsist");
+            throw new RecourseIsAlreadyExistException("Cart already exist");
         }
-            
 
         var cart = mapper.Map<Models.Domain.Cart>(request.Request);
         cart.TotalAmount = 0;

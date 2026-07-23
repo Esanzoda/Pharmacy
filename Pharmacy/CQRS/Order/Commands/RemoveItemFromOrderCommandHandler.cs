@@ -23,7 +23,7 @@ public class RemoveItemFromOrderHandler(
             .FirstOrDefaultAsync(x => x.Id == request.CustomerId, cancellationToken);
         if (customer is null)
         {
-            throw new ResourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Customer not found");
         }
 
         var order = await dbContext.Orders
@@ -31,7 +31,7 @@ public class RemoveItemFromOrderHandler(
             .FirstOrDefaultAsync(x => x.Id == request.OrderId, cancellationToken);
         if (order == null)
         {
-            throw new ResourseNotFoundException("Order not found");
+            throw new RecourseNotFoundException("Order not found");
         }
 
         if (order.OrderStatus == OrderStatus.Completed || order.OrderStatus == OrderStatus.Cancelled)
@@ -42,14 +42,14 @@ public class RemoveItemFromOrderHandler(
         var itemToRemove = order.OrderItems.FirstOrDefault(x => x.Id == request.ItemId);
         if (itemToRemove == null)
         {
-            throw new ResourseNotFoundException($"OrderItem not found");
+            throw new RecourseNotFoundException($"OrderItem not found");
         }
 
         var product = await dbContext.Products
             .FindAsync(itemToRemove.ProductId, cancellationToken);
         if (product == null)
         {
-            throw new ResourseNotFoundException($"Product not found");
+            throw new RecourseNotFoundException($"Product not found");
         }
 
         product.Stock += itemToRemove.Quantity;

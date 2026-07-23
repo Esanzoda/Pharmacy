@@ -13,5 +13,23 @@ public class DeliverConfiguration : IEntityTypeConfiguration<Deliver>
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.Id)
             .IsUnique();
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(50);
+        builder.Property(x => x.Address)
+            .IsRequired()
+            .HasMaxLength(100);
+        builder.Property(x => x.Email)
+            .IsRequired()
+            .HasMaxLength(100);
+        builder.Property(x => x.PasswordHash)
+            .IsRequired()
+            .HasMaxLength(100);
+        builder.Property(x => x.PhoneNumber)
+            .IsRequired()
+            .HasMaxLength(50);
+        builder.Property(x => x.Password)
+            .IsRequired()
+            .HasMaxLength(100);
     }
 }

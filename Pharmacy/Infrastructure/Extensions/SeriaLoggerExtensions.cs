@@ -3,7 +3,7 @@ using Serilog;
 namespace Pharmacy.Infrastructure.Extensions;
 
 public static class SeriaLoggerExtensions
-{ 
+{
     public static void AddSeriaLogger(this WebApplicationBuilder webApplicationBuilder)
     {
         Log.Logger = new LoggerConfiguration()

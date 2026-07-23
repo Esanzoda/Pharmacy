@@ -2,43 +2,35 @@ using Pharmacy.Exception;
 
 namespace Pharmacy.Middlewares;
 
-public class ExceptionMiddleware
+public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionMiddleware> _logger;
-
-    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
-    {
-        _next = next;
-        _logger = logger;
-    }
     public async Task Invoke(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await next(context);
         }
-        catch (ResourseIsAlredyExistException ex)
+        catch (RecourseIsAlreadyExistException ex)
         {
-            _logger.LogError(ex, ex.Message);
+            logger.LogError(ex, ex.Message);
             context.Response.StatusCode = StatusCodes.Status409Conflict;
             await context.Response.WriteAsync(ex.Message);
         }
-        catch (ResourseNotFoundException ex)
+        catch (RecourseNotFoundException ex)
         {
-            _logger.LogError(ex, ex.Message);
+            logger.LogError(ex, ex.Message);
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             await context.Response.WriteAsync(ex.Message);
         }
         catch (BusinessException ex)
         {
-            _logger.LogError(ex, ex.Message);
+            logger.LogError(ex, ex.Message);
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
             await context.Response.WriteAsync(ex.Message);
         }
         catch (System.Exception ex)
         {
-            _logger.LogError(ex, ex.Message);
+            logger.LogError(ex, ex.Message);
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await context.Response.WriteAsync(ex.Message);
         }

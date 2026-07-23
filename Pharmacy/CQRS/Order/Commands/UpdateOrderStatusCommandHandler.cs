@@ -31,7 +31,7 @@ public class UpdateOrderStatusHandler(
             .FirstOrDefaultAsync(x => x.Id == request.OrderId, cancellationToken);
         if (order == null)
         {
-            throw new ResourseNotFoundException($"Order not found");
+            throw new RecourseNotFoundException($"Order not found");
         }
 
 //its order.status alredy changed
@@ -48,7 +48,7 @@ public class UpdateOrderStatusHandler(
             {
                 if (item.Product == null)
                 {
-                    throw new ResourseNotFoundException("Product ot found");
+                    throw new RecourseNotFoundException("Product ot found");
                 }
 
                 item.Product.Stock += item.Quantity;

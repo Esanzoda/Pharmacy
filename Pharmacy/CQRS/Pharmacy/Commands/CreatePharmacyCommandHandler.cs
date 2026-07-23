@@ -17,16 +17,16 @@ public class CreatePharmacyCommandHandler(
 {
     public async Task<PharmacyResponse> Handle(CreatePharmacyCommand request, CancellationToken cancellationToken)
     {
-        var pharmacyExsist = await dbContext.Pharmacies
+        var pharmacyExist = await dbContext.Pharmacies
             .AnyAsync(x =>
                     x.Name == request.Request.Name &&
                     x.Email == request.Request.Email &&
                     x.Address == request.Request.Address
                 , cancellationToken);
 
-        if (pharmacyExsist)
+        if (pharmacyExist)
         {
-            throw new ResourseIsAlredyExistException("Pharmacy whith this information alredy exsist");
+            throw new RecourseIsAlreadyExistException("Pharmacy with this information already exist");
         }
 
         var pharmacy = mapper.Map<Models.Domain.Pharmacy>(request.Request);

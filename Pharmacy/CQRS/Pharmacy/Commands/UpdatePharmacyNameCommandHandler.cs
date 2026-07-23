@@ -19,12 +19,12 @@ public class UpdatePharmacyNameCommandHandler(IMapper mapper, IApplicationDbCont
             .FindAsync(request.Id, cancellationToken);
         if (pharmacy is null)
         {
-            throw new ResourseNotFoundException("Pharmacy not found");
+            throw new RecourseNotFoundException("Pharmacy not found");
         }
 
         if (pharmacy.Name == request.NewName)
         {
-            throw new BusinessException(" Pharmacy with this name alredy exsist");
+            throw new BusinessException(" Pharmacy with this name already exist");
         }
 
         pharmacy.Name = request.NewName;

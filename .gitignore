@@ -9,4 +9,6 @@ obj/
 *.sln.DotSettings.user
 
 appsettings.Local.json
+
 .env
+

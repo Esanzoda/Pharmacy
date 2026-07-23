@@ -10,65 +10,63 @@ namespace Pharmacy.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class PurchaseController : ControllerBase
+public class PurchaseController(IMediator mediator) : ControllerBase
 {
- 
-    private readonly IMediator _mediator;
-
-    public PurchaseController( IMediator mediator)
-    {
-       
-        _mediator = mediator;
-    }
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<PurchaseResponse>> Create([FromBody] PurchaseRequest request)
     {
-        var response = await _mediator.Send(new CreatePurchaseCommand(request));
+        var response = await mediator.Send(new CreatePurchaseCommand(request));
         return Ok(response);
     }
+
     [Authorize]
     [HttpPut]
-
     public async Task<ActionResult<PurchaseResponse>> Update(long id, [FromBody] PurchaseRequest request)
     {
-        var response = await _mediator.Send(new UpdatePurchaseCommand(id, request));
+        var response = await mediator.Send(new UpdatePurchaseCommand(id, request));
         return Ok(response);
     }
+
     [Authorize]
     [HttpGet("id")]
     public async Task<ActionResult<PurchaseResponse>> GetByIdAsync(long id)
     {
-        var response = await _mediator.Send(new GetPurchaseBuIdQuery(id));
+        var response = await mediator.Send(new GetPurchaseBuIdQuery(id));
         return Ok(response);
     }
+
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<PurchaseResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<PurchaseResponse>>> GetAllByPagination(int pageNumber, int pageSize)
     {
-        var response = await _mediator.Send(new GetAllPurchaseQuery(pageNumber, pageSize));
+        var response = await mediator.Send(new GetAllPurchaseQuery(pageNumber, pageSize));
         return Ok(response);
     }
+
     [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeleteById(long id)
     {
-        var response = await _mediator.Send(new DeletePurchaseCommand(id));
+        var response = await mediator.Send(new DeletePurchaseCommand(id));
         return Ok(response);
     }
+
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<PurchaseItemResponse>> AddItem(long purchaseId,
-        PurchaseItemRequest purchaserequest)
+        PurchaseItemRequest purchaseItemRequest)
     {
-        var resourse = await _mediator.Send(new AddItemToPurchaseCommand(purchaseId, purchaserequest));
-        return Ok(resourse);
+        var response = await mediator.Send(new AddItemToPurchaseCommand(purchaseId, purchaseItemRequest));
+        return Ok(response);
     }
+
     [Authorize]
     [HttpDelete]
-    public async Task<ActionResult<PurchaseItemResponse>> RemoveItem(long employeeId,long purchaseId, long purchaseItemId)
+    public async Task<ActionResult<PurchaseItemResponse>> RemoveItem(long employeeId, long purchaseId,
+        long purchaseItemId)
     {
-        var response = await _mediator.Send(new RemoveItemFromPurchaseCommand(employeeId, purchaseId, purchaseItemId));
+        var response = await mediator.Send(new RemoveItemFromPurchaseCommand(employeeId, purchaseId, purchaseItemId));
         return Ok(response);
     }
 }

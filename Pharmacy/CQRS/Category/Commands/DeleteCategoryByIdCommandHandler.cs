@@ -20,7 +20,7 @@ public class DeleteCategoryByIdHandler(
 
         if (category is null)
         {
-            throw new ResourseNotFoundException("Category not found  ");
+            throw new RecourseNotFoundException("Category not found  ");
         }
 
         dbContext.Categories.Remove(category);

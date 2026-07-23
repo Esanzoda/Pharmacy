@@ -7,12 +7,11 @@ using Pharmacy.Models.Domain;
 namespace Pharmacy.CQRS.Notification.Commands;
 
 public record SendToEmailCommand(
-    EmailMessage Message
-    ) : IRequest;
+    EmailMessage Message) : IRequest;
+
 public class SendToEmailCommandHandler(
     IConfiguration configuration,
-    ILogger<SendToEmailCommandHandler> logger
-    ):IRequestHandler<SendToEmailCommand>
+    ILogger<SendToEmailCommandHandler> logger) : IRequestHandler<SendToEmailCommand>
 {
     public async Task Handle(SendToEmailCommand request, CancellationToken cancellationToken)
     {
@@ -27,7 +26,7 @@ public class SendToEmailCommandHandler(
             email.To.Add(MailboxAddress.Parse(request.Message.To));
             email.Subject = request.Message.Subject;
 
-            var builder = new BodyBuilder { HtmlBody =request.Message.Body };
+            var builder = new BodyBuilder { HtmlBody = request.Message.Body };
             email.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();
@@ -38,12 +37,12 @@ public class SendToEmailCommandHandler(
 
             await smtp.AuthenticateAsync(
                 configuration["EmailSettings:Username"] ?? throw new InvalidOperationException(),
-                configuration["EmailSettings:Password"] ?? throw new InvalidOperationException(), 
+                configuration["EmailSettings:Password"] ?? throw new InvalidOperationException(),
                 cancellationToken);
 
             await smtp.SendAsync(email,
                 cancellationToken);
-            await smtp.DisconnectAsync(true, 
+            await smtp.DisconnectAsync(true,
                 cancellationToken);
 
             logger.LogInformation("Email sent to {Email}", request.Message.To);

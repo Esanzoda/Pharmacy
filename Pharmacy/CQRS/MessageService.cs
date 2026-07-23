@@ -4,10 +4,10 @@ namespace Pharmacy.CQRS;
 
 public interface IMessageService
 {
-    Task<string> SendOrderCreatedAsync(string toPhonenumber, long orderId, decimal totalAmount, DateTime createdAt);
-    Task<string> SendOrderCancelledAsync(string toPhonenumber, long orderId, DateTime updatedAt);
-    Task<string> SendOrderCompletedAsync(string toPhonenumber, long orderId, decimal totalAmount, DateTime completedAt);
-    Task<string> SendLowStockAlertAsync(string toPhonenumber, string productName, int currentStock);
+    Task<string> SendOrderCreatedAsync(string toPhoneNumber, long orderId, decimal totalAmount, DateTime createdAt);
+    Task<string> SendOrderCancelledAsync(string toPhoneNumber, long orderId, DateTime updatedAt);
+    Task<string> SendOrderCompletedAsync(string toPhoneNumber, long orderId, decimal totalAmount, DateTime completedAt);
+    Task<string> SendLowStockAlertAsync(string toPhoneNumber, string productName, int currentStock);
 }
 
 public class MessageService : IMessageService
@@ -50,7 +50,7 @@ public class MessageService : IMessageService
 
     public Task<string> SendLowStockAlertAsync(string toPhonenumber, string productName, int currentStock)
     {
-        var messageText = $"Low stoc product {productName} quantity {currentStock} send to {toPhonenumber}";
+        var messageText = $"Low stock product {productName} quantity {currentStock} send to {toPhonenumber}";
         Console.WriteLine((messageText));
         var message = new PhoneNumberMessage
         {

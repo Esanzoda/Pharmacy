@@ -6,8 +6,7 @@ namespace Pharmacy.CQRS.Notification.Commands;
 public record SendToEmailLowStockProductCommand(
     string ToEmail,
     string ProductName,
-    int CurrentStock
-) : IRequest;
+    int CurrentStock) : IRequest;
 
 public class SendToEmailLowStockProductCommandHandler(
     IMediator mediator
@@ -26,6 +25,6 @@ public class SendToEmailLowStockProductCommandHandler(
                 <p>Please replenish the stock..</p>
             "
         };
-        await mediator.Send(new SendToEmailCommand(message));
+        await mediator.Send(new SendToEmailCommand(message), cancellationToken);
     }
 }

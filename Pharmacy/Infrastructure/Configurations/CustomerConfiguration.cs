@@ -27,12 +27,12 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.Property(x => x.PasswordHash)
             .HasMaxLength(500);
-        
+
         builder.HasOne(x => x.Cart)
             .WithOne(x => x.Customer)
             .HasForeignKey<Cart>(x => x.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder.HasMany(x => x.Orders)
             .WithOne(x => x.Customer)
             .HasForeignKey(x => x.CustomerId)

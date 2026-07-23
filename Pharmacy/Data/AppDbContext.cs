@@ -5,11 +5,8 @@ using Pharmacy.Models.Domain;
 
 namespace Pharmacy.Data;
 
-public class AppDbContext : DbContext,IApplicationDbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options), IApplicationDbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<Category> Categories { get; set; }
@@ -22,7 +19,7 @@ public class AppDbContext : DbContext,IApplicationDbContext
     public DbSet<PurchaseItem> PurchaseItems { get; set; }
     public DbSet<Deliver> Delivers { get; set; }
     public DbSet<ExpiryDateProduct> ExpireDateProducts { get; set; }
-    public DbSet<ExpireDateItems> ExpireDateItems { get; set; }
+    public DbSet<ExpiryDateItems> ExpireDateItems { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Models.Domain.Pharmacy> Pharmacies { get; set; }
 

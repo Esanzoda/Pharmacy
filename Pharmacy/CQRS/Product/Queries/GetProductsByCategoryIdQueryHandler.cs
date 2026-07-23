@@ -24,7 +24,7 @@ public class GetProductsByCategoryIdQueryHandler(
             .FirstOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
         if (category == null)
         {
-            throw new ResourseNotFoundException("Category with this id  not found");
+            throw new RecourseNotFoundException("Category with this id  not found");
         }
 
 
@@ -35,7 +35,7 @@ public class GetProductsByCategoryIdQueryHandler(
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!product.Any())
-            throw new ResourseNotFoundException("We dont have product  with categoryId ");
+            throw new RecourseNotFoundException("We dont have product  with categoryId ");
         return mapper.Map<List<ProductResponse>>(product);
     }
 }

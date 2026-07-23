@@ -17,7 +17,7 @@ public interface IApplicationDbContext
     DbSet<PurchaseItem> PurchaseItems { get; }
     DbSet<Deliver> Delivers { get; }
     DbSet<ExpiryDateProduct> ExpireDateProducts { get; }
-    DbSet<ExpireDateItems> ExpireDateItems { get; }
+    DbSet<ExpiryDateItems> ExpireDateItems { get; }
     DbSet<RefreshToken> RefreshTokens { get; }
     DbSet<Models.Domain.Pharmacy> Pharmacies { get; }
 

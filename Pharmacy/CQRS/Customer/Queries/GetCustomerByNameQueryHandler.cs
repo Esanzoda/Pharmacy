@@ -8,8 +8,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Customer.Queries;
 
 public record GetCustomerByNameQuery(
-    string Name
-) : IRequest<List<CustomerResponse>>;
+    string Name) : IRequest<List<CustomerResponse>>;
 
 public class GetCustomerByNameQueryHandler(
     IMapper mapper,
@@ -23,7 +22,7 @@ public class GetCustomerByNameQueryHandler(
             .FirstOrDefaultAsync(x => x.Name == request.Name, cancellationToken);
         if (customer is null)
         {
-            throw new ResourseNotFoundException($"Customer with this name{request.Name} not found");
+            throw new RecourseNotFoundException($"Customer with this name{request.Name} not found");
         }
 
         return mapper.Map<List<CustomerResponse>>(customer);

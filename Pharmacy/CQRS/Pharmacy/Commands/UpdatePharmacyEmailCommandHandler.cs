@@ -18,12 +18,12 @@ public class UpdatePharmacyEmailCommandHandler(
             .FindAsync(request.Id, cancellationToken);
         if (pharmacy is null)
         {
-            throw new ResourseNotFoundException("Pharmacy not found");
+            throw new RecourseNotFoundException("Pharmacy not found");
         }
 
         if (pharmacy.Email == request.NewEmail)
         {
-            throw new BusinessException("Pharmacy with this email alredy exsist");
+            throw new BusinessException("Pharmacy with this email already exist");
         }
 
         pharmacy.Email = request.NewEmail;

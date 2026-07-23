@@ -10,8 +10,7 @@ namespace Pharmacy.CQRS.Purchase.Queries;
 public record GetPurchaseByEmployeIdQuery(
     int EmployeeId,
     int Page,
-    int PageSize
-) : IRequest<List<PurchaseResponse>>;
+    int PageSize) : IRequest<List<PurchaseResponse>>;
 
 public class GetPurchaseByEmployeIdQueryHandler(
     IApplicationDbContext dbContext,
@@ -30,7 +29,7 @@ public class GetPurchaseByEmployeIdQueryHandler(
             .ToListAsync(cancellationToken);
         if (purchase == null)
         {
-            throw new ResourseNotFoundException("Purchase not found");
+            throw new RecourseNotFoundException("Purchase not found");
         }
 
         return mapper.Map<List<PurchaseResponse>>(purchase);
