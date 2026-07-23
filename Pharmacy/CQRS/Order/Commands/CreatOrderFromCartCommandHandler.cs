@@ -44,7 +44,7 @@ public class CreatOrderFromCartHandler(
             CustomerId = cart.CustomerId,
             OrderType = request.OrderType,
             OrderStatus = OrderStatus.Pending,
-            Adress = newAddress,
+            Address = newAddress,
             Customer = cart.Customer,
             TotalAmount = cart.TotalAmount,
         };

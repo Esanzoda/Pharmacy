@@ -17,5 +17,8 @@ public class PurchaseItemConfiguration : IEntityTypeConfiguration<PurchaseItem>
         builder.HasOne(x => x.Purchase)
             .WithMany(x => x.PurchaseItems)
             .HasForeignKey(x => x.PurchaseId);
+        builder.Property(x => x.Barcode)
+            .IsRequired()
+            .HasMaxLength(100);
     }
 }
