@@ -18,5 +18,9 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .WithMany(c => c.Orders)
             .HasForeignKey(x => x.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
+        builder.Property(x => x.Address)
+            .IsRequired()
+            .HasMaxLength(100);
+        
     }
 }
