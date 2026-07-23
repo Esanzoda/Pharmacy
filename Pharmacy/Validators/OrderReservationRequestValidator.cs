@@ -3,9 +3,9 @@ using Pharmacy.Models.Dto.Request;
 
 namespace Pharmacy.Validators;
 
-public class OrderResevationRequestValidator : AbstractValidator<OrderReservationRequest>
+public class OrderReservationRequestValidator : AbstractValidator<OrderReservationRequest>
 {
-    public OrderResevationRequestValidator()
+    public OrderReservationRequestValidator()
     {
         RuleFor(x => x.CustomerId)
             .GreaterThan(0)

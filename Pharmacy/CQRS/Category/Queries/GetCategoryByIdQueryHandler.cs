@@ -34,7 +34,7 @@ public class GetCategoryByIdHandler(
             .FirstOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
         if (category is null)
         {
-            throw new ResourseNotFoundException("Category not found");
+            throw new RecourseNotFoundException("Category not found");
         }
 
         await cache.SetStringAsync(key,

@@ -9,8 +9,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record CreateDeliverCommand(
-    DeliverRequest DeliverRequest
-) : IRequest<DeliverResponse>;
+    DeliverRequest DeliverRequest) : IRequest<DeliverResponse>;
 
 public class CreateDeliverCommandHandler(
     IMapper mapper,
@@ -24,7 +23,7 @@ public class CreateDeliverCommandHandler(
 
         if (deliver is not null)
         {
-            throw new ResourseIsAlredyExistException("Deliver already exist");
+            throw new RecourseIsAlreadyExistException("Deliver already exist");
         }
 
         var newDeliver = mapper.Map<Models.Domain.Deliver>(request.DeliverRequest);

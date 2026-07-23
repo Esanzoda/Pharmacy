@@ -9,8 +9,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Customer.Queries;
 
 public record GetCustomerByIdQuery(
-    long Id
-) : IRequest<CustomerResponse>;
+    long Id) : IRequest<CustomerResponse>;
 
 public class GetCustomerByIdHandler(
     IDistributedCache cache,
@@ -36,7 +35,7 @@ public class GetCustomerByIdHandler(
             .FindAsync(request.Id, cancellationToken);
         if (customer is null)
         {
-            throw new ResourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Customer not found");
         }
 
         var response = mapper.Map<CustomerResponse>(customer);

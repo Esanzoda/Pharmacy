@@ -11,10 +11,9 @@ namespace Pharmacy.CQRS.Employee.Commands;
 
 public record UpdateEmployeeCommand(
     long Id,
-    EmployeeRequest Request
-) : IRequest<EmployeeResponse>;
+    EmployeeRequest Request) : IRequest<EmployeeResponse>;
 
-public class UpdateEmployeHandler(
+public class UpdateEmployeeHandler(
     IApplicationDbContext dbContext,
     IMapper mapper
 ) : IRequestHandler<UpdateEmployeeCommand, EmployeeResponse>
@@ -25,18 +24,18 @@ public class UpdateEmployeHandler(
             .FindAsync(request.Id, cancellationToken);
         if (employee == null)
         {
-            throw new ResourseNotFoundException($"Employee with id {request.Id} not found");
+            throw new RecourseNotFoundException($"Employee with id {request.Id} not found");
         }
 
         var employeeExist = await dbContext.Employees
-            .AnyAsync(x => x.Id != request.Id && 
+            .AnyAsync(x => x.Id != request.Id &&
                            (x.Email == request.Request.Email
-                           || x.PhoneNumber == request.Request.PhoneNumber),
+                            || x.PhoneNumber == request.Request.PhoneNumber),
                 cancellationToken);
 
         if (employeeExist)
         {
-            throw new ResourseIsAlredyExistException(
+            throw new RecourseIsAlreadyExistException(
                 $"Email: {request.Request.Email} or Number{request.Request.PhoneNumber}already exists");
         }
 

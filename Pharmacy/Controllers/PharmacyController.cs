@@ -14,8 +14,8 @@ public class PharmacyController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<PharmacyResponse>> Create(PharmacyRequest request)
     {
-        var resourse = await mediator.Send(new CreatePharmacyCommand(request));
-        return Ok(resourse);
+        var response = await mediator.Send(new CreatePharmacyCommand(request));
+        return Ok(response);
     }
 
     [HttpPatch]
@@ -27,7 +27,7 @@ public class PharmacyController(IMediator mediator) : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<ActionResult<PharmacyResponse>> UpdateAddres([FromBody] string nawAddress)
+    public async Task<ActionResult<PharmacyResponse>> UpdateAddress([FromBody] string nawAddress)
     {
         var pharmacyId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         var response = await mediator.Send(new UpdatePharmacyAddressCommand(pharmacyId, nawAddress));
@@ -38,7 +38,7 @@ public class PharmacyController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<PharmacyResponse>> UpdateEmail([FromBody] string newEmail)
     {
         var pharmacyId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await mediator.Send(new UpdatePharmacyEmailCommand(pharmacyId,newEmail));
+        var response = await mediator.Send(new UpdatePharmacyEmailCommand(pharmacyId, newEmail));
         return Ok(response);
     }
 
@@ -46,7 +46,7 @@ public class PharmacyController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<PharmacyResponse>> UpdatePhoneNumber([FromBody] string nawNumber)
     {
         var pharmacyId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await mediator.Send(new UpdatePharmacyPhoneNumberCommand(pharmacyId,nawNumber));
+        var response = await mediator.Send(new UpdatePharmacyPhoneNumberCommand(pharmacyId, nawNumber));
         return Ok(response);
     }
 
@@ -54,7 +54,7 @@ public class PharmacyController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<PharmacyResponse>> Update([FromBody] PharmacyRequest request)
     {
         var pharmacyId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var response = await mediator.Send(new UpdatePharmacyCommand(pharmacyId,request));
+        var response = await mediator.Send(new UpdatePharmacyCommand(pharmacyId, request));
         return Ok(response);
     }
 }

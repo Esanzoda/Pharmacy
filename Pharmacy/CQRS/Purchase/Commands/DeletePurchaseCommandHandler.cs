@@ -9,7 +9,7 @@ public record DeletePurchaseCommand(
     long Id) : IRequest<bool>;
 
 public class DeletePurchaseCommandHandler(
-    IApplicationDbContext dbContext ) : IRequestHandler<DeletePurchaseCommand, bool>
+    IApplicationDbContext dbContext) : IRequestHandler<DeletePurchaseCommand, bool>
 {
     public async Task<bool> Handle(DeletePurchaseCommand request, CancellationToken cancellationToken)
     {
@@ -18,7 +18,7 @@ public class DeletePurchaseCommandHandler(
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (purchase is null)
         {
-            throw new ResourseNotFoundException($"Purchase with id {request.Id} not found");
+            throw new RecourseNotFoundException($"Purchase with id {request.Id} not found");
         }
 
         dbContext.Purchases

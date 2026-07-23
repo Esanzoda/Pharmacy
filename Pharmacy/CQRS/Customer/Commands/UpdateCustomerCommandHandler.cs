@@ -11,8 +11,7 @@ namespace Pharmacy.CQRS.Customer.Commands;
 
 public record UpdateCustomerCommand(
     long Id,
-    UpdateCustomerRequest Request
-) : IRequest<CustomerResponse>;
+    UpdateCustomerRequest Request) : IRequest<CustomerResponse>;
 
 public class UpdateCustomerHandler(
     IMapper mapper,
@@ -25,7 +24,7 @@ public class UpdateCustomerHandler(
             .FindAsync(request.Id, cancellationToken);
         if (customer == null)
         {
-            throw new ResourseNotFoundException($"Customer not found with id {request.Id}");
+            throw new RecourseNotFoundException($"Customer not found with id {request.Id}");
         }
 
         var customerExist = await dbContext.Customers
@@ -37,7 +36,7 @@ public class UpdateCustomerHandler(
 
         if (customerExist)
         {
-            throw new ResourseIsAlredyExistException(
+            throw new RecourseIsAlreadyExistException(
                 $"Customer already exists with this phone number{request.Request.PhoneNumber} or ");
         }
 

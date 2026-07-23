@@ -11,12 +11,11 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Customer.Commands;
 
 public record CreateCustomerCommand(
-    CustomerRequest Request
-    ) : IRequest<CustomerResponse>;
+    CustomerRequest Request) : IRequest<CustomerResponse>;
 
 public class CreateCustomerHandler(
-    IMapper mapper, 
-    IApplicationDbContext dbContext, 
+    IMapper mapper,
+    IApplicationDbContext dbContext,
     IMediator mediator)
     : IRequestHandler<CreateCustomerCommand, CustomerResponse>
 {
@@ -27,7 +26,7 @@ public class CreateCustomerHandler(
                 cancellationToken);
         if (customerByEmail)
         {
-            throw new ResourseIsAlredyExistException(
+            throw new RecourseIsAlreadyExistException(
                 $"Customer already exists with this email {request.Request.Email} or number {request.Request.PhoneNumber}");
         }
 

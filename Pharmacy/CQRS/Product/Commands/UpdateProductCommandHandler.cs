@@ -22,21 +22,21 @@ public class UpdateProductCommandHandler(
         var product = await dbContext.Products
             .FindAsync(request.Id, cancellationToken);
         if (product == null)
-            throw new ResourseNotFoundException($"Product whith this id {request.Id} not found");
+            throw new RecourseNotFoundException($"Product whith this id {request.Id} not found");
         var categoryExists = await dbContext.Categories
             .AnyAsync(x => x.Id == request.Request.CategoryId, cancellationToken);
         if (!categoryExists)
         {
-            throw new ResourseNotFoundException($"Category whis this id {request.Request.CategoryId} not found");
+            throw new RecourseNotFoundException($"Category whis this id {request.Request.CategoryId} not found");
         }
 
         var productExist = await dbContext.Products
             .AnyAsync(x => x.Id != request.Id &&
-                                    (  x.Name == request.Request.Name ||
-                                      x.Barcode == request.Request.Barcode), cancellationToken);
+                           (x.Name == request.Request.Name ||
+                            x.Barcode == request.Request.Barcode), cancellationToken);
         if (productExist)
         {
-            throw new ResourseIsAlredyExistException(
+            throw new RecourseIsAlreadyExistException(
                 $"Product already exists with Name {request.Request.Name} orwith Barcode {request.Request.Barcode} ");
         }
 

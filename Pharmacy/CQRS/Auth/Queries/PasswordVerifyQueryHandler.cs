@@ -1,13 +1,15 @@
 using MediatR;
 
 namespace Pharmacy.CQRS.Auth.Queries;
+
 public record PasswordVerifyQuery(
-    string Password, 
+    string Password,
     string PasswordHash) : IRequest<bool>;
-public class PasswordVerifyQueryHandler:IRequestHandler<PasswordVerifyQuery,bool>
+
+public class PasswordVerifyQueryHandler : IRequestHandler<PasswordVerifyQuery, bool>
 {
-    public async Task<bool> Handle(PasswordVerifyQuery request, CancellationToken cancellationToken)
+    public Task<bool> Handle(PasswordVerifyQuery request, CancellationToken cancellationToken)
     {
-        return BCrypt.Net.BCrypt.Verify(request.Password,request.PasswordHash);
+        return Task.FromResult(BCrypt.Net.BCrypt.Verify(request.Password, request.PasswordHash));
     }
 }

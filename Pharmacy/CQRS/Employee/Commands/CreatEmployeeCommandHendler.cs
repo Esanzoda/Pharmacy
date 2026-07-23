@@ -10,33 +10,32 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Employee.Commands;
 
 public record CreateEmployeeCommand(
-    EmployeeRequest Request
-    ) : IRequest<EmployeeResponse>;
+    EmployeeRequest Request) : IRequest<EmployeeResponse>;
 
 public class CreatEmployeeCommandHandler(
     IApplicationDbContext dbContext,
     IMapper mapper
-    ) : IRequestHandler<CreateEmployeeCommand, EmployeeResponse>
+) : IRequestHandler<CreateEmployeeCommand, EmployeeResponse>
 {
-    
-
     public async Task<EmployeeResponse> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employeeExist = await dbContext.Employees
-            .AnyAsync(x =>  x.Email!.ToLower() == request.Request.Email.ToLower() 
-                            || x.Name==request.Request.PhoneNumber,
+            .AnyAsync(x => x.Email!.ToLower() == request.Request.Email.ToLower()
+                           || x.Name == request.Request.PhoneNumber,
                 cancellationToken);
         if (employeeExist)
         {
-            throw new ResourseIsAlredyExistException($"Email: {request.Request.Email} or Number{request.Request.PhoneNumber}already exists");
+            throw new RecourseIsAlreadyExistException(
+                $"Email: {request.Request.Email} or Number{request.Request.PhoneNumber}already exists");
         }
+
         if (request.Request.Role == Role.Customer)
         {
             throw new BusinessException("Cant create employee with status customer");
         }
 
         var newEmployee = mapper.Map<Models.Domain.Employee>(request.Request);
-        await dbContext.Employees.AddAsync(newEmployee,cancellationToken);
+        await dbContext.Employees.AddAsync(newEmployee, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
         return mapper.Map<EmployeeResponse>(newEmployee);
     }

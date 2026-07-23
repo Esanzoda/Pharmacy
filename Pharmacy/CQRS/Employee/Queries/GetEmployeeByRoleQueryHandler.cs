@@ -11,8 +11,7 @@ namespace Pharmacy.CQRS.Employee.Queries;
 public record GetEmployeeByRoleQuery(
     Role Role,
     int Page,
-    int PageSize
-) : IRequest<List<EmployeeResponse>>;
+    int PageSize) : IRequest<List<EmployeeResponse>>;
 
 public class GetEmployeeByRoleQueryHandler(
     IApplicationDbContext dbContext,
@@ -30,7 +29,7 @@ public class GetEmployeeByRoleQueryHandler(
             .ToListAsync(cancellationToken);
         if (!employees.Any())
         {
-            throw new ResourseNotFoundException($"Employee whith this role {request.Role} not found");
+            throw new RecourseNotFoundException($"Employee with this role {request.Role} not found");
         }
 
         return mapper.Map<List<EmployeeResponse>>(employees);

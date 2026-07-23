@@ -9,9 +9,8 @@ namespace Pharmacy.CQRS.Employee.Queries;
 
 public record GetEmployeeBySalaryQuery(
     decimal Salary,
-    int Pagem,
-    int PageSize
-) : IRequest<List<EmployeeResponse>>;
+    int Page,
+    int PageSize) : IRequest<List<EmployeeResponse>>;
 
 public class GetEmployeeBySalaryQueryHandler(
     IApplicationDbContext dbContext,
@@ -24,12 +23,12 @@ public class GetEmployeeBySalaryQueryHandler(
         var employees = await dbContext.Employees
             .Where(x => x.Salary == request.Salary)
             .OrderBy(x => x.Id)
-            .Skip((request.Pagem - 1) * request.PageSize)
+            .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!employees.Any())
         {
-            throw new ResourseNotFoundException($"Employee whith this salary {request.Salary} not found");
+            throw new RecourseNotFoundException($"Employee with this salary {request.Salary} not found");
         }
 
         return mapper.Map<List<EmployeeResponse>>(employees);

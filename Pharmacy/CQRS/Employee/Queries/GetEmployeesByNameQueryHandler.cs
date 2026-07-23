@@ -7,18 +7,17 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Employee.Queries;
 
-public record GetEmpoyeesByNameQuery(
+public record GetEmployeesByNameQuery(
     string Name,
     int Page,
-    int PageSize
-    ) : IRequest<List<EmployeeResponse>>;
+    int PageSize) : IRequest<List<EmployeeResponse>>;
 
 public class GetEmployeesByNameQueryHandler(
     IApplicationDbContext dbContext,
     IMapper mapper
-    ) : IRequestHandler<GetEmpoyeesByNameQuery, List<EmployeeResponse>>
+) : IRequestHandler<GetEmployeesByNameQuery, List<EmployeeResponse>>
 {
-    public async Task<List<EmployeeResponse>> Handle(GetEmpoyeesByNameQuery request,
+    public async Task<List<EmployeeResponse>> Handle(GetEmployeesByNameQuery request,
         CancellationToken cancellationToken)
     {
         var employees = await dbContext.Employees
@@ -31,7 +30,7 @@ public class GetEmployeesByNameQueryHandler(
 
         if (!employees.Any())
         {
-            throw new ResourseNotFoundException($"Employee whith this name {request.Name} not found ");
+            throw new RecourseNotFoundException($"Employee with this name {request.Name} not found ");
         }
 
         return mapper.Map<List<EmployeeResponse>>(employees);

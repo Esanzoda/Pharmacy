@@ -6,17 +6,17 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Customer.Queries;
 
-public record GetAllCustomerByPagenationQuery(
+public record GetAllCustomerByPaginationQuery(
     int PageNumber,
     int PageSize
 ) : IRequest<List<CustomerResponse>>;
 
-public class GetAllCustomerByPagenationHandler(
+public class GetAllCustomerByPaginationHandler(
     IMapper mapper,
     IApplicationDbContext dbContext)
-    : IRequestHandler<GetAllCustomerByPagenationQuery, List<CustomerResponse>>
+    : IRequestHandler<GetAllCustomerByPaginationQuery, List<CustomerResponse>>
 {
-    public async Task<List<CustomerResponse>> Handle(GetAllCustomerByPagenationQuery request,
+    public async Task<List<CustomerResponse>> Handle(GetAllCustomerByPaginationQuery request,
         CancellationToken cancellationToken)
     {
         var customers = await dbContext.Customers

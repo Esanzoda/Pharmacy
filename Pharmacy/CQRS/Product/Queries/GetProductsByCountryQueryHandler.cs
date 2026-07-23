@@ -27,7 +27,7 @@ public class GetProductsByCountryQueryHandler(
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
         if (!products.Any())
-            throw new ResourseNotFoundException($"Product from this country[{request.Country}] not found");
+            throw new RecourseNotFoundException($"Product from this country[{request.Country}] not found");
         return mapper.Map<List<ProductResponse>>(products);
     }
 }

@@ -12,7 +12,7 @@ public record RemoveItemFromPurchaseCommand(
     long PurchaseId,
     long ItemId) : IRequest<PurchaseResponse>;
 
-public class RemovItemFromPurchaseCommandHandler(
+public class RemoveItemFromPurchaseCommandHandler(
     IApplicationDbContext dbContext,
     IMapper mapper)
     : IRequestHandler<RemoveItemFromPurchaseCommand, PurchaseResponse>
@@ -24,7 +24,7 @@ public class RemovItemFromPurchaseCommandHandler(
             .FindAsync(request.EmployeeId, cancellationToken);
         if (employee == null)
         {
-            throw new ResourseNotFoundException("Employee not found");
+            throw new RecourseNotFoundException("Employee not found");
         }
 
         var purchase = await dbContext.Purchases
@@ -32,19 +32,19 @@ public class RemovItemFromPurchaseCommandHandler(
             .FirstOrDefaultAsync(x => x.Id == request.PurchaseId, cancellationToken);
         if (purchase == null)
         {
-            throw new ResourseNotFoundException("Purchase not found");
+            throw new RecourseNotFoundException("Purchase not found");
         }
 
         var purchaseItemToRemove = purchase.PurchaseItems.FirstOrDefault(x => x.Id == request.ItemId);
         if (purchaseItemToRemove == null)
         {
-            throw new ResourseNotFoundException("Purchase item not found");
+            throw new RecourseNotFoundException("Purchase item not found");
         }
 
         var product = await dbContext.Products
             .FindAsync(purchaseItemToRemove.ProductId, cancellationToken);
         if (product == null)
-            throw new ResourseNotFoundException("Porduct not found");
+            throw new RecourseNotFoundException("Product not found");
 
         product.Stock -= purchaseItemToRemove.Quantity;
 

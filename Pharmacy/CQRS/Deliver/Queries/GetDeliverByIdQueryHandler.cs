@@ -9,8 +9,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Queries;
 
 public record GetDeliverByIdQuery(
-    long Id
-) : IRequest<DeliverResponse>;
+    long Id) : IRequest<DeliverResponse>;
 
 public class GetDeliverByIdHandler(
     IMapper mapper,
@@ -30,7 +29,7 @@ public class GetDeliverByIdHandler(
             .FindAsync(request.Id, cancellationToken);
         if (deliver is null)
         {
-            throw new ResourseNotFoundException("Deliver not found");
+            throw new RecourseNotFoundException("Deliver not found");
         }
 
         var response = mapper.Map<DeliverResponse>(deliver);

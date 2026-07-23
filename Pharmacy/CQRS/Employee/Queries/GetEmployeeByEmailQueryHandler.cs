@@ -8,8 +8,7 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Employee.Queries;
 
 public record GetEmployeeByEmailQuery(
-    string Email
-) : IRequest<EmployeeResponse>;
+    string Email) : IRequest<EmployeeResponse>;
 
 public class GetEmployeeByEmailHandler(
     IApplicationDbContext dbContext,
@@ -18,10 +17,10 @@ public class GetEmployeeByEmailHandler(
     public async Task<EmployeeResponse> Handle(GetEmployeeByEmailQuery request, CancellationToken cancellationToken)
     {
         var employee = await dbContext.Employees
-            .FirstOrDefaultAsync(x => x.Email.ToLower() == request.Email.ToLower(), cancellationToken);
+            .FirstOrDefaultAsync(x => x.Email!.ToLower() == request.Email.ToLower(), cancellationToken);
         if (employee == null)
         {
-            throw new ResourseNotFoundException($"Employee whith this email {request.Email} not found ");
+            throw new RecourseNotFoundException($"Employee with this email {request.Email} not found ");
         }
 
         return mapper.Map<EmployeeResponse>(employee);

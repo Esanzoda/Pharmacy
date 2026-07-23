@@ -4,22 +4,20 @@ using Pharmacy.Interfaces;
 
 namespace Pharmacy.CQRS.Employee.Commands;
 
-public record DeleteEmployeCommand(
+public record DeleteEmployeeCommand(
     long EmployeeId
-    ) : IRequest<bool>;
+) : IRequest<bool>;
 
-public class DeleteEmployeHandler(
-    IApplicationDbContext dbContext
-    ) :  IRequestHandler<DeleteEmployeCommand, bool>
+public class DeleteEmployeeHandler(
+    IApplicationDbContext dbContext) : IRequestHandler<DeleteEmployeeCommand, bool>
 {
-
-    public async Task<bool> Handle(DeleteEmployeCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employee = await dbContext.Employees
             .FindAsync(request.EmployeeId, cancellationToken);
         if (employee is null)
         {
-            throw new ResourseNotFoundException($"Employe with id {request.EmployeeId} not found");
+            throw new RecourseNotFoundException($"Employee with id {request.EmployeeId} not found");
         }
 
         dbContext.Employees.Remove(employee);

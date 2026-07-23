@@ -13,8 +13,7 @@ public record GetActiveCategoriesQuery(
 
 public class GetActiveCategoriesHandler(
     IMapper mapper,
-    IApplicationDbContext dbContext):
-        IRequestHandler<GetActiveCategoriesQuery, List<CategoryResponse>>
+    IApplicationDbContext dbContext) : IRequestHandler<GetActiveCategoriesQuery, List<CategoryResponse>>
 {
     public async Task<List<CategoryResponse>> Handle(GetActiveCategoriesQuery request,
         CancellationToken cancellationToken)
@@ -22,10 +21,10 @@ public class GetActiveCategoriesHandler(
         var category = await dbContext.Categories
             .Where(x => x.CategoryStatus == CategoryStatus.Active)
             .OrderBy(x => x.Id)
-            .Skip((request.PageNumber-1)*request.PageSize)
+            .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
-        
+
         return mapper.Map<List<CategoryResponse>>(category);
     }
 }

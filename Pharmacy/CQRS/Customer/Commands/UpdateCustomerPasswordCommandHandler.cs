@@ -25,7 +25,7 @@ public class UpdateCustomerPasswordHandler(
             .FindAsync(request.Id, cancellationToken);
         if (customer is null)
         {
-            throw new ResourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Customer not found");
         }
 
         customer.PasswordHash = await mediator.Send(new PasswordHashCommand(request.NewPassword), cancellationToken);

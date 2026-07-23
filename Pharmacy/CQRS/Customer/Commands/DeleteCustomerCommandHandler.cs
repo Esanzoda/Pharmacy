@@ -12,8 +12,7 @@ public record DeleteCustomerCommand(
 
 public class DeleteCustomerHandler(
     IDistributedCache cache,
-    IApplicationDbContext dbContext
-) : IRequestHandler<DeleteCustomerCommand, bool>
+    IApplicationDbContext dbContext) : IRequestHandler<DeleteCustomerCommand, bool>
 {
     public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
@@ -21,7 +20,7 @@ public class DeleteCustomerHandler(
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (customer is null)
         {
-            throw new ResourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Customer not found");
         }
 
         dbContext.Customers

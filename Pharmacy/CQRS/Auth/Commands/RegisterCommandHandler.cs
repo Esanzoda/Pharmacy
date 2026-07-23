@@ -13,7 +13,7 @@ public record RegisterCommand(
 
 public class RegisterHandler(
     IMapper mapper,
-    IMediator mediator, 
+    IMediator mediator,
     IApplicationDbContext dbContext)
     : IRequestHandler<RegisterCommand, CustomerResponse>
 {
@@ -23,7 +23,7 @@ public class RegisterHandler(
             .AnyAsync(x => x.Email == request.Request.Email, cancellationToken);
         if (existingCustomer)
         {
-            throw new ResourseIsAlredyExistException("Customer already exist");
+            throw new RecourseIsAlreadyExistException("Customer already exist");
         }
 
         var passwordHash = await mediator.Send(new PasswordHashCommand(request.Request.Password), cancellationToken);

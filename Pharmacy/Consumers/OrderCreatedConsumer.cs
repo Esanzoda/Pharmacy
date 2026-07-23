@@ -9,11 +9,8 @@ namespace Pharmacy.Consumers;
 public class OrderCreatedConsumer(
     ILogger<OrderCreatedConsumer> logger,
     IMediator mediator,
-    IApplicationDbContext dbContext
-    ) : IConsumer<OrderCreatedEvent>
+    IApplicationDbContext dbContext ) : IConsumer<OrderCreatedEvent>
 {
-   
-
     public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
     {
         var message = context.Message;
@@ -29,7 +26,7 @@ public class OrderCreatedConsumer(
             .FindAsync(message.CustomerId);
         if (user != null)
         {
-            await  mediator.Send(new SendToEmailCustomerOrderCreateCommand(
+            await mediator.Send(new SendToEmailCustomerOrderCreateCommand(
                 user.Email,
                 message.OrderId,
                 message.TotalAmount,

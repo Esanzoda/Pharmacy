@@ -1,8 +1,3 @@
 namespace Pharmacy.Exception;
 
-public class BusinessException : System.Exception
-{
-    public BusinessException(string message) : base(message)
-    {
-    }
-}
+public class BusinessException(string message) : System.Exception(message);

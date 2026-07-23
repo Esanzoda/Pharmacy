@@ -6,21 +6,19 @@ namespace Pharmacy.CQRS.Notification.Commands;
 public record SendToEmailCustomerOrderCancelledCommand(
     string ToEmail,
     long OrderId,
-    DateTime UpdatedAt
-) : IRequest;
+    DateTime UpdatedAt) : IRequest;
 
 public class SendToEmailCustomerOrderCancelledCommandHandler(
-    IMediator mediator
-) : IRequestHandler<SendToEmailCustomerOrderCancelledCommand>
+    IMediator mediator) : IRequestHandler<SendToEmailCustomerOrderCancelledCommand>
 {
     public async Task Handle(SendToEmailCustomerOrderCancelledCommand request, CancellationToken cancellationToken)
     {
         var message = new EmailMessage
         {
             To = request.ToEmail,
-            Subject = $"order #{request.OrderId} cncselled — Pharmacy",
+            Subject = $"order #{request.OrderId} cancelled — Pharmacy",
             Body = $@"
-                <h2>Your order is canselled</h2>
+                <h2>Your order is cancelled</h2>
                 <p>Order Id: <strong>#{request.OrderId}</strong></p>
                 <p>Order cancelled at <strong>{request.UpdatedAt}</strong></p>
                 

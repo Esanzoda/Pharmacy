@@ -12,20 +12,19 @@ public record GetByNameQuery(
 
 public class GetByNameHandler(
     IMapper mapper,
-    IApplicationDbContext dbContext) :
-    IRequestHandler<GetByNameQuery, List<CategoryResponse>>
+    IApplicationDbContext dbContext) : IRequestHandler<GetByNameQuery, List<CategoryResponse>>
 {
     public async Task<List<CategoryResponse>> Handle(GetByNameQuery request, CancellationToken cancellationToken)
     {
-        var category = await dbContext.Categories
+        var categories = await dbContext.Categories
             .Where(x => x.Name.Contains(request.Name))
             .OrderBy(x => x.Id)
             .ToListAsync(cancellationToken);
-        if (!category.Any())
+        if (!categories.Any())
         {
-            throw new ResourseNotFoundException("Category not found");
+            throw new RecourseNotFoundException("Category not found");
         }
 
-        return mapper.Map<List<CategoryResponse>>(category);
+        return mapper.Map<List<CategoryResponse>>(categories);
     }
 }

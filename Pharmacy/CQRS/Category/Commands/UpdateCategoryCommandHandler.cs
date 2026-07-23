@@ -9,7 +9,9 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Category.Commands;
 
-public record UpdateCategoryCommand(long Id, UpdateCategoryRequest Request) : IRequest<UpdateCategoryResponse>;
+public record UpdateCategoryCommand(
+    long Id,
+    UpdateCategoryRequest Request) : IRequest<UpdateCategoryResponse>;
 
 public class UpdateCategoryHandler(
     IMapper mapper,
@@ -23,14 +25,14 @@ public class UpdateCategoryHandler(
             .FindAsync(request.Id, cancellationToken);
         if (category is null)
         {
-            throw new ResourseNotFoundException("Category not found");
+            throw new RecourseNotFoundException("Category not found");
         }
 
-        var exixtCategory = await dbContext.Categories
+        var existCategory = await dbContext.Categories
             .AnyAsync(x => x.Name == request.Request.Name, cancellationToken);
-        if (exixtCategory)
+        if (existCategory)
         {
-            throw new ResourseIsAlredyExistException("Category  with this name alredy exsist");
+            throw new RecourseIsAlreadyExistException("Category  with this name already exist");
         }
 
         mapper.Map(request.Request, category);

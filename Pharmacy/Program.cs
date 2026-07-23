@@ -23,8 +23,6 @@ builder.Services.AddInfrastructure();
 builder.Services.AddSwagger();
 
 
-
-
 var app = builder.Build();
 app.AddJob();
 
@@ -32,9 +30,10 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
-    
+
     app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy API"); });
 }
+
 app.UseHangfireDashboard();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();

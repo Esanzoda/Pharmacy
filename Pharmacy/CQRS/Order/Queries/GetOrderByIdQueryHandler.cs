@@ -21,7 +21,7 @@ public class GetOrderByIdQueryHandler(
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (customer == null)
         {
-            throw new ResourseNotFoundException("Order not found");
+            throw new RecourseNotFoundException("Order not found");
         }
 
         return mapper.Map<OrderResponse>(customer);

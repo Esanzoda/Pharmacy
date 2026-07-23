@@ -17,7 +17,7 @@ public class DeleteProductCommandHandler(
             .FindAsync(request.Id, cancellationToken);
         if (product is null)
         {
-            throw new ResourseNotFoundException($"Product with id {request.Id} not found");
+            throw new RecourseNotFoundException($"Product with id {request.Id} not found");
         }
 
         dbContext.Products.Remove(product);

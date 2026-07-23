@@ -13,8 +13,6 @@ namespace Pharmacy.Controllers;
 [Route("api/[controller]/[action]")]
 public class CustomerController(IMediator mediator) : ControllerBase
 {
-  
-
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<CustomerResponse>> Create([FromBody] CustomerRequest request)
@@ -52,9 +50,10 @@ public class CustomerController(IMediator mediator) : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<CustomerResponse>>> GetAllByPagination(int pageNumber, int pageSize)
     {
-        var response = await mediator.Send(new GetAllCustomerByPagenationQuery(pageNumber, pageSize), HttpContext.RequestAborted);
+        var response = await mediator.Send(new GetAllCustomerByPaginationQuery(pageNumber, pageSize),
+            HttpContext.RequestAborted);
         return Ok(response);
     }
 

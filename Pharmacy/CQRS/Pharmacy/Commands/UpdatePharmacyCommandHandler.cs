@@ -21,7 +21,7 @@ public class UpdatePharmacyCommandHandler(
             .FindAsync(request.Id, cancellationToken);
         if (pharmacy is null)
         {
-            throw new ResourseNotFoundException("Pharmacy not found");
+            throw new RecourseNotFoundException("Pharmacy not found");
         }
 
         mapper.Map(request.Request, pharmacy);

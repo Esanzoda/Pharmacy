@@ -7,18 +7,17 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Employee.Queries;
 
-public record GetEmpoyeesByAddressQuery(
+public record GetEmployeesByAddressQuery(
     string Address,
     int Page,
-    int PageSize
-) : IRequest<List<EmployeeResponse>>;
+    int PageSize) : IRequest<List<EmployeeResponse>>;
 
 public class GEtEmployeeByAddressQueryHandler(
     IApplicationDbContext dbContext,
     IMapper mapper
-) : IRequestHandler<GetEmpoyeesByAddressQuery, List<EmployeeResponse>>
+) : IRequestHandler<GetEmployeesByAddressQuery, List<EmployeeResponse>>
 {
-    public async Task<List<EmployeeResponse>> Handle(GetEmpoyeesByAddressQuery request,
+    public async Task<List<EmployeeResponse>> Handle(GetEmployeesByAddressQuery request,
         CancellationToken cancellationToken)
     {
         var employees = await dbContext.Employees
@@ -30,7 +29,7 @@ public class GEtEmployeeByAddressQueryHandler(
 
         if (employees is null)
         {
-            throw new ResourseNotFoundException($"Employee with this address{request.Address} not found ");
+            throw new RecourseNotFoundException($"Employee with this address{request.Address} not found ");
         }
 
         return mapper.Map<List<EmployeeResponse>>(employees);

@@ -24,7 +24,7 @@ public class CreateCategoryCommandHandler(
 
         if (exist)
         {
-            throw new ResourseIsAlredyExistException("Category alredy exist");
+            throw new RecourseIsAlreadyExistException("Category already exist");
         }
 
         var category = mapper.Map<Models.Domain.Category>(request.Request);

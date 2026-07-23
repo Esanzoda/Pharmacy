@@ -7,5 +7,4 @@ public class Cart : BaseEntity
     public decimal TotalAmount { get; set; }
 
     public List<CartItem?> CartItems { get; set; } = new List<CartItem?>();
-
 }
