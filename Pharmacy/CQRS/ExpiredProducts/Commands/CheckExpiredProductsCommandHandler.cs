@@ -29,7 +29,7 @@ public class CheckExpiredProductsHandler(
         foreach (var product in expiredProducts)
         {
             var oldStock = product.Stock;
-            var item = new ExpireDateItems
+            var item = new ExpiryDateItems
             {
                 Product = product,
                 ProductName = product.Name,
@@ -38,7 +38,7 @@ public class CheckExpiredProductsHandler(
                 TotalPurchasePrice = product.Stock * product.PurchasePrice
             };
 
-            report.ExpiredateItemsList.Add(item);
+            report.ExpiryDateItemsList.Add(item);
 
             report.TotalOrderPrice += item.TotalOrderPrice;
             report.TotalPurchasePrice += item.TotalPurchasePrice;
@@ -52,6 +52,6 @@ public class CheckExpiredProductsHandler(
 
         logger.LogInformation(
             "Created expired products report with {Count} items.",
-            report.ExpiredateItemsList.Count);
+            report.ExpiryDateItemsList.Count);
     }
 }

@@ -19,7 +19,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<PurchaseItem> PurchaseItems { get; set; }
     public DbSet<Deliver> Delivers { get; set; }
     public DbSet<ExpiryDateProduct> ExpireDateProducts { get; set; }
-    public DbSet<ExpireDateItems> ExpireDateItems { get; set; }
+    public DbSet<ExpiryDateItems> ExpireDateItems { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Models.Domain.Pharmacy> Pharmacies { get; set; }
 

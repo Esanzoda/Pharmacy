@@ -9,7 +9,7 @@ public record ExpireDateProductResponse
     public int Count { get; set; }
     public decimal ToTalPrice { get; set; }
     public decimal TotalPurchasePrice { get; set; }
-    public List<ExpireDateItems> ExpiredateItemsListResponse { get; set; }
+    public List<ExpireDateItemsResponse> ExpiryDateItemsListResponse { get; set; }
 }
 
 public record ExpireDateItemsResponse
