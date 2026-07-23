@@ -1,1 +1,12 @@
+bin/
+obj/
 
+.idea/
+
+.DS_Store
+
+*.user
+*.sln.DotSettings.user
+
+appsettings.Local.json
+.env
