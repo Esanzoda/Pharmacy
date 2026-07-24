@@ -9,7 +9,7 @@ using Pharmacy.Models.Dto.Response;
 
 namespace Pharmacy.CQRS.Employee.Commands;
 
-public record CreateEmployeeCommand(
+public record CreateEmployeeCommand(long PharmacyId,
     EmployeeRequest Request) : IRequest<EmployeeResponse>;
 
 public class CreatEmployeeCommandHandler(
@@ -19,8 +19,10 @@ public class CreatEmployeeCommandHandler(
 {
     public async Task<EmployeeResponse> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
+       
         var employeeExist = await dbContext.Employees
-            .AnyAsync(x => x.Email!.ToLower() == request.Request.Email.ToLower()
+            .AnyAsync(x => x.PharmacyId == request.PharmacyId &&
+                           x.Email == request.Request.Email
                            || x.Name == request.Request.PhoneNumber,
                 cancellationToken);
         if (employeeExist)

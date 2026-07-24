@@ -10,7 +10,8 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Employee.Commands;
 
 public record UpdateEmployeeCommand(
-    long Id,
+    long PharmacyId,
+    long EmployeeId,
     EmployeeRequest Request) : IRequest<EmployeeResponse>;
 
 public class UpdateEmployeeHandler(
@@ -21,18 +22,22 @@ public class UpdateEmployeeHandler(
     public async Task<EmployeeResponse> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employee = await dbContext.Employees
-            .FindAsync(request.Id, cancellationToken);
-        if (employee == null)
+            .FirstOrDefaultAsync(
+                x => x.Id == request.EmployeeId &&
+                     x.PharmacyId == request.PharmacyId,
+                cancellationToken);
+        if (employee is null)
         {
-            throw new RecourseNotFoundException($"Employee with id {request.Id} not found");
+            throw new RecourseNotFoundException($"Employee with id {request.EmployeeId} not found");
         }
 
         var employeeExist = await dbContext.Employees
-            .AnyAsync(x => x.Id != request.Id &&
-                           (x.Email == request.Request.Email
-                            || x.PhoneNumber == request.Request.PhoneNumber),
-                cancellationToken);
-
+            .AnyAsync(x => x.PharmacyId == request.PharmacyId &&
+                           x.Id!=request.EmployeeId &&
+                           (
+                               x.Email == request.Request.Email ||
+                               x.Name == request.Request.PhoneNumber
+                           ), cancellationToken);
         if (employeeExist)
         {
             throw new RecourseIsAlreadyExistException(
@@ -41,7 +46,7 @@ public class UpdateEmployeeHandler(
 
         if (request.Request.Role == Role.Customer)
         {
-            throw new BusinessException("Cant create employee with status customer");
+            throw new BusinessException("Cant update employee status to  customer status");
         }
 
         mapper.Map(request.Request, employee);
