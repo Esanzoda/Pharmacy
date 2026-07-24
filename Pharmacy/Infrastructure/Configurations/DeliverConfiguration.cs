@@ -28,8 +28,6 @@ public class DeliverConfiguration : IEntityTypeConfiguration<Deliver>
         builder.Property(x => x.PhoneNumber)
             .IsRequired()
             .HasMaxLength(50);
-        builder.Property(x => x.Password)
-            .IsRequired()
-            .HasMaxLength(100);
+       
     }
 }

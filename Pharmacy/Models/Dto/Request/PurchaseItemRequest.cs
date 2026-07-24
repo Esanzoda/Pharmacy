@@ -2,10 +2,10 @@ namespace Pharmacy.Models.Dto.Request;
 
 public record PurchaseItemRequest
 {
-    public long ProductId { get; set; }
-    public int Quantity { get; set; }
-    public decimal PurchasePrice { get; set; }
-    public decimal Price { get; set; }
-    public string? Barcode { get; set; }
-    public DateTime ExpiryDate { get; set; }
+    public long ProductId { get; init; }
+    public int Quantity { get; init; }
+    public decimal PurchasePrice { get; init; }
+    public decimal Price { get; init; }
+    public required string Barcode { get; init; }
+    public DateTime ExpiryDate { get; init; }
 }

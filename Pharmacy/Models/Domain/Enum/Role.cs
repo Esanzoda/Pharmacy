@@ -4,4 +4,7 @@ public enum Role
 {
     Customer = 0,
     Admin = 1,
+    PurchasingManager = 2,
+    SuperAdmin = 3,
+    Deliver = 4
 }

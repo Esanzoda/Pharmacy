@@ -9,7 +9,6 @@ public class Pharmacy : BaseEntity
     public TimeOnly OpeningTime { get; set; }
     public TimeOnly ClosingTime { get; set; }
     public List<Product> Products { get; set; } = new List<Product>();
-    public List<Category> Categories { get; set; } = new List<Category>();
     public List<Employee> Employees { get; set; } = new List<Employee>();
-    public List<Customer> Customers { get; set; } = new List<Customer>();
+    public List<Deliver> Delivers { get; set; } = new List<Deliver>();
 }
