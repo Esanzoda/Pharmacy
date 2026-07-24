@@ -88,9 +88,9 @@ public class ProductController(IMediator mediator) : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<ProductResponse>>> GetLowOfStockAsync(int minquantity, int page, int pageSize)
+    public async Task<ActionResult<List<ProductResponse>>> GetLowOfStockAsync(int minimumQuantity, int page, int pageSize)
     {
-        var response = await mediator.Send(new GetLowOfStockQuery(minquantity, page, pageSize));
+        var response = await mediator.Send(new GetLowOfStockQuery(minimumQuantity, page, pageSize));
         return Ok(response);
     }
 

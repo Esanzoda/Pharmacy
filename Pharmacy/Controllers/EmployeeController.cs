@@ -41,7 +41,7 @@ public class EmployeeController(IMediator mediator) : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<EmployeeResponse>>> GetAllByPagenation(int pageNumber, int pageSize)
+    public async Task<ActionResult<List<EmployeeResponse>>> GetAllByPagination(int pageNumber, int pageSize)
     {
         var response = await mediator.Send(new GetAllEmployeeByPaginationQuery(pageNumber, pageSize));
         return Ok(response);
@@ -65,10 +65,10 @@ public class EmployeeController(IMediator mediator) : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<EmployeeResponse>>> GetByAdressAsync(string adress, int page,
+    public async Task<ActionResult<List<EmployeeResponse>>> GetByAddressAsync(string address, int page,
         int pageSize)
     {
-        var response = await mediator.Send(new GetEmployeesByAddressQuery(adress, page, pageSize));
+        var response = await mediator.Send(new GetEmployeesByAddressQuery(address, page, pageSize));
         return Ok(response);
     }
 
