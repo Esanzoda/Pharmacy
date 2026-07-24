@@ -31,6 +31,7 @@ public class CheckExpiredProductsHandler(
             var oldStock = product.Stock;
             var item = new ExpiryDateItems
             {
+                PharmacyId = product.PharmacyId,
                 Product = product,
                 ProductName = product.Name,
                 Quantity = oldStock,
