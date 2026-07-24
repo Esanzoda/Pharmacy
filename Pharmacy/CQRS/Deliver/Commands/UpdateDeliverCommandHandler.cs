@@ -9,18 +9,22 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record UpdateDeliverCommand(
+    long PharmacyId,
     long Id,
     DeliverRequest Request) : IRequest<DeliverResponse>;
 
 public class UpdateDeliverHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper
-) : IRequestHandler<UpdateDeliverCommand, DeliverResponse>
+    IMapper mapper) : IRequestHandler<UpdateDeliverCommand, DeliverResponse>
 {
     public async Task<DeliverResponse> Handle(UpdateDeliverCommand request, CancellationToken cancellationToken)
     {
         var deliver = await dbContext.Delivers
-            .FindAsync(request.Id, cancellationToken);
+            .FirstOrDefaultAsync(
+                x => x.Id == request.Id &&
+                     x.PharmacyId == request.PharmacyId,
+                cancellationToken);
+
         if (deliver is null)
         {
             throw new RecourseNotFoundException("Deliver not found");
@@ -30,8 +34,7 @@ public class UpdateDeliverHandler(
             .AnyAsync(
                 x => x.Id != request.Id &&
                      (x.Email == request.Request.Email ||
-                      x.PhoneNumber == request.Request.PhoneNumber),
-                cancellationToken);
+                      x.PhoneNumber == request.Request.PhoneNumber), cancellationToken);
 
 
         if (deliverExist)

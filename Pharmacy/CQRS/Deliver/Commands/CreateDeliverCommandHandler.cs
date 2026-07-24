@@ -9,24 +9,27 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record CreateDeliverCommand(
-    DeliverRequest DeliverRequest) : IRequest<DeliverResponse>;
+    long PharmacyId,
+    DeliverRequest Request) : IRequest<DeliverResponse>;
 
 public class CreateDeliverCommandHandler(
     IMapper mapper,
-    IApplicationDbContext dbContext
-) : IRequestHandler<CreateDeliverCommand, DeliverResponse>
+    IApplicationDbContext dbContext) : IRequestHandler<CreateDeliverCommand, DeliverResponse>
 {
     public async Task<DeliverResponse> Handle(CreateDeliverCommand request, CancellationToken cancellationToken)
     {
-        var deliver = await dbContext.Delivers
-            .FirstOrDefaultAsync(x => x.Email == request.DeliverRequest.Email, cancellationToken);
+        var deliverExist = await dbContext.Delivers
+            .AnyAsync(x => x.PharmacyId == request.PharmacyId &&
+                           (x.Email == request.Request.Email ||
+                            x.PhoneNumber == request.Request.PhoneNumber), cancellationToken);
 
-        if (deliver is not null)
+        if (deliverExist)
         {
             throw new RecourseIsAlreadyExistException("Deliver already exist");
         }
 
-        var newDeliver = mapper.Map<Models.Domain.Deliver>(request.DeliverRequest);
+        var newDeliver = mapper.Map<Models.Domain.Deliver>(request.Request);
+        newDeliver.PharmacyId = request.PharmacyId;
         await dbContext.Delivers
             .AddAsync(newDeliver, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);

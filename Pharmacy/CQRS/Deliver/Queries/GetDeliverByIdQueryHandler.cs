@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Pharmacy.Exception;
@@ -9,7 +10,8 @@ using Pharmacy.Models.Dto.Response;
 namespace Pharmacy.CQRS.Deliver.Queries;
 
 public record GetDeliverByIdQuery(
-    long Id) : IRequest<DeliverResponse>;
+    long PharmacyId,
+    long DeliverId) : IRequest<DeliverResponse>;
 
 public class GetDeliverByIdHandler(
     IMapper mapper,
@@ -18,7 +20,7 @@ public class GetDeliverByIdHandler(
 {
     public async Task<DeliverResponse> Handle(GetDeliverByIdQuery request, CancellationToken cancellationToken)
     {
-        var key = $"DeliverById-{request.Id}";
+        var key = $"DeliverById-{request.DeliverId}";
         var cached = await cache.GetStringAsync(key, cancellationToken);
         if (cached is not null)
         {
@@ -26,7 +28,10 @@ public class GetDeliverByIdHandler(
         }
 
         var deliver = await dbContext.Delivers
-            .FindAsync(request.Id, cancellationToken);
+            .FirstOrDefaultAsync(
+                x => x.PharmacyId == request.PharmacyId &&
+                     x.Id == request.DeliverId,
+                cancellationToken);
         if (deliver is null)
         {
             throw new RecourseNotFoundException("Deliver not found");

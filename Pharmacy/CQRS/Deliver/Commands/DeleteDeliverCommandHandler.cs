@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Pharmacy.Exception;
 using Pharmacy.Interfaces;
@@ -6,20 +7,23 @@ using Pharmacy.Interfaces;
 namespace Pharmacy.CQRS.Deliver.Commands;
 
 public record DeleteDeliverCommand(
+    long PharmacyId,
     int Id) : IRequest<bool>;
 
 public class DeleteDeliverHandler(
     IApplicationDbContext dbContext,
-    IDistributedCache cache
-) : IRequestHandler<DeleteDeliverCommand, bool>
+    IDistributedCache cache) : IRequestHandler<DeleteDeliverCommand, bool>
 {
     public async Task<bool> Handle(DeleteDeliverCommand request, CancellationToken cancellationToken)
     {
         var deliver = await dbContext.Delivers
-            .FindAsync(request.Id, cancellationToken);
+            .FirstOrDefaultAsync(
+                x => x.Id == request.Id &&
+                     x.PharmacyId == request.PharmacyId,
+                cancellationToken);
         if (deliver is null)
         {
-            throw new RecourseNotFoundException("Customer not found");
+            throw new RecourseNotFoundException("Deliver not found");
         }
 
         dbContext.Delivers
