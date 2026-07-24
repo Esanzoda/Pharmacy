@@ -36,11 +36,10 @@ public class CategoryController(IMediator mediator) : ControllerBase
         var response = await mediator.Send(new GetCategoryByIdQuery(id), cancellationToken);
         return Ok(response);
     }
-
-    // no recomendate for from body in get 
+    
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<List<CategoryResponse>>> GetAllByPagenationAsinc(int page, int pageSize)
+    public async Task<ActionResult<List<CategoryResponse>>> GetAllByPaginationAsync(int page, int pageSize)
     {
         var response = await mediator.Send(new GetAllCategoriesByPaginationQuery(page, pageSize));
         return Ok(response);
