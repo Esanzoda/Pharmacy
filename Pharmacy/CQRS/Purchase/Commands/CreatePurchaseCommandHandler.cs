@@ -40,7 +40,6 @@ public class CreatePurchaseCommandHandler(
             }
 
             var purchaseItem = mapper.Map<PurchaseItem>(item);
-            purchaseItem.Purchase = purchase;
             purchaseItem.TotalPrice = item.Quantity * item.PurchasePrice;
 
             purchase.PurchaseItems.Add(purchaseItem);
