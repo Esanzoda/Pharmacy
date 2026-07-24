@@ -4,14 +4,14 @@ namespace Pharmacy.Models.Dto.Request;
 
 public record ProductRequest
 {
-    public string? Name { get; set; }
-    public ProductType ProductType { get; set; }
-    public long CategoryId { get; set; }
-    public string? Description { get; set; }
-    public CountryEnum Country { get; set; }
-    public decimal PurchasePrice { get; set; }
-    public decimal Price { get; set; }
-    public string? Barcode { get; set; }
-    public int Stock { get; set; }
-    public DateTime ExpiryDate { get; set; }
+    public required string Name { get; init; }
+    public ProductType ProductType { get; init; }
+    public long CategoryId { get; init; }
+    public string Description { get; init; }= string.Empty;
+    public CountryEnum Country { get; init; }
+    public decimal PurchasePrice { get; init; }
+    public decimal Price { get; init; }
+    public string? Barcode { get; init; }
+    public int Stock { get; init; }
+    public DateTime ExpiryDate { get; init; }
 }

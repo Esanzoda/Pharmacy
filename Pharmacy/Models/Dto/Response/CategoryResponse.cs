@@ -2,7 +2,7 @@ namespace Pharmacy.Models.Dto.Response;
 
 public record CategoryResponse
 {
-    public long Id { get; set; }
-    public string? Name { get; set; }
-    public string? Description { get; set; }
+    public long Id { get; init; }
+    public required string Name { get; init; }
+    public string Description { get; init; } = string.Empty;
 }

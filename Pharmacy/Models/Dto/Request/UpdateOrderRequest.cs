@@ -4,6 +4,6 @@ namespace Pharmacy.Models.Dto.Request;
 
 public record UpdateOrderRequest
 {
-    public long UserId { get; set; }
-    public OrderStatus OrderStatus { get; set; }
+    public long UserId { get; init; }
+    public OrderStatus OrderStatus { get; init; }
 }

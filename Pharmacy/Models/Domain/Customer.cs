@@ -10,7 +10,7 @@ public class Customer : BaseEntity
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
     public Role Role { get; set; }
-    public Cart? Cart { get; set; }
+    public Cart Cart { get; set; }= null!;
     public List<Order> Orders { get; set; } = new List<Order>();
     public List<RefreshToken> RefreshTokens { get; set; } = new();
 }

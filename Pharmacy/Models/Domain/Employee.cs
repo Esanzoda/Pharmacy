@@ -4,6 +4,7 @@ namespace Pharmacy.Models.Domain;
 
 public class Employee : BaseEntity
 {
+    public long PharmacyId { get; set; }
     public string? Name { get; set; } = string.Empty;
     public string? Address { get; set; } = string.Empty;
     public string? PhoneNumber { get; set; } = string.Empty;

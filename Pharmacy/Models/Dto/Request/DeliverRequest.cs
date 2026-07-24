@@ -1,10 +1,13 @@
+using Pharmacy.Models.Domain.Enum;
+
 namespace Pharmacy.Models.Dto.Request;
 
 public record DeliverRequest
 {
-    public string? Name { get; set; }
-    public string? PhoneNumber { get; set; }
-    public string? Email { get; set; }
-    public string? Address { get; set; }
-    public string? Password { get; set; }
+    public required string Name { get; init; }
+    public required string PhoneNumber { get; init; }
+    public required string Email { get; init; }
+    public required string Address { get; init; }
+    public required string Password { get; init; }
+    public Role Role { get; set; } = Role.Deliver;
 }
